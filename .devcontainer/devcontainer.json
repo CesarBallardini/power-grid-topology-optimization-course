@@ -1,5 +1,5 @@
 {
-  "name": "curso-optimizacion-redes-electricas",
+  "name": "power-grid-topology-optimization-course",
   "build": {
     "dockerfile": "../Dockerfile"
   },

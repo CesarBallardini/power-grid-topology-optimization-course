@@ -3,9 +3,9 @@ site_description: >-
   A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp,
   the open-source GPU topology optimization engine for power grids.
 site_author: Cesar Ballardini
-site_url: https://cesarballardini.github.io/curso-optimizacion-redes-electricas/
-repo_url: https://github.com/CesarBallardini/curso-optimizacion-redes-electricas
-repo_name: CesarBallardini/curso-optimizacion-redes-electricas
+site_url: https://katra.ballardini.com.ar/power-grid-topology-optimization-course/
+repo_url: https://github.com/CesarBallardini/power-grid-topology-optimization-course
+repo_name: CesarBallardini/power-grid-topology-optimization-course
 
 # Rebuild on changes to the auto-appended abbreviations when serving.
 watch:
