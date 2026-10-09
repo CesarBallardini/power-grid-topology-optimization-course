@@ -87,7 +87,7 @@ repos:
       # .github/workflows/validate_pr_title.yaml.
       - id: commitizen
         name: commitizen (conventional commit message)
-        entry: uv run --frozen cz check --commit-msg-file
+        entry: uv run --frozen python -m commitizen check --commit-msg-file
         language: system
         stages: [commit-msg]
 
