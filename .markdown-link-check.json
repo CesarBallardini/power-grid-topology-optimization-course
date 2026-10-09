@@ -49,6 +49,9 @@
       "pattern": "^https://katra\\.ballardini\\.com\\.ar/power-grid-topology-optimization-course"
     },
     {
+      "pattern": "^https://github\\.com/CesarBallardini/power-grid-topology-optimization-course/actions/"
+    },
+    {
       "pattern": "^\\.\\./print_page/"
     },
     {
