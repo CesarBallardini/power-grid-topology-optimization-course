@@ -1,0 +1,3804 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/dev/appendices/c-toop-concept-map/">
+      
+      
+        <link rel="prev" href="../b-books/">
+      
+      
+        <link rel="next" href="../d-glossary/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C. ToOp concept map - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#appendix-c-toop-concept-map" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C. ToOp concept map
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-headline-findings-read-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Headline findings (read first)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-literature-references-found-anywhere-in-the-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Literature references found anywhere in the repo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-documentation-inventory-what-theory-the-docs-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Documentation inventory (what theory the docs explain)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-concept-inventory-by-knowledge-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Concept inventory by knowledge domain
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Concept inventory by knowledge domain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-mathematics-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Mathematics: linear algebra
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-mathematics-numerical-linear-algebra-and-numerics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Mathematics: numerical linear algebra and numerics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-mathematics-graph-theory-and-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Mathematics: graph theory and algorithms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-mathematics-complex-numbers-trigonometry-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Mathematics: complex numbers, trigonometry, geometry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-mathematics-probability-and-statistics-light" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Mathematics: probability and statistics (light)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-electrical-engineering-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Electrical engineering fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-power-systems-power-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Power systems: power flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-power-systems-linear-sensitivity-distribution-factors-the-core-of-the-solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Power systems: linear sensitivity (distribution) factors, the core of the solver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-power-systems-security-contingency-analysis-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.9 Power systems: security, contingency analysis, operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#310-power-systems-substation-topology-grid-models-and-data-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.10 Power systems: substation topology, grid models and data formats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#311-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.11 Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-computing-jax-gpu-and-numerical-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.12 Computing: JAX / GPU and numerical Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-computing-data-tooling-distributed-systems-and-messaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.13 Computing: data tooling, distributed systems and messaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-notebooks-what-each-teaches-and-which-concepts-it-requires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Notebooks: what each teaches and which concepts it requires
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-suggested-dependency-order-of-concepts-curriculum-spine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Suggested dependency order of concepts (curriculum spine)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-headline-findings-read-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Headline findings (read first)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-literature-references-found-anywhere-in-the-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Literature references found anywhere in the repo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-documentation-inventory-what-theory-the-docs-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Documentation inventory (what theory the docs explain)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-concept-inventory-by-knowledge-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Concept inventory by knowledge domain
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Concept inventory by knowledge domain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-mathematics-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Mathematics: linear algebra
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-mathematics-numerical-linear-algebra-and-numerics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Mathematics: numerical linear algebra and numerics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-mathematics-graph-theory-and-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Mathematics: graph theory and algorithms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-mathematics-complex-numbers-trigonometry-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Mathematics: complex numbers, trigonometry, geometry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-mathematics-probability-and-statistics-light" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Mathematics: probability and statistics (light)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-electrical-engineering-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Electrical engineering fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-power-systems-power-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Power systems: power flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-power-systems-linear-sensitivity-distribution-factors-the-core-of-the-solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Power systems: linear sensitivity (distribution) factors, the core of the solver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-power-systems-security-contingency-analysis-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.9 Power systems: security, contingency analysis, operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#310-power-systems-substation-topology-grid-models-and-data-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.10 Power systems: substation topology, grid models and data formats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#311-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.11 Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-computing-jax-gpu-and-numerical-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.12 Computing: JAX / GPU and numerical Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-computing-data-tooling-distributed-systems-and-messaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.13 Computing: data tooling, distributed systems and messaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-notebooks-what-each-teaches-and-which-concepts-it-requires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Notebooks: what each teaches and which concepts it requires
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-suggested-dependency-order-of-concepts-curriculum-spine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Suggested dependency order of concepts (curriculum spine)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="appendix-c-toop-concept-map">Appendix C — ToOp Concept Map<a class="headerlink" href="#appendix-c-toop-concept-map" title="Permanent link">&para;</a></h1>
+<p>An inventory of the domain knowledge the ToOp code relies on, with evidence of where each concept appears.
+It is the basis for the chapter selection in the <a href="../../">study plan</a> and is meant as an instructor
+reference. It was produced by reading the documentation, all six packages and the notebooks of the ToOp
+repository (local checkout <code>../ToOp</code>, commit <code>ba1874e</code>, September 2026).</p>
+<p>Levels: <strong>B</strong> = basic (sophomore), <strong>I</strong> = intermediate (junior/senior EE or CS), <strong>A</strong> = advanced (graduate or
+specialist).</p>
+<h2 id="0-headline-findings-read-first">0. Headline findings (read first)<a class="headerlink" href="#0-headline-findings-read-first" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>The DC solver works entirely with sensitivity factors.</strong></li>
+<li>It builds the <abbr title="Power transfer distribution factor">PTDF</abbr> once, on CPU, with a scipy sparse solve.</li>
+<li>Every later change is a low-rank update applied on <abbr title="Graphics processing unit">GPU</abbr>. There is no refactorization.<ul>
+<li>Bus splits use <abbr title="Bus split distribution factor">BSDF</abbr>, a rank-1 update.</li>
+<li>Branch disconnections use <abbr title="Line outage distribution factor">LODF</abbr>, a rank-1 update.</li>
+<li>Multi-outages (3-winding transformers, busbars) use <abbr title="Multi-outage distribution factor">MODF</abbr>, a k×k solve.</li>
+<li><abbr title="Phase-shifting transformer">PST</abbr> tap and susceptance changes use a Woodbury-style correction.</li>
+</ul>
+</li>
+<li>Linear algebra is the core prerequisite.</li>
+<li><strong>The "Pareto front" wording in README.md oversells the method.</strong></li>
+<li>The DC fitness is a weighted-sum scalarization: <code>fitness = sum(-metric*weight)</code> in <code>dc/genetic_functions/scoring_functions.py:266</code>.</li>
+<li>Diversity comes from discrete MAP-Elites descriptors (grid cells).</li>
+<li>Dominance appears only as a heuristic "dominator filter" in AC candidate selection.</li>
+<li>No NSGA-style non-dominated sorting, crowding distance or hypervolume exists anywhere.</li>
+<li><strong>The docs promise more AC evolution operators than the code has.</strong></li>
+<li>Docs (<code>packages/topology_optimizer_pkg/README.md</code>, <code>.github/copilot-instructions.md</code>) list pull, reconnect and close_coupler.</li>
+<li><code>ac/evolution_functions.py</code> implements only <code>pull</code> plus selection.</li>
+<li><strong>"(G)<abbr title="Line outage distribution factor">LODF</abbr>" is not literal.</strong> The code has <abbr title="Line outage distribution factor">LODF</abbr> (single outage) and <abbr title="Multi-outage distribution factor">MODF</abbr> (multi-outage, the generalized form). Nothing is named <abbr title="Generalized line outage distribution factor">GLODF</abbr>.</li>
+<li><strong>The <abbr title="Multi-outage distribution factor">MODF</abbr> citation differs between docs and code.</strong></li>
+<li>The dc_solver README cites arXiv:1606.07276.</li>
+<li>The code in <code>jax/multi_outages.py</code> cites DOI 10.1109/TPWRS.2009.2023273 ("equation 7").</li>
+<li><strong>Switching distance is implemented differently from how the doc describes it.</strong></li>
+<li><code>docs/dc_solver/switching_distance.md</code> says "graph algorithm involving edge cuts".</li>
+<li>The code enumerates all 2^n coupler open/closed states (n ≤ 20) and keeps those giving exactly 2 connected components, then takes the minimum Hamming distance (<code>preprocess/preprocess_switching.py:make_separation_set</code>).</li>
+<li><strong>Some items you asked about are absent or only nominal.</strong></li>
+<li>Gradient optimization: none (no <code>jax.grad</code>).</li>
+<li>Sharding / <code>shard_map</code>: none; only <code>jax.pmap</code>.</li>
+<li>lineax: commented out.</li>
+<li>evosax, optax: not used.</li>
+<li>Redispatch: not modeled, only named as the motivation.</li>
+<li><abbr title="High-voltage direct current">HVDC</abbr> optimization: <code>HVDCRange</code> exists but "not implemented yet in the solver"; converter stations are plain injections.</li>
+<li>OpenRAO: only an export format (<code>ac/summary.py</code>) plus a stub notebook.</li>
+<li><strong>"Distance protection zones" belong to the contingency analysis package.</strong> They are part of an optional pandapower cascading-failure simulator: relay impedance R/X is tested against quadrilateral polygons in the R-X plane (details in §3.9).</li>
+</ol>
+<hr />
+<h2 id="1-literature-references-found-anywhere-in-the-repo">1. Literature references found anywhere in the repo<a class="headerlink" href="#1-literature-references-found-anywhere-in-the-repo" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Reference as it appears in the repo</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1</td>
+<td><strong>Accelerated DC loadflow solver for topology optimization</strong>, arXiv:2501.17529. Solver paper, called "our paper on load flow solving".</td>
+<td><code>packages/dc_solver_pkg/src/toop_engine_dc_solver/jax/__init__.py</code> (title plus URL); <code>packages/dc_solver_pkg/README.md</code>; <code>docs/index.md</code>; <code>.github/copilot-instructions.md</code></td>
+</tr>
+<tr>
+<td>L2</td>
+<td>DOI <strong>10.1109/PowerTech59965.2025.11180422</strong>, "our paper on load flow solving". The IEEE Kiel PowerTech 2025 version of L1 (Westerbeck, van Dijk, Viebahn, Merz &amp; Witthaut); no title is given in the repo.</td>
+<td><code>README.md:145</code></td>
+</tr>
+<tr>
+<td>L3</td>
+<td>arXiv:<strong>2605.10128</strong>, "our paper on the optimizer architecture" / "high level academic introduction". No title in the repo; it is Westerbeck, Hilfrich &amp; Witthaut, "Transmission Topology Optimization using accelerated MapElites" (2026).</td>
+<td><code>README.md:34,145</code></td>
+</tr>
+<tr>
+<td>L4</td>
+<td><strong>Bus Split Distribution Factors</strong>, DOI 10.36227/techrxiv.22298950.v1 (TechRxiv). Also linked as https://www.techrxiv.org/users/689474/articles/681212-bus-split-distribution-factors (TechRxiv blocks many automated clients; archived copy: https://web.archive.org/web/20240614093230/https://www.techrxiv.org/users/689474/articles/681212-bus-split-distribution-factors).</td>
+<td><code>jax/bsdf.py</code>, <code>jax/__init__.py</code>, <code>tests/numpy_reference.py</code>, <code>tests/preprocessing/helper/test_ptdf.py:57</code> (test values taken from the paper), dc_solver README</td>
+</tr>
+<tr>
+<td>L5</td>
+<td><strong>Unified algebraic deviation [sic, derivation] of distribution factors in linear power flow</strong>, https://doi.org/10.48550/arXiv.2412.16164</td>
+<td><code>jax/bsdf.py</code>, <code>jax/__init__.py</code>, <code>tests/numpy_reference.py</code></td>
+</tr>
+<tr>
+<td>L6</td>
+<td>DOI <strong>10.1109/TPWRS.2009.2023273</strong>, cited for <abbr title="Multi-outage distribution factor">MODF</abbr>, "equation 7", notation <abbr title="Power transfer distribution factor">PTDF</abbr>^0_{M,O}. No title in the repo. Verified via Crossref: Guo, Fu, Li &amp; Shahidehpour, "Direct Calculation of Line Outage Distribution Factors", IEEE Trans. Power Systems 24(3):1633–1634, 2009.</td>
+<td><code>packages/dc_solver_pkg/src/toop_engine_dc_solver/jax/multi_outages.py:89,118,247,295</code></td>
+</tr>
+<tr>
+<td>L7</td>
+<td><strong><abbr title="Multi-outage distribution factor">MODF</abbr> formulation</strong>, arXiv:1606.07276. No title in the repo. Verified: Ronellenfitsch, Manik, Hörsch, Brown &amp; Witthaut, "Dual theory of transmission line outages", IEEE Trans. Power Systems, 2017, doi:10.1109/TPWRS.2017.2658022.</td>
+<td><code>packages/dc_solver_pkg/README.md</code> (Scientific Background)</td>
+</tr>
+<tr>
+<td>L8</td>
+<td><strong><abbr title="Phase shift distribution factor">PSDF</abbr></strong>, DOI 10.1109/TPAS.1985.319195 (IEEE Trans. PAS-104:1656–1662, 1985). No title in the repo; verified via Crossref: Srinivasan, Rao, Indulkar &amp; Venkata, "On-Line Computation of Phase Shifter Distribution Factors and Lineload Alleviation".</td>
+<td><code>packages/dc_solver_pkg/README.md</code></td>
+</tr>
+<tr>
+<td>L9</td>
+<td>JAX software citation: Bradbury, Frostig, Hawkins, Johnson, Leary, Maclaurin, Necula, Paszke, VanderPlas, Wanderman-Milne, Zhang, "JAX: composable transformations of Python+NumPy programs", 2018, http://github.com/jax-ml/jax</td>
+<td><code>README.md</code>, <code>docs/index.md</code></td>
+</tr>
+<tr>
+<td>L10</td>
+<td>UCTE data exchange format spec (ENTSO-E): https://eepublicdownloads.entsoe.eu/clean-documents/pre2015/publications/ce/otherreports/UCTE-format.pdf</td>
+<td><code>importer_pkg/.../ucte_toolset/ucte_io.py:37</code>, <code>exporter/asset_topology_to_ucte.py:44</code></td>
+</tr>
+<tr>
+<td>L11</td>
+<td>ENTSO-E, "Quality of datasets and calculations", 3rd edition (UCTE area codes): .../Publications/SOC/Continental_Europe/150420_quality_of_datasets_and_calculations_3rd_edition.pdf</td>
+<td><code>interfaces_pkg/.../messages/preprocess/preprocess_commands.py:20</code></td>
+</tr>
+<tr>
+<td>L12</td>
+<td>pandapower source used for the <abbr title="Power transfer distribution factor">PTDF</abbr> and B matrices: <code>makePTDF.py</code> (commit 7086cf7) and <code>makeBdc.py</code> (v2.0.1); pandapower tutorial <code>create_advanced.ipynb</code>; pandapower issues #2517</td>
+<td><code>preprocess/helpers/ptdf.py</code>; <code>grid_helpers</code> example grids</td>
+</tr>
+<tr>
+<td>L13</td>
+<td>PowSyBl docs: transformer model (cited as <code>www.powsybl.org/pages/documentation/grid/model/#transformers</code>, now offline; archived copy: https://web.archive.org/web/20240816020722/https://www.powsybl.org/pages/documentation/grid/model/#transformers); grid exchange formats; network/subnetwork; OpenLoadFlow parameters and security parameters; pypowsybl issue #1153</td>
+<td><code>powsybl_backend.py:274</code>, <code>docs/dc_solver/loadflow_parameters.md</code>, contingency_analysis</td>
+</tr>
+<tr>
+<td>L14</td>
+<td>QDax (https://github.com/adaptive-intelligent-robotics/QDax); the repertoire and MAP-Elites code is "adapted from QDax"</td>
+<td><code>topology_optimizer_pkg/.../dc/repertoire/discrete_map_elites.py</code>, <code>discrete_me_repertoire.py</code></td>
+</tr>
+<tr>
+<td>L15</td>
+<td>grid2op "topo-vect" format (the concept only, no URL)</td>
+<td><code>docs/dc_solver/quickstart.md</code></td>
+</tr>
+<tr>
+<td>L16</td>
+<td>Implementation notes: JAX issues #4258, #4572, #9940; gist tbenthompson/faae311ec4e465b0ff47b4aabe0d56b2 (unrolled 3×3 solve); JAX "Common Gotchas" (float64); StackOverflow 8317403; polars issue 27509</td>
+<td><code>jax/unrolled_linalg.py</code>, <code>jax/utils.py</code>, <code>docs/dc_solver/quickstart.md</code></td>
+</tr>
+<tr>
+<td>L17</td>
+<td>Talks: LF Energy Summit 2025 (https://www.youtube.com/watch?v=XteDpNsX75A) and 2024 (lfenergy.org recap, "A <abbr title="Graphics processing unit">GPU</abbr>-native approach on tackling grid topology optimization")</td>
+<td><code>README.md</code>, <code>docs/index.md</code></td>
+</tr>
+<tr>
+<td>L18</td>
+<td>Tooling docs: c4model.com, likec4.dev, hydra.cc, uv docs, Material for MkDocs</td>
+<td><code>docs/architecture/README.md</code>, <code>docs/benchmark.md</code></td>
+</tr>
+</tbody>
+</table>
+<p>There is no bibliography file, and <code>mkdocs.yml</code> has no references section. The nav contains only docs pages plus mkdocstrings API references.</p>
+<p>Recommended textbooks are <strong>not</strong> cited anywhere in the repo (no Wood &amp; Wollenberg, Grainger &amp; Stevenson, Kundur, Mouret &amp; Clune, etc.). You will need to pick them.</p>
+<hr />
+<h2 id="2-documentation-inventory-what-theory-the-docs-explain">2. Documentation inventory (what theory the docs explain)<a class="headerlink" href="#2-documentation-inventory-what-theory-the-docs-explain" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>docs/dc_solver/intro.md</code> (includes <code>packages/dc_solver_pkg/README.md</code>): <abbr title="Power transfer distribution factor">PTDF</abbr>/(G)<abbr title="Line outage distribution factor">LODF</abbr>/<abbr title="Bus split distribution factor">BSDF</abbr> batching; static vs dynamic information (JAX recompilation); symmetric mode vs injection bruteforcing; cross-coupler flow; cost of <abbr title="Bus split distribution factor">BSDF</abbr> and <abbr title="Line outage distribution factor">LODF</abbr> ∝ <code>max_num_splits</code> / <code>max_num_disconnections</code>; scientific background (L1, L4, L7, L8).</li>
+<li><code>docs/dc_solver/preprocessing.md</code>: the full preprocessing pipeline, 25 steps.</li>
+<li>Relevant nodes need ≥4 branches (N-1 safe split).</li>
+<li><abbr title="Power transfer distribution factor">PTDF</abbr>, <abbr title="Phase shift distribution factor">PSDF</abbr>, node reduction (nodes more than one hop away are merged), bridges, N-2-safe disconnectables.</li>
+<li>trafo3w multi-outages, injection outages, bus-B <abbr title="Power transfer distribution factor">PTDF</abbr> columns.</li>
+<li>Master vs runtime asset topology; parallel <abbr title="Phase-shifting transformer">PST</abbr> grouping rules (same voltage, same bus pair, same tap tables).</li>
+<li><code>docs/dc_solver/busbar_outage.md</code>: busbar outage as a multi-outage (<abbr title="Multi-outage distribution factor">MODF</abbr>) plus nodal ΔP.</li>
+<li>Outage propagation over closed non-breaker couplers and double-connected assets.</li>
+<li>Stub or bridge branches; articulation-node busbars are excluded.</li>
+<li>Physical vs electrical busbars; 2^(n-1)-1 configurations; retry with a "skeleton branch".</li>
+<li>Two modes: busbar outage as N-1, or as an N-2-like penalty.</li>
+<li><code>docs/dc_solver/switching_distance.md</code>: physical vs electrical switching; Hamming distance over translation sets; asset topology.</li>
+<li><code>docs/dc_solver/install_time.md</code>: realizing an electrical action as a physical configuration (feasible coupler configurations, busbar_A mapping, minimum switching).</li>
+<li><code>docs/dc_solver/loadflow_parameters.md</code>: distributed slack (smaller AC/DC mismatch), voltage initialization modes, convergence fallbacks.</li>
+<li><code>docs/dc_solver/quickstart.md</code>:</li>
+<li>Topo-vect (grid2op): each substation runs in at most a 2-node configuration.</li>
+<li>Metrics table; branch weights formula (overload_grid = Σ weight·overload).</li>
+<li><strong>Double limits</strong> (lower 0.9 and upper 1.0 bands) and <strong>N0-N1 max-diff factors</strong> (limit power pushed into the distribution grid).</li>
+<li>German PRDx whitelist/blacklist; postprocessing runners.</li>
+<li><code>docs/topology_optimizer/intro.md</code> (includes the package README), <code>structure.md</code>, <code>deepdive.md</code> (marked WIP on the "genetic algorithm"): two-stage DC→AC pipeline, quality-diversity, Kafka topics.</li>
+<li><code>docs/topology_optimizer/metrics.md</code>: authoritative definitions of every metric (matrix, operation, other), including exponential overload α=1.5, n0_n1_delta, cross-coupler flow, busbar-outage penalty and islands, AC-only va-diff and voltage-jump metrics, and non-converging loadflows.</li>
+<li><code>docs/topology_optimizer/ac/select_strategy.md</code>: median, dominator and discriminator filters over repertoire heatmaps.</li>
+<li><code>docs/topology_optimizer/ac/early_stopping.md</code>: worst-k contingency screening (union of AC-baseline and DC worst-k), acceptance thresholds, reuse of results.</li>
+<li><code>docs/topology_optimizer/ac/ac_loop.md</code>: survivor batching, timeout flush, runtime limit.</li>
+<li><code>docs/contingency_analysis/cascade.md</code>: cascade simulation.</li>
+<li>Triggers: current overload (loading = i/i_max) and distance protection.</li>
+<li>Three nested polygon zones (DANGER/ALARM/WARNING); factor divides measured |R|; base-case screening.</li>
+<li><abbr title="Special protection scheme">SpPS</abbr> (Special Protection Schemes) iteration; <code>sw_characteristics</code> relay table (angle, r_i, r_v, x_v).</li>
+<li><code>docs/contingency_analysis/propagation.md</code>: ToOp busbar-section expansion vs PowSyBl native <code>contingencyPropagation</code> (breaker-based fault isolation, currently disabled); pandapower outage grouping by connected components.</li>
+<li><code>docs/contingency_analysis/result_filtering.md</code>, <code>progress.md</code>: result filtering (loading and voltage-band thresholds); Ray progress callbacks.</li>
+<li><code>docs/interfaces/asset_topology.md</code>: node-breaker ↔ bus-branch mapping; MasterBusGroup/RuntimeBusGroup; Busbar, BusbarCoupler, SwitchableAsset; AssetBay (disconnector–breaker–selector disconnectors); AssetSetpoint (<abbr title="Phase-shifting transformer">PST</abbr>/<abbr title="High-voltage direct current">HVDC</abbr>).</li>
+<li><code>docs/importer/network_graph/index.md</code>: NetworkGraphData schemas (busbar/node, DISCONNECTOR/BREAKER, branch types for powsybl and pandapower, helper branches).</li>
+<li>Weighted shortest paths with cutoffs to find bays, couplers and zero-impedance connections.</li>
+<li>No star-equivalent needed for trafo3w.</li>
+<li><code>docs/importer/pypowsybl/merge_ucte_with_cgmes.md</code>: border lines, area codes, boundary voltage levels → tie lines, merge, AC loadflow.</li>
+<li><code>docs/importer/contingency_from_power_factory/index.md</code>: PowerFactory contingency import with pandera validation.</li>
+<li><code>docs/importer/exporter/index.md</code>: UCTE export (RES/RAS, PRDx) and PowerFactory DGS export.</li>
+<li><code>docs/importer/worker/worker.md</code>: importer Kafka worker.</li>
+<li><code>docs/usage.md</code>, <code>docs/quickstart.md</code>, <code>docs/benchmark.md</code>: Kafka workflow; Hydra multirun and parameter sweeps.</li>
+<li><code>docs/wall_of_shame.md</code>: known limitations.</li>
+<li>Islanding branches are excluded from N-1 because <abbr title="Line outage distribution factor">LODF</abbr> cannot handle them.</li>
+<li>AC runs on the reduced outage set.</li>
+<li>Topologies that improve convergence but worsen overload are rejected.</li>
+<li>PowSyBl <code>NO_CALCULATION</code> is treated as a failure.</li>
+<li><code>docs/architecture/</code> (LikeC4 <code>.c4</code> files): C4 model; Kafka topics <code>importer_commands</code>, <code>importer_results</code>, <code>importer_heartbeat</code>, <code>commands</code>, <code>results</code>, <code>heartbeat</code>; three filesystems/stores.</li>
+</ul>
+<hr />
+<h2 id="3-concept-inventory-by-knowledge-domain">3. Concept inventory by knowledge domain<a class="headerlink" href="#3-concept-inventory-by-knowledge-domain" title="Permanent link">&para;</a></h2>
+<p>The dc_solver source directory below is <code>.../packages/dc_solver_pkg/src/toop_engine_dc_solver</code>. Other packages follow the same pattern, <code>.../packages/&lt;pkg&gt;/src/toop_engine_&lt;name&gt;</code>.</p>
+<h3 id="31-mathematics-linear-algebra">3.1 Mathematics: linear algebra<a class="headerlink" href="#31-mathematics-linear-algebra" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>How the code uses it</th>
+<th>Key files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vectors and matrices, matrix-vector product, outer product</td>
+<td>Flows <code>F = PTDF @ P</code> (einsum <code>"bij,btj-&gt;bti"</code>). Bus splits are rank-1 updates <code>PTDF + outer(u, v)</code>; disconnection sets and multi-outages are rank-k updates.</td>
+<td><code>jax/compute_batch.py:463</code>, <code>jax/bsdf.py:403</code>, <code>jax/disconnections.py:61</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Directed incidence / connectivity matrix A (branch×node, +1/−1)</td>
+<td><code>get_connectivity_matrix</code> builds <code>Cft = Cf - Ct</code> as sparse CSC</td>
+<td><code>preprocess/helpers/ptdf.py</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Weighted Laplacian <code>B_bus = Aᵀ diag(b) A</code>; branch-node matrix <code>B_f = diag(b) A</code></td>
+<td>Nodal susceptance matrix of the DC power flow ("makeBdc")</td>
+<td><code>preprocess/helpers/ptdf.py:get_susceptance_matrices</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Singular matrices, reference / slack elimination (reduce by a row and column)</td>
+<td><abbr title="Power transfer distribution factor">PTDF</abbr> is solved with the slack column removed and the reference bus fixed. NaNs mean the grid is disconnected, i.e. B is singular.</td>
+<td><code>preprocess/helpers/ptdf.py:compute_ptdf</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Solving linear systems, matrix inverse, multiple right-hand sides</td>
+<td><code>spsolve(B_red.T, B_f.T).T</code> gives the whole <abbr title="Power transfer distribution factor">PTDF</abbr> at once</td>
+<td>same</td>
+<td>I</td>
+</tr>
+<tr>
+<td>Rank-1 updates / Sherman–Morrison</td>
+<td><abbr title="Line outage distribution factor">LODF</abbr>-based <abbr title="Power transfer distribution factor">PTDF</abbr> update after a disconnection, and <abbr title="Bus split distribution factor">BSDF</abbr> update after a bus split, are both rank-1 corrections with a scalar denominator. Denominator 0 means islanding.</td>
+<td><code>jax/lodf.py</code>, <code>jax/disconnections.py</code>, <code>jax/bsdf.py</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Low-rank updates / Woodbury identity</td>
+<td><abbr title="Multi-outage distribution factor">MODF</abbr>: solve <code>(I − H_OO) X = H_MO</code> (k×k). Branch-parameter change: <code>(I + D_α H_OO) C = D_α PTDF_O</code>, then <code>PTDF += (−H + E) C</code>. The identity is not named in the code, but the algebra is Woodbury.</td>
+<td><code>jax/multi_outages.py:build_modf_matrix</code>, <code>update_ptdf_with_modf</code>; <code>jax/branch_parameter_changes.py</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Determinants, 2×2 / 3×3 closed-form inverse (adjugate/Cramer)</td>
+<td>Unrolled solves for 2- and 3-branch trafo3w multi-outages, with a determinant check</td>
+<td><code>jax/unrolled_linalg.py</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Superposition / linearity</td>
+<td>Injection outage <code>F' = F + PTDF[:,node]·ΔP</code>; reassignment ΔP on bus A/B; <code>Flow = PTDF·P + PSDF·α</code></td>
+<td><code>jax/contingency_analysis.py:calc_injection_outage</code>, <code>jax/injections.py:get_reassignment_deltap</code>, <code>preprocess/helpers/psdf.py</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Block / augmented matrices</td>
+<td><abbr title="Power transfer distribution factor">PTDF</abbr> extended with "bus B" columns (copies) for each relevant substation; <abbr title="Phase shift distribution factor">PSDF</abbr> appended as extra pseudo-node columns</td>
+<td><code>preprocess/helpers/ptdf.py:get_extended_ptdf</code>, <code>preprocess/preprocess.py:combine_phaseshift_and_injection</code>, <code>add_bus_b_columns_to_ptdf</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Tensor index notation (einsum), batching axes</td>
+<td>Everywhere in the solver (<code>io,to-&gt;ti</code>, <code>bij,btj-&gt;bti</code>)</td>
+<td><code>jax/multi_outages.py</code>, <code>jax/compute_batch.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Monoid / associativity (a design comment)</td>
+<td>Comment on whether <abbr title="Bus split distribution factor">BSDF</abbr> composition is a monoid, which would allow <code>reduce</code></td>
+<td><code>jax/bsdf.py:535</code></td>
+<td>A (optional)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-mathematics-numerical-linear-algebra-and-numerics">3.2 Mathematics: numerical linear algebra and numerics<a class="headerlink" href="#32-mathematics-numerical-linear-algebra-and-numerics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sparse matrix storage (CSC/CSR, COO construction)</td>
+<td>B matrices, nodal injection aggregation</td>
+<td><code>preprocess/helpers/ptdf.py</code>, <code>preprocess/helpers/injection_topology.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Sparse direct solvers (SuperLU via <code>scipy.sparse.linalg.spsolve</code>; UMFPACK option in pandapower)</td>
+<td><abbr title="Power transfer distribution factor">PTDF</abbr> computation; pandapower parameter <code>use_umfpack</code></td>
+<td><code>preprocess/helpers/ptdf.py</code>; <code>grid_helpers_pkg/.../pandapower/loadflow_parameters.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td><abbr title="LU factorization">LU</abbr> factorization with pivoting; determinant from the <abbr title="LU factorization">LU</abbr> diagonal</td>
+<td>General k×k <abbr title="Multi-outage distribution factor">MODF</abbr> solves in JAX (<code>jax.scipy.linalg.lu_factor/lu_solve</code>)</td>
+<td><code>jax/unrolled_linalg.py:solve_and_check_det</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Conditioning, tolerances, near-singularity detection</td>
+<td>Thresholds: <code>|denom| &gt; 1e-11</code> (<abbr title="Line outage distribution factor">LODF</abbr>), <code>≥ 1e-5</code> (<abbr title="Bus split distribution factor">BSDF</abbr>), <code>|det| &gt; 1e-10</code>; NaN/finite checks</td>
+<td><code>jax/lodf.py</code>, <code>jax/bsdf.py</code>, <code>jax/unrolled_linalg.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Floating-point precision (float32 vs float64)</td>
+<td><code>jax.config.update("jax_enable_x64", True)</code> is recommended because JAX defaults to 32-bit</td>
+<td><code>docs/dc_solver/quickstart.md</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Newton–Raphson iteration for nonlinear systems (convergence, mismatch tolerance, iteration caps, initialization)</td>
+<td>AC power flow in pandapower (<code>algorithm: "nr"</code>, <code>max_iteration</code>, <code>tolerance_mva: 1e-8</code>) and OpenLoadFlow (<code>maxNewtonRaphsonIterations: 25</code>, <code>maxActivePowerMismatch</code>); warm start <code>init="results"</code></td>
+<td><code>grid_helpers_pkg/.../pandapower/loadflow_parameters.py</code>, <code>grid_helpers_pkg/.../powsybl/loadflow_parameters.py</code>, <code>contingency_analysis_pkg/.../pandapower/outage_power_flow.py</code></td>
+<td>I–A</td>
+</tr>
+<tr>
+<td>Padded arrays and sentinel indices (fixed shapes for <abbr title="Graphics processing unit">GPU</abbr>)</td>
+<td><code>int_max</code> padding with <code>.at[].get(mode="fill")</code> so variable-size data fits a static shape</td>
+<td><code>jax/bsdf.py</code>, <code>jax/lodf.py</code>, <code>jax/types.py</code></td>
+<td>I</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-mathematics-graph-theory-and-algorithms">3.3 Mathematics: graph theory and algorithms<a class="headerlink" href="#33-mathematics-graph-theory-and-algorithms" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Graphs, multigraphs (parallel branches), directed vs undirected</td>
+<td>Grid as a (multi)graph keyed by branch index</td>
+<td><code>preprocess/helpers/find_bridges.py</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Connected components / islanding</td>
+<td>Grid-split detection; outage groups (pandapower); 2-component coupler partitions; SciPy csgraph; union-find bus lookup</td>
+<td><code>preprocess/preprocess_switching.py</code>, <code>grid_helpers_pkg/.../pandapower/outage_group.py</code>, <code>slack_allocation.py</code>, <code>bus_lookup.py</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Bridges (Tarjan, <code>nx.bridges</code>)</td>
+<td>Branches whose outage islands the grid are removed from the N-1 set; "mainland" side; N-2-safe disconnectables found by counting bridges after each removal</td>
+<td><code>preprocess/helpers/find_bridges.py</code>, <code>preprocess/preprocess.py:compute_bridging_branches</code>, <code>filter_disconnectable_branches_nminus2</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Articulation points (cut vertices)</td>
+<td>Busbars whose outage splits a station or grid are excluded from busbar outages</td>
+<td><code>preprocess/preprocess_bb_outage.py:get_articulation_nodes</code>, <code>preprocess/network_data.py:839</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Weighted shortest paths (Dijkstra, cutoff, custom multi-weight functions)</td>
+<td>Node-breaker parsing: find asset bays, couplers, busbar connections</td>
+<td><code>grid_helpers_pkg/.../network_graph/filter_strategy/*.py</code>, <code>network_graph_helper_functions.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>k-hop neighborhoods</td>
+<td>Node-dimension reduction keeps nodes within 2 branches of relevant elements</td>
+<td><code>preprocess/helpers/reduce_node_dimension.py</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Exhaustive enumeration over subsets (<code>itertools.product</code>) plus a component test</td>
+<td>All coupler open/closed states giving exactly two electrical buses (≤ 20 couplers)</td>
+<td><code>preprocess/preprocess_switching.py:make_separation_set</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Graph partitioning (Kernighan–Lin bisection)</td>
+<td>Only for generating synthetic region masks in example grids</td>
+<td><code>dc_solver/example_grids.py:987</code></td>
+<td>A (optional)</td>
+</tr>
+<tr>
+<td>Hamming distance between binary vectors</td>
+<td>Switching distance; configuration deduplication</td>
+<td><code>preprocess/helpers/switching_distance.py</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Combinatorics of splits (2^(n−1) bus assignments, clipping)</td>
+<td>Action enumeration per station (<code>action_set_clip = 2**23</code>); exhaustive bruteforce generator</td>
+<td><code>preprocess/action_set.py</code>, <code>topology_optimizer_pkg/.../dc_bruteforce/generator.py</code></td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-mathematics-complex-numbers-trigonometry-geometry">3.4 Mathematics: complex numbers, trigonometry, geometry<a class="headerlink" href="#34-mathematics-complex-numbers-trigonometry-geometry" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phasors, complex impedance Z = R + jX, polar ↔ rectangular</td>
+<td>Relay impedance: <code>V_phase = V_LL/√3</code>, <code>|Z| = V/I</code>, <code>φ = atan2(Q, P)</code>, R and X from φ</td>
+<td><code>contingency_analysis_pkg/.../pandapower/cascade/detection/switch_preparation.py:get_complex_impedance</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Apparent power magnitude <code>S = √(P² + Q²)</code>; three-phase current <code>I = S/(√3·V)</code></td>
+<td>Switch current results; P-to-I conversion; limits <code>P_limit = √3·V·I_perm</code></td>
+<td><code>contingency_analysis_pkg/.../results/switch_results.py:590</code>, <code>grid_helpers_pkg/.../powsybl/powsybl_helpers.py:98-165</code>, <code>dc_solver_pkg/.../preprocess/powsybl/powsybl_helpers.py:get_p_max</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Angle arithmetic, <code>atan2</code>, degrees ↔ radians</td>
+<td>AC result post-processing computes a <abbr title="Phase-shifting transformer">PST</abbr> angle from tap position, step percent and step degree with <code>atan2</code> (the DC solver instead reads angles from <code>pst_tap_values</code>); <abbr title="Phase shift distribution factor">PSDF</abbr> in MW/° (× base_MVA·π/180); critical angle difference 20°</td>
+<td><code>contingency_analysis_pkg/.../results/va_diff_results.py:540-600</code>, <code>preprocess/helpers/psdf.py</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Computational geometry: polygon construction, point-in-polygon (shapely)</td>
+<td>Distance-protection quadrilateral zones in the R-X plane</td>
+<td><code>contingency_analysis_pkg/.../cascade/detection/distance_protection.py</code></td>
+<td>I</td>
+</tr>
+</tbody>
+</table>
+<h3 id="35-mathematics-probability-and-statistics-light">3.5 Mathematics: probability and statistics (light)<a class="headerlink" href="#35-mathematics-probability-and-statistics-light" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Discrete distributions: categorical sampling with probabilities, Poisson, Normal</td>
+<td>Number of substations mutated ~ Poisson(λ=2); <abbr title="Phase-shifting transformer">PST</abbr> tap mutation draws an integer step from a discretized Gaussian on ±⌈4σ⌉ (defaults σ=1, probability 0.2, reset probability 0.0 in <code>BatchedMEParameters</code>); the Poisson draw is clipped to [1, max_num_splits]; uniform sampling from the repertoire</td>
+<td><code>topology_optimizer_pkg/.../dc/genetic_functions/mutation/mutate.py</code>, <code>mutate_nodal_inj.py</code>, <code>dc/repertoire/discrete_me_repertoire.py:sample</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Pseudo-random number generators, seeds, key splitting (JAX PRNG)</td>
+<td>Reproducible mutation and crossover</td>
+<td>same; <code>dc/genetic_functions/crossover.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Order statistics: max, median, top-k</td>
+<td>N-1 worst case per branch; median metrics; median filter; <code>jax.lax.top_k</code> worst-k contingencies</td>
+<td><code>jax/aggregate_results.py</code>, <code>ac/select_strategy.py</code></td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
+<h3 id="36-electrical-engineering-fundamentals">3.6 Electrical engineering fundamentals<a class="headerlink" href="#36-electrical-engineering-fundamentals" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kirchhoff's current and voltage laws, Ohm's law</td>
+<td>DC power flow derivation; cross-coupler flow = <abbr title="Kirchhoff's current law">KCL</abbr> imbalance at bus A</td>
+<td><code>jax/cross_coupler_flow.py:compute_cross_coupler_flow_single</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Sinusoidal steady state, active/reactive/apparent power, power factor</td>
+<td>AC results (p, q, i, vm, va); <code>dc_power_factor = 1.0</code> when converting current limits to MW</td>
+<td><code>grid_helpers_pkg/.../powsybl/loadflow_parameters.py</code>, loadflow result schemas in <code>interfaces_pkg/.../loadflow_results*.py</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Three-phase systems (line-to-line vs phase voltage, √3 factors)</td>
+<td>Current and limit conversions; relay phase voltage</td>
+<td>see §3.4</td>
+<td>B</td>
+</tr>
+<tr>
+<td>Per-unit system, base MVA</td>
+<td>PowSyBl <code>net_pu.per_unit = True</code>; susceptances in p.u.; <abbr title="Phase shift distribution factor">PSDF</abbr> scaled by base_mva; pandapower ppc internal format</td>
+<td><code>preprocess/powsybl/powsybl_helpers.py:get_network_as_pu</code>, <code>powsybl_backend.py:get_base_mva</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Series reactance and susceptance (b = 1/x; DC neglects r)</td>
+<td><code>get_susceptances = 1/x</code>; pandapower <code>calc_b_from_branch</code></td>
+<td><code>preprocess/powsybl/powsybl_backend.py:431</code>, <code>preprocess/pandapower/pandapower_backend.py:503</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Transformers: ratio (rho), tap changers, T vs π equivalent models</td>
+<td>DC susceptance uses <code>x/rho</code> (<code>dc_use_transformer_ratio=True</code>); pandapower <code>trafo_model: "t"</code>; low-voltage-side limits</td>
+<td><code>preprocess/powsybl/powsybl_helpers.py:get_trafos</code>, <code>grid_helpers_pkg/.../pandapower/loadflow_parameters.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Phase-shifting transformers (<abbr title="Phase-shifting transformer">PST</abbr>): symmetric/asymmetric, linear vs non-linear tap tables, tap steps (alpha, rho, x)</td>
+<td>Taps optimized by index with per-tap angle and susceptance tables (<code>pst_tap_values</code>, <code>pst_tap_susceptance_values</code>); <code>_is_linear_pst_step_table</code> (rho, x, r, g, b constant) is used only to group parallel PSTs into buckets, and the DC <code>pst_linear</code> flag comes from <code>get_linear_pst</code> (x constant across taps)</td>
+<td><code>preprocess/powsybl/powsybl_backend.py:493-561</code>, <code>preprocess/powsybl/powsybl_helpers.py:_is_linear_pst_step_table</code>, <code>_identify_pst_buckets</code>, <code>jax/pst.py</code></td>
+<td>I–A</td>
+</tr>
+<tr>
+<td>Three-winding transformers (star equivalent with auxiliary bus)</td>
+<td>pandapower models each as 3 branches plus an aux bus; outage = 2- or 3-branch multi-outage</td>
+<td><code>preprocess/pandapower/pandapower_backend.py:708</code>, <code>jax/multi_outages.py</code>, <code>preprocess/preprocess.py:convert_multi_outages</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td><abbr title="High-voltage direct current">HVDC</abbr> (<abbr title="Line-commutated converter">LCC</abbr> and <abbr title="Voltage-source converter">VSC</abbr> converter stations), dclines</td>
+<td>Modeled as P injections; <code>HVDCRange</code> setpoint placeholder</td>
+<td><code>preprocess/powsybl/powsybl_backend.py:_get_hvdc_lcc</code>, <code>_get_hvdc_vsc</code>; <code>interfaces_pkg/.../stored_action_set.py:HVDCRange</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Generators, loads, batteries, boundary lines, <abbr title="High-voltage direct current">HVDC</abbr> converter stations; shunts and SVCs; constant-Z loads</td>
+<td>PowSyBl injection table holds generators, loads, boundary lines, batteries and <abbr title="Line-commutated converter">LCC</abbr>/<abbr title="Voltage-source converter">VSC</abbr> converters (the backend asserts there are no shunt compensators with active power and no three-winding transformers; those are handled in the pandapower backend); example grid "battery, <abbr title="High-voltage direct current">HVDC</abbr>, <abbr title="Static var compensator">SVC</abbr>, 3w trafo"; <code>modify_constan_z_load</code></td>
+<td><code>grid_helpers_pkg/.../powsybl/example_grids.py:create_complex_grid_battery_hvdc_svc_3w_trafo</code>, <code>importer_pkg/.../pandapower_import/preprocessing.py</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Network equivalents: Ward / extended Ward (xward), boundary (dangling) lines, X-nodes, tie lines (x = x₁ + x₂)</td>
+<td>Aux buses for xward; boundary lines as injections; tie lines merge two dangling halves</td>
+<td><code>preprocess/pandapower/pandapower_backend.py:210-230</code>, <code>preprocess/powsybl/powsybl_helpers.py:get_tie_lines</code>, <code>importer_pkg/.../merge_ucte_cgmes/</code></td>
+<td>I–A</td>
+</tr>
+<tr>
+<td>Protection: circuit breakers vs disconnectors (load-break), relays, distance (impedance) protection, zones, overcurrent tripping</td>
+<td>Cascade simulation; contingency propagation via breakers</td>
+<td><code>contingency_analysis_pkg/.../pandapower/cascade/</code>, <code>docs/contingency_analysis/cascade.md</code>, <code>propagation.md</code></td>
+<td>I–A</td>
+</tr>
+</tbody>
+</table>
+<h3 id="37-power-systems-power-flow">3.7 Power systems: power flow<a class="headerlink" href="#37-power-systems-power-flow" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bus-branch model, nodal injections, slack/reference bus, <abbr title="Generator bus (active power and voltage specified)">PV</abbr>/<abbr title="Load bus (active and reactive power specified)">PQ</abbr> buses</td>
+<td>Backend interface exposes nodes, branches and injections; single slack for <abbr title="Power transfer distribution factor">PTDF</abbr> (distributed slack "cannot" be used with <abbr title="Bus split distribution factor">BSDF</abbr>)</td>
+<td><code>interfaces_pkg/.../backend.py</code>, <code>preprocess/helpers/ptdf.py:43</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td><strong>DC power flow approximation</strong> (flat voltage, small angles, r ≪ x, P = B·θ)</td>
+<td>Whole <abbr title="Graphics processing unit">GPU</abbr> solver; the pandapower <code>rundcpp</code> and PowSyBl <code>run_dc</code> paths</td>
+<td><code>preprocess/helpers/ptdf.py</code>, <code>jax/*</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>AC power flow</strong> (nonlinear power balance equations, Newton–Raphson, reactive limits, voltage control, convergence)</td>
+<td>AC validation and N-1 in pandapower <code>runpp</code> and PowSyBl OpenLoadFlow</td>
+<td><code>contingency_analysis_pkg/.../pandapower/contingency_analysis_pandapower.py:852</code>, <code>pypowsybl/contingency_analysis_powsybl.py:189</code>, <code>grid_helpers_pkg/.../*/loadflow_parameters.py</code></td>
+<td>I–A</td>
+</tr>
+<tr>
+<td>Distributed slack (balance proportional to Pmax or P), reference bus selection, slack per island</td>
+<td>OpenLoadFlow <code>BalanceType</code>; slack allocation to generators per island (pandapower)</td>
+<td><code>grid_helpers_pkg/.../powsybl/loadflow_parameters.py</code>, <code>grid_helpers_pkg/.../pandapower/slack_allocation.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Voltage initialization modes (flat, DC values, previous values) and convergence fallbacks</td>
+<td>Three inits are tried at import; parameters are persisted</td>
+<td><code>docs/dc_solver/loadflow_parameters.md</code>, <code>importer_pkg/.../pypowsybl_import/preprocessing.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>AC–DC mismatch correction</td>
+<td><code>unsplit_flow = PTDF·P + ac_dc_mismatch·ac_dc_interpolation</code></td>
+<td><code>jax/cross_coupler_flow.py:179-203</code>, <code>preprocess/*/..._backend.py:get_ac_dc_mismatch</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Multi-timestep ("chronics")</td>
+<td>Arrays carry an <code>n_timesteps</code> axis; the harmonize module is disabled</td>
+<td><code>jax/types.py</code>, <code>preprocess/harmonize.py</code>, <code>preprocess/pandapower/pandapower_backend.py</code> (dcline_p chronics)</td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
+<h3 id="38-power-systems-linear-sensitivity-distribution-factors-the-core-of-the-solver">3.8 Power systems: linear sensitivity (distribution) factors, the core of the solver<a class="headerlink" href="#38-power-systems-linear-sensitivity-distribution-factors-the-core-of-the-solver" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Formula / algorithm in the code</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><abbr title="Power transfer distribution factor">PTDF</abbr></strong> (branch × node)</td>
+<td><code>PTDF[:, noslack] = spsolve(B_bus[noslack, noref]ᵀ, B_f[:, noref]ᵀ)ᵀ</code></td>
+<td><code>preprocess/helpers/ptdf.py:compute_ptdf</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong><abbr title="Phase shift distribution factor">PSDF</abbr></strong> (phase shift)</td>
+<td><code>PSDF = −b_pst·(PTDF[:, f] − PTDF[:, t])</code>, plus <code>b_pst</code> on the <abbr title="Phase-shifting transformer">PST</abbr>'s own row; scaled by <code>base_mva * (np.pi/180)</code> in <code>psdf.py</code> (MW/°). Stacked onto the <abbr title="Power transfer distribution factor">PTDF</abbr> so one matmul gives flows.</td>
+<td><code>preprocess/helpers/psdf.py</code>, <code>preprocess/preprocess.py:combine_phaseshift_and_injection</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong><abbr title="Line outage distribution factor">LODF</abbr></strong> (single outage)</td>
+<td><code>LODF_{a,b} = (PTDF_{a,f_b} − PTDF_{a,t_b}) / (1 − (PTDF_{b,f_b} − PTDF_{b,t_b}))</code>; own row = −1; failure when the denominator ≈ 0 (bridge); <code>n_1 = n_0 + LODF·n_0[b]</code></td>
+<td><code>jax/lodf.py</code>, <code>jax/contingency_analysis.py:calc_n_1_matrix</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td><abbr title="Power transfer distribution factor">PTDF</abbr> update after topological disconnections</td>
+<td>In the batch path, <code>apply_disconnections</code> applies all disconnections of a topology as one joint <abbr title="Multi-outage distribution factor">MODF</abbr> update (<code>build_modf_matrix</code> + <code>update_ptdf_with_modf</code>); a failure marks the topology unsuccessful. The single-outage form <code>PTDF' = PTDF + outer(LODF, PTDF[b]); PTDF'[b] = 0</code> (<code>apply_single_disconnection_lodf</code>) is used only in tests</td>
+<td><code>jax/disconnections.py</code>, <code>jax/multi_outages.py</code></td>
+<td>I–A</td>
+</tr>
+<tr>
+<td><strong><abbr title="Multi-outage distribution factor">MODF</abbr></strong> (multi-outage, generalized <abbr title="Line outage distribution factor">LODF</abbr>)</td>
+<td><code>denom = I − H_OO</code>, <code>nom = H_MO</code> (own rows set to −denom), <code>MODF = solve(denomᵀ, nomᵀ)ᵀ</code>; flows <code>F0 + MODF·F0[O]</code>; <abbr title="Power transfer distribution factor">PTDF</abbr> update uses "equation 7" of L6</td>
+<td><code>jax/multi_outages.py</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td><strong><abbr title="Bus split distribution factor">BSDF</abbr></strong> (bus split)</td>
+<td><code>ptdf_th_sw</code> = Σ <abbr title="Power transfer distribution factor">PTDF</abbr> rows of branches entering bus A − Σ leaving (slack handled); <code>denom = Σ b_A − g_sw</code>; <code>nom = Σ b·PEDF[other ends]</code> ± b on own rows; <code>PTDF' = PTDF + outer(bsdf, ptdf_th_sw)</code>; from/to node vectors are rewired to bus B</td>
+<td><code>jax/bsdf.py:calc_bsdf</code>, <code>_apply_bus_split</code>, <code>compute_bus_splits</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td><abbr title="Power exchange distribution factor">PEDF</abbr> (theoretical injection to bus B)</td>
+<td><code>pedf = PTDF − PTDF[:, i_stat]</code> inside <abbr title="Bus split distribution factor">BSDF</abbr></td>
+<td><code>jax/bsdf.py</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Susceptance-change (<abbr title="Phase-shifting transformer">PST</abbr> tap) low-rank update</td>
+<td><code>α = Δb/b</code>, <code>(I + D_α H_OO)·C = D_α·PTDF_O</code>, then <code>PTDF += (E − H)·C</code></td>
+<td><code>jax/branch_parameter_changes.py</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Injection outages and reassignment</td>
+<td>ΔP at a node × <abbr title="Power transfer distribution factor">PTDF</abbr> column; bus A/B deltas</td>
+<td><code>jax/contingency_analysis.py</code>, <code>jax/injections.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Order of composition</td>
+<td><abbr title="Power transfer distribution factor">PTDF</abbr> side: bus splits (<abbr title="Bus split distribution factor">BSDF</abbr>) → disconnections (joint <abbr title="Multi-outage distribution factor">MODF</abbr>) → <abbr title="Phase-shifting transformer">PST</abbr> susceptance update (Woodbury) → <abbr title="Line outage distribution factor">LODF</abbr> and <abbr title="Multi-outage distribution factor">MODF</abbr> contingency matrices. Flow side: nodal injections → cross-coupler flows → N-0 update after disconnections → <abbr title="Phase-shifting transformer">PST</abbr> angles (N-0 recomputed) → N-1 flows, injection outages and busbar outages (<abbr title="Multi-outage distribution factor">MODF</abbr> + ΔP)</td>
+<td><code>jax/compute_batch.py:compute_bsdf_lodf_static_flows</code>, <code>jax/topology_looper.py</code> docstring</td>
+<td>A</td>
+</tr>
+<tr>
+<td>NumPy reference implementations (for teaching)</td>
+<td>Plain-NumPy <abbr title="Line outage distribution factor">LODF</abbr>/<abbr title="Bus split distribution factor">BSDF</abbr>, also used for the action-set <abbr title="Bus split distribution factor">BSDF</abbr> pre-filter</td>
+<td><code>packages/dc_solver_pkg/tests/numpy_reference.py</code></td>
+<td>I</td>
+</tr>
+</tbody>
+</table>
+<h3 id="39-power-systems-security-contingency-analysis-operations">3.9 Power systems: security, contingency analysis, operations<a class="headerlink" href="#39-power-systems-security-contingency-analysis-operations" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N-0, N-1, N-2 security criterion; monitored vs outaged elements; contingency lists</td>
+<td><code>Nminus1Definition</code> (Contingency, GridElement, MonitoredElement); N-2-safe disconnectables; <code>n_2_penalty</code></td>
+<td><code>interfaces_pkg/.../nminus1_definition.py</code>, <code>preprocess/helpers/find_bridges.py</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Contingency types: branch, injection (generator/load), busbar, trafo3w multi-outage, exceptional/multi</td>
+<td>Branch and injection outages, busbar outages (relevant and non-relevant), multi-outages</td>
+<td><code>jax/contingency_analysis.py</code>, <code>jax/busbar_outage.py</code>, <code>preprocess/preprocess_bb_outage.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Security analysis engines</td>
+<td>PowSyBl <code>security.create_analysis().run_ac/run_dc</code>; pandapower sequential or Ray-parallel</td>
+<td><code>contingency_analysis_pkg/.../pypowsybl/contingency_analysis_powsybl.py</code>, <code>.../pandapower/contingency_analysis_pandapower.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Thermal ratings: permanent limit (<abbr title="Permanent admissible transmission loading">PATL</abbr>), N-1 / temporary limits, current → MW conversion, loading = I/I_max</td>
+<td><code>get_p_max</code> probes <code>permanent_limit</code> and "N-1" limits; loadflow-based artificial limits for border lines and <abbr title="Distribution system operator">DSO</abbr> transformers (<code>LimitAdjustmentParameters</code>)</td>
+<td><code>preprocess/powsybl/powsybl_helpers.py:149-198</code>, <code>importer_pkg/.../pypowsybl_import/loadflow_based_current_limits.py</code>, <code>interfaces_pkg/.../preprocess_commands.py:47</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Overload metrics</td>
+<td>Overload energy <code>Σ_t max_contingency clip(|F| − Fmax, 0)</code> (weighted); "exponential" <code>((|F|/Fmax)^α − 1)·Fmax</code> with α=1.5 (actually a power law); critical branch count; transport; underload; cumulative overload; median/max flow</td>
+<td><code>jax/aggregate_results.py</code>, <code>docs/topology_optimizer/metrics.md</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Double limits (operational banding 0.9/1.0)</td>
+<td><code>compute_double_limits</code></td>
+<td><code>jax/aggregate_results.py:999</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>N0–N1 max-diff (limit power pushed to <abbr title="Distribution system operator">DSO</abbr> after a contingency)</td>
+<td><code>n0_n1_delta</code> penalty</td>
+<td><code>jax/aggregate_results.py:407-518</code>, <code>docs/dc_solver/quickstart.md</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Voltage security metrics (AC only)</td>
+<td>Voltage jump N-0→N-1 &gt; 5%; voltage-angle difference across breakers at contingency ends &gt; 20° (reclosing/synchro-check motivation, not stated in the repo); voltage bands in result filters</td>
+<td><code>contingency_analysis_pkg/.../ac_loadflow_service/compute_metrics.py</code>, <code>.../pandapower_helpers/va_diff_info.py</code>, <code>results/va_diff_results.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Congestion management; redispatch as the costly alternative; non-costly remedial actions (topology, <abbr title="Phase-shifting transformer">PST</abbr>); preventive vs curative</td>
+<td>Motivation (README); OpenRAO "preventive-actions-list" export</td>
+<td><code>README.md</code>, <code>topology_optimizer_pkg/.../ac/summary.py</code>, <code>notebooks/openrao.ipynb</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Cascading failures; Special Protection Schemes (<abbr title="Special protection scheme">SpPS</abbr> rule engine: conditions/actions, ALL/ANY, iterate power flow)</td>
+<td>Optional pandapower cascade loop with depth limit and minimum island size</td>
+<td><code>contingency_analysis_pkg/.../pandapower/spps/engine.py</code>, <code>.../cascade/simulation/simulator.py</code>, <code>interfaces_pkg/.../nminus1_definition.py:SppsRule</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Distance protection: R-X quadrilateral (angle, r_i, r_v, x_v), severity zones, per-relay factors</td>
+<td>Trip detection in cascades</td>
+<td><code>.../cascade/detection/distance_protection.py</code>, <code>docs/contingency_analysis/cascade.md</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Contingency propagation / fault isolation</td>
+<td>Busbar-section expansion; PowSyBl breaker-based propagation (disabled); connected-component outage groups</td>
+<td><code>docs/contingency_analysis/propagation.md</code>, <code>grid_helpers_pkg/.../pandapower/outage_group.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td><abbr title="Transmission system operator">TSO</abbr> operational context: control / view / N-1 areas, UCTE area codes and ISO 3166 regions, cutoff voltage (220 kV default), <abbr title="Transmission system operator">TSO</abbr>-<abbr title="Transmission system operator">TSO</abbr> border lines, <abbr title="Distribution system operator">DSO</abbr> border transformers, German PRDx and <abbr title="Day-ahead congestion forecast">DACF</abbr> processes, critical-branch whitelist/blacklist, RES/RAS</td>
+<td>Importer masks and area settings</td>
+<td><code>importer_pkg/.../pypowsybl_import/powsybl_masks.py</code>, <code>dacf_whitelists.py</code>, <code>network_analysis.py:apply_cb_lists</code>, <code>interfaces_pkg/.../preprocess_commands.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Islanding penalties and grid-split handling</td>
+<td><code>bb_outage_grid_splits</code>, <code>bb_outage_more_islands_penalty</code>; bridges excluded</td>
+<td><code>jax/busbar_outage.py</code>, <code>dc_params.py</code></td>
+<td>I</td>
+</tr>
+</tbody>
+</table>
+<h3 id="310-power-systems-substation-topology-grid-models-and-data-formats">3.10 Power systems: substation topology, grid models and data formats<a class="headerlink" href="#310-power-systems-substation-topology-grid-models-and-data-formats" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node-breaker vs bus-breaker vs bus-branch models</td>
+<td>Importer converts node-breaker → bus-branch; asset topology maps both ways</td>
+<td><code>docs/interfaces/asset_topology.md</code>, <code>importer_pkg/.../pandapower_import/preprocessing.py</code>, <code>grid_helpers_pkg/.../powsybl/powsybl_station_to_graph.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Substation layout: busbars and busbar sections, busbar couplers, cross couplers, bays / asset bays, breakers, selector disconnectors, double busbar, zero-impedance connections, fusing closed switches</td>
+<td>NetworkGraph filter strategy; <code>pandapower_toolset_node_breaker</code> (ASCII diagram in the docstring)</td>
+<td><code>grid_helpers_pkg/.../network_graph/</code>, <code>importer_pkg/.../pandapower_import/pandapower_toolset_node_breaker.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Topological remedial actions: busbar splitting, reassignment, line switching, <abbr title="Phase-shifting transformer">PST</abbr> taps</td>
+<td>ActionSet; topo-vect bus A/B (grid2op); a topology is actions + disconnections + pst_setpoints</td>
+<td><code>interfaces_pkg/.../stored_action_set.py</code>, <code>topology_optimizer_pkg/.../interfaces/messages/results.py:Topology</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Electrical vs physical switching; station realization heuristics; switching distance (reassignment + coupler distance)</td>
+<td>Separation sets and Hamming distance; <code>realise_ba_to_physical_topo_per_station_jax</code></td>
+<td><code>preprocess/preprocess_switching.py</code>, <code>preprocess/helpers/switching_distance.py</code>, <code>postprocess/realize_assignment.py</code>, <code>preprocess/preprocess_station_realisations.py</code></td>
+<td>I–A</td>
+</tr>
+<tr>
+<td>Master vs runtime vs simplified asset topology; bus_group_id identity</td>
+<td>Structural vs electrical grouping</td>
+<td><code>interfaces_pkg/.../asset_topology/</code>, <code>preprocess/simplify_topology.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Single-line diagrams (<abbr title="Single-line diagram">SLD</abbr>), network area diagrams (NAD)</td>
+<td>Before/after SLDs of split stations; custom PowSyBl <abbr title="Single-line diagram">SLD</abbr> styling</td>
+<td><code>grid_helpers_pkg/.../powsybl/single_line_diagram/</code>, <code>grid_helpers_pkg/.../powsybl/loadflow_parameters.py:SDL_PARAM</code>, <code>notebooks/example2_small_grid_toop.ipynb</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Formats: UCTE-DEF (.uct fixed-width), <abbr title="Common Grid Model Exchange Standard">CGMES</abbr>/<abbr title="Common Information Model">CIM</abbr> (.zip), PowSyBl <abbr title="iTesla Internal Data Model">IIDM</abbr>/<abbr title="Extended iTesla Internal Data Model (XML)">XIIDM</abbr>, pandapower JSON, MATPOWER .mat (matpowercaseframes), PowerFactory DGS export and contingency import, OpenRAO <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr>/<abbr title="Generation and load shift key">GLSK</abbr> (notebook) and ORAO JSON summary</td>
+<td>Import, export, merge</td>
+<td><code>importer_pkg/.../ucte_toolset/ucte_io.py</code>, <code>.../pypowsybl_import/cgmes/</code>, <code>.../exporter/</code>, <code>dc_solver_pkg/.../export/asset_topology_to_dgs.py</code>, <code>dgs_v7_definitions.py</code>, <code>importer_pkg/.../contingency_from_power_factory/</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>UCTE + <abbr title="Common Grid Model Exchange Standard">CGMES</abbr> merging (boundary voltage levels → tie lines)</td>
+<td>Multi-<abbr title="Transmission system operator">TSO</abbr> model merge</td>
+<td><code>importer_pkg/.../pypowsybl_import/merge_ucte_cgmes/</code>, <code>docs/importer/pypowsybl/merge_ucte_with_cgmes.md</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Network reduction (voltage levels, depth range), low-impedance lines, removing branches across switches</td>
+<td>Import cleanup</td>
+<td><code>importer_pkg/.../pypowsybl_import/network_reduction.py</code>, <code>network_analysis.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Standard test cases: IEEE 14/30/57/300; PEGASE-like case1354 / case9241; pandapower Oberrhein; CIGRE MV</td>
+<td>Examples and tests</td>
+<td><code>dc_solver_pkg/.../example_grids.py</code>, <code>grid_helpers_pkg/.../*/example_grids.py</code></td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
+<h3 id="311-optimization">3.11 Optimization<a class="headerlink" href="#311-optimization" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Combinatorial / discrete optimization; search-space size</td>
+<td>Topologies = choice of ≤ <code>max_num_splits</code> station actions (one per substation) plus ≤ <code>max_num_disconnections</code> plus <abbr title="Phase-shifting transformer">PST</abbr> taps</td>
+<td><code>dc_params.py:LoadflowSolverParameters</code>, <code>jax/topology_computations.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Objective design: weighted-sum scalarization, penalties as soft constraints</td>
+<td><code>fitness = Σ −w·metric</code>; infeasible (split grid) scored as <code>inf</code>; penalties n0_n1_delta, cross_coupler, busbar outage</td>
+<td><code>topology_optimizer_pkg/.../dc/genetic_functions/scoring_functions.py:116,266</code></td>
+<td>B–I</td>
+</tr>
+<tr>
+<td>Evolutionary algorithms: genotype, mutation (add/change/remove split or disconnection, <abbr title="Phase-shifting transformer">PST</abbr> Gaussian), crossover (unique sampling), random restarts (<code>random_topo_prob</code>), deduplication, elitism</td>
+<td>Discrete <abbr title="Genetic algorithm">GA</abbr> operators in JAX</td>
+<td><code>dc/genetic_functions/genotype.py</code>, <code>mutation/*.py</code>, <code>crossover.py</code>, <code>dc/ga_helpers.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>Quality-diversity / MAP-Elites</strong>: descriptors (split_subs, switching_distance, disconnected_branches), grid cells (<code>ravel_multi_index</code>), per-cell elite, <code>cell_depth</code>, emitters, <code>segment_max</code> insertion</td>
+<td><code>DiscreteMapElites</code>, <code>DiscreteMapElitesRepertoire</code> (adapted from QDax)</td>
+<td><code>dc/repertoire/discrete_map_elites.py</code>, <code>discrete_me_repertoire.py</code>, <code>dc/repertoire/plotting.py</code></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Multi-objective concepts: Pareto optimality, dominance</td>
+<td>README claims a Pareto front; the actual dominance heuristic is <code>get_dominator_mask</code> over discrete target metrics; median and discriminator filters</td>
+<td><code>README.md:101</code>, <code>ac/select_strategy.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Exhaustive (bruteforce) search with lazy enumeration</td>
+<td><code>dc_bruteforce</code> optimizer</td>
+<td><code>topology_optimizer_pkg/.../dc_bruteforce/generator.py</code>, <code>optimizer.py</code></td>
+<td>B</td>
+</tr>
+<tr>
+<td>Two-fidelity pipeline: surrogate/linear screening (DC) then high-fidelity validation (AC); early rejection on worst-k subset; acceptance thresholds (convergence ≤1.0×, overload ≤0.95×, critical branches ≤1.1×, voltage jump and va-diff ≤1.1×)</td>
+<td>AC worker and scoring</td>
+<td><code>topology_optimizer_pkg/.../ac/scoring_functions.py:evaluate_acceptance</code>, <code>optimizer/interfaces/messages/ac_params.py</code>, <code>docs/topology_optimizer/ac/*.md</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Explore/exploit selection</td>
+<td><code>select_strategy</code> and interest scorer for pulling DC candidates</td>
+<td><code>ac/select_strategy.py</code>, <code>ac/evolution_functions.py</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Hyperparameter search</td>
+<td>Hydra multirun sweeps; optuna and ray[tune] in dependencies</td>
+<td><code>docs/benchmark.md</code>, <code>toop-engine-benchmark/</code>, <code>topology_optimizer_pkg/pyproject.toml</code></td>
+<td>I</td>
+</tr>
+<tr>
+<td>Related tool: remedial action optimization (OpenRAO: <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr>, <abbr title="Generation and load shift key">GLSK</abbr>)</td>
+<td>Export format and stub notebook only</td>
+<td><code>notebooks/openrao.ipynb</code>, <code>ac/summary.py</code></td>
+<td>A (context)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="312-computing-jax-gpu-and-numerical-python">3.12 Computing: JAX / <abbr title="Graphics processing unit">GPU</abbr> and numerical Python<a class="headerlink" href="#312-computing-jax-gpu-and-numerical-python" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use (counts are non-test source files)</th>
+<th>Files</th>
+<th>Conceptual weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Functional programming, immutability, pure functions</td>
+<td>StaticInformation updated via <code>replace</code>; notebook 1 explains this explicitly</td>
+<td><code>notebooks/example1_dc_loadflow_example.ipynb</code>, <code>jax/types.py</code></td>
+<td>High (B–I)</td>
+</tr>
+<tr>
+<td><code>jax.jit</code>, tracing, static vs dynamic arguments, recompilation</td>
+<td><code>static_argnames</code>; SolverConfig is static, DynamicInformation is traced; <code>HashableArrayWrapper</code> avoids recompiles</td>
+<td><code>jax/topology_looper.py:491</code>, <code>jax/utils.py</code>, <code>jax/types.py</code></td>
+<td>High (I)</td>
+</tr>
+<tr>
+<td><code>jax.vmap</code> (nested batching over topologies, injections, outages)</td>
+<td>19 files</td>
+<td><code>jax/compute_batch.py</code>, <code>jax/lodf.py</code></td>
+<td>High (I)</td>
+</tr>
+<tr>
+<td>Control flow primitives: <code>lax.scan</code>, <code>fori_loop</code>, <code>cond</code>, <code>switch</code>, <code>dynamic_slice</code>, <code>top_k</code>, <code>ops.segment_max</code></td>
+<td>Batching loops; top-k; repertoire insertion</td>
+<td><code>jax/topology_looper.py:584</code>, <code>jax/injections.py:134</code>, <code>jax/cross_coupler_flow.py:322</code>, <code>discrete_me_repertoire.py</code></td>
+<td>High (I)</td>
+</tr>
+<tr>
+<td><code>jax.pmap</code> multi-device, <code>donate_argnums</code>, <code>jax.devices</code>, <code>default_device(cpu)</code></td>
+<td>Distributed solver and <abbr title="Genetic algorithm">GA</abbr> epoch</td>
+<td><code>jax/topology_looper.py:446</code>, <code>dc/worker/optimizer.py:334</code>, <code>dc/genetic_functions/initialization.py:310</code></td>
+<td>Medium (A)</td>
+</tr>
+<tr>
+<td>Pytrees (<code>jax.tree_util</code>), equinox Modules, jax_dataclasses <code>Static</code></td>
+<td>All solver and <abbr title="Genetic algorithm">GA</abbr> state</td>
+<td><code>jax/types.py</code>, <code>dc/genetic_functions/genotype.py</code></td>
+<td>High (I)</td>
+</tr>
+<tr>
+<td>Shape-typed arrays and runtime checking (jaxtyping + beartype, chex in tests)</td>
+<td>Every signature, e.g. <code>Float[Array, " n_branches n_bus"]</code></td>
+<td>throughout</td>
+<td>Medium (B)</td>
+</tr>
+<tr>
+<td>Fixed-shape padding, <abbr title="Graphics processing unit">GPU</abbr> memory, batch sizes, OOM tuning</td>
+<td><code>batch_size_bsdf</code>, <code>batch_size_injection</code>, <code>max_num_splits</code></td>
+<td><code>jax/batching.py</code>, <code>packages/dc_solver_pkg/README.md</code> (cost of <abbr title="Bus split distribution factor">BSDF</abbr> and <abbr title="Line outage distribution factor">LODF</abbr> slots)</td>
+<td>Medium (I)</td>
+</tr>
+<tr>
+<td><abbr title="Accelerated Linear Algebra">XLA</abbr> environment flags, CUDA_VISIBLE_DEVICES, float64</td>
+<td><code>set_environment_variables</code></td>
+<td><code>topology_optimizer_pkg/.../benchmark/benchmark_utils.py</code></td>
+<td>Low–Medium</td>
+</tr>
+<tr>
+<td>NumPy / SciPy sparse, NetworkX, shapely, numba (pandapower acceleration)</td>
+<td>Preprocessing and CPU paths</td>
+<td>as above</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Not used: <code>jax.grad</code>, optax, evosax, lineax (commented out), sharding / <code>shard_map</code></td>
+<td>n/a</td>
+<td><code>jax/multi_outages.py:29</code></td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<h3 id="313-computing-data-tooling-distributed-systems-and-messaging">3.13 Computing: data tooling, distributed systems and messaging<a class="headerlink" href="#313-computing-data-tooling-distributed-systems-and-messaging" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+<th>Files</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tabular data: pandas and polars (lazy frames), pyarrow</td>
+<td>Grid element tables; loadflow results; polars is faster for large N-1</td>
+<td><code>interfaces_pkg/.../loadflow_results_polars.py</code>, <code>contingency_analysis_pkg/.../pypowsybl/powsybl_helpers_polars.py</code></td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Schema validation: pandera (DataFrames), pydantic (models, validators, discriminated unions)</td>
+<td>58 and 50 files respectively</td>
+<td><code>interfaces_pkg/.../messages/</code>, <code>dc_params.py</code> validators</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>HDF5 (h5py) binary arrays; JSON; <code>.npy</code> masks; filesystem abstraction (fsspec DirFileSystem)</td>
+<td><code>static_information.hdf5</code>, <code>action_set_diffs.hdf5</code>, masks</td>
+<td><code>jax/inputs.py</code>, <code>interfaces_pkg/.../folder_structure.py</code></td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Message-driven architecture: Kafka (confluent-kafka) topics, commands, results, heartbeats; protobuf wrapper</td>
+<td>DC and AC workers run concurrently</td>
+<td><code>topology_optimizer_pkg/.../dc/worker/worker.py</code>, <code>ac/worker.py</code>, <code>interfaces_pkg/.../messages/protobuf_schema/message_wrapper.proto</code>, <code>docs/architecture/model/02-messaging.c4</code></td>
+<td>Medium (I)</td>
+</tr>
+<tr>
+<td>Parallelism on CPU: Ray remote tasks and queues (pandapower N-1), ThreadPoolExecutor (AC runners), multiprocessing</td>
+<td>Parallel contingencies and topologies</td>
+<td><code>contingency_analysis_pkg/.../pandapower/contingency_analysis_pandapower.py:755</code>, <code>topology_optimizer_pkg/.../ac/scoring_functions.py:10</code></td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Databases: SQLModel/SQLAlchemy (SQLite) for the AC repertoire</td>
+<td>Storing and querying topologies</td>
+<td><code>topology_optimizer_pkg/.../ac/storage.py</code>, <code>evolution_functions.py</code></td>
+<td>Low–Medium</td>
+</tr>
+<tr>
+<td>Experiment tooling: tensorboardX, tyro CLIs, Hydra configs, structlog</td>
+<td>Logging and CLI</td>
+<td><code>dc/main.py</code>, <code>benchmark_utils.py</code></td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Engineering: uv, Docker / devcontainer, pytest (xdist), MkDocs + mkdocstrings, LikeC4/C4 model, ruff</td>
+<td>Development workflow</td>
+<td><code>pyproject.toml</code>, <code>docs/architecture/</code></td>
+<td>Low (for theory)</td>
+</tr>
+<tr>
+<td>External power-system libraries: pandapower (PYPOWER ppc internals), pypowsybl (Java PowSyBl via C++ bindings), OpenLoadFlow</td>
+<td>The backends</td>
+<td><code>preprocess/*_backend.py</code></td>
+<td>High (practical)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-notebooks-what-each-teaches-and-which-concepts-it-requires">4. Notebooks: what each teaches and which concepts it requires<a class="headerlink" href="#4-notebooks-what-each-teaches-and-which-concepts-it-requires" title="Permanent link">&para;</a></h2>
+<p>Folder: <code>../ToOp/notebooks/</code></p>
+<ol>
+<li><strong><code>example1_dc_loadflow_example.ipynb</code></strong>: DC loadflow on IEEE-57 (PowSyBl backend).</li>
+<li>Content: <code>load_grid</code> → static information (solver_config vs dynamic_information), then <code>run_initial_loadflow</code>; 72 nodes, 82 branches; <code>unsplit_flow</code> shape (timesteps × branches); functional programming note.</li>
+<li>Requires: DC power flow, <abbr title="Power transfer distribution factor">PTDF</abbr>, float64 in JAX, immutability / pytrees.</li>
+<li><strong><code>example2_small_grid_toop.ipynb</code></strong>: full pipeline on a small node-breaker grid (<code>data/grid_node_breaker</code>).</li>
+<li>Content: import → preprocess (busbar outages enabled, <code>bb_outage_as_nminus1=False</code>) → DC MAP-Elites (descriptor split_subs) → AC validation; single-line diagrams before and after the VL2 split; <code>res.json</code> <code>overload_energy_n_1</code>.</li>
+<li>Requires: substation topology, busbar splitting, N-1, overload energy, MAP-Elites, AC power flow, SLDs.</li>
+<li><strong><code>example3_e2e_pipeline.ipynb</code></strong>: staged pipeline on a generated "complex grid with battery, <abbr title="High-voltage direct current">HVDC</abbr>, <abbr title="Static var compensator">SVC</abbr>, 3w trafo".</li>
+<li>Content: CgmesImporterParameters and AreaSettings (cutoff voltage, control/view/N-1 areas); <code>target_metrics</code> weighted sum (<code>overload_energy_n_0</code> + 50·<code>critical_branch_count_n_0</code>); three descriptors (the comment "cells on the pareto front" is loose); <code>max_num_splits</code> / <code>max_num_disconnections</code> / <code>batch_size</code> (VRAM); AC validation settings (voltage jump 5%, va-diff 20°).</li>
+<li>Requires: all of the above plus <abbr title="High-voltage direct current">HVDC</abbr>/3w-transformer modeling, weighted-sum objectives, <abbr title="Graphics processing unit">GPU</abbr> memory.</li>
+<li><strong><code>example_asset_topology_analysis.ipynb</code></strong>: interactive PowSyBl topology inspection (ipywidgets, pypowsybl_jupyter SLDs).</li>
+<li>Content: voltage-level, bus-group and element views; master vs runtime vs simplified topology; separation-set preparation (<code>prepare_for_separation_set</code>, <code>StationProblems</code>).</li>
+<li>Requires: node-breaker modeling, busbars/couplers/bays, asset topology data model.</li>
+<li><strong><code>run_ac_contingency_analysis.ipynb</code></strong>: standalone AC N-1 in pandapower (<abbr title="Common Information Model">CIM</abbr> import, Ray with 15 processes) and PowSyBl (<abbr title="Common Grid Model Exchange Standard">CGMES</abbr>).</li>
+<li>Content: building <code>Nminus1Definition</code> (monitored lines, trafos, trafo3w, buses; line and trafo outages); result-count arithmetic (2 sides per branch, 3 per trafo3w); pandera validation toggle; profiling.</li>
+<li>Requires: N-1 criterion, AC power flow, grid data formats, dataframes.</li>
+<li><strong><code>openrao.ipynb</code></strong>: stub, not runnable as-is.</li>
+<li>Content: loads the CIGRE MV network, then a PowSyBl <abbr title="Remedial action optimization">RAO</abbr> with <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr> and <abbr title="Generation and load shift key">GLSK</abbr> files.</li>
+<li>Requires: remedial action optimization context (<abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr> = contingency list, remedial actions and constraints; <abbr title="Generation and load shift key">GLSK</abbr> = generation and load shift keys). These terms are not explained in the repo.</li>
+<li><code>notebooks/tests/test_notebooks.py</code> executes the notebooks.</li>
+</ol>
+<hr />
+<h2 id="5-suggested-dependency-order-of-concepts-curriculum-spine">5. Suggested dependency order of concepts (curriculum spine)<a class="headerlink" href="#5-suggested-dependency-order-of-concepts-curriculum-spine" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Math foundations (B).</strong> Vectors and matrices, products, outer products, solving Ax=b, determinants, inverse; complex numbers and phasors; trigonometry and atan2; Hamming distance; basic probability (categorical, Poisson, Normal); max, median, top-k.</li>
+<li><strong>Circuits (B).</strong> Ohm's law, <abbr title="Kirchhoff's current law">KCL</abbr>/<abbr title="Kirchhoff's voltage law">KVL</abbr>; nodal analysis as a matrix equation (conductance Laplacian); superposition.</li>
+<li><strong>AC fundamentals (B–I).</strong> Sinusoidal steady state, impedance and admittance, P/Q/S, power factor; three-phase and √3 relations; per-unit system.</li>
+<li><strong>Power system components (I).</strong> Lines (π model, x ≫ r), transformers (ratio, tap changers, T/π models), PSTs (angle and tap tables, linearity), three-winding transformers (star equivalent), generators, loads, shunts/<abbr title="Static var compensator">SVC</abbr>, batteries, <abbr title="High-voltage direct current">HVDC</abbr> <abbr title="Line-commutated converter">LCC</abbr>/<abbr title="Voltage-source converter">VSC</abbr> as injections, Ward equivalents, tie and boundary lines.</li>
+<li><strong>Graph theory (B–I).</strong> Graphs and multigraphs, incidence matrix, weighted Laplacian (link to step 2), connected components, bridges, articulation points, Dijkstra with cutoffs, subset enumeration and union-find.</li>
+<li><strong>Power flow (I).</strong> Bus types and slack; AC power flow equations; Newton–Raphson (with numerics: Jacobian, convergence, initialization); distributed slack; then the <strong>DC approximation</strong>, B_bus = AᵀDA, B_f = DA and the slack reduction.</li>
+<li><strong>Numerical linear algebra (I).</strong> Sparse storage and sparse direct solves; <abbr title="LU factorization">LU</abbr> with pivoting; conditioning and tolerances; float32 vs float64.</li>
+<li><strong>Sensitivity factors (I–A).</strong> <abbr title="Power transfer distribution factor">PTDF</abbr> → <abbr title="Phase shift distribution factor">PSDF</abbr> → <abbr title="Line outage distribution factor">LODF</abbr> (derived from <abbr title="Power transfer distribution factor">PTDF</abbr>) → rank-1 updates / Sherman–Morrison → <abbr title="Multi-outage distribution factor">MODF</abbr> (multi-outage) / Woodbury → <abbr title="Bus split distribution factor">BSDF</abbr> bus splits (needs substation topology from step 9) → susceptance-change updates; composition order and islanding (zero denominators ⇔ bridges).</li>
+<li><strong>Substation topology and grid models (I).</strong> Busbars, couplers, breakers vs disconnectors, bays; node-breaker vs bus-breaker vs bus-branch; topo-vect bus A/B; electrical vs physical switching; switching distance; asset topology. Data formats: UCTE, <abbr title="Common Grid Model Exchange Standard">CGMES</abbr>/<abbr title="Common Information Model">CIM</abbr>, <abbr title="Extended iTesla Internal Data Model (XML)">XIIDM</abbr>, pandapower JSON, MATPOWER, DGS. SLDs.</li>
+<li><strong>Operational security (I).</strong> N-0/N-1/N-2; contingency definitions (branch, injection, busbar, multi-outage); thermal limits (<abbr title="Permanent admissible transmission loading">PATL</abbr>, N-1 limits, current ↔ MW); overload metrics, double limits, N0-N1 delta; voltage-jump and angle-difference metrics; congestion management, redispatch and non-costly topological or <abbr title="Phase-shifting transformer">PST</abbr> remedial actions; <abbr title="Transmission system operator">TSO</abbr> areas and processes (<abbr title="Day-ahead congestion forecast">DACF</abbr>, PRDx, border lines, <abbr title="Distribution system operator">DSO</abbr> transformers).</li>
+<li><strong>Protection and cascades (A, optional module).</strong> Breakers and relays, distance protection in the R-X plane (zones, polygons), overcurrent trips, special protection schemes, contingency propagation, cascade simulation.</li>
+<li><strong>Optimization (I–A).</strong> Combinatorial search spaces; objectives, weighted sums and penalties; exhaustive search; evolutionary algorithms (mutation, crossover, dedup, elitism); multi-objective basics (Pareto dominance); quality-diversity and MAP-Elites (descriptors, repertoires); multi-fidelity screening (DC→AC), early rejection, acceptance thresholds; explore/exploit selection; hyperparameter sweeps; context on <abbr title="Remedial action optimization">RAO</abbr>/OpenRAO.</li>
+<li><strong>Computing for the <abbr title="Graphics processing unit">GPU</abbr> solver (I–A).</strong> Python typing and dataclasses; NumPy broadcasting and einsum; functional programming; JAX (jit/tracing/static args, vmap, scan/fori_loop/cond, PRNG keys, pytrees/equinox, fixed-shape padding, pmap, memory/batching); jaxtyping + beartype.</li>
+<li><strong>Data and distributed engineering (I).</strong> pandas/polars/pyarrow, pandera/pydantic schemas, HDF5/JSON/npy, fsspec; Kafka message-driven workers and protobuf; Ray and process/thread pools; SQL (SQLModel/SQLite); logging, tensorboard, Hydra/tyro; Docker/uv/pytest/MkDocs; C4 architecture diagrams.</li>
+<li><strong>Capstone.</strong> Read L1 (arXiv:2501.17529 / PowerTech DOI), L4 (<abbr title="Bus split distribution factor">BSDF</abbr>), L5 (arXiv:2412.16164), L6/L7 (<abbr title="Multi-outage distribution factor">MODF</abbr>) and L3 (arXiv:2605.10128). Then run notebooks 1 → 4 → 5 → 2 → 3 and map each stage back to <code>jax/compute_batch.py</code>, <code>dc/repertoire/*</code> and <code>ac/scoring_functions.py</code>.</li>
+</ol>
+<p>Hard prerequisite edges: steps 1–2 → 5 → 6 (DC) → 8. Steps 3–4 → 6 (AC) → 10 → 11. Step 9 is needed before <abbr title="Bus split distribution factor">BSDF</abbr>, busbar outages and switching distance in step 8. Steps 8 and 10 → 12. Step 13 can start in parallel after step 1, but the solver code needs step 8 first.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../b-books/" class="md-footer__link md-footer__link--prev" aria-label="Previous: B. Bibliography">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                B. Bibliography
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../d-glossary/" class="md-footer__link md-footer__link--next" aria-label="Next: D. Glossary">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                D. Glossary
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
