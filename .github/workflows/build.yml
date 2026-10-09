@@ -1,0 +1,36 @@
+name: build
+
+# Strict build of the course book on every PR and push to main. It is its own
+# workflow so a broken link between chapters reads as a build failure, not a
+# lint failure, and it gets its own status badge. (docs.yaml is the separate
+# release publisher.)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup-python
+        with:
+          sync-args: "--group doc --frozen"
+
+      # --strict turns a dangling cross-reference, an anchor that does not
+      # exist or a page missing from the nav into a build failure, which is
+      # the only way the book stays honest.
+      - name: Build the course book
+        run: uv run --frozen mkdocs build --strict -d ./site

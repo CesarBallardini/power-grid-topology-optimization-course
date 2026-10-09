@@ -1,6 +1,8 @@
 # Power Grid Topology Optimization — course book
 
 [![check](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/check.yml/badge.svg)](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/check.yml)
+[![links](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/links.yml/badge.svg)](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/links.yml)
+[![build](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/build.yml/badge.svg)](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/build.yml)
 [![docs](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/docs.yaml/badge.svg)](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/docs.yaml)
 [![validate-pr-title](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/validate_pr_title.yaml/badge.svg)](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/validate_pr_title.yaml)
 [![site](https://img.shields.io/website?url=https://katra.ballardini.com.ar/power-grid-topology-optimization-course/&label=site)](https://katra.ballardini.com.ar/power-grid-topology-optimization-course/)

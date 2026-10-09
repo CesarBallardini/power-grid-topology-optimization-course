@@ -35,32 +35,14 @@ jobs:
       # checks: running the same hooks here is what stops CI and a local commit
       # disagreeing about which ruff version or which rules applied.
       # no-commit-to-branch is skipped because CI legitimately builds with main
-      # checked out.
+      # checked out. markdown-link-check is skipped here and runs in the
+      # `links` workflow: it is network-bound and takes minutes, so it must not
+      # hold up lint and tests.
       - name: Run pre-commit hooks
-        run: SKIP=no-commit-to-branch uv run --frozen pre-commit run --all-files
+        run: SKIP=no-commit-to-branch,markdown-link-check uv run --frozen pre-commit run --all-files
 
       # Unit tests for the maintenance tools. Tests marked `network` (live
       # archive.org) are excluded by the default addopts, so a flaky external
       # service cannot turn the build red. This mirrors `make test`.
       - name: Run the test suite
         run: uv run --frozen pytest
-
-  # Separate job: the docs build only needs the doc group, and a broken link
-  # between chapters should read as a docs failure, not a lint failure.
-  docs:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup-python
-        with:
-          sync-args: "--group doc --frozen"
-
-      # --strict turns a dangling cross-reference, an anchor that does not
-      # exist or a page missing from the nav into a build failure, which is
-      # the only way the book stays honest.
-      - name: Build the course book
-        run: uv run --frozen mkdocs build --strict -d ./site
