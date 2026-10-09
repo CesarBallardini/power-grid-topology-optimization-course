@@ -1,0 +1,2864 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/0.1.1/part-3-power-systems/ch18-sensitivity-factors-2/">
+      
+      
+        <link rel="prev" href="../ch17-sensitivity-factors-1/">
+      
+      
+        <link rel="next" href="../ch19-operational-security/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>18. Sensitivity factors II: low-rank updates for topology changes - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-18-sensitivity-factors-ii-low-rank-updates-for-topology-changes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              18. Sensitivity factors II: low-rank updates for topology changes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading guide
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disconnections-and-multi-outages-modf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disconnections and multi-outages (MODF)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#susceptance-changes-pst-taps-by-woodbury" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Susceptance changes (PST taps) by Woodbury
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bus-splits-bsdf-and-the-cross-coupler-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bus splits (BSDF) and the cross-coupler flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#injection-reassignment-injection-outages-and-busbar-outages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Injection reassignment, injection outages and busbar outages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composition-order-in-compute_symmetric_batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composition order in compute_symmetric_batch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-vs-code-known-discrepancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation vs code: known discrepancies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading guide
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disconnections-and-multi-outages-modf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disconnections and multi-outages (MODF)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#susceptance-changes-pst-taps-by-woodbury" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Susceptance changes (PST taps) by Woodbury
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bus-splits-bsdf-and-the-cross-coupler-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bus splits (BSDF) and the cross-coupler flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#injection-reassignment-injection-outages-and-busbar-outages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Injection reassignment, injection outages and busbar outages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composition-order-in-compute_symmetric_batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composition order in compute_symmetric_batch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-vs-code-known-discrepancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation vs code: known discrepancies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-18-sensitivity-factors-ii-low-rank-updates-for-topology-changes">Chapter 18. Sensitivity factors II: low-rank updates for topology changes<a class="headerlink" href="#chapter-18-sensitivity-factors-ii-low-rank-updates-for-topology-changes" title="Permanent link">&para;</a></h1>
+<p><strong>Weeks:</strong> 3.5 · <strong>Semester:</strong> 3 · <strong>Prerequisites:</strong> <a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>, <a href="../ch13-substations-grid-models/">Chapter 13</a>, <a href="../ch17-sensitivity-factors-1/">Chapter 17</a></p>
+<div class="admonition info">
+<p class="admonition-title">Why it matters for ToOp</p>
+<p>This is the heart of the DC solver. It never refactorizes <span class="arithmatex">\(B\)</span> for a new topology; it updates the <abbr title="Power transfer distribution factor">PTDF</abbr> on
+the <abbr title="Graphics processing unit">GPU</abbr> with low-rank corrections:</p>
+<ul>
+<li><strong>Bus split (<abbr title="Bus split distribution factor">BSDF</abbr>)</strong>: a rank-1 update <span class="arithmatex">\(H' = H + \beta\, p_c\)</span> per split station (<code>dc_solver/jax/bsdf.py</code>), and
+  the matching flow update <span class="arithmatex">\(F' = F + c\,\beta\)</span> driven by the cross-coupler flow <span class="arithmatex">\(c\)</span>
+  (<code>dc_solver/jax/cross_coupler_flow.py</code>).</li>
+<li><strong>Disconnections and multi-outages (<abbr title="Multi-outage distribution factor">MODF</abbr>)</strong>: solve a <span class="arithmatex">\(k \times k\)</span> system <span class="arithmatex">\((I - \mathcal H_{OO})\)</span> for <span class="arithmatex">\(k\)</span>
+  branches at once (<code>dc_solver/jax/disconnections.py</code>, <code>dc_solver/jax/multi_outages.py</code>).</li>
+<li><strong>Susceptance changes (<abbr title="Phase-shifting transformer">PST</abbr> taps)</strong>: a Woodbury correction with per-tap susceptance tables
+  (<code>dc_solver/jax/branch_parameter_changes.py</code>, <code>dc_solver/jax/pst.py</code>).</li>
+<li><strong>Injections</strong>: reassignment to bus B, injection outages and busbar outages as <abbr title="Power transfer distribution factor">PTDF</abbr> columns times
+  <span class="arithmatex">\(\Delta P\)</span> (<code>dc_solver/jax/injections.py</code>, <code>dc_solver/jax/busbar_outage.py</code>).</li>
+<li><strong>Composition order</strong> (<code>dc_solver/jax/compute_batch.py</code>): bus splits → disconnections → <abbr title="Phase-shifting transformer">PST</abbr> susceptance
+  update → <abbr title="Line outage distribution factor">LODF</abbr> and <abbr title="Multi-outage distribution factor">MODF</abbr> matrices; then nodal injections and cross-coupler flows → N-0 update for
+  disconnections (and <abbr title="Phase-shifting transformer">PST</abbr> angles) → contingency matrix (branch N-1, multi-outages, injection outages,
+  busbar outages if enabled as N-1). Details in the worked example.</li>
+</ul>
+<p>JAX itself is introduced in <a href="../../part-5-computing/ch31-jax-gpu-fundamentals/">Chapter 31</a>, taught between
+Chapter 17 and this chapter; how ToOp batches these updates on the <abbr title="Graphics processing unit">GPU</abbr> is the subject of
+<a href="../../part-5-computing/ch32-jax-in-toop/">Chapter 32</a>.</p>
+</div>
+<h2 id="topics">Topics<a class="headerlink" href="#topics" title="Permanent link">&para;</a></h2>
+<ul>
+<li><abbr title="Line outage distribution factor">LODF</abbr> as a Sherman–Morrison update; <abbr title="Power transfer distribution factor">PTDF</abbr> update after a topological disconnection (revisits the rank-1
+  updates of <a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>).</li>
+<li>Generalized / multiple-outage distribution factors (<abbr title="Generalized line outage distribution factor">GLODF</abbr>, <abbr title="Multi-outage distribution factor">MODF</abbr>): <span class="arithmatex">\(k \times k\)</span> solves; closed-form
+  <span class="arithmatex">\(2 \times 2\)</span> and <span class="arithmatex">\(3 \times 3\)</span> inverses with determinant checks.</li>
+<li>Branch parameter changes via Woodbury; <abbr title="Multi-outage distribution factor">MODF</abbr> as the special case "susceptance goes to zero"; <abbr title="Phase-shifting transformer">PST</abbr> tap tables.</li>
+<li><strong>Bus split distribution factors</strong>: splitting a node, the coupler <abbr title="Power transfer distribution factor">PTDF</abbr> row, <abbr title="Power exchange distribution factor">PEDF</abbr>, rewiring from/to vectors,
+  cross-coupler flow as a <abbr title="Kirchhoff's current law">KCL</abbr> imbalance, and the "inject the coupler flow" view.</li>
+<li>Injection reassignment between bus A and bus B; injection outages after reassignment.</li>
+<li>Busbar outages as injection removal plus multi-outages, with a retry that keeps one skeleton branch
+  (<code>docs/dc_solver/busbar_outage.md</code>).</li>
+<li>Composition of updates; islanding detection (zero denominators and determinants) and numerical tolerances.</li>
+<li>Extensions: voltage-sensitive distribution factors.</li>
+</ul>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Derive the <abbr title="Bus split distribution factor">BSDF</abbr> update from the outage of a zero-impedance coupler, implement it in NumPy, and verify it
+  against a <abbr title="Power transfer distribution factor">PTDF</abbr> recomputed on the physically split network.</li>
+<li>Derive the <abbr title="Multi-outage distribution factor">MODF</abbr> and the Woodbury susceptance update from the Sherman–Morrison–Woodbury identity and show
+  that <abbr title="Multi-outage distribution factor">MODF</abbr> is the case <span class="arithmatex">\(\alpha = -1\)</span>.</li>
+<li>Reproduce ToOp's composition order for a bus split, a disconnection, an injection reassignment and an N-1
+  screen, and explain why each step needs the results of the previous ones.</li>
+<li>Explain the cost of each update type as a function of the number of splits and outages, and why it fits
+  <abbr title="Graphics processing unit">GPU</abbr> batching.</li>
+</ul>
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Papers (core readings, all with free versions):</li>
+<li>Westerbeck, van Dijk, Viebahn, Merz &amp; Witthaut, "Accelerated DC loadflow solver for topology
+    optimization", IEEE PowerTech 2025, doi:10.1109/PowerTech59965.2025.11180422. Open access:
+    arXiv:2501.17529. <strong>The ToOp solver paper.</strong></li>
+<li>van Dijk, Viebahn, Cijsouw &amp; van Casteren, "Bus Split Distribution Factors", <em>IEEE Trans. Power Systems</em>
+    39(3):5115–5125, 2024, doi:10.1109/TPWRS.2023.3331896. Preprint:
+    <a href="https://www.techrxiv.org/users/689474/articles/681212-bus-split-distribution-factors">https://www.techrxiv.org/users/689474/articles/681212-bus-split-distribution-factors</a>
+    (doi:10.36227/techrxiv.22298950.v1); TechRxiv blocks many automated clients, archived copy of June 2024:
+    <a href="https://web.archive.org/web/20240614093230/https://www.techrxiv.org/users/689474/articles/681212-bus-split-distribution-factors">https://web.archive.org/web/20240614093230/https://www.techrxiv.org/users/689474/articles/681212-bus-split-distribution-factors</a>.</li>
+<li>Ronellenfitsch, Manik, Hörsch, Brown &amp; Witthaut, "Dual theory of transmission line outages", <em>IEEE Trans.
+    Power Systems</em>, 2017, doi:10.1109/TPWRS.2017.2658022. Open access: arXiv:1606.07276 (the <abbr title="Multi-outage distribution factor">MODF</abbr> formulation
+    cited in the ToOp dc_solver README).</li>
+<li>Güler, Gross &amp; Liu, "Generalized Line Outage Distribution Factors", <em>IEEE Trans. Power Systems</em>
+    22(2):879–881, 2007, doi:10.1109/TPWRS.2006.888950.</li>
+<li>Guo, Fu, Li &amp; Shahidehpour, "Direct Calculation of Line Outage Distribution Factors", <em>IEEE Trans. Power
+    Systems</em> 24(3):1633–1634, 2009, doi:10.1109/TPWRS.2009.2023273. <code>dc_solver/jax/multi_outages.py</code> cites its
+    "equation 7" for the <abbr title="Multi-outage distribution factor">MODF</abbr> <abbr title="Power transfer distribution factor">PTDF</abbr> update.</li>
+<li>van Dijk et al., arXiv:2412.16164 (<a href="../ch17-sensitivity-factors-1/">Chapter 17</a>).</li>
+<li>Titz, Witthaut, van Dijk, Petrick &amp; Westerbeck, "Voltage-sensitive distribution factors for contingency
+    analysis and topology optimization", arXiv:2509.19976 (extension).</li>
+<li>Background: Hager, "Updating the Inverse of a Matrix", <em>SIAM Review</em> 31(2), 1989,
+  doi:10.1137/1031049; Higham on Sherman–Morrison–Woodbury (<a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>).</li>
+<li>ToOp: <code>docs/dc_solver/busbar_outage.md</code>; tests that double as executable specifications:
+  <code>packages/dc_solver_pkg/tests/jax/test_cross_coupler_flow.py</code> (cross-coupler flows against <abbr title="Power transfer distribution factor">PTDF</abbr> flows of the
+  split grid), <code>packages/dc_solver_pkg/tests/jax/test_busbar_outage.py</code> (busbar outages against
+  <code>pypowsybl.loadflow.run_dc</code> with <code>SINGLE_SLACK</code>), <code>packages/dc_solver_pkg/tests/jax/test_disconnections.py</code>,
+  <code>packages/dc_solver_pkg/tests/jax/test_multi_outages.py</code>, <code>packages/dc_solver_pkg/tests/jax/test_pst.py</code>;
+  NumPy reference <code>packages/dc_solver_pkg/tests/numpy_reference.py</code>.</li>
+</ul>
+<h2 id="reading-guide">Reading guide<a class="headerlink" href="#reading-guide" title="Permanent link">&para;</a></h2>
+<p>The papers are graduate level. For third-semester students, read them in this order and depth.</p>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Required</th>
+<th>Recommended</th>
+<th>Skippable on first reading</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>van Dijk et al., arXiv:2412.16164</td>
+<td>§III background and notation; §IV.1 branch modifications and line outages; §IV.4 <abbr title="Bus split distribution factor">BSDF</abbr>; §V detecting islanding</td>
+<td>§IV.2 phase-shifting transformers; §VI.1 finite topology modifications and line outages</td>
+<td>§II literature overview; §IV.3 and §VI.2 bus merge factors; §IV.5 alternative treatment of bus splits; §VI.3 multiple bus splits</td>
+</tr>
+<tr>
+<td>Westerbeck et al., arXiv:2501.17529 (ToOp)</td>
+<td>§II DC loadflow theory; §III-A task definition; §IV-A injection–branch differentiation; §IV-D representing multiple outages</td>
+<td>§III-C <abbr title="Graphics processing unit">GPU</abbr> architecture; §VI discussion</td>
+<td>§III-B CPU architecture; §IV-B, §IV-C; §V case studies (look at the figures only)</td>
+</tr>
+<tr>
+<td>van Dijk et al., "Bus Split Distribution Factors" (2024)</td>
+<td>the definition and derivation of the <abbr title="Bus split distribution factor">BSDF</abbr>; map each quantity to <code>calc_bsdf</code></td>
+<td>numerical validation</td>
+<td>case studies. Section numbers are not given here: the preprint host blocks automated access, so they could not be checked.</td>
+</tr>
+<tr>
+<td>Ronellenfitsch et al., arXiv:1606.07276</td>
+<td>§II primal formulation; §V.A single and §V.B multiple line outages</td>
+<td>§III–IV cycles, dual graph and dual flows (needed to follow §V in full); §V.C computational aspects</td>
+<td>§VI topology of cycle flows</td>
+</tr>
+<tr>
+<td>Güler et al. (2007)</td>
+<td>the whole letter (3 pages): matrix form of the generalized <abbr title="Line outage distribution factor">LODF</abbr></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Guo et al. (2009)</td>
+<td>the whole letter (2 pages): direct <abbr title="Line outage distribution factor">LODF</abbr> and <abbr title="Power transfer distribution factor">PTDF</abbr> update after multiple outages</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Titz et al., arXiv:2509.19976</td>
+<td>—</td>
+<td>—</td>
+<td>all, unless you work on voltage-sensitive extensions, for example in a capstone project (<a href="../../part-6-capstone/ch35-capstone/">Chapter 35</a>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h2>
+<p>Notation: <span class="arithmatex">\(H\)</span> is the <abbr title="Power transfer distribution factor">PTDF</abbr> (<span class="arithmatex">\(n_l \times n_b\)</span>), <span class="arithmatex">\(F = HP\)</span> the flows, and for a set <span class="arithmatex">\(O\)</span> of branches
+<span class="arithmatex">\(\mathcal H_{:,O} = H_{:,f_O} - H_{:,t_O}\)</span> (column <span class="arithmatex">\(j\)</span> is the flow response to one MW sent from <span class="arithmatex">\(f_{O_j}\)</span> to
+<span class="arithmatex">\(t_{O_j}\)</span>), so <span class="arithmatex">\(\mathcal H_{OO}\)</span> is its <span class="arithmatex">\(k \times k\)</span> block on the rows of <span class="arithmatex">\(O\)</span>.</p>
+<h3 id="disconnections-and-multi-outages-modf">Disconnections and multi-outages (<abbr title="Multi-outage distribution factor">MODF</abbr>)<a class="headerlink" href="#disconnections-and-multi-outages-modf" title="Permanent link">&para;</a></h3>
+<p>For one branch <span class="arithmatex">\(k\)</span>, <a href="../ch17-sensitivity-factors-1/">Chapter 17</a> gave <span class="arithmatex">\(H' = H + \text{LODF}_{:,k}\,H_{k,:}\)</span>. For
+<span class="arithmatex">\(k\)</span> simultaneous outages, the compensating injections solve a <span class="arithmatex">\(k \times k\)</span> system instead of a scalar
+equation:</p>
+<div class="arithmatex">\[
+\text{MODF} = N\,(I - \mathcal H_{OO})^{-1}, \qquad N = \mathcal H_{:,O} \text{ with rows } O \text{ replaced by } -(I - \mathcal H_{OO}),
+\]</div>
+<div class="arithmatex">\[
+F' = F + \text{MODF}\,F_O, \qquad H' = H + \text{MODF}\,H_{O,:}, \qquad F'_O = 0,\; H'_{O,:} = 0 .
+\]</div>
+<p><code>build_modf_matrix</code> computes this with <code>solve_and_check_det</code>, which uses closed-form inverses for <span class="arithmatex">\(k = 2, 3\)</span> and
+an <abbr title="LU factorization">LU</abbr> factorization otherwise, and reports failure when the determinant is (numerically) zero, i.e. when the
+outage set disconnects the grid. <code>update_ptdf_with_modf</code> applies <span class="arithmatex">\(H + \text{MODF}\,H_{O,:}\)</span> (the "equation 7" of
+Guo et al.).</p>
+<h3 id="susceptance-changes-pst-taps-by-woodbury">Susceptance changes (<abbr title="Phase-shifting transformer">PST</abbr> taps) by Woodbury<a class="headerlink" href="#susceptance-changes-pst-taps-by-woodbury" title="Permanent link">&para;</a></h3>
+<p>Changing the susceptances of branches <span class="arithmatex">\(O\)</span> from <span class="arithmatex">\(b_O\)</span> to <span class="arithmatex">\(b_O + \Delta b_O\)</span> changes the reduced matrix by
+<span class="arithmatex">\(A_O^\top \operatorname{diag}(\Delta b_O) A_O\)</span>. The Woodbury identity</p>
+<div class="arithmatex">\[
+(\tilde B + U D V)^{-1} = \tilde B^{-1} - \tilde B^{-1} U \left(D^{-1} + V \tilde B^{-1} U\right)^{-1} V \tilde B^{-1}
+\]</div>
+<p>with <span class="arithmatex">\(U = A_O^\top\)</span>, <span class="arithmatex">\(V = A_O\)</span>, <span class="arithmatex">\(D = \operatorname{diag}(\Delta b_O)\)</span>, and the identities
+<span class="arithmatex">\(A_O \tilde B^{-1} A_O^\top = \operatorname{diag}(b_O)^{-1}\mathcal H_{OO}\)</span> and
+<span class="arithmatex">\(A_O \tilde B^{-1} = \operatorname{diag}(b_O)^{-1} H_{O,:}\)</span>, give, with <span class="arithmatex">\(\alpha = \Delta b_O / b_O\)</span> elementwise and
+<span class="arithmatex">\(E_O\)</span> the <span class="arithmatex">\(n_l \times k\)</span> matrix with ones at <span class="arithmatex">\((O_j, j)\)</span>,</p>
+<div class="arithmatex">\[
+C = \left(I + \operatorname{diag}(\alpha)\,\mathcal H_{OO}\right)^{-1} \operatorname{diag}(\alpha)\, H_{O,:}, \qquad
+H' = H + \left(E_O - \mathcal H_{:,O}\right) C .
+\]</div>
+<p>This is exactly <code>update_ptdf_with_branch_parameter_change</code>. Setting <span class="arithmatex">\(\alpha = -1\)</span> (susceptance to zero) gives
+the <abbr title="Multi-outage distribution factor">MODF</abbr> update. ToOp stores, for every controllable <abbr title="Phase-shifting transformer">PST</abbr>, a table of effective susceptances per tap
+(<code>pst_tap_susceptance_values</code>) and of shift angles in degrees per tap (<code>pst_tap_values</code>) in
+<code>NodalInjectionInformation</code> (<code>dc_solver/jax/types.py</code>); a tap index <code>j</code> into these tables corresponds to the
+grid model's tap position <code>j + grid_model_low_tap</code>. <code>prepare_pst_tap_state</code> looks up the susceptances for the requested taps,
+the Woodbury update changes the <abbr title="Power transfer distribution factor">PTDF</abbr>, and <code>write_pst_taps_to_nodal_injections</code> writes the angles into the <abbr title="Phase shift distribution factor">PSDF</abbr>
+columns of the injection vector.</p>
+<h3 id="bus-splits-bsdf-and-the-cross-coupler-flow">Bus splits (<abbr title="Bus split distribution factor">BSDF</abbr>) and the cross-coupler flow<a class="headerlink" href="#bus-splits-bsdf-and-the-cross-coupler-flow" title="Permanent link">&para;</a></h3>
+<p>Split station <span class="arithmatex">\(i\)</span> into bus A (the branches that stay on node <span class="arithmatex">\(i\)</span>) and bus B (a new node <span class="arithmatex">\(b\)</span>; in ToOp's extended
+<abbr title="Power transfer distribution factor">PTDF</abbr> its column starts as a copy of column <span class="arithmatex">\(i\)</span>, <code>get_extended_ptdf</code>). Think of the unsplit station as A and B
+joined by a coupler. Its flow from A to B follows from <abbr title="Kirchhoff's current law">KCL</abbr> at bus A:</p>
+<div class="arithmatex">\[
+c = \sum_{\ell \in A_\text{to}} F_\ell - \sum_{\ell \in A_\text{from}} F_\ell + P_A = p_c\, P, \qquad
+p_c = \sum_{\ell \in A_\text{to}} H_{\ell,:} - \sum_{\ell \in A_\text{from}} H_{\ell,:} + e_i^\top ,
+\]</div>
+<p>where <span class="arithmatex">\(A_\text{to}\)</span> (<span class="arithmatex">\(A_\text{from}\)</span>) are bus-A branches whose to-end (from-end) is at the station. (If <span class="arithmatex">\(i\)</span> is the
+slack, ToOp instead subtracts one from every entry and sets entry <span class="arithmatex">\(i\)</span> to zero.) Opening the coupler is the
+outage of a zero-impedance branch that carries <span class="arithmatex">\(c\)</span>, so, as for an <abbr title="Line outage distribution factor">LODF</abbr>,</p>
+<div class="arithmatex">\[
+F' = F + c\,\beta, \qquad H' = H + \beta\, p_c ,
+\]</div>
+<p>and <span class="arithmatex">\(\beta\)</span> is the limit of the coupler's <abbr title="Line outage distribution factor">LODF</abbr> as its impedance goes to zero. Equivalently, <strong>inject the coupler
+flow</strong>: in the split network, sending <span class="arithmatex">\(c\)</span> from A to B reproduces the unsplit flows, so
+<span class="arithmatex">\(\beta = H'_{:,i} - H'_{:,b}\)</span> is the post-split <abbr title="Power exchange distribution factor">PEDF</abbr> from bus A to bus B. To compute <span class="arithmatex">\(\beta\)</span> from the pre-split
+<abbr title="Power transfer distribution factor">PTDF</abbr>, emulate the split network in the unsplit one: an angle difference <span class="arithmatex">\(\Delta\)</span> between A and B changes each
+bus-A branch <span class="arithmatex">\(m\)</span> (other end <span class="arithmatex">\(o_m\)</span>, susceptance <span class="arithmatex">\(b_m\)</span>) by <span class="arithmatex">\(b_m\Delta\)</span>, which the unsplit network sees as injections
+<span class="arithmatex">\(+b_m\Delta\)</span> at <span class="arithmatex">\(o_m\)</span> and <span class="arithmatex">\(-b_m\Delta\)</span> at <span class="arithmatex">\(i\)</span>. Normalizing the exchange to one MW leaving A gives</p>
+<div class="arithmatex">\[
+\beta_\ell = \frac{\sum_{m \in A} b_m\left(H_{\ell o_m} - H_{\ell i}\right) + \sigma_\ell\, b_\ell\,[\ell \in A]}
+{\sum_{m \in A} b_m - \sum_{m \in A} b_m\left(p_{c,o_m} - p_{c,b}\right)},
+\qquad \sigma_\ell = \begin{cases} +1 &amp; \ell \in A_\text{from} \\ -1 &amp; \ell \in A_\text{to} \end{cases}
+\]</div>
+<p>term by term the <code>nom</code>, <code>denom</code> and <code>g_sw</code> of <code>calc_bsdf</code>. A zero denominator (ToOp: <span class="arithmatex">\(|d| &lt; 10^{-5}\)</span>) means the
+split islands part of the grid. Several splits are applied one after the other; each uses the <abbr title="Power transfer distribution factor">PTDF</abbr> left by the
+previous ones (<code>compute_bus_splits</code>), and <code>compute_cross_coupler_flows</code> reapplies <span class="arithmatex">\(F \leftarrow F + c\,\beta\)</span> in
+the same order, recomputing <span class="arithmatex">\(c\)</span> from the already updated flows. <code>test_compute_cross_coupler_flow_against_ptdf</code>
+checks that the result equals <span class="arithmatex">\(H' P'\)</span>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">bsdf_split</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">frm</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">bus_a</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="sd">"""H has the extra column nb (a copy of column i); bus_a lists branch ids that stay on node i."""</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">a_from</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">bus_a</span> <span class="k">if</span> <span class="n">frm</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">a_to</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">bus_a</span> <span class="k">if</span> <span class="n">to</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">other</span> <span class="o">=</span> <span class="p">{</span><span class="n">l</span><span class="p">:</span> <span class="p">(</span><span class="n">to</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">if</span> <span class="n">frm</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span> <span class="k">else</span> <span class="n">frm</span><span class="p">[</span><span class="n">l</span><span class="p">])</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">bus_a</span><span class="p">}</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">p_c</span> <span class="o">=</span> <span class="n">H</span><span class="p">[</span><span class="n">a_to</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">H</span><span class="p">[</span><span class="n">a_from</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">p_c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>                                         <span class="c1"># i is not the slack</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">num</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">H</span><span class="p">[:,</span> <span class="n">other</span><span class="p">[</span><span class="n">l</span><span class="p">]]</span> <span class="o">-</span> <span class="n">H</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">bus_a</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">bus_a</span><span class="p">:</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="n">num</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="k">if</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">a_from</span> <span class="k">else</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">den</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">bus_a</span><span class="p">)</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">p_c</span><span class="p">[</span><span class="n">other</span><span class="p">[</span><span class="n">l</span><span class="p">]]</span> <span class="o">-</span> <span class="n">p_c</span><span class="p">[</span><span class="n">nb</span><span class="p">])</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">bus_a</span><span class="p">)</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">beta</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">den</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">p_c</span> <span class="o">@</span> <span class="n">P</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="k">return</span> <span class="n">H</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">p_c</span><span class="p">),</span> <span class="n">H</span> <span class="o">@</span> <span class="n">P</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">beta</span>     <span class="c1"># updated PTDF and flows</span>
+</code></pre></div>
+<h3 id="injection-reassignment-injection-outages-and-busbar-outages">Injection reassignment, injection outages and busbar outages<a class="headerlink" href="#injection-reassignment-injection-outages-and-busbar-outages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Reassignment.</strong> Moving injection <span class="arithmatex">\(x\)</span> from bus A to bus B is the balanced change <span class="arithmatex">\(\Delta P_i = -x\)</span>,
+  <span class="arithmatex">\(\Delta P_b = +x\)</span>, so <span class="arithmatex">\(\Delta F = H'_{:,b}\,x - H'_{:,i}\,x = -\beta\,x\)</span>. <code>get_reassignment_deltap</code> returns exactly
+  these node/<span class="arithmatex">\(\Delta P\)</span> pairs (bus A node <code>rel_stat_map[sub_id]</code>, bus B node <code>n_stat + sub_id</code>). In the batch path,
+  <code>get_injection_vector</code> writes the bus-A and bus-B sums into the injection vector and the bus-A injection
+  enters <span class="arithmatex">\(c\)</span>.</li>
+<li><strong>Injection outages</strong> use <span class="arithmatex">\(F + H'_{:,n}\,\Delta P\)</span> at the node where the injection sits <em>after</em> reassignment
+  (<code>get_all_outaged_injection_nodes_after_reassignment</code>).</li>
+<li><strong>Busbar outages</strong> (<code>perform_outage_single_busbar</code>): remove the busbar's injections through its <abbr title="Power transfer distribution factor">PTDF</abbr> column,
+  then outage all its branches with the <abbr title="Multi-outage distribution factor">MODF</abbr>: <span class="arithmatex">\(\hat F = F - H_{:,n}\,P_\text{bb}\)</span> and
+  <span class="arithmatex">\(F' = \hat F + \text{MODF}_O\,\hat F_O\)</span>. If the <abbr title="Multi-outage distribution factor">MODF</abbr> fails (the outage would island the grid), the computation is retried without the first valid
+  branch, which stays as a skeleton branch; if both attempts fail the flows are NaN. The set <span class="arithmatex">\(O\)</span> is found on the
+  physical station topology first, with propagation over disconnectors and double-connected assets
+  (<code>docs/dc_solver/busbar_outage.md</code>).</li>
+</ul>
+<h3 id="composition-order-in-compute_symmetric_batch">Composition order in <code>compute_symmetric_batch</code><a class="headerlink" href="#composition-order-in-compute_symmetric_batch" title="Permanent link">&para;</a></h3>
+<p><abbr title="Power transfer distribution factor">PTDF</abbr> side (<code>compute_bsdf_lodf_static_flows</code>):</p>
+<ol>
+<li><strong>Bus splits</strong>: <code>compute_bus_splits</code> (<abbr title="Bus split distribution factor">BSDF</abbr>, updates <abbr title="Power transfer distribution factor">PTDF</abbr> and from/to nodes, stores one <span class="arithmatex">\(\beta\)</span> per split).</li>
+<li><strong>Disconnections</strong>: <code>apply_disconnections</code> builds one <abbr title="Multi-outage distribution factor">MODF</abbr> for all disconnected branches, updates the <abbr title="Power transfer distribution factor">PTDF</abbr>,
+   sets their from/to nodes to an invalid index, and marks their N-1 cases to be zeroed. A failure (islanding)
+   makes the whole topology unsuccessful.</li>
+<li><strong><abbr title="Phase-shifting transformer">PST</abbr> susceptance update</strong>: <code>update_ptdf_with_branch_parameter_change</code>, only when <abbr title="Phase-shifting transformer">PST</abbr> taps are requested.</li>
+<li><strong>Contingency factors</strong>: <code>calc_lodf_matrix</code> for single branch outages and <code>build_modf_matrices</code> for
+   multi-outages, on the fully updated <abbr title="Power transfer distribution factor">PTDF</abbr>; the success flags of injection outages and (if
+   <code>enable_bb_outages</code> and <code>bb_outage_as_nminus1</code>) busbar outages inherit the topology's success.</li>
+</ol>
+<p>Flow side:</p>
+<ol>
+<li><strong>Nodal injections</strong> for the chosen injection assignment (<code>compute_injections</code>).</li>
+<li><strong>Cross-coupler flows</strong>: <code>compute_cross_coupler_flows</code>, starting from <code>unsplit_flow</code> (which contains the AC–DC
+   correction of <a href="../ch17-sensitivity-factors-1/">Chapter 17</a>).</li>
+<li><strong>N-0 after disconnections</strong>: <code>update_n0_flows_after_disconnections</code> applies the disconnection <abbr title="Multi-outage distribution factor">MODF</abbr>.</li>
+<li><strong><abbr title="Phase-shifting transformer">PST</abbr> angles</strong>: if taps are requested, the angles are written into the injection vector and the N-0 flows are
+   recomputed as <span class="arithmatex">\(H'P\)</span> (<code>update_n0_for_pst_taps</code>).</li>
+<li><strong>Contingency matrix</strong>: <code>contingency_analysis_matrix</code> concatenates branch N-1 (<abbr title="Line outage distribution factor">LODF</abbr>), multi-outages (<abbr title="Multi-outage distribution factor">MODF</abbr>),
+   injection outages and, if enabled as N-1, busbar outages; N-1 rows of disconnected branches are set to zero.
+   Otherwise, with <code>enable_bb_outages</code> on, busbar outages become a penalty relative to the unsplit grid
+   (<code>get_busbar_outage_penalty_batched</code>).</li>
+</ol>
+<h2 id="documentation-vs-code-known-discrepancies">Documentation vs code: known discrepancies<a class="headerlink" href="#documentation-vs-code-known-discrepancies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Disconnection update.</strong> <code>apply_single_disconnection_lodf</code> (<code>dc_solver/jax/disconnections.py</code>) implements
+  <span class="arithmatex">\(H' = H + \text{LODF}_{:,b} H_{b,:}\)</span>, sets row <span class="arithmatex">\(b\)</span> to zero and silently keeps the old <abbr title="Power transfer distribution factor">PTDF</abbr> on failure via
+  <code>jax.lax.select</code>. The batch path does not use it: <code>compute_bsdf_lodf_static_flows</code> calls <code>apply_disconnections</code>,
+  which applies one joint <abbr title="Multi-outage distribution factor">MODF</abbr> for all disconnections and propagates a failure to the topology's success flag.
+  The single-<abbr title="Line outage distribution factor">LODF</abbr> version is used as a reference in <code>test_disconnections.py</code> and <code>test_multi_outages.py</code>.</li>
+<li><strong>Bus A and bus B labels.</strong> The docstrings of <code>compute_cross_coupler_flows</code> and <code>_gather_bus_a_injection</code> say
+  that <code>True</code> in a topology or injection vector means bus A. The code (<code>get_bus_data</code> in <code>dc_solver/jax/bsdf.py</code>,
+  <code>get_injection_per_bus</code> in <code>dc_solver/jax/injections.py</code>) treats <code>False</code> entries as bus A, which stays on the
+  original node, and <code>True</code> entries as bus B, the new node.</li>
+<li><strong>Failed busbar outages.</strong> The docstring of <code>perform_outage_single_busbar</code> says the flows are set to zero if
+  both attempts fail; the code sets them to NaN and uses zeros only for an invalid busbar index.</li>
+<li><strong>Inconsistent islanding tolerances.</strong> <abbr title="Line outage distribution factor">LODF</abbr>: <span class="arithmatex">\(|1 - h_{kk}| &gt; 10^{-11}\)</span>; <abbr title="Bus split distribution factor">BSDF</abbr>: <span class="arithmatex">\(|d| \ge 10^{-5}\)</span>;
+  <span class="arithmatex">\(2 \times 2\)</span>, <span class="arithmatex">\(3 \times 3\)</span> and <abbr title="LU factorization">LU</abbr> solves: <span class="arithmatex">\(|\det| &gt; 10^{-10}\)</span>; but the <span class="arithmatex">\(1 \times 1\)</span> case of
+  <code>solve_and_check_det</code> (<code>dc_solver/jax/unrolled_linalg.py</code>) tests <code>a != 0</code> exactly. In floating point a bridge
+  often gives <span class="arithmatex">\(1 - h_{kk} \approx 10^{-16}\)</span> rather than zero, so a single disconnection of a bridge can pass this
+  check.</li>
+<li><strong><abbr title="Phase-shifting transformer">PST</abbr> path limitations.</strong> <code>update_n0_for_pst_taps</code> recomputes the N-0 flows as <span class="arithmatex">\(H'P\)</span>, which drops the AC–DC
+  mismatch offset carried by <code>unsplit_flow</code>. <code>prepare_pst_tap_state</code> uses one tap state per topology (from the
+  first timestep whose taps differ from the start) for the susceptance update, while the angles stay per
+  timestep.</li>
+</ul>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Lab: split, disconnect, screen, and compare with ToOp</p>
+<p>Tools: Jupyter + NumPy; ToOp's NumPy reference and JAX solver (JAX from
+<a href="../../part-5-computing/ch31-jax-gpu-fundamentals/">Chapter 31</a>); pandapower for the IEEE 14 data.</p>
+<ol>
+<li>Implement <abbr title="Bus split distribution factor">BSDF</abbr> in NumPy for a substation of IEEE 14 (worked example): split it into two busbars, update the
+   <abbr title="Power transfer distribution factor">PTDF</abbr>, and compare with a <abbr title="Power transfer distribution factor">PTDF</abbr> recomputed from a network where the node is physically split. Check that
+   <span class="arithmatex">\(\beta = H'_{:,i} - H'_{:,b}\)</span>.</li>
+<li>Compute the cross-coupler flow from <abbr title="Kirchhoff's current law">KCL</abbr> at bus A and confirm <span class="arithmatex">\(F + c\,\beta = H'P\)</span>. Reassign one generator to
+   bus B and confirm <span class="arithmatex">\(\Delta F = -\beta x\)</span>.</li>
+<li>Implement the <abbr title="Multi-outage distribution factor">MODF</abbr> and the Woodbury update. Disconnect two branches jointly and change one transformer's
+   susceptance by 20 %; compare both with recomputed PTDFs, and show that <span class="arithmatex">\(\alpha = -1\)</span> reproduces the <abbr title="Multi-outage distribution factor">MODF</abbr>.</li>
+<li>Compose, in ToOp's order, a bus split, a disconnection and an N-1 screen (<abbr title="Line outage distribution factor">LODF</abbr> plus one busbar outage), and
+   compare with brute-force DC power flows, with <code>packages/dc_solver_pkg/tests/numpy_reference.py</code>
+   (<code>run_solver</code>) and with ToOp's <code>run_initial_loadflow</code> for the unsplit case.</li>
+<li>Apply the same steps in a different order (disconnection before split). Which final quantities are
+   invariant, and which intermediate objects (the stored <span class="arithmatex">\(\beta\)</span> vectors, the cross-coupler flows) change?</li>
+</ol>
+</div>
+<h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Write the <abbr title="Multi-outage distribution factor">MODF</abbr> for two outaged branches with the closed-form <span class="arithmatex">\(2 \times 2\)</span> inverse. Show that
+   <span class="arithmatex">\(\det(I - \mathcal H_{OO}) = 0\)</span> when the two branches form a cut set, even if neither is a bridge alone.</li>
+<li><em>(Jupyter: NumPy)</em> Verify the Woodbury update on IEEE 118 for 1, 2 and 3 simultaneous susceptance changes,
+   and time it against recomputing the <abbr title="Power transfer distribution factor">PTDF</abbr>. At what <span class="arithmatex">\(k\)</span> does recomputation win?</li>
+<li>Derive <span class="arithmatex">\(\beta = H'_{:,i} - H'_{:,b}\)</span> from the "inject the coupler flow" argument, and use it to show that the
+   bus-A branches' <span class="arithmatex">\(\beta\)</span> entries, oriented out of bus A, sum to one.</li>
+<li><em>(Jupyter: NumPy + matplotlib)</em> For every admissible two-way split of one IEEE 14 station, plot the
+   cross-coupler flow <span class="arithmatex">\(|c|\)</span> against the maximum post-split loading. Relate the plot to ToOp's <code>cross_coupler_flow</code>
+   penalty (<code>docs/topology_optimizer/metrics.md</code>).</li>
+<li>Count floating-point operations for: one <abbr title="Bus split distribution factor">BSDF</abbr> update, one <span class="arithmatex">\(k\)</span>-outage <abbr title="Multi-outage distribution factor">MODF</abbr>, the <abbr title="Line outage distribution factor">LODF</abbr> matrix for <span class="arithmatex">\(n_f\)</span> N-1
+   cases, and the N-1 flow matrix for <span class="arithmatex">\(T\)</span> timesteps. Explain which of them are embarrassingly parallel over a
+   batch of topologies.</li>
+<li><em>(Jupyter: NumPy)</em> Generate random meshed grids with one radial branch, compute <span class="arithmatex">\(1 - h_{kk}\)</span> for the radial
+   branch, and report how often it is exactly zero. Discuss which of ToOp's tolerances would catch the bridge
+   (<a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>).</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../ch17-sensitivity-factors-1/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ch19-operational-security/" class="md-footer__link md-footer__link--next" aria-label="Next: 19. Operational security and performance metrics">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                19. Operational security and performance metrics
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
