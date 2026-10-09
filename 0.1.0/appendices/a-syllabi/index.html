@@ -1,0 +1,5551 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/0.1.0/appendices/a-syllabi/">
+      
+      
+        <link rel="prev" href="../../part-6-capstone/ch35-capstone/">
+      
+      
+        <link rel="next" href="../b-books/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>A. University syllabi - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#appendix-a-university-syllabi" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A. University syllabi
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-power-systems/ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-this-appendix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to read this appendix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-most-cited-books-by-subject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: most-cited books by subject
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coverage-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-mathematics-physics-circuits-and-machines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1 — Mathematics, physics, circuits and machines
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1 — Mathematics, physics, circuits and machines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Linear algebra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Linear algebra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-numerical-methods-numerical-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Numerical methods / numerical linear algebra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Numerical methods / numerical linear algebra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-graph-theory-network-science" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Graph theory / network science
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Graph theory / network science">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-complex-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Complex variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Complex variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-electric-circuits-i-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Electric circuits I &amp; II
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Electric circuits I &amp; II">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-electromagnetism-physics-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Electromagnetism / Physics II
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Electromagnetism / Physics II">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-electric-machines-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Electric machines &amp; transformers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Electric machines &amp; transformers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-power-systems-optimization-and-computing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2 — Power systems, optimization and computing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2 — Power systems, optimization and computing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#8-power-system-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Power system analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Power system analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-power-system-operation-and-control-security-opf-congestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Power system operation and control, security, OPF, congestion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Power system operation and control, security, OPF, congestion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-computational-methods-for-power-systems-graduate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Computational methods for power systems (graduate)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Computational methods for power systems (graduate)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-electricity-markets-and-power-system-economics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Electricity markets and power system economics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Electricity markets and power system economics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-operations-research-linear-and-integer-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Operations research: linear and integer optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Operations research: linear and integer optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted-latin-america" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted — Latin America
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-convex-and-nonlinear-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Convex and nonlinear optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Convex and nonlinear optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-evolutionary-computation-and-metaheuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Evolutionary computation and metaheuristics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Evolutionary computation and metaheuristics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-scientific-computing-hpc-and-gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Scientific computing, HPC and GPU
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Scientific computing, HPC and GPU">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-this-appendix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to read this appendix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-most-cited-books-by-subject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: most-cited books by subject
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coverage-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-mathematics-physics-circuits-and-machines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1 — Mathematics, physics, circuits and machines
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1 — Mathematics, physics, circuits and machines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Linear algebra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Linear algebra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-numerical-methods-numerical-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Numerical methods / numerical linear algebra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Numerical methods / numerical linear algebra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-graph-theory-network-science" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Graph theory / network science
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Graph theory / network science">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-complex-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Complex variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Complex variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-electric-circuits-i-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Electric circuits I &amp; II
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Electric circuits I &amp; II">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-electromagnetism-physics-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Electromagnetism / Physics II
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Electromagnetism / Physics II">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-electric-machines-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Electric machines &amp; transformers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Electric machines &amp; transformers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-power-systems-optimization-and-computing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2 — Power systems, optimization and computing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2 — Power systems, optimization and computing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#8-power-system-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Power system analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Power system analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-power-system-operation-and-control-security-opf-congestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Power system operation and control, security, OPF, congestion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Power system operation and control, security, OPF, congestion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-computational-methods-for-power-systems-graduate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Computational methods for power systems (graduate)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Computational methods for power systems (graduate)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-electricity-markets-and-power-system-economics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Electricity markets and power system economics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Electricity markets and power system economics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-operations-research-linear-and-integer-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Operations research: linear and integer optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Operations research: linear and integer optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted-latin-america" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted — Latin America
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-convex-and-nonlinear-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Convex and nonlinear optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Convex and nonlinear optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-evolutionary-computation-and-metaheuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Evolutionary computation and metaheuristics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Evolutionary computation and metaheuristics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-scientific-computing-hpc-and-gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Scientific computing, HPC and GPU
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Scientific computing, HPC and GPU">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syllabi-consulted_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syllabi consulted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-ranking_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Book ranking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="appendix-a-university-syllabi">Appendix A — University Syllabi<a class="headerlink" href="#appendix-a-university-syllabi" title="Permanent link">&para;</a></h1>
+<p>This appendix records the official course pages, syllabi and catalog entries consulted to choose the
+textbooks in the <a href="../../">study plan</a>. For each course it gives the <strong>scope</strong>, <strong>prerequisites</strong>,
+<strong>stated goals</strong> and <strong>bibliography</strong>, taken from the course page itself. The survey was carried out in
+September 2026 and covers well over 100 course pages from more than 50 universities in the United States, Europe (with emphasis on Belgium and
+Germany, where Elia and 50Hertz operate, and on Spain) and Latin America (Argentina, Chile, Brazil, Mexico).</p>
+<p>Access status of the books (archive.org) and Spanish translations are consolidated in
+<a href="../b-books/">Appendix B</a>.</p>
+<h2 id="how-to-read-this-appendix">How to read this appendix<a class="headerlink" href="#how-to-read-this-appendix" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Book tags:</strong> R = required ("básica", "obligatoria"); Rec = recommended ("complementaria", "consulta");
+  "(list)" = the syllabus does not separate required from recommended.</li>
+<li><strong>n/s</strong> or <strong>n.s.</strong> = not stated on the page.</li>
+<li><strong>Counts</strong> in the rankings are distinct universities citing a book; a university counts once even if several
+  of its courses cite it. The three UTN regional faculties count as one university.</li>
+<li><strong>Dates:</strong> several pages are old (some Latin American programs date from 2008–2015). The date or plan year is
+  given where it matters.</li>
+<li><strong>Language:</strong> "ES" and "PT" mark Spanish and Portuguese editions cited by the syllabus.</li>
+</ul>
+<h2 id="summary-most-cited-books-by-subject">Summary: most-cited books by subject<a class="headerlink" href="#summary-most-cited-books-by-subject" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Subject</th>
+<th>Most-cited books (number of universities)</th>
+<th>Study plan chapters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linear algebra</td>
+<td>Lay (6); Strang (6); Anton (3); Hoffman &amp; Kunze (3)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Numerical methods</td>
+<td>Burden &amp; Faires (4); Chapra &amp; Canale (2)</td>
+<td>4, 5</td>
+</tr>
+<tr>
+<td>Graph theory / networks</td>
+<td>West (2); Diestel (2); Easley &amp; Kleinberg (2)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Complex variables</td>
+<td>Brown &amp; Churchill (4); Kreyszig (2)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Electric circuits</td>
+<td>Dorf &amp; Svoboda (6); Nilsson &amp; Riedel (5); Alexander &amp; Sadiku (5); Hayt, Kemmerly &amp; Durbin (4); Irwin (4)</td>
+<td>8–10</td>
+</tr>
+<tr>
+<td>Electromagnetism / Physics II</td>
+<td>Serway &amp; Jewett (2); Tipler &amp; Mosca (2); Young &amp; Freedman (2)</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Electric machines and transformers</td>
+<td>Fitzgerald, Kingsley &amp; Umans (6); Chapman (5)</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Power system analysis</td>
+<td>Grainger &amp; Stevenson (12); Glover, Sarma &amp; Overbye (12); Gómez-Expósito, Conejo &amp; Cañizares (8); Kundur (8, stability); Elgerd (6); Bergen &amp; Vittal (5)</td>
+<td>13–15</td>
+</tr>
+<tr>
+<td>Operation, security, <abbr title="Optimal power flow">OPF</abbr></td>
+<td>Wood, Wollenberg &amp; Sheblé (11); Gómez-Expósito et al. (8)</td>
+<td>14–16, 19</td>
+</tr>
+<tr>
+<td>Electricity markets</td>
+<td>Kirschen &amp; Strbac (6); Stoft (3)</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Linear and integer optimization</td>
+<td>Winston (7); Hillier &amp; Lieberman (6); Bertsimas &amp; Tsitsiklis (4); Bazaraa, Jarvis &amp; Sherali (4)</td>
+<td>21</td>
+</tr>
+<tr>
+<td>Convex and nonlinear optimization</td>
+<td>Boyd &amp; Vandenberghe (6); Luenberger &amp; Ye (3)</td>
+<td>21</td>
+</tr>
+<tr>
+<td>Evolutionary computation</td>
+<td>Eiben &amp; Smith (5); Goldberg (3)</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Scientific computing, HPC, <abbr title="Graphics processing unit">GPU</abbr></td>
+<td>Kirk &amp; Hwu (2); most HPC courses use no textbook</td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+<p>Observations that shaped the plan:</p>
+<ul>
+<li><strong>No syllabus covers <abbr title="Power transfer distribution factor">PTDF</abbr>/<abbr title="Line outage distribution factor">LODF</abbr> with a dedicated text</strong> beyond Wood &amp; Wollenberg's security chapter, and
+  graduate computational-methods courses (TAMU ECEN 615, UIUC ECE 530, GT ECE 6320) rely on lecture notes.
+  Chapters 16–17 are therefore built on Overbye's free slides and on papers.</li>
+<li><strong>No syllabus covers quality-diversity or MAP-Elites</strong>, and none teaches JAX. Chapters 23 and 27 are built
+  on papers and official documentation.</li>
+<li>The closest match to ToOp's search among the surveyed courses is <strong>USP PEA3422</strong> (optimization methods
+  applied to power systems: <abbr title="Mixed-integer linear programming">MILP</abbr>, heuristic network reconfiguration, genetic algorithms, multi-objective).</li>
+<li>Latin American programs cite Spanish translations of the same US textbooks (Grainger &amp; Stevenson, Glover,
+  Hayt, Nilsson, Chapman, Fitzgerald, Hillier &amp; Lieberman, Winston, Taha), plus Spanish originals
+  (Gómez-Expósito; Fraile Mora; Barrero).</li>
+</ul>
+<h2 id="coverage-gaps">Coverage gaps<a class="headerlink" href="#coverage-gaps" title="Permanent link">&para;</a></h2>
+<p>Some pages could not be read: they required JavaScript logins or returned errors, or no syllabus was found
+within the survey's search budget.</p>
+<ul>
+<li><strong>Not reached or unreadable:</strong> DTU (math and circuits courses; login redirect), Comillas guía docente
+  (JavaScript app), Politecnico di Milano, RWTH Aachen, TU Berlin, KIT (circuits module has no literature
+  list), TU Dortmund, UGent, Imperial College, Manchester, UPM (power systems), UW-Madison ECE 427, CMU power
+  courses, FIUBA plan 2020/2023 programs and the Física II / Análisis Matemático III plans, UNAM undergraduate
+  power systems PDFs (HTTP 404), KU Leuven H01W4B (HTTP 500), Texas A&amp;M ECEN 214 (PDF text not extractable).</li>
+<li><strong>Official page unreachable, secondary source used:</strong> TU Delft courses are listed from the student
+  association's (ETV) book-sales pages, which are not official. A Stanford CEE 272R syllabus seen only as a
+  third-party copy was not counted.</li>
+<li><strong>Courses without named books:</strong> Purdue ECE 20001, UIUC PHYS 212 and CS 450, ETH power system analysis and
+  several DTU, KTH and ETH graduate courses use lecture notes only.</li>
+</ul>
+<hr />
+<h2 id="part-1-mathematics-physics-circuits-and-machines">Part 1 — Mathematics, physics, circuits and machines<a class="headerlink" href="#part-1-mathematics-physics-circuits-and-machines" title="Permanent link">&para;</a></h2>
+<h3 id="1-linear-algebra">1. Linear algebra<a class="headerlink" href="#1-linear-algebra" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted">Syllabi consulted<a class="headerlink" href="#syllabi-consulted" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>MIT 18.06 Linear Algebra, Spring 2010</strong> — https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/pages/syllabus/</li>
+<li>Books: R: Strang, <em>Introduction to Linear Algebra</em> 4e (2009). Rec: 5e (2016). Also Strang, <em>Differential Equations and Linear Algebra</em> (2014).</li>
+<li>Scope: elimination, vector spaces and bases, least squares, orthogonalization, determinants, eigenvalues, symmetric matrices, linear transformations. Undergraduate; 3 lectures + 1 recitation per week.</li>
+<li>Prereq: 18.02.</li>
+<li>
+<p>Goals: computational and conceptual matrix skills (elimination, the four subspaces, least squares, diagonalization), applied to engineering problems including graphs and networks.</p>
+</li>
+<li>
+<p><strong>Georgia Tech MATH 1554, Fall 2026</strong> — https://syllabus.gatech.edu/sites/default/files/2026-04/MATH%201554%20Syllabus%20for%20Fall%202026_2.pdf (GT-Europe version: https://syllabus.gatech.edu/sites/default/files/2026-04/Math1554_summer2026_Syllabus-HJ_7.pdf)</p>
+</li>
+<li>Books: Lay, <em>Linear Algebra and Its Applications</em> 6e; the syllabus says "textbook is optional". The GT-Europe version adds the free Margalit &amp; Rabinoff, <em>Interactive Linear Algebra</em>.</li>
+<li>Scope: row reduction, <abbr title="LU factorization">LU</abbr> and <abbr title="Singular value decomposition">SVD</abbr>, linear transformations, determinants, eigenvalues, orthogonal projections and least squares. 4 credits, first year.</li>
+<li>Prereq: Math SAT 620 / ACT 26, or MATH 1113 or MATH 1552 (stated in the Europe version).</li>
+<li>
+<p>Goals: construct, evaluate and analyze linear-algebra expressions, write proofs, and model real-world problems.</p>
+</li>
+<li>
+<p><strong>Purdue MA 26500, Fall 2024</strong> — https://www.math.purdue.edu/academic/courses/semester/202510/ma26500/index.html</p>
+</li>
+<li>Books: R: Lay 6e with MyLab.</li>
+<li>Scope: linear systems, matrices, vector spaces, determinants, eigenvalues, diagonalization. 3 credits.</li>
+<li>Prereq: n/s (the course is closed to students with credit in MA 26200/27200/35000/35100).</li>
+<li>
+<p>Goals: n/s.</p>
+</li>
+<li>
+<p><strong>Texas A&amp;M MATH 304, Spring 2024 (section 510)</strong> — https://people.tamu.edu/~grigorch//Math%20304-510_2024.html</p>
+</li>
+<li>Books: R: Leon &amp; de Pillis, <em>Linear Algebra with Applications</em> 10e (2020).</li>
+<li>Scope: systems, matrices, determinants, vector spaces, linear maps, orthogonality, eigenvalues. 3 credits.</li>
+<li>Prereq: MATH 152.</li>
+<li>
+<p>Goals: solve systems, work with vector spaces, orthogonalization and eigenvalues, including applications to ODEs.</p>
+</li>
+<li>
+<p><strong>UC Berkeley EECS 16A (site shows Spring 2026)</strong> — https://eecs16a.org/</p>
+</li>
+<li>Books: main reference Boyd &amp; Vandenberghe, <em>VMLS</em> (free PDF). Supplements: Strang, <em>ILA</em>; Lipschutz &amp; Lipson, <em>Schaum's Linear Algebra</em> 5e; Lee &amp; Varaiya, <em>Structure and Interpretation of Signals and Systems</em>; <em>Data-Driven Science and Engineering</em>.</li>
+<li>Scope: vectors and signals, inner products, complex exponentials, discrete-time Fourier series, least squares, eigen-analysis, <abbr title="Singular value decomposition">SVD</abbr>/PCA, LTI systems. The page title reads "Foundations of Signals, Dynamical Systems, and Information Processing".</li>
+<li>
+<p>Prereq: n/s. Goals: n/s.</p>
+</li>
+<li>
+<p><strong>KU Leuven H01A4B Toegepaste algebra, 2026-27</strong> — https://onderwijsaanbod.kuleuven.be/syllabi/n/H01A4BN.htm</p>
+</li>
+<li>Books: R: Lay, Lay &amp; McDonald 6e Global edition, plus a Dutch supplement.</li>
+<li>Scope: linear equations through <abbr title="Singular value decomposition">SVD</abbr> and quadratic forms. 6 ECTS, first semester of the engineering bachelor.</li>
+<li>Prereq: secondary-school maths (at least 6 hours per week).</li>
+<li>
+<p>Goals: least squares, factorizations, translating engineering problems into algebra.</p>
+</li>
+<li>
+<p><strong>ETH 401-0151-00L Lineare Algebra (EE&amp;IT bachelor), HS 2025</strong> — https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=192867&amp;semkez=2025W&amp;ansicht=KATALOGDATEN&amp;lang=de</p>
+</li>
+<li>Books (list): Gradinaru lecture script; Nipp &amp; Stoffer, <em>Lineare Algebra</em> 5e (2002); Olver &amp; Shakiban, <em>Applied Linear Algebra</em> 2e (2018).</li>
+<li>Scope: Gauss elimination, <abbr title="LU factorization">LU</abbr>/QR, least squares, eigenvalues, <abbr title="Singular value decomposition">SVD</abbr>, numerical aspects. 5 ECTS.</li>
+<li>Prereq: basic scientific Python.</li>
+<li>Goals: solve and geometrically interpret linear systems and matrix operations.</li>
+<li>
+<p>Note: ETH's computer-science linear algebra course (401-0131) uses Strang, <em>ILA</em> 6e.</p>
+</li>
+<li>
+<p><strong>TU Delft EE1M11 Linear Algebra &amp; Analysis A</strong> — https://etv.tudelft.nl/en-US/education/default/course?id=503 (ETV book list, not official)</p>
+</li>
+<li>Books: Poole, <em>Linear Algebra: A Modern Introduction</em> (plus Stewart, <em>Calculus</em>).</li>
+<li>
+<p>Scope, prereq, goals: n/s.</p>
+</li>
+<li>
+<p><strong>KTH SF1624 Algebra och geometri (archived 2010-11 page)</strong> — https://www.kth.se/social/course/SF1624/page/kurslitteratur/</p>
+</li>
+<li>Books: Anton &amp; Rorres, <em>Elementary Linear Algebra with Applications</em> 10e.</li>
+<li>Scope: systems through quadratic forms. 7.5 hp.</li>
+<li>
+<p>Prereq, goals: n/s.</p>
+</li>
+<li>
+<p><strong>UTN FRBA Álgebra y Geometría Analítica, 2023 (common to all engineering degrees)</strong> — https://www.frba.utn.edu.ar/wp-content/uploads/2023/10/Programa-Algebra-y-Geometria-Analitica.pdf</p>
+<ul>
+<li>R:</li>
+<li>Anton, <em>Introducción al Álgebra Lineal</em> (Limusa 2011)</li>
+<li>Grossman, <em>Álgebra Lineal con Aplicaciones</em> (2012)</li>
+<li>Kolman &amp; Hill 8a</li>
+<li>Kozak, Pastorelli &amp; Vardanega (2007)</li>
+<li>Lay, Lay &amp; McDonald, <em>Álgebra lineal y sus aplicaciones</em> 5a (2016)</li>
+<li>Poole 4a (2017)</li>
+<li>Rojo, <em>Álgebra II</em></li>
+<li>Rec: Grossman &amp; Flores 8a, Hoffman &amp; Kunze (1973), Lipschutz, Strang <em>Álgebra lineal y sus aplicaciones</em> 4a, plus about 12 others.</li>
+<li>Scope: matrices, linear systems, vectors, lines and planes, quadratic forms, vector spaces, linear maps, eigenvalues. First year, 120 clock hours.</li>
+<li>Prereq: n/s.</li>
+<li>Goals: abstraction through vector spaces; apply linear models and analytic geometry; use software.</li>
+</ul>
+</li>
+<li>
+<p><strong>FIUBA 81.02 Álgebra II, 1C/2020</strong> — https://cms.fi.uba.ar/uploads/8102_abc54c1706.pdf (same list in 61.08: https://cms.fi.uba.ar/uploads/6108_78cec112e1.pdf)</p>
+<ul>
+<li>Books (Rec only): Jeronimo, Sabia &amp; Tesauri (FCEyN 2008); Hoffman &amp; Kunze (1984); Maltsev (MIR); Lay (Spanish ed., 1999); Strang <em>Álgebra lineal y sus aplicaciones</em> (1989); Grossman 3a (1990).</li>
+<li>Scope: vector spaces, inner products, least squares, eigenvalues, Hermitian matrices, <abbr title="Singular value decomposition">SVD</abbr>, linear ODE systems. 8 hours per week.</li>
+<li>Prereq: n/s.</li>
+<li>Goals: linear algebra needed in engineering; combine theory and computation.</li>
+</ul>
+</li>
+<li>
+<p><strong>U. de Chile MA1102 Álgebra Lineal (in force since 2006, revised 2009)</strong> — https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=3462</p>
+<ul>
+<li>Books: Dartnell, Goles &amp; San Martín course notes (2005); Brinkmann &amp; Klotz (1971); Hoffman &amp; Kunze (1973); Nering (1963).</li>
+<li>Scope: matrices, <abbr title="LU factorization">LU</abbr>, vector spaces, determinants, eigenvalues, quadratic forms, conics. 6 SCT credits.</li>
+<li>Prereq: MA1101, MA1001.</li>
+<li>Goals: model linear phenomena, diagonal and Jordan forms, eigenvalues.</li>
+</ul>
+</li>
+<li>
+<p><strong>USP (Escola Politécnica) MAT3457 / MAT3458 Álgebra Linear I/II</strong> — https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAT3457 and https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAT3458</p>
+<ul>
+<li>Books (list): Camargo &amp; Boulos; Nicholson; Anton &amp; Rorres 10a (Portuguese); Strang <em>Álgebra Linear e suas Aplicações</em> 4a (Portuguese); Lay 2a (LTC, Portuguese); Callioli et al.; Barone Jr.</li>
+<li>Scope: MAT3457 covers V3 vectors, analytic geometry, row reduction, matrices, vector spaces. MAT3458 covers inner products, linear maps, diagonalization, symmetric operators, ODE systems. 4 credits / 60 h each.</li>
+<li>Prereq: not shown on the page.</li>
+<li>Goals: row reduction and 3D geometry (MAT3457); inner products, eigenvalues and engineering relevance (MAT3458).</li>
+</ul>
+</li>
+</ol>
+<h4 id="book-ranking">Book ranking<a class="headerlink" href="#book-ranking" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Book</th>
+<th>Cites</th>
+<th>Universities (edition / language)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Lay, <em>Linear Algebra and Its Applications</em></td>
+<td>6</td>
+<td>GT (6e), Purdue (6e R), KU Leuven (6e R), UTN (Spanish 5a R), FIUBA (Spanish 1999), USP (Portuguese 2a)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Strang, <em>Introduction to Linear Algebra</em> / <em>Linear Algebra and Its Applications</em> (two different books)</td>
+<td>6</td>
+<td>MIT (ILA 4e R), Berkeley (ILA), ETH (ILA 6e, computer-science dept.), UTN (LAA Spanish 4a), FIUBA (LAA Spanish), USP (LAA Portuguese 4a)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Anton (&amp; Rorres), <em>Elementary Linear Algebra</em></td>
+<td>3</td>
+<td>KTH (10e), UTN (Spanish, Limusa), USP (Portuguese 10a)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Hoffman &amp; Kunze, <em>Linear Algebra</em></td>
+<td>3</td>
+<td>UTN, FIUBA, UChile (Spanish)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Grossman, <em>Álgebra lineal</em> (Spanish only)</td>
+<td>2</td>
+<td>UTN, FIUBA</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Poole, <em>Linear Algebra: A Modern Introduction</em></td>
+<td>2</td>
+<td>TU Delft, UTN (Spanish 4a)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Lipschutz, <em>Schaum's</em></td>
+<td>2</td>
+<td>Berkeley, UTN</td>
+</tr>
+</tbody>
+</table>
+<p>Cited once each: Leon; Boyd &amp; Vandenberghe; Kolman &amp; Hill; Kozak et al.; Olver &amp; Shakiban; Nipp &amp; Stoffer; Callioli; Nicholson.</p>
+<hr />
+<h3 id="2-numerical-methods-numerical-linear-algebra">2. Numerical methods / numerical linear algebra<a class="headerlink" href="#2-numerical-methods-numerical-linear-algebra" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_1">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>MIT 18.335J Intro to Numerical Methods, Spring 2019</strong> — https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/pages/syllabus/</li>
+<li>Books: R: Trefethen &amp; Bau, <em>Numerical Linear Algebra</em> (SIAM 1997). Additional: Barrett et al., <em>Templates for the Solution of Linear Systems</em>; Bai et al., <em>Templates for Eigenproblems</em>.</li>
+<li>Scope: direct and iterative solvers, eigenvalues, QR/<abbr title="Singular value decomposition">SVD</abbr>, stability, floating point, sparse matrices. Graduate.</li>
+<li>Prereq: 18.06 or 18.700.</li>
+<li>
+<p>Goals: numerical linear algebra with attention to stability, accuracy and efficiency (uses Julia).</p>
+</li>
+<li>
+<p><strong>MIT 18.085 Computational Science &amp; Engineering I, Fall 2008</strong> — https://ocw.mit.edu/courses/18-085-computational-science-and-engineering-i-fall-2008/pages/syllabus/</p>
+</li>
+<li>Books: R: Strang, <em>Computational Science and Engineering</em> (2007).</li>
+<li>Scope: applied linear algebra, differential equations, Fourier methods, algorithms.</li>
+<li>Prereq: 18.02, 18.03.</li>
+<li>
+<p>Goals: mathematics through applications and efficient computation.</p>
+</li>
+<li>
+<p><strong>UC Berkeley Math 128A, Summer 2011</strong> — https://math.berkeley.edu/~wilken/128A.Su11</p>
+</li>
+<li>Books: R: Burden &amp; Faires 9e. Rec: Dorfman, MATLAB programming.</li>
+<li>Scope: round-off error, nonlinear equations, interpolation, quadrature, linear systems, ODEs.</li>
+<li>Prereq: Math 53 &amp; 54.</li>
+<li>
+<p>Goals: not formally stated.</p>
+</li>
+<li>
+<p><strong>KTH SF1547 Numeriska metoder, grundkurs</strong> — https://www.kth.se/social/course/SF1547/page/kurslitteratur-201/ and https://www.kth.se/student/kurser/kurs/SF1547</p>
+</li>
+<li>Books: Sauer, <em>Numerical Analysis</em> 2e; Edsberg et al. exercise collection (PDF).</li>
+<li>Scope: linear and nonlinear equations, interpolation, ODEs, optimization. 6 hp.</li>
+<li>Prereq: SF1625 plus a programming course; SF1624 recommended.</li>
+<li>
+<p>Goals: identify subproblems, choose and implement methods, assess reliability.</p>
+</li>
+<li>
+<p><strong>KU Leuven H01D8B Numerieke wiskunde, 2026-27</strong> — https://onderwijsaanbod.kuleuven.be/syllabi/n/H01D8BN.htm</p>
+</li>
+<li>Books: course text (Acco); no named textbook.</li>
+<li>Scope: nonlinear equations, errors, linear systems, interpolation, quadrature, ODEs, eigenvalues, PDEs. 4 ECTS.</li>
+<li>Prereq: analysis, applied algebra, programming (MATLAB).</li>
+<li>
+<p>Goals: errors, stability, telling ill-conditioning apart from algorithmic instability.</p>
+</li>
+<li>
+<p><strong>ETH 401-0654-00L Numerische Methoden (EE&amp;IT), FS 2026</strong> — https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=198888&amp;semkez=2026S&amp;ansicht=KATALOGDATEN&amp;lang=de</p>
+</li>
+<li>Books: "reading list announced in lecture" (none named).</li>
+<li>Scope: quadrature, Newton's method, ODE solvers (explicit, implicit, stability, step control). 4 ECTS.</li>
+<li>Prereq: scientific Python; analysis; linear algebra (Gauss, <abbr title="LU factorization">LU</abbr>).</li>
+<li>
+<p>Goals: know, implement and apply basic engineering numerics, focused on ODEs.</p>
+</li>
+<li>
+<p><strong>FIUBA 75.12 Análisis Numérico I, 1C/2020</strong> — https://cms.fi.uba.ar/uploads/7512_7f9c246c95.pdf</p>
+</li>
+<li>Main list: Burden &amp; Faires, <em>Análisis Numérico</em> 9a (Cengage 2012); Higham, <em>Accuracy and Stability of Numerical Algorithms</em>; Saad, <em>Iterative Methods for Sparse Linear Systems</em> 2e; Samarski (Mir); Zill, ODEs.</li>
+<li>Rec: Dennis &amp; Moré on quasi-Newton methods, Goldberg on floating point, Trefethen articles, and others.</li>
+<li>Scope: errors, linear systems, roots, approximation, quadrature, ODEs.</li>
+<li>Prereq: n/s.</li>
+<li>
+<p>Goals: develop and apply numerical techniques for engineering.</p>
+</li>
+<li>
+<p><strong>UPC 820009 Cálculo Numérico. Ecuaciones Diferenciales (EEBE; required in the Electrical Engineering degree), 2026</strong> — https://www.upc.edu/content/grau/guiadocent/pdf/esp/820009</p>
+</li>
+<li>R: Vázquez et al. (2009); Huerta, Sarrate &amp; Rodríguez-Ferran, <em>Métodos numéricos</em> (Edicions UPC, free online); Arias et al. (UPC, free online); Zill &amp; Cullen 7a.</li>
+<li>Rec: Burden &amp; Faires <em>Análisis numérico</em> 7a; Chapra &amp; Canale 6a.</li>
+<li>Scope: computer numerics, ODEs, integral transforms, PDEs. 6 ECTS.</li>
+<li>Prereq: n/s.</li>
+<li>
+<p>Goals: program and use basic methods with judgment; solve ODEs and PDEs analytically and numerically.</p>
+</li>
+<li>
+<p><strong>USP MAP3121 Métodos Numéricos e Aplicações</strong> — https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAP3121</p>
+</li>
+<li>Books: Burden &amp; Faires (Portuguese 7th, 2008); Chapra &amp; Canale, <em>Métodos Numéricos para Engenharia</em> (the page says "12th ed., 2009").</li>
+<li>Scope: Gaussian elimination, Gauss-Seidel, conjugate gradient, Newton's method, splines and least squares, quadrature, Runge-Kutta. 4 credits / 60 h.</li>
+<li>Prereq: not shown.</li>
+<li>Goals: introduce basic numerical methods and applications.</li>
+</ol>
+<h4 id="book-ranking_1">Book ranking<a class="headerlink" href="#book-ranking_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Book</th>
+<th>Cites</th>
+<th>Universities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Burden &amp; Faires, <em>Numerical Analysis</em></td>
+<td>4</td>
+<td>Berkeley (9e R), FIUBA (Spanish 9a), UPC (Spanish 7a Rec), USP (Portuguese 7th)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Chapra &amp; Canale, <em>Numerical Methods for Engineers</em></td>
+<td>2</td>
+<td>UPC (Spanish 6a), USP (Portuguese)</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Trefethen &amp; Bau</td>
+<td>1</td>
+<td>MIT (R)</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Sauer</td>
+<td>1</td>
+<td>KTH</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Saad, <em>Iterative Methods for Sparse Linear Systems</em></td>
+<td>1</td>
+<td>FIUBA</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Higham, <em>Accuracy and Stability</em></td>
+<td>1</td>
+<td>FIUBA</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Strang, <em>CSE</em></td>
+<td>1</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Barrett et al., <em>Templates</em></td>
+<td>1</td>
+<td>MIT</td>
+</tr>
+</tbody>
+</table>
+<p>Only MIT 18.335 and FIUBA 75.12 explicitly cover sparse matrices. Newton's method appears in FIUBA, ETH and USP.</p>
+<hr />
+<h3 id="3-graph-theory-network-science">3. Graph theory / network science<a class="headerlink" href="#3-graph-theory-network-science" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_2">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_2" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Stanford CS224W, Fall 2025</strong> — https://web.stanford.edu/class/cs224w/</li>
+<li>Books (optional, all free online): Hamilton, <em>Graph Representation Learning</em>; Easley &amp; Kleinberg, <em>Networks, Crowds, and Markets</em>; Barabási, <em>Network Science</em>.</li>
+<li>Scope: node embeddings, graph neural networks, knowledge graphs, graph transformers. Graduate.</li>
+<li>Prereq: CS107/145, probability, linear algebra.</li>
+<li>
+<p>Goals: machine-learning and algorithmic analysis of large networks.</p>
+</li>
+<li>
+<p><strong>MIT 14.15J/6.207J Networks, Spring 2018</strong> — https://ocw.mit.edu/courses/14-15j-networks-spring-2018/pages/syllabus/</p>
+</li>
+<li>Books: R: Newman, <em>Networks: An Introduction</em> (2010). Rec: Easley &amp; Kleinberg; Jackson, <em>Social and Economic Networks</em>; Osborne, <em>Game Theory</em>.</li>
+<li>Scope: random graphs, cascades, epidemics, financial and energy networks. Undergraduate.</li>
+<li>Prereq: probability (6.041 / 14.30).</li>
+<li>
+<p>Goals: robustness and fragility of networked systems, using dynamical systems, random graphs, optimization and game theory.</p>
+</li>
+<li>
+<p><strong>MIT 6.042J Mathematics for Computer Science, Spring 2015</strong> — https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/</p>
+</li>
+<li>Books: an open textbook on the course site (authors not named on the syllabus page).</li>
+<li>Scope: proofs, number theory, graphs, counting, probability.</li>
+<li>Prereq: 18.01.</li>
+<li>
+<p>Goals: discrete-math methods for computer science.</p>
+</li>
+<li>
+<p><strong>ETH 401-3052-10L Graph Theory, FS 2026</strong> — https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=197875&amp;semkez=2026S&amp;ansicht=KATALOGDATEN&amp;lang=de</p>
+</li>
+<li>Books: West, <em>Introduction to Graph Theory</em>; Diestel, <em>Graph Theory</em>.</li>
+<li>Scope: trees, matrix-tree theorem, Menger's theorem, Euler/Hamilton cycles, matchings, planarity, colourings. 9 ECTS, master's level (includes EE&amp;IT).</li>
+<li>Prereq: able to write rigorous proofs.</li>
+<li>
+<p>Goals: overview of fundamental questions; use proof techniques independently.</p>
+</li>
+<li>
+<p><strong>U. de Chile MA5505 Teoría de Grafos (since 2012)</strong> — https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=13298</p>
+</li>
+<li>Books: Diestel (GTM 173); Bollobás, <em>Modern Graph Theory</em>; West.</li>
+<li>Scope: bridges, trees, bipartite graphs, density and distances, graph minors.</li>
+<li>Prereq: MA3705 Algoritmos Combinatoriales.</li>
+<li>Goals: introduce basic graph theory.</li>
+</ol>
+<p>Graph and network topology also appears inside other syllabi: MIT 18.06 (graphs and networks), USP PSI3211 ("redes de bipolos e grafos") and UTN FRM Teoría de los Circuitos I (circuit topology).</p>
+<h4 id="book-ranking_2">Book ranking<a class="headerlink" href="#book-ranking_2" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Book</th>
+<th>Cites</th>
+<th>Universities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Easley &amp; Kleinberg</td>
+<td>2</td>
+<td>Stanford, MIT</td>
+</tr>
+<tr>
+<td>West</td>
+<td>2</td>
+<td>ETH, UChile</td>
+</tr>
+<tr>
+<td>Diestel</td>
+<td>2</td>
+<td>ETH, UChile</td>
+</tr>
+<tr>
+<td>Newman</td>
+<td>1</td>
+<td>MIT (R)</td>
+</tr>
+<tr>
+<td>Barabási</td>
+<td>1</td>
+<td>Stanford</td>
+</tr>
+<tr>
+<td>Bollobás</td>
+<td>1</td>
+<td>UChile</td>
+</tr>
+<tr>
+<td>Hamilton</td>
+<td>1</td>
+<td>Stanford</td>
+</tr>
+<tr>
+<td>Jackson</td>
+<td>1</td>
+<td>MIT</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4-complex-variables">4. Complex variables<a class="headerlink" href="#4-complex-variables" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_3">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_3" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>MIT 18.04, Spring 2018</strong> — https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/pages/syllabus/</li>
+<li>Books: no required text. Rec: Brown &amp; Churchill 9e (2013). Free online: Taylor; Beck, Marchesi, Pixton &amp; Sabalka, <em>A First Course in Complex Analysis</em>.</li>
+<li>Scope: analytic functions, Cauchy's theorem and integral formula, Taylor/Laurent series, harmonic functions, Laplace and Fourier transforms.</li>
+<li>Prereq: 18.02 and 18.03.</li>
+<li>
+<p>Goals: key theorems plus engineering applications.</p>
+</li>
+<li>
+<p><strong>ETH 401-0302-10L Komplexe Analysis (EE&amp;IT bachelor), FS 2026</strong> — https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=199386&amp;semkez=2026S&amp;ansicht=KATALOGDATEN&amp;lang=de</p>
+</li>
+<li>Books: Brown &amp; Churchill 9e; Needham, <em>Visual Complex Analysis</em> (2023); Kreyszig, <em>Advanced Engineering Mathematics</em> 10e; Dyke, <em>Laplace Transforms and Fourier Series</em> 2e.</li>
+<li>Scope: Cauchy-Riemann equations, complex integration, residues, Taylor/Laurent series, Fourier/Laplace transforms. 4 ECTS.</li>
+<li>Prereq: Analysis 1; Analysis 2 taken alongside.</li>
+<li>
+<p>Goals: apply complex-analysis tools and series; analyze with the Fourier transform.</p>
+</li>
+<li>
+<p><strong>TU Delft EE2M11 Complexe Functietheorie</strong> — https://etv.tudelft.nl/en-US/education/default/course?id=513 (ETV list)</p>
+</li>
+<li>Books: Brown (&amp; Churchill), <em>Complex Variables and Applications</em>.</li>
+<li>
+<p>Scope, prereq, goals: n/s.</p>
+</li>
+<li>
+<p><strong>U. de Chile MA2002 Cálculo Avanzado y Aplicaciones</strong> (3 weeks on complex variables) — https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=13266</p>
+</li>
+<li>Books (list): Brown &amp; Churchill, <em>Variable Compleja y Aplicaciones</em> (Spanish, 1992); Spiegel, <em>Variable Compleja</em> (Schaum); Kreyszig (Spanish); Apostol; Marsden &amp; Tromba; O'Neil; others.</li>
+<li>Scope: vector-calculus theorems, complex functions, Fourier series and transforms, PDEs, calculus of variations.</li>
+<li>Prereq: MA2601, MA2001.</li>
+<li>Goals: vector-field calculus for physical problems; classical PDEs.</li>
+</ol>
+<h4 id="book-ranking_3">Book ranking<a class="headerlink" href="#book-ranking_3" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Book</th>
+<th>Cites</th>
+<th>Universities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Brown &amp; Churchill</td>
+<td>4</td>
+<td>MIT (9e), ETH (9e), TU Delft, UChile (Spanish)</td>
+</tr>
+<tr>
+<td>Kreyszig, <em>Advanced Engineering Mathematics</em></td>
+<td>2</td>
+<td>ETH, UChile</td>
+</tr>
+<tr>
+<td>Spiegel (Schaum)</td>
+<td>1</td>
+<td>UChile</td>
+</tr>
+<tr>
+<td>Needham</td>
+<td>1</td>
+<td>ETH</td>
+</tr>
+<tr>
+<td>Beck et al. (free)</td>
+<td>1</td>
+<td>MIT</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="5-electric-circuits-i-ii">5. Electric circuits I &amp; II<a class="headerlink" href="#5-electric-circuits-i-ii" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_4">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_4" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>MIT 6.002, Spring 2007</strong> — https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/pages/syllabus/</li>
+<li>Books: R: Agarwal &amp; Lang, <em>Foundations of Analog and Digital Electronic Circuits</em> (2005).</li>
+<li>Scope: lumped circuit abstraction, digital circuits, op-amps, energy-storage elements.</li>
+<li>Prereq: 8.02, 18.03.</li>
+<li>
+<p>Goals: circuit models for design; time- and frequency-domain analysis; lab work.</p>
+</li>
+<li>
+<p><strong>Georgia Tech ECE 2040, Fall 2026</strong> — https://syllabus.gatech.edu/sites/default/files/2026-04/ECE%202040%20Fall%202026%20Syllabus.pdf</p>
+</li>
+<li>Books: R: Svoboda &amp; Dorf, <em>Introduction to Electric Circuits</em> 9e (2013).</li>
+<li>Scope: <abbr title="Kirchhoff's current law">KCL</abbr>/<abbr title="Kirchhoff's voltage law">KVL</abbr>, nodal and mesh analysis, theorems, op-amps, transients, sinusoidal steady state, frequency response, power. 3 credits.</li>
+<li>Prereq: n/s.</li>
+<li>
+<p>Goals: RLC by hand, nodal/mesh analysis, Thévenin/Norton, phasors, frequency response.</p>
+</li>
+<li>
+<p><strong>UIUC ECE 210, Fall 2025</strong> — https://courses.grainger.illinois.edu/ece210/fa2025/</p>
+</li>
+<li>Books: R: Kudeki &amp; Munson, <em>Analog Signals and Systems</em> (2009). Rec: Lathi &amp; Green 3e; Oppenheim &amp; Willsky 2e.</li>
+<li>Scope: circuits, phasors, Fourier and Laplace transforms, filters, AM receiver.</li>
+<li>Prereq: n/s (builds on ECE 110).</li>
+<li>
+<p>Goals: analyze and design signal-processing systems.</p>
+</li>
+<li>
+<p><strong>Stanford EE 101A Circuits I</strong> — https://edit-summer.stanford.edu/sites/summer/files/media/file/ee_101a_syllabus_summer_2026.pdf (the file name says summer 2026; the content says Fall 2025)</p>
+</li>
+<li>Books: no required text. Readings from Hambley, <em>EE Principles and Applications</em> 7e; Sedra &amp; Smith 8e; Scherz &amp; Monk 4e.</li>
+<li>Scope: circuit elements including diodes and transistors; DC/AC analysis of amplifiers. 4 units.</li>
+<li>Prereq: n/s.</li>
+<li>
+<p>Goals: circuit theory; preparation for EE 101B/114/116/153.</p>
+</li>
+<li>
+<p><strong>Purdue ECE 20002</strong> — https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=725&amp;show=true&amp;type=undergrad</p>
+</li>
+<li>Books: R: Talavage &amp; Terlep, <em>EE Fundamentals II</em> 3e (2020).</li>
+<li>Scope: second-order circuits, convolution, Laplace, transfer functions, filters, amplifiers, transmission lines. 3 credits.</li>
+<li>Prereq: ECE 20001 and MA 26200/26600/366.</li>
+<li>Goals: Laplace-based analysis, frequency behaviour, SPICE.</li>
+<li>
+<p>(ECE 20001 lists "notes provided by instructor" only.)</p>
+</li>
+<li>
+<p><strong>KU Leuven H01Z2A Elektrische netwerken, 2026-27</strong> — https://onderwijsaanbod.kuleuven.be/syllabi/n/H01Z2AN.htm</p>
+</li>
+<li>Books: R: Irwin &amp; Nelms, <em>Basic Engineering Circuit Analysis</em> 10e.</li>
+<li>Scope: DC analysis (nodal, op-amps) and AC analysis (frequency response, filters). 3 ECTS.</li>
+<li>Prereq: linear systems, complex numbers, ODEs, Ohm/Kirchhoff.</li>
+<li>
+<p>Goals: compute linear networks under DC and AC; transfer-function basics.</p>
+</li>
+<li>
+<p><strong>ETH 227-0001-00L Netzwerke und Schaltungen I, HS 2025</strong> — https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=192802&amp;semkez=2025W&amp;ansicht=KATALOGDATEN&amp;lang=de</p>
+</li>
+<li>Books: Albach, <em>Elektrotechnik</em> (Pearson 2020).</li>
+<li>Scope: electrostatic and current fields, DC networks, magnetic fields, induction. 4 ECTS.</li>
+<li>Prereq: n/s.</li>
+<li>Goals: trace voltage and current to fields; compute DC networks.</li>
+</ol>
+<p><strong>ETH 227-0002-00L Netzwerke und Schaltungen II, FS 2026</strong> — https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=198525&amp;semkez=2026S&amp;ansicht=KATALOGDATEN&amp;lang=de
+   - Books: Albach 2e (2020); Schmidt, Schaller &amp; Martius, <em>Grundlagen der Elektrotechnik – Netzwerke</em> 2e (2014); Sedra &amp; Smith 7e.
+   - Scope: complex AC analysis, mesh/nodal methods, Fourier, switching transients, Laplace, two-ports, op-amps. 8 ECTS.
+   - Prereq: n/s.
+   - Goals: time- and frequency-domain network behaviour.</p>
+<ol>
+<li><strong>TU Delft EE1C11 / EE1C21 Linear Circuits A/B</strong> — https://etv.tudelft.nl/en-US/education/default/course?id=496 (ETV list); descriptions at https://microelectronics.tudelft.nl/Education/coursedetail.php?mi=71 and https://microelectronics.tudelft.nl/Education/coursedetail.php?mi=72</li>
+<li>Books: Alexander &amp; Sadiku, <em>Fundamentals of Electric Circuits</em> (listed for EE1C21).</li>
+<li>Scope: Part A covers Kirchhoff's laws, Thévenin/Norton, nodal/mesh analysis, first-order transients. Part B covers second-order transients, phasors, AC power, transformers, Bode plots, filters, Laplace, two-ports. 5 EC each.</li>
+<li>Prereq: n/s.</li>
+<li>
+<p>Goals: the listed outcomes (compute voltages, currents and power with these methods).</p>
+</li>
+<li>
+<p><strong>UPM 565000134 Teoría de Circuitos (Grado en Electrónica Industrial y Automática, 2022-23)</strong> — https://www.upm.es/comun_gauss/publico/guias/2022-23/1S/GA_56IA_565000134_1S_2022-23.pdf</p>
+</li>
+<li>Books (list): Fraile Mora, <em>Circuitos eléctricos</em> (Pearson 2012); Hayt, Kemmerly &amp; Durbin, <em>Análisis de circuitos en ingeniería</em> (2012); Alexander &amp; Sadiku, <em>Fundamentos de circuitos eléctricos</em> (2013); Pastor &amp; Ortega (UNED).</li>
+<li>Scope: DC, single-phase AC, three-phase systems, introduction to transients, lab. 4.5 ECTS, second year.</li>
+<li>Prereq: none formally; complex-number arithmetic recommended.</li>
+<li>
+<p>Goals: fundamentals of circuit theory.</p>
+</li>
+<li>
+<p><strong>UPC 820123 Circuitos y Señales (EEBE, Electrical Engineering degree, 2026)</strong> — https://www.upc.edu/content/grau/guiadocent/pdf/esp/820123</p>
+<ul>
+<li>R: Hayt, Kemmerly &amp; Durbin (Spanish 7a); Irwin, <em>Análisis básico de circuitos en ingeniería</em> (Spanish 6a); Alexander &amp; Sadiku (Spanish 6a).</li>
+<li>Rec: Dorf &amp; Svoboda (Spanish 3a); REA <em>Electric Circuits Problem Solver</em>.</li>
+<li>Scope: transients, coupled circuits, Fourier, Laplace, resonance and filters, two-ports. 6 ECTS.</li>
+<li>Prereq: Sistemes Elèctrics; Càlcul Numèric-Equacions Diferencials.</li>
+<li>Goals: analysis techniques in time and frequency domains; software; lab measurement.</li>
+</ul>
+</li>
+<li>
+<p><strong>UPC 340103 Circuitos Eléctricos (EPSEVG, Electrical Engineering degree, 2026)</strong> — https://www.upc.edu/content/grau/guiadocent/pdf/esp/340103</p>
+<ul>
+<li>R: Nilsson &amp; Riedel (Spanish 7a); Alexander &amp; Sadiku (Spanish 6a 2018); Gómez Expósito, exercises; Nahvi &amp; Edminister (Spanish 4a); two PSpice books.</li>
+<li>Scope: unbalanced three-phase, non-sinusoidal periodic excitation, transients, state equations, Laplace. 6 ECTS.</li>
+<li>Prereq: Sistemas Eléctricos recommended.</li>
+<li>Goals: unbalanced Y/Δ systems, transient and frequency analysis, two-ports, simulation.</li>
+</ul>
+</li>
+<li>
+<p><strong>UTN FRM Teoría de los Circuitos I (Electronic Eng., program dated 2008)</strong> — http://www1.frm.utn.edu.ar/circuitos1/Apuntes/programa_TCIRC%20I.pdf</p>
+<ul>
+<li>Books (list): Boylestad, <em>Introducción al análisis de circuitos</em> 10a (2004); Cunningham &amp; Stuller; Dorf &amp; Svoboda (Spanish, Alfaomega 2000); Hayt &amp; Kemmerly, <em>Análisis de circuitos en ingeniería</em> (1985); Pueyo &amp; Marco; Scott; Van Valkenburg, <em>Análisis de redes</em>.</li>
+<li>Scope: mesh/nodal analysis, one- and two-port networks, transients, single- and three-phase AC, coupled inductors, Fourier and Laplace. 6 h/week, annual.</li>
+<li>Prereq: n/s.</li>
+<li>Goals: linear circuits as linear systems, in time and frequency domains.</li>
+</ul>
+</li>
+<li>
+<p><strong>UTN FRC Teoría de los Circuitos I (Electronic Eng.)</strong> — https://www.profesores.frc.utn.edu.ar/electronica/teoriadeloscircuitosi/</p>
+<ul>
+<li>Books (list): Pueyo &amp; Marco; Dorf &amp; Svoboda; Edminister (Schaum); Skilling; Nilsson; Van Valkenburg; Balabanian et al.; Kuo; Chen.</li>
+<li>Scope: time, frequency and Laplace domains; phasors, power, polyphase systems.</li>
+<li>Prereq: n/s.</li>
+<li>Goals: solve basic low-frequency linear-circuit problems.</li>
+</ul>
+</li>
+<li>
+<p><strong>FIUBA 85.02 Electrotecnia (Electrical Eng., 1C/2018)</strong> — https://cms.fi.uba.ar/uploads/8502_4f6f5e89f5.pdf</p>
+<ul>
+<li>General recommended: Spinadel, <em>Circuitos eléctricos y magnéticos</em> 2a; Skilling; Edminister (Schaum); Fraile Mora, <em>Máquinas eléctricas</em> 5a (chapter 1); Fitzgerald et al. 6e (chapter 1).</li>
+<li>Rec: Hayt, Kemmerly &amp; Durbin (Spanish 7a); Usaola; Nilsson &amp; Riedel (Spanish 7a); Nahvi &amp; Edminister; Zeveke &amp; Ionkin; Svoboda &amp; Dorf 9e.</li>
+<li>Scope: sinusoidal regime and power, resonance, topology, mesh/nodal analysis, polyphase systems (Aron method), coupled circuits, harmonics, magnetic circuits.</li>
+<li>Prereq: n/s (assumes Física and Introducción a la Ingeniería Electricista).</li>
+<li>Goals: consolidate electric and magnetic circuit principles for later work on machines and the grid.</li>
+</ul>
+</li>
+<li>
+<p><strong>U. de Chile EL3101 Análisis y Diseño de Circuitos Eléctricos (from 2021)</strong> — https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=175018</p>
+<ul>
+<li>R: Thomas &amp; Rosa 4e (2004); Dorf &amp; Svoboda (Spanish 6a); Nilsson &amp; Riedel (Spanish 7a).</li>
+<li>Rec: Alexander &amp; Sadiku (Spanish); Johnson, Hilburn, Johnson &amp; Scott 5a; Irwin (Spanish 5a).</li>
+<li>Scope: resistive and dynamic circuits, Laplace, steady state including balanced three-phase. 6 credits.</li>
+<li>Prereq: MA2002, FI2002.</li>
+<li>Goals: analyze LTI circuits; simulate and design op-amp circuits.</li>
+</ul>
+</li>
+<li>
+<p><strong>USP PSI3211 Circuitos Elétricos I</strong> — https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=PSI3211</p>
+<ul>
+<li>Books (list): Orsini &amp; Consonni vols I–II; Nilsson &amp; Riedel 9e; Dorf &amp; Svoboda 8e; Mariotto; Alexander &amp; Sadiku (Portuguese 5a); Irwin &amp; Wu 8e; Chua, Desoer &amp; Kuh; Orsini, exercises.</li>
+<li>Scope: bipoles, Kirchhoff's laws with graph topology, phasors, nodal analysis, Thévenin/Norton, first- and second-order circuits. 60 h.</li>
+<li>Prereq: not shown.</li>
+<li>Goals: systematic steady-state analysis; introduction to dynamics.</li>
+</ul>
+</li>
+</ol>
+<h4 id="book-ranking_4">Book ranking<a class="headerlink" href="#book-ranking_4" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Book</th>
+<th>Cites</th>
+<th>Universities (edition / language)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Dorf &amp; Svoboda, <em>Introduction to Electric Circuits</em></td>
+<td>6</td>
+<td>GT (9e R), UTN (Spanish, FRM + FRC), FIUBA (9e), UChile (Spanish 6a R), UPC (Spanish 3a), USP (8e)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Nilsson &amp; Riedel, <em>Electric Circuits</em></td>
+<td>5</td>
+<td>UTN FRC (Spanish), FIUBA (Spanish 7a), UChile (Spanish 7a R), UPC (Spanish 7a R), USP (9e)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Alexander &amp; Sadiku, <em>Fundamentals of Electric Circuits</em></td>
+<td>5</td>
+<td>TU Delft, UPM (Spanish), UPC (Spanish 6a R), UChile (Spanish), USP (Portuguese 5a)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Hayt, Kemmerly &amp; Durbin, <em>Engineering Circuit Analysis</em></td>
+<td>4</td>
+<td>UTN FRM (Spanish), FIUBA (Spanish 7a), UPM (Spanish 2012), UPC (Spanish 7a R)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Irwin (&amp; Nelms), <em>Basic Engineering Circuit Analysis</em></td>
+<td>4</td>
+<td>KU Leuven (10e R), UChile (Spanish 5a), UPC (Spanish 6a R), USP (8e)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Edminister / Nahvi &amp; Edminister (Schaum)</td>
+<td>3</td>
+<td>UTN, FIUBA, UPC</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Skilling</td>
+<td>2</td>
+<td>UTN, FIUBA</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Sedra &amp; Smith (electronics)</td>
+<td>2</td>
+<td>Stanford, ETH</td>
+</tr>
+</tbody>
+</table>
+<p>Cited once each: Albach (ETH); Boylestad, Spanish (UTN FRM); Fraile Mora, <em>Circuitos</em> (UPM); Thomas &amp; Rosa (UChile); Van Valkenburg (UTN); Pueyo &amp; Marco (UTN); Agarwal &amp; Lang; Kudeki &amp; Munson; Talavage &amp; Terlep; Orsini &amp; Consonni; Spinadel.</p>
+<hr />
+<h3 id="6-electromagnetism-physics-ii">6. Electromagnetism / Physics II<a class="headerlink" href="#6-electromagnetism-physics-ii" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_5">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_5" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>MIT 8.02, Spring 2007</strong> — https://ocw.mit.edu/courses/8-02-physics-ii-electricity-and-magnetism-spring-2007/pages/syllabus/</li>
+<li>Books: no required text. Rec: Serway &amp; Jewett; Tipler &amp; Mosca; Giancoli; Young &amp; Freedman; Resnick, Halliday &amp; Krane.</li>
+<li>Scope: electric and magnetic fields, forces, phenomena.</li>
+<li>Prereq: 8.01.</li>
+<li>
+<p>Goals: describe, represent mathematically and predict electromagnetic phenomena from a few laws.</p>
+</li>
+<li>
+<p><strong>MIT 6.013 Electromagnetics &amp; Applications, Spring 2009</strong> — https://ocw.mit.edu/courses/6-013-electromagnetics-and-applications-spring-2009/pages/syllabus/</p>
+</li>
+<li>Books: course notes. Optional: Staelin, Morgenthaler &amp; Kong, <em>Electromagnetic Waves</em>.</li>
+<li>Scope: fields, waves, radiation, transmission lines.</li>
+<li>Prereq: 18.01, 18.02, 8.02, 6.002.</li>
+<li>
+<p>Goals: electromagnetic theory from Maxwell's equations, applied to communications, motors and sensors.</p>
+</li>
+<li>
+<p><strong>TU Delft EE1P21 Electricity &amp; Magnetism</strong> — https://etv.tudelft.nl/en-US/education/default/course?id=507 (ETV)</p>
+</li>
+<li>Books: Wolfson, <em>Essential University Physics</em> vols 1–2; Müller-Kirsten, <em>Electrodynamics</em>.</li>
+<li>
+<p>Scope, prereq, goals: n/s.</p>
+</li>
+<li>
+<p><strong>UPC 820005 Física II: Fundamentos de Electromagnetismo (EEBE, includes the Electrical Engineering degree, 2026)</strong> — https://www.upc.edu/content/grau/guiadocent/pdf/esp/820005</p>
+</li>
+<li>Books (R): Tipler &amp; Mosca, <em>Física para la ciencia y la tecnología</em> vol 2 (Spanish 6a, 2010); two problem books (Alcaraz et al.; Alarcón et al.).</li>
+<li>Scope: fields and potential, conductors and dielectrics, DC/AC current, magnetic fields, induction, Maxwell's equations. 6 ECTS.</li>
+<li>Prereq: none.</li>
+<li>
+<p>Goals: working method plus basic electromagnetic principles for engineering problems.</p>
+</li>
+<li>
+<p><strong>FIUBA 82.06 Electromagnetismo (Electronic Eng., 1C/2020)</strong> — https://cms.fi.uba.ar/uploads/8206_7615e0fbaf.pdf</p>
+</li>
+<li>Books: R: course notes. Rec: Fernández (EUDEBA 2013); Ramo, Whinnery &amp; Van Duzer 3e; Orfanidis (free online); Sadiku, <em>Elementos de electromagnetismo</em> (Spanish 2a); Zahn; Vanderlinde; Stratton.</li>
+<li>Scope: Maxwell's equations, statics, magnetic materials, transmission lines, waves, antennas, numerical methods.</li>
+<li>Prereq: n/s.</li>
+<li>
+<p>Goals: electromagnetic theory for electronic engineering; know the limits of models; simulation.</p>
+</li>
+<li>
+<p><strong>U. de Chile FI2002 Electromagnetismo (from 2025)</strong> — https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=248822</p>
+</li>
+<li>Books (R): Griffiths, <em>Introduction to Electrodynamics</em> 4e; Cordero; Serway &amp; Jewett vol 2 (Spanish 7a); Sapone.</li>
+<li>Scope: electrostatics, currents, magnetostatics, induction, electromagnetic waves. 6 credits, 4th semester.</li>
+<li>Prereq: MA2001, MA2601, FI2001.</li>
+<li>
+<p>Goals: characterize electromagnetic phenomena up to energy propagation.</p>
+</li>
+<li>
+<p><strong>USP 4323203 Física III</strong> — https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=4323203</p>
+</li>
+<li>Books (list): Young &amp; Freedman, <em>Física III</em> (Portuguese 12a, 2009); Nussenzveig vol 3; Feynman Lectures vol 2.</li>
+<li>Scope: charge through induction and magnetic materials. 60 h.</li>
+<li>Prereq: not shown.</li>
+<li>Goals: basic electricity and magnetism for engineers.</li>
+</ol>
+<p>(ETH 227-0001 covers fields inside Netzwerke und Schaltungen I, using Albach.)</p>
+<h4 id="book-ranking_5">Book ranking<a class="headerlink" href="#book-ranking_5" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Book</th>
+<th>Cites</th>
+<th>Universities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serway &amp; Jewett</td>
+<td>2</td>
+<td>MIT, UChile (Spanish 7a R)</td>
+</tr>
+<tr>
+<td>Tipler &amp; Mosca</td>
+<td>2</td>
+<td>MIT, UPC (Spanish 6a R)</td>
+</tr>
+<tr>
+<td>Young &amp; Freedman (Sears-Zemansky)</td>
+<td>2</td>
+<td>MIT, USP (Portuguese 12a)</td>
+</tr>
+<tr>
+<td>Griffiths</td>
+<td>1</td>
+<td>UChile (R)</td>
+</tr>
+<tr>
+<td>Halliday / Resnick / Krane</td>
+<td>1</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>Giancoli</td>
+<td>1</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>Wolfson</td>
+<td>1</td>
+<td>TU Delft</td>
+</tr>
+<tr>
+<td>Sadiku, <em>Elements</em></td>
+<td>1</td>
+<td>FIUBA</td>
+</tr>
+<tr>
+<td>Ramo, Whinnery &amp; Van Duzer</td>
+<td>1</td>
+<td>FIUBA</td>
+</tr>
+<tr>
+<td>Nussenzveig</td>
+<td>1</td>
+<td>USP</td>
+</tr>
+<tr>
+<td>Feynman vol 2</td>
+<td>1</td>
+<td>USP</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="7-electric-machines-transformers">7. Electric machines &amp; transformers<a class="headerlink" href="#7-electric-machines-transformers" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_6">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_6" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>MIT 6.685 Electric Machines, Fall 2013</strong> — https://ocw.mit.edu/courses/6-685-electric-machines-fall-2013/pages/syllabus/</li>
+<li>Books: course notes. Rec: Fitzgerald, Kingsley &amp; Umans 6e; Kirtley, <em>Electric Power Principles</em> (2010); Beaty &amp; Kirtley, <em>Electric Motor Handbook</em>.</li>
+<li>Scope: transformers, transducers, DC, induction and synchronous machines, dynamics. Graduate.</li>
+<li>Prereq: 6.061/6.690.</li>
+<li>
+<p>Goals: design rotating and linear machines; estimate dynamic parameters.</p>
+</li>
+<li>
+<p><strong>MIT 6.061 Intro to Electric Power Systems, Spring 2011</strong> — https://ocw.mit.edu/courses/6-061-introduction-to-electric-power-systems-spring-2011/pages/syllabus/</p>
+</li>
+<li>Books: R: Kirtley, <em>Electric Power Principles</em>.</li>
+<li>Scope: magnetic circuits, synchronous/induction/DC machines, power electronics, system operation.</li>
+<li>Prereq: 6.002, 6.013.</li>
+<li>
+<p>Goals: model and interconnect power apparatus with lumped parameters and transformations.</p>
+</li>
+<li>
+<p><strong>Purdue ECE 32100, Fall 2015</strong> — https://engineering.purdue.edu/~dionysis/321_F15_syllabus.pdf</p>
+</li>
+<li>Books: R: Krause, Wasynczuk &amp; Pekarek, <em>Electromechanical Motion Devices</em> 2e (2012).</li>
+<li>Scope: energy conversion; DC, induction, brushless DC and stepper motors.</li>
+<li>Prereq: ECE 20200, electricity &amp; magnetism physics, ECE 25500.</li>
+<li>
+<p>Goals: analyze electromagnetic devices, reference-frame transformations, machines and DC drives.</p>
+</li>
+<li>
+<p><strong>UIUC ECE 330, Fall 2025</strong> — https://ws.engr.illinois.edu/custom/getsyllabus.asp?id=3130</p>
+</li>
+<li>Books: Pai, <em>Power Circuits and Electromechanics</em> (Stipes).</li>
+<li>Scope: complex power, three-phase, magnetic circuits, transformers, energy/co-energy, synchronous and induction machines, dynamics and stability.</li>
+<li>
+<p>Prereq: n/s. Goals: n/s.</p>
+</li>
+<li>
+<p><strong>TU Delft EE2E11 Electrical Energy Conversion</strong> — https://etv.tudelft.nl/en-US/education/default/course?id=509 (ETV)</p>
+</li>
+<li>Books: Ferreira, <em>The Principles of Electromechanical Power Conversion</em>.</li>
+<li>
+<p>Scope, prereq, goals: n/s.</p>
+</li>
+<li>
+<p><strong>KU Leuven H01L8A Elektrische energie en aandrijvingen, 2026-27</strong> — https://onderwijsaanbod.kuleuven.be/syllabi/n/H01L8AN.htm</p>
+</li>
+<li>Books: textbook sold through Acco, title not named.</li>
+<li>Scope: three-phase, transformers, DC/induction/synchronous machines, power quality. 6 ECTS.</li>
+<li>Prereq: n/s.</li>
+<li>
+<p>Goals: practical understanding of energy systems and machines.</p>
+</li>
+<li>
+<p><strong>UPC 820127 Máquinas Eléctricas I (EEBE, Electrical Engineering degree, 2026)</strong> — https://www.upc.edu/content/grau/guiadocent/pdf/esp/820127</p>
+</li>
+<li>R: Fitzgerald &amp; Umans 7e (2014); Fraile Mora 7a (2015).</li>
+<li>Rec: Boldea; Gross; Sen 3e.</li>
+<li>Scope: transformers; AC-machine transient models. 6 ECTS.</li>
+<li>Prereq: Sistemes Elèctrics; calculus, matrix calculus.</li>
+<li>
+<p>Goals: electromechanical conversion, transformers and induction machines.</p>
+</li>
+<li>
+<p><strong>UPC 340102 Máquinas Eléctricas I (EPSEVG, 2026)</strong> — https://www.upc.edu/content/grau/guiadocent/pdf/esp/340102/maquinas-electricas-i.pdf</p>
+</li>
+<li>R: Chapman, <em>Máquinas eléctricas</em> 5a (2012); Fitzgerald, Kingsley &amp; Umans (Spanish 6a).</li>
+<li>Rec: Fraile Mora 8a (2016); Sanz Feito.</li>
+<li>Scope: single- and three-phase transformers, energy conversion, synchronous machines. 150 h.</li>
+<li>Prereq: n/s.</li>
+<li>
+<p>Goals: equivalent circuits, steady state, lab testing.</p>
+</li>
+<li>
+<p><strong>FIUBA 85.36 Máquinas Eléctricas (Electrical Eng., 1C/2018; same list in 65.06)</strong> — https://cms.fi.uba.ar/uploads/8536_bd32c94704.pdf (and https://cms.fi.uba.ar/uploads/6506_822bb055fe.pdf)</p>
+</li>
+<li>Rec (for the course): notes; Chapman; Guru &amp; Hiziroglu; Wildi 6a.</li>
+<li>Reference: Fitzgerald, Kingsley &amp; Umans (Spanish 5a); MIT EE Staff, <em>Circuitos magnéticos y transformadores</em>; Hindmarsh; Cathey.</li>
+<li>Scope: transformers, induction, synchronous, DC and special machines, heating, switchgear.</li>
+<li>Prereq (stated as required knowledge): Electrotecnia General, calculus, physics.</li>
+<li>
+<p>Goals: construction, operation, selection and control of machines.</p>
+</li>
+<li>
+<p><strong>UTN FRBA Máquinas Eléctricas I (950528, Electrical Eng., 2017)</strong> — https://frba.utn.edu.ar/wp-content/uploads/2018/06/M%C3%A1quinas-El%C3%A9ctricas-I-Ing.-El%C3%A9ctrica-950528.pdf</p>
+<ul>
+<li>R: Kostenko &amp; Piotrovsky, <em>Máquinas Eléctricas</em> vol I; Gourishankar, <em>Conversión de energía electromecánica</em>; Cortes Cherta; MIT Staff, <em>Circuitos magnéticos y transformadores</em>.</li>
+<li>Rec: Lemozy notes.</li>
+<li>Scope: single- and three-phase transformers, transients, conversion principle, DC machines. 144 h, annual.</li>
+<li>Prereq: n/s.</li>
+<li>Goals: model transformers and DC machines analytically, graphically and numerically; industrial selection.</li>
+</ul>
+</li>
+<li>
+<p><strong>UNAM FI 1656 Máquinas Eléctricas I (approved 2005)</strong> — Wayback copy: http://web.archive.org/web/2023id_/https://www.ingenieria.unam.mx/programas_academicos/licenciatura/Electrica_Electronica/06/maquinas_electricas_i.pdf (live URL now 404)</p>
+<ul>
+<li>Books (list): El-Hawary; Kosow; Langsdorf; Matsch; Puchstein; Sen 2e; Pérez Amador; Chapman (Spanish 1998); Fitzgerald, Kingsley &amp; Kusko (2004).</li>
+<li>Scope: magnetic circuits, transformers, induction, synchronous and DC machines, AC motor control. 104 h, 11 credits.</li>
+<li>Prereq: Análisis de Circuitos Eléctricos.</li>
+<li>Goals: qualitative and quantitative analysis of machines; plan installation and operation.</li>
+</ul>
+</li>
+<li>
+<p><strong>U. de Chile EL4111 Conversión de la Energía y Sistemas Eléctricos (from 2022)</strong> — https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=128814</p>
+<ul>
+<li>R: Fitzgerald, Kingsley &amp; Umans (Spanish 6a); Romo &amp; Vargas notes; Brokering, Palma &amp; Vargas, <em>Atrapando el Sol</em> (free online).</li>
+<li>Rec: Sanz; Gómez Expósito; Nasar; Gourishankar; Langsdorf; Chapman 4a; Glover &amp; Sarma; Saadat; Grainger &amp; Stevenson; others.</li>
+<li>Scope: conversion fundamentals, transformers, DC and AC machines, generation. 6 credits.</li>
+<li>Prereq: EL3101.</li>
+<li>Goals: evaluate electrical, magnetic and mechanical behaviour with analytic and circuit models.</li>
+</ul>
+</li>
+<li>
+<p><strong>USP PEA3306 Conversão Eletromecânica de Energia</strong> — https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=PEA3306</p>
+<ul>
+<li>Books (list): Falcone, <em>Eletromecânica</em>; Umans, <em>Máquinas Elétricas de Fitzgerald e Kingsley</em> (Portuguese 7a); Chapman, <em>Fundamentos de máquinas elétricas</em> (2013).</li>
+<li>Scope: transformers, converters, rotating fields, synchronous, induction and DC machines. 60 h.</li>
+<li>Prereq: not shown.</li>
+<li>Goals: understand, model and analyze electromechanical devices.</li>
+</ul>
+</li>
+</ol>
+<p>Relevant to ToOp though outside this scope: UChile EL4103 (power systems; https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=124166) cites Gómez Expósito, Wood &amp; Wollenberg 3e, Grainger &amp; Stevenson and Saadat. ETH 227-0122 (power transmission, including power flow) uses a lecture script only.</p>
+<h4 id="book-ranking_6">Book ranking<a class="headerlink" href="#book-ranking_6" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Book</th>
+<th>Cites</th>
+<th>Universities (edition / language)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Fitzgerald, Kingsley &amp; Umans, <em>Electric Machinery</em></td>
+<td>6</td>
+<td>MIT (6e), UPC (7e R, Spanish 6a R), FIUBA (Spanish 5a), UNAM, UChile (Spanish 6a R), USP (Portuguese 7a)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Chapman, <em>Electric Machinery Fundamentals</em></td>
+<td>5</td>
+<td>FIUBA, UNAM (Spanish), UPC (Spanish 5a R), UChile (Spanish 4a), USP (Portuguese)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Fraile Mora, <em>Máquinas eléctricas</em> (Spanish)</td>
+<td>2</td>
+<td>UPC (7a R, 8a), FIUBA (Electrotecnia course, chapter 1). Also a UPM design course.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Gourishankar</td>
+<td>2</td>
+<td>UTN (R), UChile</td>
+</tr>
+<tr>
+<td>4</td>
+<td>MIT EE Staff, <em>Magnetic Circuits and Transformers</em></td>
+<td>2</td>
+<td>UTN (R), FIUBA</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Sen</td>
+<td>2</td>
+<td>UNAM, UPC</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Langsdorf</td>
+<td>2</td>
+<td>UNAM, UChile</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Sanz Feito</td>
+<td>2</td>
+<td>UPC, UChile</td>
+</tr>
+</tbody>
+</table>
+<p>Cited once each: Kirtley (MIT, two courses); Kostenko &amp; Piotrovsky (UTN R); Krause (Purdue); Pai (UIUC); Ferreira (TU Delft); Wildi; Guru &amp; Hiziroglu.</p>
+<hr />
+<h2 id="part-2-power-systems-optimization-and-computing">Part 2 — Power systems, optimization and computing<a class="headerlink" href="#part-2-power-systems-optimization-and-computing" title="Permanent link">&para;</a></h2>
+<h3 id="8-power-system-analysis">8. Power system analysis<a class="headerlink" href="#8-power-system-analysis" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_7">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_7" title="Permanent link">&para;</a></h4>
+<p><strong>US</strong>
+- <strong>Texas A&amp;M ECEN 460 Power System Operation and Control, Spring 2025 (Overbye)</strong>
+  URL: https://overbye.engr.tamu.edu/wp-content/uploads/sites/146/2025/01/ECEN460_Syllabus_Spring2025_Public.pdf
+  - Scope: undergraduate, 4 credits with lab. Complex power, 3-phase, per-unit, component models, Ybus, power flow and solution methods, power-flow sensitivity, contingency analysis, economic dispatch, <abbr title="Optimal power flow">OPF</abbr>/<abbr title="Security-constrained optimal power flow">SCOPF</abbr>/<abbr title="Locational marginal price">LMP</abbr>, markets, stability, controls, renewables. PowerWorld labs.
+  - Prerequisites: ECEN 215 or 314 (ECEN 340 recommended).
+  - Goals: n.s.
+  - Books: R Glover, Overbye, Birchfield &amp; Sarma, <em>Power System Analysis and Design</em>, 7th ed., Cengage 2023. The Spring 2026 offering (Birchfield) requires the same book: https://birchfield.engr.tamu.edu/460s26
+- <strong>UIUC ECE 476 Power System Analysis (catalog)</strong>
+  URL: https://ece.illinois.edu/academics/courses/ece476
+  - Scope: 3 credit hours. 3-phase, per-unit, line parameters, power flow, symmetrical components and short circuit, transient stability, economic dispatch, relaying.
+  - Prerequisites: ECE 330.
+  - Goals: overview of interconnected operation; build system models; do power flow, economic dispatch and short circuit; write a basic power-flow program.
+  - Books: Glover, Overbye &amp; Sarma, 6th ed. The Fall 2011 page lists the 5th ed.: https://courses.grainger.illinois.edu/ece476/fa2011/
+- <strong>Georgia Tech ECE 4320 Power System Analysis and Control</strong>
+  URL: https://ece.gatech.edu/courses/ece4320
+  - Scope: power flow, <abbr title="Optimal power flow">OPF</abbr>, unit commitment, state estimation, voltage/frequency control, economic dispatch.
+  - Prerequisites: ECE 3072.
+  - Goals: formulate and solve power-flow problems; assess controls; solve economic dispatch.
+  - Books: the textbook field gives only generic titles, no authors. Not counted.
+- <strong>UC Berkeley EE 137A Introduction to Electric Power Systems, Fall 2017 (von Meier)</strong>
+  URL: https://tbp.studentorg.berkeley.edu/syllabi/797/download
+  - Scope: 4 units. System design, generators, transmission and distribution components, power flow, operation.
+  - Prerequisites: Math 54, Physics 7B, EE 16AB.
+  - Goals: explain component functions and limits; quantitative AC analysis; power-flow methods in PowerWorld; P/Q balance, stability and security.
+  - Books: R Bergen &amp; Vittal, <em>Power Systems Analysis</em>, 2nd ed., 2000. Rec von Meier, <em>Electric Power Systems: A Conceptual Introduction</em> (2006). Masters, <em>Renewable and Efficient Electric Power Systems</em>, 2nd ed. (required in 137B).
+- <strong>MIT 6.061/6.690 Introduction to Electric Power Systems, Spring 2011</strong>
+  URL: https://ocw.mit.edu/courses/6-061-introduction-to-electric-power-systems-spring-2011/pages/syllabus/
+  - Scope: advanced undergraduate. Energy circuits, magnetics, machines, power electronics, interconnection.
+  - Prerequisites: 6.002, 6.013.
+  - Goals: n.s.
+  - Books: Kirtley, <em>Electric Power Principles</em>, Wiley 2010 (free OCW notes).
+- <strong>MIT 6.691 Seminar in Electric Power Systems, Spring 2006</strong>
+  URL: https://ocw.mit.edu/courses/6-691-seminar-in-electric-power-systems-spring-2006/pages/syllabus/
+  - Scope: graduate, variable topics (economics/deregulation, DC distribution, renewables).
+  - Prerequisites: 6.061 or network theory plus controls/EM.
+  - Goals: n.s.
+  - Books: Bergen &amp; Vittal, 2nd ed.
+- <strong>Cornell ECE 4510 Electric Power Systems I, Fall 2025 roster</strong>
+  URL: https://classes.cornell.edu/browse/roster/FA25/class/ECE/4510
+  - Scope: 3 credits. Line/transformer/generator models, per-unit, network matrices, power flow, voltage control, economic dispatch.
+  - Prerequisites: ECE 3250.
+  - Goals: component models; power flow and economic dispatch; response to contingencies.
+  - Books: none listed.
+- <strong>Stanford CEE 272R Modern Power Systems Engineering, 2019.</strong> SECONDARY SOURCE ONLY: a Course Hero copy; the official syllabus was not accessible. Books: Glover et al., 5th ed.; Kirschen &amp; Strbac; von Meier (optional). Not counted.</p>
+<p><strong>Europe</strong>
+- <strong>KU Leuven H04A9A Power System Calculations</strong>
+  URL: https://onderwijsaanbod.kuleuven.be/syllabi/e/H04A9AE.htm
+  - Scope: master, 3 ECTS. Component models, power flow, <abbr title="Optimal power flow">OPF</abbr>/ED/UC, short circuits.
+  - Prerequisites: H01L8A (basic AC/energy).
+  - Goals: derive models; apply them in power flow and <abbr title="Optimal power flow">OPF</abbr> by hand and in software.
+  - Books (Rec): Grainger &amp; Stevenson; Glover, Sarma &amp; Overbye.
+- <strong>UCLouvain LELEC2520 Electrical power systems</strong>
+  URL: https://uclouvain.be/en-cours-2025-lelec2520
+  - Scope: master, 5 credits. Architecture, steady-state modelling, calculation, optimization.
+  - Prerequisites: LELEC1370, LELEC1310.
+  - Goals: outcome codes only.
+  - Books: reference textbook Gómez-Expósito, Conejo &amp; Cañizares, <em>Electric Energy Systems: Analysis and Operation</em>.
+- <strong>ULiège ELEC0447 Analysis of electric power and energy systems</strong>
+  URL: https://www.programmes.uliege.be/cocoon/20252026/en/cours/ELEC0447-1.html
+  - Scope: master, 5 credits. Per-unit, components, power-flow solvers, frequency/voltage control, stability.
+  - Prerequisites: circuits, programming, numerical methods.
+  - Goals: understand operation and its mathematical/numerical modelling.
+  - Books: mainly Mohan, <em>Electric Power Systems: A First Course</em>, Wiley 2012.
+- <strong>ETH 227-0526-00L Power System Analysis (Hug, Valverde)</strong>
+  URL: https://www.vorlesungen.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=192800&amp;semkez=2025W&amp;ansicht=ALLE&amp;lang=en
+  - Scope: MSc, 6 ECTS. Stationary models, Newton-Raphson power flow, short circuit, symmetrical components, distribution power flow, state estimation.
+  - Prerequisites: n.s.
+  - Goals: stationary dependencies and analysis tools in normal and faulted states.
+  - Books: lecture notes only.
+- <strong>DTU 46705 Power grid analysis</strong>
+  URL: https://kurser.dtu.dk/course/46705
+  - Scope: MSc, 5 ECTS. Power flow in Python, faults.
+  - Prerequisites (recommended): 31730/46700.
+  - Books: none.
+- <strong>KTH EG2100 Power System Analysis</strong>
+  URL: https://www.kth.se/student/kurser/kurs/EG2100?l=en
+  - Scope: load flow in Matlab, symmetrical/unsymmetrical steady state.
+  - Prerequisites: linear algebra, calculus, Matlab, EJ1200.
+  - Books: literature field empty.
+- <strong>Edinburgh ELEE09029 Power Systems, Power Electronics and Machines 3</strong>
+  URL: http://www.drps.ed.ac.uk/25-26/dpt/cxelee09029.htm
+  - Scope: undergraduate year 3. Load flow, faults, machines, converters.
+  - Prerequisites: SCEE08008.
+  - Goals: load flow and fault calculations; machines and converters.
+  - Books: Saadat, <em>Power System Analysis</em>; Mohan, Undeland &amp; Robbins; Chapman.
+- <strong>Edinburgh ELEE10032 Power Systems 4</strong>
+  URL: http://www.drps.ed.ac.uk/25-26/dpt/cxelee10032.htm
+  - Scope: year 4. Generator dq model, short circuits, protection, distributed generation.
+  - Prerequisites: ELEE09029 recommended.
+  - Books: Chapman; Grainger &amp; Stevenson.
+- <strong>Chalmers ENM125 Sustainable electric power systems</strong>
+  URL: https://www.chalmers.se/en/education/your-studies/find-course-and-programme-syllabi/course-syllabus/ENM125/?acYear=2025%2F2026
+  - Scope: master, 7.5 credits, for students without an electrical background.
+  - Books: Glover, Overbye &amp; Sarma, 6th ed. SI; Powell.
+- <strong>Sevilla 2030104 Sistemas Eléctricos de Potencia, 2024-25 (taught by Gómez-Expósito)</strong>
+  URL: POST form at https://sevius4.us.es/index.php?PyP=LISTA&amp;codcentro=45&amp;titulacion=203&amp;asignatura=2030104
+  - Scope: industrial engineering degree year 4, 6 ECTS. Per-unit, Gauss-Seidel/Newton-Raphson/fast decoupled/DC power flow, static security analysis, short circuit, transient stability.
+  - Prerequisites: n.s.
+  - Goals: know system structure, real-time operation and planning; simulate a real network.
+  - Books (Rec, all Spanish):
+    - Gómez-Expósito (coord.), <em>Análisis y operación de sistemas de energía eléctrica</em>, McGraw-Hill 2002
+    - Barrero, <em>Sistemas de Energía Eléctrica</em>, Thomson 2004
+    - Grainger &amp; Stevenson, <em>Análisis de Sistemas Eléctricos de Potencia</em>, McGraw-Hill 1996
+    - Gómez-Expósito et al., <em>Problemas resueltos</em>, 2003
+- <strong>Comillas ICAI DIE-GITI-323 Sistemas de Energía Eléctrica, 2020-21</strong>
+  URL: https://repositorio.comillas.edu/server/api/core/bitstreams/ac4b2e20-7d2b-48b4-a89e-a4fdf7f19e6d/content
+  - Scope: year 3, 6 ECTS. Components, power flow, Q-V and P-f control, state estimation.
+  - Goals: pick the right model per analysis; economic operation.
+  - Books: R Gómez-Expósito, Conejo &amp; Cañizares (CRC). Rec Wood &amp; Wollenberg; Elgerd.
+  - The older Comillas AES10 guide (https://repositorio.comillas.edu/server/api/core/bitstreams/df1077a3-faae-41b0-b7e6-3b2c7301177b/content) lists R Elgerd 1983; Grainger &amp; Stevenson (ES); Gómez-Expósito 2002 (ES). Rec Kundur.</p>
+<p><strong>Latin America</strong>
+- <strong>FIUBA 6515 Sistemas Eléctricos de Potencia, 2015</strong>
+  URL: https://cms.fi.uba.ar/uploads/6515_ad5e1ddb96.pdf
+  - Scope: per-unit, load flow (Gauss-Seidel/Newton-Raphson, network matrices), voltage/FACTS, faults, economic operation, stability, <abbr title="High-voltage direct current">HVDC</abbr>.
+  - Prerequisites: n.s.
+  - Goals: apply line/machine parameters, load flow, faults and stability.
+  - Books: R Grainger &amp; Stevenson (EN); Saadat 2002; Glover-Sarma-Overbye 2012; Kundur; Padiyar; Sauer &amp; Pai; Greenwood; Wood &amp; Wollenberg 1996; others. Rec Gross; Bergen &amp; Vittal; Weedy; Elgerd; Kimbark.
+- <strong>UTN FRBB Sistemas de Potencia, 2025–26</strong>
+  URL: https://www.frbb.utn.edu.ar/frbb/info/departamentos/electrica/programas_analiticos/sistemas_de_potencia.pdf
+  - Scope: 128 h. Lines, power flow, faults, stability, economic dispatch.
+  - Prerequisites: Materiales, Máquinas I, Electrotecnia II.
+  - Goals: basic knowledge; solve small real problems.
+  - Books: Grainger &amp; Stevenson, <em>Análisis de Sistemas de Potencia</em> (ES, 1998); Elgerd; Gross (ES); Greenwood; course notes.
+- <strong>UTN FRM Centrales y Sistemas de Transmisión</strong>
+  URL: http://www1.frm.utn.edu.ar/cstransmision/programa.html
+  - Prerequisites and goals: n.s.
+  - Books: Grainger &amp; Stevenson (ES); Weedy (ES); others.
+- <strong>UNR E21 Sistemas de Potencia, Plan 2014</strong>
+  URL: https://web.fceia.unr.edu.ar/images/PDF/Webs_de_asignaturas/El%C3%A9ctrica/E21-Sistemas_de_Potencia.pdf
+  - Scope: 9th semester, 80 h. Power flow, <abbr title="Optimal power flow">OPF</abbr> (hydrothermal), <abbr title="High-voltage direct current">HVDC</abbr>, P/Q control, stability.
+  - Prerequisites: E14, E17.
+  - Goals: static analysis with computer tools; operation and planning with economic implications.
+  - Books: R Kundur; Arrillaga &amp; Watson; El-Hawary. Rec Glover &amp; Sarma, <em>Sistemas de Potencia: Análisis y Diseño</em>, 3ª ed., Thomson 2003 (ES); Kothari &amp; Nagrath (ES); Wood, Wollenberg &amp; Sheblé; Vaahedi; Barrero.
+- <strong>UNLP E1239 Sistemas de Potencia, Plan 2018</strong>
+  URL: https://www1.ing.unlp.edu.ar/sitio/academica/asignaturas/asignatura.php?cod=E1239
+  - Scope: year 5, 96 h. Argentine wholesale market, power flow, voltage control, optimal dispatch with nodal factors, faults, transient stability and contingency evaluation. PSS/E, ATP and Matlab.
+  - Prerequisites: E1237, E1234, E1235, English.
+  - Goals: large interconnected systems; models applied to near-real cases.
+  - Books: Glover-Sarma-Overbye 6th ed. 2017; Gómez-Expósito 2002 (ES); Kothari &amp; Nagrath (ES); Stevenson &amp; Grainger (ES 1996); Stevenson (ES); Weedy (ES); Elgerd; Stagg &amp; El-Abiad; Kundur; many others.
+- <strong>UNLP E1235 Teoría de la Transmisión</strong>
+  URL: https://www1.ing.unlp.edu.ar/sitio/academica/asignaturas/asignatura.php?cod=E1235
+  - Scope: year 4. Line parameters, per-unit, faults, matrix network methods, <abbr title="High-voltage direct current">HVDC</abbr>.
+  - Prerequisites: E1233, E1204.
+  - Books: similar list (Glover, Grainger &amp; Stevenson ES, Gómez-Expósito ES, Kothari &amp; Nagrath, and others).
+- <strong>U. de Chile EL4103 Sistemas de Energía y Equipos Eléctricos, 2022</strong>
+  URL: https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=124166
+  - Scope: 6 credits. Models, power flow (iterative and decoupled), voltage control, faults, economic operation.
+  - Prerequisites: EL4111.
+  - Goals: analyse normal and faulted operation; optimization for economic operation.
+  - Books: Brokering &amp; Palma (ES); Gómez-Expósito 2003 (ES); Wood &amp; Wollenberg 2013; Grainger &amp; Stevenson 2ª ed. (ES); Saadat.
+- <strong>PUC Chile IEE2312 Sistemas de Potencia</strong>
+  URL: https://catalogo.uc.cl/index.php?tmpl=component&amp;option=com_catalogo&amp;view=programa&amp;sigla=IEE2312
+  - Scope: 10 credits.
+  - Prerequisites: IEE1122.
+  - Goals: operation under technical and economic limits.
+  - Books: Grainger &amp; Stevenson 1994 (EN); Gönen; Brokering (ES); Almeida &amp; Freitas (PT).
+- <strong>USP PEA3410 / PEA3417 Sistemas de Potência I and II</strong>
+  URLs: https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=PEA3410 and ?sgldis=PEA3417
+  - Scope: line models, nodal matrices, short circuit, power flow, redispatch and load shedding for overloads.
+  - Prerequisites: PEA3301.
+  - Goals: model and analyse steady-state networks.
+  - Books: Grainger &amp; Stevenson 1994; Zanetta (PT); El-Hawary; Oliveira-Schmidt-Kagan-Robba (PT); Stagg &amp; El-Abiad; Weedy (PT).
+- <strong>UNICAMP ET720 / ET931, catalog 2026</strong>
+  URL: https://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2026/disciplinas/et.html
+  - Scope: 60 h each. ET931 covers Newton and decoupled load flow and sparse storage.
+  - Prerequisites: ET620 / ET720.
+  - Goals: n.s.
+  - Books: Monticelli &amp; Garcia (PT); Monticelli, <em>Fluxo de Carga</em> (PT); Stevenson, <em>Elements</em>; Elgerd (PT); Robba (PT).
+- <strong>UNAM Especialización, Análisis de Sistemas Eléctricos</strong>
+  URL: https://www.ingenieria.unam.mx/puei/asignaturas/energiaelectrica/anadsistelec.pdf
+  - Scope: 64 h.
+  - Prerequisites: none.
+  - Goals: short circuit, power flow, harmonics and arc flash with software.
+  - Books: Grainger &amp; Stevenson 1994 (EN); Das; Anderson; Arrillaga; IEEE 399; others.
+- <strong>UNAM graduate power-systems admission syllabus</strong> (not a course)
+  URL: http://posgrado.electrica.unam.mx/temarios/potencia.pdf
+  - Books: Grainger &amp; Stevenson, <em>Análisis de Sistemas de Potencia</em> (ES 1996); Glover &amp; Sarma, <em>Sistemas de Potencia: Análisis y Diseño</em> 3ª ed. (ES); Elgerd; Stagg &amp; El-Abiad; Anderson.</p>
+<h4 id="book-ranking_7">Book ranking<a class="headerlink" href="#book-ranking_7" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Book</th>
+<th>Univ.</th>
+<th>Universities</th>
+<th>Editions / languages seen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Grainger &amp; Stevenson, <em>Power System Analysis</em>; ES <em>Análisis de sistemas de potencia</em></td>
+<td>12</td>
+<td>GT; KU Leuven, Edinburgh, Sevilla, Comillas; FIUBA, UTN, UNLP, U Chile, PUC, USP, UNAM</td>
+<td>EN McGraw-Hill 1994; ES McGraw-Hill México 1996 (UTN, UNLP, U Chile, UNAM, Sevilla, Comillas)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Glover, Sarma, Overbye (+Birchfield), <em>Power System Analysis and Design</em>; ES <em>Sistemas de potencia: análisis y diseño</em></td>
+<td>12</td>
+<td>TAMU, UIUC, GT, UT Austin, UW; KU Leuven, Chalmers, Edinburgh; FIUBA, UNR, UNLP, UNAM</td>
+<td>7th ed. 2023 (TAMU, GT); 6th (UIUC, Chalmers, UNLP); 5th/4th/3rd older; ES 3ª ed. Thomson 2003 (UNR, UNAM)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Gómez-Expósito, Conejo, Cañizares, <em>Electric Energy Systems: Analysis and Operation</em>; ES <em>Análisis y operación de SEE</em></td>
+<td>8</td>
+<td>UT Austin; KU Leuven, UCLouvain, Comillas, Sevilla; U Chile, UNLP, USP</td>
+<td>EN CRC 2008 / 2nd ed. 2018; ES McGraw-Hill 2002; PT LTC 2011</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Elgerd, <em>Electric Energy Systems Theory</em></td>
+<td>6</td>
+<td>Comillas; FIUBA, UTN, UNLP, UNICAMP (PT), UNAM</td>
+<td>1981–83</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Bergen &amp; Vittal, <em>Power Systems Analysis</em></td>
+<td>5</td>
+<td>MIT, Berkeley, GT, UT Austin; FIUBA</td>
+<td>2nd ed. 2000</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Saadat, <em>Power System Analysis</em></td>
+<td>4</td>
+<td>Edinburgh, Chalmers; FIUBA, U Chile</td>
+<td>1999/2002; 3rd ed. PSA 2010–11</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Weedy, <em>Electric Power Systems</em>; ES <em>Sistemas eléctricos de gran potencia</em></td>
+<td>4</td>
+<td>FIUBA, UTN, UNLP, USP</td>
+<td>ES Reverté 1978; PT</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Stevenson, <em>Elements of Power System Analysis</em></td>
+<td>3</td>
+<td>UNLP (ES), UNICAMP, USP</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Stagg &amp; El-Abiad, <em>Computer Methods in Power System Analysis</em></td>
+<td>3</td>
+<td>UNLP, USP, UNAM</td>
+<td>1968</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Kundur, <em>Power System Stability and Control</em> (outside ToOp's steady-state core): 8 universities (KU Leuven, Chalmers, Comillas, FIUBA, UNR, UNLP, U Chile, USP).</li>
+<li>Two universities: Kothari &amp; Nagrath (ES).</li>
+<li>One university: Mohan (ULiège), Kirtley (MIT).</li>
+<li>Notes only: ETH, DTU, KTH, Cornell.</li>
+</ul>
+<h3 id="9-power-system-operation-and-control-security-opf-congestion">9. Power system operation and control, security, <abbr title="Optimal power flow">OPF</abbr>, congestion<a class="headerlink" href="#9-power-system-operation-and-control-security-opf-congestion" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_8">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_8" title="Permanent link">&para;</a></h4>
+<p><strong>US</strong>
+- <strong>UIUC ECE 573 Power System Operations (catalog, updated 2013)</strong>
+  URL: https://ece.illinois.edu/academics/courses/ece573
+  - Scope: graduate. EMS, security analysis, <abbr title="Optimal power flow">OPF</abbr>/<abbr title="Security-constrained optimal power flow">SCOPF</abbr>, unit commitment (DP, Lagrangian relaxation), state estimation, restructuring, congestion management.
+  - Prerequisites: ECE 476; ECE 530 concurrent.
+  - Goals: n.s.
+  - Books: class notes. Rec (not required) Wood &amp; Wollenberg, 2nd ed. 1996; Monticelli, <em>State Estimation in Electric Power Systems</em>, Kluwer 1999.
+- <strong>Georgia Tech ECE 6320 Power System Operation and Control, Fall 2026 (Grijalva)</strong>
+  URL: https://syllabus.gatech.edu/sites/default/files/2026-03/ECE6320%20Syllabus.pdf
+  - Scope: graduate, 3 credits. Security assessment, economic optimization, dynamics, DER operation.
+  - Prerequisites: graduate standing; ECE 4320-level course desirable.
+  - Goals: computational methods for bulk operation; security-assessment modelling; economic optimization algorithms; dynamics; EMS architecture.
+  - Books: electronic notes (required). Background: Glover et al. 7th; Bergen &amp; Vittal 2nd; Grainger &amp; Stevenson 1994. Complementary: Wood &amp; Wollenberg 3rd ("the Bible"); Sauer, Pai &amp; Chow 2nd 2017; Kersting 4th.
+  - The Fall 2024 version (https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/4/1075/files/2024/10/ECE6320_Syllabus_F2024.pdf) also adds Abur &amp; Gómez-Expósito, <em>Power System State Estimation</em>.
+- <strong>UT Austin EE 394V Power System Operations &amp; Control, Spring 2020 (Hao Zhu)</strong>
+  URL: https://utdirect.utexas.edu/apps/student/coursedocs/nlogon/download/10298680/
+  - Scope: graduate, 3 credits. Economic dispatch, AGC, gradient/Newton methods, Lagrange for dispatch, sensitivity factors for security, state estimation.
+  - Prerequisites: power flow at EE 368L/369 level, linear algebra, probability, Matlab/Python.
+  - Goals: as listed in the scope.
+  - Books (all Rec, none required):
+    - Wood, Wollenberg &amp; Sheblé, 3rd ed. 2014
+    - Bergen &amp; Vittal, 2nd ed.
+    - Baldick, <em>Applied Optimization</em>, Cambridge UP 2006
+    - Boyd &amp; Vandenberghe
+    - Gómez-Expósito, Conejo &amp; Cañizares, 2018
+    - Taylor, <em>Convex Optimization of Power Systems</em>, Cambridge UP 2015
+- TAMU ECEN 460 (see section 8) also covers contingency analysis, <abbr title="Security-constrained optimal power flow">SCOPF</abbr> and <abbr title="Locational marginal price">LMP</abbr> with Glover 7th.</p>
+<p><strong>Europe</strong>
+- <strong>KU Leuven H04C6A Design and Management of Electric Power Systems (Van Hertem)</strong>
+  URL: https://onderwijsaanbod.kuleuven.be/syllabi/e/H04C6AE.htm
+  - Scope: master, 6 ECTS. <abbr title="Power transfer distribution factor">PTDF</abbr>/<abbr title="Line outage distribution factor">LODF</abbr>, <abbr title="Optimal power flow">OPF</abbr>, network reduction, state estimation, N-1/N-k reliability, <abbr title="High-voltage direct current">HVDC</abbr>/FACTS, planning, asset management.
+  - Prerequisites: H04A0A, H04A9A.
+  - Goals: from planning to real-time operation.
+  - Books (Rec): Kundur 1994; Gómez-Expósito, Conejo &amp; Cañizares, CRC 2008; Grainger &amp; Stevenson 1994.
+- <strong>ULB ELEC-H413 Electric Power Systems I</strong>
+  URL: https://www.ulb.be/en/programme/elec-h413
+  - Scope: 5 ECTS. Load flow, weighted-least-squares state estimation, economic dispatch/UC, <abbr title="Optimal power flow">OPF</abbr>, security under contingencies.
+  - Prerequisites: n.s.
+  - Books: Debs, <em>Modern Power Systems Control and Operation</em>, 1988; Wood &amp; Wollenberg, 2nd ed. 1996.
+- <strong>Chalmers ENM066 Advanced power system analysis</strong>
+  URL: https://www.chalmers.se/en/education/your-studies/find-course-and-programme-syllabi/course-syllabus/ENM066/?acYear=2025%2F2026
+  - Scope: 7.5 credits. Economic dispatch, UC, large-scale power flow, <abbr title="Optimal power flow">OPF</abbr>, markets, stability.
+  - Prerequisites: ENM052.
+  - Books: Kirschen &amp; Strbac 2004; Saadat 3rd; Kundur; Van Cutsem &amp; Vournas.
+- <strong>ULiège ELEC0448 Planning and operation</strong>
+  URL: https://www.programmes.uliege.be/cocoon/20252026/en/cours/ELEC0448-1.html
+  - Prerequisites: physics, optimization, programming.
+  - Books: slides and papers.
+- <strong>DTU 46750 Optimization in modern power systems</strong>
+  URL: https://kurser.dtu.dk/course/46750
+  - Scope: convex optimization, duality, uncertainty, applied to operation and markets.
+  - Prerequisites (recommended): 46705, 42101 etc., plus Python/Julia.
+  - Books: none listed.
+- <strong>DTU 46770 Integrated energy grids</strong>
+  URL: https://kurser.dtu.dk/course/46770
+  - Scope: AC-<abbr title="Optimal power flow">OPF</abbr>, DC-<abbr title="Optimal power flow">OPF</abbr>, convexification.
+  - Books: none listed.
+- <strong>ETH 227-0530-00L Optimization in Energy Systems</strong>
+  URL: https://www.vorlesungen.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=199315&amp;semkez=2026S&amp;ansicht=ALLE&amp;lang=en
+  - Books: none listed.
+- <strong>KTH EG2200 Power Generation Operation and Planning</strong>
+  URL: https://www.kth.se/student/kurser/kurs/EG2200?l=en
+  - Books: literature field empty.</p>
+<p><strong>Latin America</strong>
+- <strong>U. de Chile EL7020 Análisis y Operación de SEP, 2013</strong>
+  URL: https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=3809
+  - Scope: graduate.
+  - Prerequisites: EL4103.
+  - Goals: solve real operation problems; choose tools.
+  - Books: R Wood &amp; Wollenberg; Billinton &amp; Allan, <em>Reliability Evaluation of Power Systems</em>. Rec Gómez-Expósito (ES); Kundur; Grainger &amp; Stevenson (ES).
+- <strong>UNSJ-IEE postgraduate courses, 2024</strong> (80 h each; no books, prerequisites or goals stated)
+  - Flujo de Potencia y Métodos de Optimización: https://fi.unsj.edu.ar/panel_fi/archivos/noticias/d476e432-c751-11ee-83c1-96b8d93456aa.pdf (Newton-Raphson, <abbr title="Linear programming">LP</abbr>/<abbr title="Mixed-integer linear programming">MILP</abbr>/NLP, Benders, Lagrangian relaxation, <abbr title="Optimal power flow">OPF</abbr>)
+  - Despacho Económico y Planeamiento: https://fi.unsj.edu.ar/panel_fi/archivos/noticias/d486f57a-c751-11ee-83c1-96b8d93456aa.pdf
+- <strong>USP PEA3523 Operação e Comercialização</strong>
+  URL: https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=PEA3523
+  - Prerequisites: PEA3420.
+  - Books: Wood, Wollenberg &amp; Sheblé 3rd 2014; Gómez-Expósito et al. (PT, LTC 2011); Kirchmayer; Brazilian market texts.
+- <strong>USP PEA3422 Métodos de Otimização Aplicados a Sistemas Elétricos</strong>
+  URL: https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=PEA3422
+  - Scope: <abbr title="Linear programming">LP</abbr>/<abbr title="Mixed-integer linear programming">MILP</abbr>; heuristic network reconfiguration; <abbr title="Genetic algorithm">GA</abbr>, PSO, differential evolution; multi-objective.
+  - Prerequisites: n.s.
+  - Goals: classical and heuristic methods for power problems.
+  - Books: Hillier &amp; Lieberman; Goldberg 1989; Kagan et al. (PT); Michalewicz 3e; Deb 2001; Di Barba.
+  - This is the closest match found to ToOp's evolutionary search.
+- FIUBA 6515, UNR E21 and UNLP E1239 (see section 8) also cite Wood &amp; Wollenberg.</p>
+<h4 id="book-ranking_8">Book ranking<a class="headerlink" href="#book-ranking_8" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Book</th>
+<th>Univ.</th>
+<th>Universities</th>
+<th>Editions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Wood, Wollenberg (&amp; Sheblé), <em>Power Generation, Operation and Control</em></td>
+<td>11</td>
+<td>TAMU, UIUC, GT, UT Austin, UW; ULB, Comillas; FIUBA, UNR, U Chile, USP</td>
+<td>3rd ed. Wiley 2013/14 (TAMU, GT, UT, UW, U Chile, USP); 2nd ed. 1996 (UIUC, ULB, FIUBA). English only.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Gómez-Expósito, Conejo &amp; Cañizares</td>
+<td>8</td>
+<td>(see section 8)</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Baldick, <em>Applied Optimization</em></td>
+<td>2</td>
+<td>UT Austin, UW</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>One university each: Monticelli, <em>State Estimation</em> (UIUC); Abur &amp; Gómez-Expósito (GT); Debs (ULB); Billinton &amp; Allan (U Chile); Taylor, <em>Convex Optimization of Power Systems</em> (UT); Sioshansi &amp; Conejo, <em>Optimization in Engineering</em> (U Chile); Kirchmayer (USP).</p>
+<p>Many graduate operation courses use notes or papers only: ETH, DTU, ULiège, UNSJ, and partly GT and UIUC.</p>
+<h3 id="10-computational-methods-for-power-systems-graduate">10. Computational methods for power systems (graduate)<a class="headerlink" href="#10-computational-methods-for-power-systems-graduate" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_9">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Texas A&amp;M ECEN 615 Methods of Electric Power Systems Analysis, Fall 2019 (Overbye)</strong>
+  URL: https://overbye.engr.tamu.edu/wp-content/uploads/sites/146/2019/08/ECEN_615_Fall2019_Syllabus.pdf</li>
+<li>Scope: graduate, 43 h. Power flow; sparse matrices; sensitivity analysis and equivalents; data analytics and visualization; <abbr title="Optimal power flow">OPF</abbr> and markets; state estimation; high-impact low-frequency events.</li>
+<li>Prerequisites: ECEN 460.</li>
+<li>Goals: n.s.</li>
+<li>Books: Wood, Wollenberg &amp; Sheblé, 3rd ed. 2013 (ISBN 978-0471790556).</li>
+<li>The Fall 2022 Lecture 1 calls it "the almost required book": https://overbye.engr.tamu.edu/wp-content/uploads/sites/146/2022/09/Lecture-1.pdf</li>
+<li>The Fall 2023 offering (Birchfield) lists no textbook (only Tinney &amp; Hart's Newton power-flow paper): https://birchfield.engr.tamu.edu/615f23</li>
+<li><strong>UIUC ECE 530 Analysis Techniques for Large-Scale Electrical Systems (catalog)</strong>
+  URL: https://ece.illinois.edu/academics/courses/ece530</li>
+<li>Scope: graduate, 4 credit hours. Nonlinear systems and power flow; sparsity, storage, visualization; large algebraic systems, parallelization, decomposition; parameter estimation; DAE dynamics.</li>
+<li>Prerequisites: ECE 464 and ECE 476.</li>
+<li>Goals: n.s. beyond the description.</li>
+<li>Books: lecture notes by the instructor.</li>
+<li><strong>UT Austin EE 394V (Zhu)</strong>, <strong>GT ECE 6320</strong>, <strong>KU Leuven H04C6A</strong> and <strong>ETH 227-0526</strong> are described in sections 8–9.</li>
+<li><strong>UNICAMP ET931 Análise Computacional de SEE I</strong> (Newton and decoupled load flow, sparse storage): Stevenson; Elgerd (PT); Monticelli, <em>Fluxo de Carga</em> (PT); Robba (PT).</li>
+<li><strong>UNSJ-IEE Flujo de Potencia y Métodos de Optimización</strong>: no books.</li>
+<li>UW-Madison ("ECE 427?"): no syllabus reached.</li>
+</ul>
+<h4 id="book-ranking_9">Book ranking<a class="headerlink" href="#book-ranking_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Wood &amp; Wollenberg: 3 (TAMU, UT Austin, GT).</li>
+<li>Gómez-Expósito, Conejo &amp; Cañizares: 2 (UT Austin, KU Leuven).</li>
+<li>One each: Bergen &amp; Vittal (UT); Baldick (UT); Taylor (UT); Monticelli, <em>Fluxo de Carga</em> (UNICAMP); Stagg &amp; El-Abiad (classic, cited in LatAm undergraduate courses).</li>
+<li>The most common "book" is lecture notes: UIUC 530, GT 6320, ETH, DTU, UNSJ.</li>
+<li>No syllabus cites a dedicated <abbr title="Power transfer distribution factor">PTDF</abbr>/<abbr title="Line outage distribution factor">LODF</abbr> or sparse-matrix text.</li>
+</ul>
+<h3 id="11-electricity-markets-and-power-system-economics">11. Electricity markets and power system economics<a class="headerlink" href="#11-electricity-markets-and-power-system-economics" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_10">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>UW EE 553 Power System Economics, 2024 (Kirschen)</strong>
+  URL: https://peden.ece.uw.edu/academic-ops/wp-content/uploads/sites/5/2024/06/EE553_Syllabus.pdf</li>
+<li>Scope: graduate, flipped class.</li>
+<li>Prerequisites: EE 454.</li>
+<li>Goals: market types; bidding with perfect and imperfect competition; compute LMPs; reliability resources; investment; formulate problems as optimization.</li>
+<li>Books: R Kirschen &amp; Strbac, <em>Fundamentals of Power System Economics</em>, 2nd ed., Wiley 2018. Supplemental: Wood &amp; Wollenberg 3rd; Varian, <em>Intermediate Microeconomics</em>.</li>
+<li>Winter 2023 (Zhang, https://zhangbaosen.github.io/teaching/EE553): Kirschen &amp; Strbac 2nd; references Glover et al.; Baldick.</li>
+<li><strong>Iowa State EE/Econ 458 Power System Economics (latest offering Fall 2011)</strong>
+  URL: https://faculty.sites.iastate.edu/tesfatsi/archive/tesfatsi/syl458team.htm</li>
+<li>Scope: microeconomics, generator costs, <abbr title="Linear programming">LP</abbr> and <abbr title="Optimal power flow">OPF</abbr>, integer programming and security-constrained UC, market operation, transmission constraints, risk.</li>
+<li>Prerequisites and goals: n.s.</li>
+<li>Books: R Kirschen &amp; Strbac, Wiley 2004.</li>
+<li><strong>UT Austin EE 394V Restructured Electricity Markets: <abbr title="Locational marginal price">LMP</abbr> (Baldick)</strong>
+  URL: https://users.ece.utexas.edu/~baldick/classes/394V/EE394V.html</li>
+<li>Scope: graduate. Pricing with and without transmission constraints, hedging, network models, capacity adequacy.</li>
+<li>Prerequisites and goals: n.s.</li>
+<li>Books: no single text. References: Glover, Sarma &amp; Overbye 4th; Wood &amp; Wollenberg 2nd; Baldick 2006.</li>
+<li><strong>UCLouvain LINMA2415 Quantitative Energy Economics</strong>
+  URL: https://uclouvain.be/en-cours-2025-linma2415</li>
+<li>Scope: 5 credits. Duality, equilibrium, economic dispatch/<abbr title="Optimal power flow">OPF</abbr>/UC, reserves, hedging, planning.</li>
+<li>Prerequisites: <abbr title="Linear programming">LP</abbr>, KKT, duality.</li>
+<li>Goals: explain market architecture; write mathematical-programming models of markets.</li>
+<li>Books: textbook Papavasiliou, <em>Optimization Models in Electricity Markets</em>. Support Stoft; Kirschen &amp; Strbac.</li>
+<li><strong>Edinburgh ELEE11054 Power Systems Engineering 5 / PGEE11016 Power Systems Engineering and Economics (MSc)</strong>
+  URLs: http://www.drps.ed.ac.uk/25-26/dpt/cxelee11054.htm and http://www.drps.ed.ac.uk/25-26/dpt/cxpgee11016.htm</li>
+<li>Scope: 10 ECTS. Power flow, <abbr title="Optimal power flow">OPF</abbr>, market basics, <abbr title="Locational marginal price">LMP</abbr>, PowerWorld.</li>
+<li>Prerequisites: ELEE10032.</li>
+<li>Books: Saadat; Glover &amp; Sarma 2002; Jenkins et al., <em>Embedded Generation</em>; Kirschen &amp; Strbac 2004; Stoft 2002.</li>
+<li><strong>Chalmers ENM066</strong>: see section 9.</li>
+<li><strong>ETH 227-0731-00L Power Market I</strong>
+  URL: https://www.vorlesungen.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=192898&amp;semkez=2025W&amp;ansicht=ALLE&amp;lang=en</li>
+<li>Books: handouts only.</li>
+<li><strong>ULiège ELEC0018 Energy markets and regulation</strong>
+  URL: https://www.programmes.uliege.be/cocoon/20252026/en/cours/ELEC0018-1.html</li>
+<li>Books: none.</li>
+<li><strong>KTH EG2220 / EG2050</strong>
+  URLs: https://www.kth.se/student/kurser/kurs/EG2220?l=en and https://www.kth.se/student/kurser/kurs/EG2050?l=en</li>
+<li>Books: Söder &amp; Amelin compendium.</li>
+<li><strong>U. de Chile EL7018 Mercados Internacionales de la Energía, 2014</strong>
+  URL: https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=27970</li>
+<li>Prerequisites: EL4001.</li>
+<li>Goals: market organisation; simulation models.</li>
+<li>Books: Kirschen &amp; Strbac; Hunt; Stoft; Gómez-Expósito (ES); Momoh; Wood &amp; Wollenberg 2nd.</li>
+<li><strong>U. de Chile EL6025 Planificación</strong>
+  URL: https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=4428</li>
+<li>Books: Shahidehpour, Yamin &amp; Li, <em>Market Operations</em>; Weber; Mazer.</li>
+<li><strong>FIUBA 8517 Economía de la Energía Eléctrica</strong>
+  URL: https://cms.fi.uba.ar/uploads/8517_3026ab468d.pdf</li>
+<li>Books: economics texts only.</li>
+<li><strong>PUC Chile IEE3372 Mercados Eléctricos</strong>: regulation papers only.</li>
+<li><strong>UNSJ-IEE Mercados de Energía Eléctrica</strong>: no books.</li>
+</ul>
+<h4 id="book-ranking_10">Book ranking<a class="headerlink" href="#book-ranking_10" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Kirschen &amp; Strbac, <em>Fundamentals of Power System Economics</em>: 6 universities (UW, Iowa State; UCLouvain, Edinburgh, Chalmers; U Chile). 1st ed. 2004; 2nd ed. 2018.</li>
+<li>Stoft, <em>Power System Economics</em>, 2002: 3 (UCLouvain, Edinburgh, U Chile).</li>
+<li>Wood &amp; Wollenberg (market chapters): 3 (UW, UT, U Chile).</li>
+<li>One each: Papavasiliou, Hunt, Shahidehpour-Yamin-Li, Söder &amp; Amelin, Varian.</li>
+</ol>
+<h3 id="12-operations-research-linear-and-integer-optimization">12. Operations research: linear and integer optimization<a class="headerlink" href="#12-operations-research-linear-and-integer-optimization" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_11">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>MIT 6.251J Introduction to Mathematical Programming, Fall 2009</strong>
+  URL: https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/pages/syllabus/ (books on /pages/readings/)</li>
+<li>Scope: graduate. Linear-optimization geometry, simplex, duality, networks, interior point, <abbr title="Semidefinite programming">SDP</abbr>, discrete.</li>
+<li>Prerequisites: n.s.</li>
+<li>Goals: structure, geometry and algorithms of linear optimization.</li>
+<li>Books: R Bertsimas &amp; Tsitsiklis, <em>Introduction to Linear Optimization</em>, Athena 1997.</li>
+<li><strong>MIT 15.093J/6.255J Optimization Methods, Fall 2009</strong>
+  URL: https://ocw.mit.edu/courses/15-093j-optimization-methods-fall-2009/pages/syllabus/</li>
+<li>Books: R Bertsimas &amp; Tsitsiklis.</li>
+<li><strong>MIT 15.053 Optimization Methods in Management Science, Spring 2013</strong>
+  URL: https://ocw.mit.edu/courses/15-053-optimization-methods-in-management-science-spring-2013/pages/syllabus/</li>
+<li>Scope: undergraduate. <abbr title="Linear programming">LP</abbr>, IP, networks, Excel Solver.</li>
+<li>Prerequisites: none formal.</li>
+<li>Books: none required. Optional Bradley, Hax &amp; Magnanti, <em>Applied Mathematical Programming</em> (1977, free online).</li>
+<li><strong>UC Berkeley IEOR 162 Linear Programming</strong>
+  URL: https://www.ocf.berkeley.edu/~abhardwaj/Teaching/162syllabus.pdf (Spring 2023 offering: https://lavaei.ieor.berkeley.edu/Course_IEOR162_Spring_2023.html)</li>
+<li>Scope: 3 units.</li>
+<li>Prerequisites: Math 53/54.</li>
+<li>Goals: model decision problems; learn solution methods.</li>
+<li>Books: R Winston &amp; Venkataramanan, <em>Introduction to Mathematical Programming</em>, 4th ed. Rec Fourer, Gay &amp; Kernighan, <em>AMPL</em>, 2nd ed.</li>
+<li><strong>Cornell ORIE 3300/5300, Fall 2019</strong>
+  URL: https://people.orie.cornell.edu/aslewis/2019%203300%20outline.pdf</li>
+<li>Scope: <abbr title="Linear programming">LP</abbr>, simplex, duality, branch and bound, AMPL.</li>
+<li>Prerequisites: linear algebra.</li>
+<li>Books: no formal text; the <em>AMPL</em> book.</li>
+<li><strong>Georgia Tech ISyE 6669 Deterministic Optimization</strong>
+  URLs: https://www2.isye.gatech.edu/~jsokol/6669/syllabus.pdf (R Winston, <em>Operations Research</em>, 3rd ed.; prerequisite ISyE 4231) and https://omscs.gatech.edu/sites/default/files/documents/Syllabi/ISYE%206669%202025-1.pdf (Spring 2025: no textbook; references Rardin, Boyd &amp; Vandenberghe, Ben-Tal &amp; Nemirovski; prerequisites linear algebra, calculus, probability, Python)</li>
+<li><strong>UIUC IE 411 Optimization of Large-Scale Linear Systems, Fall 2025</strong>
+  URL: https://ws.engr.illinois.edu/custom/getsyllabus.asp?id=3239</li>
+<li>Prerequisites: IE 310; MATH 257/415.</li>
+<li>Goals: theory and computation of <abbr title="Linear programming">LP</abbr>.</li>
+<li>Books: R Bertsimas &amp; Tsitsiklis; R Bazaraa, Jarvis &amp; Sherali, <em>Linear Programming and Network Flows</em>, 4th ed.; optional Vanderbei, 4th ed.</li>
+<li><strong>UW-Madison 525 Linear Optimization (Del Pia)</strong>
+  URL: https://sites.google.com/site/albertodelpia/teaching</li>
+<li>Books: Bertsimas &amp; Tsitsiklis; the integer course uses Conforti, Cornuéjols &amp; Zambelli.</li>
+<li><strong>DTU 42101 Operations Research</strong>
+  URL: https://kurser.dtu.dk/course/42101</li>
+<li>Scope: BSc, 5 ECTS.</li>
+<li>Prerequisites: linear algebra.</li>
+<li>Books: Hillier &amp; Lieberman, latest ed.</li>
+<li><strong>DTU 42114 Integer Programming</strong>
+  URL: https://kurser.dtu.dk/course/42114</li>
+<li>Prerequisites: 42101.</li>
+<li>Goals: solve production, energy and transport problems.</li>
+<li>Books: Wolsey, <em>Integer Programming</em>.</li>
+<li><strong>DTU 42136 Advanced OR (decomposition in Julia/JuMP)</strong>
+  URL: https://kurser.dtu.dk/course/42136</li>
+<li>Books: papers; Desrosiers et al., <em>Branch-and-Price</em> (free).</li>
+<li><strong>KU Leuven HBE13E Operations Research</strong>
+  URL: https://onderwijsaanbod.kuleuven.be/syllabi/e/HBE13E</li>
+<li>Prerequisites: HBE07E.</li>
+<li>Books: Rec Winston, <em>Operations Research: Applications and Algorithms</em>, 4th ed.</li>
+<li><strong>ETH 401-3901-00L Linear &amp; Combinatorial Optimization</strong>
+  URL: https://www.vorlesungen.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=193687&amp;semkez=2025W&amp;ansicht=ALLE&amp;lang=en</li>
+<li>Books: Korte &amp; Vygen; Schrijver (two books); Ahuja, Magnanti &amp; Orlin.</li>
+<li><strong>KTH SF1841 Optimization / SF2812 Applied Linear Optimization</strong>
+  URLs: https://www.kth.se/student/kurser/kurs/SF1841?l=en and https://www.kth.se/student/kurser/kurs/SF2812?l=en</li>
+<li>Books: Nash &amp; Sofer, <em>Linear and Nonlinear Programming</em>.</li>
+<li><strong>UCLouvain LINMA2491 Operational Research</strong>
+  URL: https://uclouvain.be/en-cours-2025-linma2491</li>
+<li>Books: Conforti, Cornuéjols &amp; Zambelli; Birge &amp; Louveaux; Sun &amp; Conejo, <em>Robust Optimization in Electric Energy Systems</em>.</li>
+</ul>
+<h4 id="syllabi-consulted-latin-america">Syllabi consulted — Latin America<a class="headerlink" href="#syllabi-consulted-latin-america" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>FIUBA 9104 Modelos y Optimización I, 2020</strong>
+  URL: https://cms.fi.uba.ar/uploads/9104_fc72e669ac.pdf</li>
+<li>Scope: <abbr title="Linear programming">LP</abbr> modelling, simplex, sensitivity, IP/MIP, heuristics intro.</li>
+<li>Prerequisites: n.s.</li>
+<li>Books: Winston 4ª ed. 2006 (ES); Hillier &amp; Lieberman 8ª ed. 2008 (ES); Taha 7ª ed. (ES); Williams, <em>Model Building</em>; Bazaraa-Jarvis-Sherali; Eppen-Gould.</li>
+<li><strong>UTN FRBA Investigación Operativa, Plan 23</strong>
+  URL: https://frba.utn.edu.ar/wp-content/uploads/2025/03/Investigacion-Operativa_23.pdf</li>
+<li>Scope: year 4, 96 h.</li>
+<li>Prerequisites: Probabilidad y Estadística, Análisis Numérico.</li>
+<li>Books: R Hillier &amp; Lieberman 2015 (ES); Taha (Alfaomega 2012, ES); Winston (Thomson 2005, ES).</li>
+<li><strong>UTN FRBB Investigación Operativa, 2020–25</strong>
+  URL: https://www.frbb.utn.edu.ar/frbb/info/departamentos/loi/programas_analiticos/investigacion_operativa.pdf</li>
+<li>Books: R Eppen-Gould; Mathur-Solow; Winston (ES). Rec Ahuja-Magnanti-Orlin; Hillier-Lieberman 7ª (ES); Taha 7ª (ES).</li>
+<li><strong>U. de Chile EL4114 Optimización (Electrical), 2022</strong>
+  URL: https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=89206</li>
+<li>Prerequisites: EL3104.</li>
+<li>Books: R Bertsimas &amp; Tsitsiklis; Boyd &amp; Vandenberghe; Sioshansi &amp; Conejo 2017. Rec Conejo et al., <em>Decomposition Techniques</em>.</li>
+<li><strong>U. de Chile IN3171 Modelamiento y Optimización</strong>
+  URL: https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=235674</li>
+<li>Books: R Bertsimas &amp; Tsitsiklis; Boyd &amp; Vandenberghe; Conforti-Cornuéjols-Zambelli. Rec Ahuja-Magnanti-Orlin; Nemhauser &amp; Wolsey; Schrijver.</li>
+<li><strong>U. de Chile MA3701 Optimización</strong>
+  URL: https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=185462</li>
+<li>Books: Boyd &amp; Vandenberghe; Chvátal; Hillier &amp; Lieberman 6ª (ES); Luenberger &amp; Ye 4e; Bazaraa-Jarvis-Sherali 4e; Bazaraa-Sherali-Shetty 3e; Nocedal &amp; Wright 2e.</li>
+<li><strong>PUC Chile ICS1113 Optimización</strong>
+  URL: https://catalogo.uc.cl/index.php?tmpl=component&amp;option=com_catalogo&amp;view=programa&amp;sigla=ICS1113</li>
+<li>Books: Bazaraa-Jarvis-Sherali; Luenberger; Spanish texts.</li>
+<li><strong>USP PRO3341</strong>
+  URL: https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=PRO3341</li>
+<li>Books: Winston &amp; Venkataramanan 4e; Hillier &amp; Lieberman, <em>Introdução à Pesquisa Operacional</em> (PT 2006); Arenales et al. (PT).</li>
+<li><strong>UNAM Investigación de Operaciones II</strong>
+  URL: https://www.dgire.unam.mx/images/planes/lic/51/1747.pdf</li>
+<li>Books: R Winston 4a (ES); Hillier &amp; Lieberman 7a (ES); Taha 6a (ES).</li>
+</ul>
+<h4 id="book-ranking_11">Book ranking<a class="headerlink" href="#book-ranking_11" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Book</th>
+<th>Univ.</th>
+<th>Universities</th>
+<th>Editions / languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Winston, <em>Operations Research: Applications and Algorithms</em> / <em>Introduction to Mathematical Programming</em></td>
+<td>7</td>
+<td>Berkeley, GT, KU Leuven; FIUBA, UTN, UNAM, USP</td>
+<td>ES <em>Investigación de operaciones: aplicaciones y algoritmos</em>, 4ª ed., Thomson 2005</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hillier &amp; Lieberman, <em>Introduction to Operations Research</em></td>
+<td>6</td>
+<td>DTU; FIUBA, UTN, UNAM, U Chile, USP</td>
+<td>ES <em>Introducción a la investigación de operaciones</em> 6ª–10ª; PT 2006</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bertsimas &amp; Tsitsiklis, <em>Introduction to Linear Optimization</em>, Athena 1997</td>
+<td>4 (+CMU optional)</td>
+<td>MIT, UIUC, UW-Madison, U Chile</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bazaraa, Jarvis &amp; Sherali, <em>Linear Programming and Network Flows</em></td>
+<td>4</td>
+<td>UIUC, FIUBA, U Chile, PUC</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Taha, <em>Operations Research: An Introduction</em></td>
+<td>3</td>
+<td>FIUBA, UTN, UNAM</td>
+<td>ES <em>Investigación de operaciones</em> 6ª–9ª ed.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Ahuja, Magnanti &amp; Orlin, <em>Network Flows</em></td>
+<td>3</td>
+<td>ETH, UTN, U Chile</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Conforti, Cornuéjols &amp; Zambelli, <em>Integer Programming</em></td>
+<td>3</td>
+<td>UW-Madison, UCLouvain, U Chile</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Eppen &amp; Gould</td>
+<td>3</td>
+<td>FIUBA, UTN, UNAM</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Schrijver</td>
+<td>3</td>
+<td>ETH, CMU (optional), U Chile</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Fourer, Gay &amp; Kernighan, <em>AMPL</em></td>
+<td>2</td>
+<td>Berkeley, Cornell</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>One university each: Wolsey (DTU); Nash &amp; Sofer (KTH); Vanderbei (UIUC); Rardin (GT); Bradley, Hax &amp; Magnanti (MIT); Korte &amp; Vygen (ETH); Chvátal (U Chile).</p>
+<h3 id="13-convex-and-nonlinear-optimization">13. Convex and nonlinear optimization<a class="headerlink" href="#13-convex-and-nonlinear-optimization" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_12">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>MIT 6.079 Introduction to Convex Optimization, Fall 2009</strong>
+  URL: https://ocw.mit.edu/courses/6-079-introduction-to-convex-optimization-fall-2009/pages/syllabus/ (books on /pages/readings/)</li>
+<li>Scope: convex sets and functions, LS/<abbr title="Linear programming">LP</abbr>/QP/<abbr title="Semidefinite programming">SDP</abbr>, duality.</li>
+<li>Prerequisites: n.s.</li>
+<li>Goals: recognize and model convex problems.</li>
+<li>Books: R Boyd &amp; Vandenberghe, <em>Convex Optimization</em>, Cambridge UP 2004 (free online). Suggested Bertsekas, <em>Convex Optimization Theory</em> 2009; Ben-Tal &amp; Nemirovski 2001.</li>
+<li><strong>MIT 6.252J Nonlinear Programming, Spring 2003</strong>
+  URL: https://ocw.mit.edu/courses/6-252j-nonlinear-programming-spring-2003/pages/syllabus/</li>
+<li>Scope: graduate. Gradient/Newton/quasi-Newton, interior point, Lagrange multipliers, duality; applications include power systems.</li>
+<li>Prerequisites: n.s.</li>
+<li>Goals: unified analytical and computational approach.</li>
+<li>Books: R Bertsekas, <em>Nonlinear Programming</em>, 2nd ed., Athena 1999.</li>
+<li><strong>Stanford EE364a Convex Optimization I</strong>
+  URL: https://web.stanford.edu/class/ee364a/</li>
+<li>Books: Boyd &amp; Vandenberghe. Prerequisites and goals n.s. on page.</li>
+<li><strong>Stanford CME307/MS&amp;E311 Optimization</strong>
+  URL: https://web.stanford.edu/class/msande311/</li>
+<li>Prerequisites: Math 113, 115.</li>
+<li>Books: Luenberger &amp; Ye, <em>Linear and Nonlinear Programming</em>, 5th ed.</li>
+<li><strong>CMU 10-725 Convex Optimization, Fall 2019</strong>
+  URL: https://www.stat.cmu.edu/~ryantibs/convexopt/syllabus.pdf</li>
+<li>Prerequisites: algorithms, mathematical maturity.</li>
+<li>Books: lectures self-contained; references Boyd &amp; Vandenberghe, Rockafellar.</li>
+<li><strong>CMU 10-725, Fall 2012</strong>
+  URL: https://www.cs.cmu.edu/~ggordon/10725-F12/index.html</li>
+<li>Books: Boyd &amp; Vandenberghe. Optional Bertsimas &amp; Tsitsiklis, Bertsekas <em>Nonlinear Programming</em>, Rockafellar, Schrijver.</li>
+<li><strong>GT ISyE 6669 (Spring 2025)</strong>: see section 12.</li>
+<li><strong>KTH SF2822 Applied Nonlinear Optimization</strong>
+  URL: https://www.kth.se/student/kurser/kurs/SF2822?l=en</li>
+<li>Books: Nash &amp; Sofer.</li>
+<li><strong>UT Austin EE 394V (Zhu)</strong>: Boyd &amp; Vandenberghe, Baldick.</li>
+<li><strong>U. de Chile EL4114 / IN3171 / MA3701</strong>: Boyd &amp; Vandenberghe (all 3). MA3701 adds Nocedal &amp; Wright 2e, Luenberger &amp; Ye, Bazaraa-Sherali-Shetty.</li>
+<li><strong>PUC Chile ICS1113</strong>: Luenberger.</li>
+<li>DTU 02612 Constrained Optimization: no literature field.</li>
+</ul>
+<h4 id="book-ranking_12">Book ranking<a class="headerlink" href="#book-ranking_12" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Boyd &amp; Vandenberghe, <em>Convex Optimization</em>, 2004: 6 universities (MIT, Stanford, CMU, GT, UT Austin; U Chile).</li>
+<li>Luenberger (&amp; Ye), <em>Linear and Nonlinear Programming</em>: 3 (Stanford, U Chile, PUC).</li>
+<li>Two each: Bertsekas, <em>Nonlinear Programming</em> (MIT, CMU optional); Ben-Tal &amp; Nemirovski (MIT, GT); Baldick (UT, UW).</li>
+<li>One each: Nocedal &amp; Wright (U Chile); Nash &amp; Sofer (KTH); Bazaraa-Sherali-Shetty (U Chile); Rockafellar (CMU).</li>
+</ol>
+<h3 id="14-evolutionary-computation-and-metaheuristics">14. Evolutionary computation and metaheuristics<a class="headerlink" href="#14-evolutionary-computation-and-metaheuristics" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_13">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>VU Amsterdam X_400111 Evolutionary Computing</strong>
+  URL: https://studiegids.vu.nl/en/courses/2026-2027/X_400111</li>
+<li>Scope: MSc, 6 EC.</li>
+<li>Prerequisites: Python (strict).</li>
+<li>Goals: evolutionary methods as solvers and simulators; design choices.</li>
+<li>Books: Eiben &amp; Smith, <em>Introduction to Evolutionary Computing</em>, 2nd ed. 2015; 2026-27 adds Eiben, Miras &amp; Hart, <em>Robot Evolution</em>.</li>
+<li><strong>Marquette COEN 4870/5870</strong>
+  URL: http://povinelli.eece.mu.edu/teaching/coen4870/syllabus.html</li>
+<li>Prerequisites: data structures, Calculus 1, discrete math.</li>
+<li>Goals: implement and compare algorithms.</li>
+<li>Books: R Eiben &amp; Smith, 2nd ed.</li>
+<li><strong>Univ. of Memphis COMP 7282/8282, Spring 2020</strong>
+  URL: https://www.memphis.edu/cs/courses/syllabi/7282.pdf</li>
+<li>Prerequisites: COMP 6601.</li>
+<li>Books: suggested Eiben &amp; Smith; Simon, <em>Evolutionary Optimization Algorithms</em> 2013; Dasgupta &amp; Michalewicz. References Goldberg 1989; <em>Handbook of EC</em>; Yang.</li>
+<li><strong>Michigan State CSE 848, Fall 2020</strong>
+  URL: https://cse.msu.edu/~cse848/syllabus2020.html</li>
+<li>Prerequisites: graduate standing.</li>
+<li>Books: none required. Rec Banzhaf; Deb; Eiben &amp; Smith; Goldberg; Mitchell; Poli et al.; Simon; Burke &amp; Kendall.</li>
+<li><strong>Univ. of Oklahoma CS 5970, Fall 2010</strong>
+  URL: http://www.cs.ou.edu/~hougen/classes/Fall-2010/EC/materials/Syllabus.html</li>
+<li>Prerequisites: CS 2413.</li>
+<li>Books: R De Jong, <em>Evolutionary Computation: A Unified Approach</em>, 2006.</li>
+<li><strong>Universidad de Granada Metaheurísticas, 2026/27</strong>
+  URL: https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/metaheuristicas-ecomputacy-sistinteligentes/guia-docente</li>
+<li>Scope: year 3, 6 ECTS.</li>
+<li>Books: Alba; Pardalos &amp; Resende; Dorigo &amp; Stützle; Eiben &amp; Smith 2nd; Du &amp; Swamy; Chopard &amp; Tomassini. Complementary Talbi 2009.</li>
+<li><strong>DTU 42137 Optimization using Metaheuristics</strong>
+  URL: https://kurser.dtu.dk/course/42137</li>
+<li>Prerequisites: 42101.</li>
+<li>Books: <em>Handbook of Metaheuristics</em>; <em>Search Methodologies</em>; <em>Stochastic Local Search</em>.</li>
+<li><strong>Chalmers FFR105 Stochastic Optimization Algorithms</strong>
+  URL: https://www.chalmers.se/en/education/your-studies/find-course-and-programme-syllabi/course-syllabus/FFR105/?acYear=2025/2026</li>
+<li>Books: Wahde, <em>Biologically Inspired Optimization Methods</em>.</li>
+<li><strong>Eastern Michigan EC</strong>
+  URL: https://emunix.emich.edu/~mevett/ECCourse/syllabus.html</li>
+<li>Books: Langdon &amp; Poli; Koza.</li>
+<li><strong>Leiden Evolutionary Algorithms</strong>: UNVERIFIED (page now 404; search snippet only).</li>
+<li><strong>USP PEA3422</strong> (see section 9): Goldberg; Michalewicz 3e; Deb 2001.</li>
+<li><strong>FIUBA 7120 Modelos y Optimización III</strong>
+  URL: https://cms.fi.uba.ar/uploads/7120_1c0a8b2473.pdf</li>
+<li>Scope: tabu search, simulated annealing, genetic algorithms, GRASP.</li>
+<li>Books: A. Díaz, <em>Optimización heurística y redes neuronales</em> (ES); Taha; Hillier &amp; Lieberman.</li>
+<li><strong>U. de Chile IN7605 Heurísticas</strong>
+  URL: https://ucampus.uchile.cl/m/fcfm_catalogo/programa?bajar=1&amp;id=210934</li>
+<li>Books: Berthold-Lodi-Salvagnin; Taillard.</li>
+<li>No syllabus covers quality-diversity or MAP-Elites.</li>
+</ul>
+<h4 id="book-ranking_13">Book ranking<a class="headerlink" href="#book-ranking_13" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Eiben &amp; Smith: 5 (VU, Marquette, Memphis, MSU, Granada; +Leiden unverified). 1st ed. 2003; 2nd ed. Springer 2015.</li>
+<li>Goldberg, <em>Genetic Algorithms in Search, Optimization and Machine Learning</em>, 1989: 3 (Memphis, MSU, USP).</li>
+<li>Two each: Simon 2013 (Memphis, MSU); Deb, <em>Multi-Objective Optimization Using EAs</em> (MSU, USP); Burke &amp; Kendall, <em>Search Methodologies</em> (MSU, DTU).</li>
+<li>One each: De Jong; Michalewicz; Talbi; Wahde; Dorigo &amp; Stützle; Díaz (ES).</li>
+</ol>
+<h3 id="15-scientific-computing-hpc-and-gpu">15. Scientific computing, HPC and <abbr title="Graphics processing unit">GPU</abbr><a class="headerlink" href="#15-scientific-computing-hpc-and-gpu" title="Permanent link">&para;</a></h3>
+<h4 id="syllabi-consulted_14">Syllabi consulted<a class="headerlink" href="#syllabi-consulted_14" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>MIT 6.172 Performance Engineering, Fall 2018</strong>
+  URL: https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/syllabus/</li>
+<li>Prerequisites: 6.004, 6.006, 6.031.</li>
+<li>Goals: build scalable high-performance software.</li>
+<li>Books: none ("reading materials posted").</li>
+<li><strong>UIUC ECE 408/CS 483 Applied Parallel Programming, Summer 2025</strong>
+  URL: https://lumetta.web.engr.illinois.edu/408-Sum25/slide-copies/ece408-lecture1-introduction-Sum25-x4.pdf</li>
+<li>Prerequisites: ECE 220 or CS 225.</li>
+<li>Goals: program massively parallel (<abbr title="Graphics processing unit">GPU</abbr>) processors.</li>
+<li>Books: Hwu, Kirk &amp; El Hajj, <em>Programming Massively Parallel Processors</em>, 4th ed. 2022.</li>
+<li><strong>UC Berkeley CS C267, Spring 2023</strong>
+  URL: http://msse.berkeley.edu/wp-content/uploads/2022/09/S23-COMPSCI-C267-Syllabus.pdf</li>
+<li>Scope: OpenMP, <abbr title="Graphics processing unit">GPU</abbr>, MPI, parallel linear algebra.</li>
+<li>Books: none.</li>
+<li><strong>Georgia Tech CSE 6220</strong>
+  URL: https://cse6220.gatech.edu/sp24-oms/</li>
+<li>Prerequisites: CS 3510, C/C++.</li>
+<li>Books: Grama, Gupta, Karypis &amp; Kumar, <em>Introduction to Parallel Computing</em>, 2003. The 2026 syllabus lists no book.</li>
+<li><strong>Cornell CS 5220, Spring 2026</strong>
+  URL: https://www.cs.cornell.edu/courses/cs5220/2026sp/syllabus.html</li>
+<li>Prerequisites: C++, CS 3410.</li>
+<li>Books: none required. Rec Hager &amp; Wellein; Kirk &amp; Hwu; Pacheco; McCool et al.</li>
+<li><strong>UIUC CS 450 Numerical Analysis</strong>
+  URL: https://siebelschool.illinois.edu/academics/courses/cs450</li>
+<li>Books: Heath, <em>Scientific Computing: An Introductory Survey</em>, 2nd ed.</li>
+<li><strong>Cornell CS 4220, Spring 2024</strong>
+  URL: https://www.cs.cornell.edu/courses/cs4220/2024sp/</li>
+<li>Books: Ascher &amp; Greif; Trefethen &amp; Bau; Demmel.</li>
+<li><strong>DTU 02601</strong>
+  URL: https://kurser.dtu.dk/course/02601</li>
+<li>Books: Cheney &amp; Kincaid 7th.</li>
+<li><strong>DTU 02614 HPC</strong>
+  URL: https://kurser.dtu.dk/course/02614</li>
+<li>Books: notes.</li>
+<li><strong>ETH 401-0663-00L Numerical Methods for CS</strong>
+  URL: https://www.vorlesungen.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lerneinheitId=192908&amp;semkez=2025W&amp;ansicht=ALLE&amp;lang=en</li>
+<li>Books: Dahmen &amp; Reusken; Gander, Gander &amp; Kwok; Deuflhard &amp; Hohmann.</li>
+<li><strong>KTH DD2356</strong>
+  URL: https://www.kth.se/student/kurser/kurs/DD2356?l=en</li>
+<li>Books: Patterson &amp; Hennessy.</li>
+<li><strong>KTH DD2360 Applied <abbr title="Graphics processing unit">GPU</abbr> Programming</strong>
+  URL: https://www.kth.se/student/kurser/kurs/DD2360?l=en</li>
+<li>Books: not public.</li>
+<li><strong>USP MAP2210</strong>
+  URL: https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAP2210</li>
+<li>Books: Noble; Strang; Demmel; Burden &amp; Faires. Scope not extracted.</li>
+<li>No Latin American HPC/<abbr title="Graphics processing unit">GPU</abbr> course was found. No syllabus covers JAX.</li>
+</ul>
+<h4 id="book-ranking_14">Book ranking<a class="headerlink" href="#book-ranking_14" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Kirk &amp; Hwu: 2 (UIUC, Cornell).</li>
+<li>Demmel, <em>Applied Numerical Linear Algebra</em>: 2 (Cornell, USP).</li>
+<li>Everything else: 1 each (Grama; Hager &amp; Wellein; Heath; Ascher &amp; Greif; Cheney &amp; Kincaid; Gander et al.; Patterson &amp; Hennessy).</li>
+<li>Four major HPC courses use no textbook (MIT, Berkeley, Cornell, DTU).</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../part-6-capstone/ch35-capstone/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 35. Capstone: reading ToOp end to end">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                35. Capstone: reading ToOp end to end
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../b-books/" class="md-footer__link md-footer__link--next" aria-label="Next: B. Bibliography">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                B. Bibliography
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
