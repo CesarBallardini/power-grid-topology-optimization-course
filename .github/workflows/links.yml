@@ -1,19 +1,16 @@
 name: links
 
-# The link check is the slow part of CI (live HTTP requests with retries), so
-# it is its own workflow: it does not hold up lint and tests, and it gets its
-# own status badge. A PR only checks the Markdown files it changes. A change to
-# the link-check config or the hook definition can affect every file, and main
-# and the weekly schedule always check everything.
+# The link check is slow (live HTTP requests with retries) and flaky for
+# reasons outside the repo, so it does not run while a PR is opened or
+# updated. It runs once the PR is merged (the push to main), weekly because
+# links rot without any file changing, and on demand.
 
 on:
   push:
     branches: [main]
-  pull_request:
-  # Links rot without any file changing, and PRs only check the files they
-  # touch, so a weekly run re-checks everything.
   schedule:
     - cron: "0 6 * * 1"
+  workflow_dispatch:
 
 permissions: {}
 
@@ -29,8 +26,6 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0 # the PR diff needs the base branch
 
       - uses: ./.github/actions/setup-python
 
@@ -41,13 +36,4 @@ jobs:
           key: pre-commit|${{ hashFiles('.python-version', '.pre-commit-config.yaml') }}
 
       - name: Check links
-        run: |
-          set -euo pipefail
-          scope=(--all-files)
-          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
-            base="origin/$GITHUB_BASE_REF"
-            if ! git diff --name-only "$base"...HEAD | grep -qE '^(\.markdown-link-check\.json|\.pre-commit-config\.yaml)$'; then
-              scope=(--from-ref "$base" --to-ref HEAD)
-            fi
-          fi
-          SKIP=no-commit-to-branch uv run --frozen pre-commit run markdown-link-check "${scope[@]}"
+        run: SKIP=no-commit-to-branch uv run --frozen pre-commit run markdown-link-check --all-files
