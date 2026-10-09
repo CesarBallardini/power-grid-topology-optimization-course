@@ -70,6 +70,17 @@
       "pattern": "^https?://([a-z0-9-]+\\.)*ethz\\.ch"
     }
   ],
+  "httpHeaders": [
+    {
+      "urls": [
+        "https://services.publishing.umich.edu"
+      ],
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9"
+      }
+    }
+  ],
   "timeout": "20s",
   "retryOn429": true,
   "retryCount": 3,
