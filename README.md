@@ -1,5 +1,10 @@
 # Power Grid Topology Optimization — course book
 
+[![check](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/check.yml/badge.svg)](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/check.yml)
+[![docs](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/docs.yaml/badge.svg)](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/docs.yaml)
+[![validate-pr-title](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/validate_pr_title.yaml/badge.svg)](https://github.com/CesarBallardini/power-grid-topology-optimization-course/actions/workflows/validate_pr_title.yaml)
+[![site](https://img.shields.io/website?url=https://katra.ballardini.com.ar/power-grid-topology-optimization-course/&label=site)](https://katra.ballardini.com.ar/power-grid-topology-optimization-course/)
+
 A five-semester course that takes students from sophomore-level college algebra, calculus and physics to
 comprehending, using, debugging and improving [ToOp](https://github.com/eliagroup/ToOp), the open-source GPU
 topology optimization engine by Elia Group and 50Hertz, and topology optimization software in general.
@@ -10,7 +15,7 @@ electricity and circuits, power systems, optimization, computing, capstone), plu
 university syllabi consulted, the bibliography (archive.org access status and Spanish editions) and a concept
 map of the ToOp code. All material is in English.
 
-**Read it online:** <https://cesarballardini.github.io/curso-optimizacion-redes-electricas/>
+**Read it online:** <https://katra.ballardini.com.ar/power-grid-topology-optimization-course/>
 (published from release tags; a printable single-page version is included).
 
 ## Working on the book
