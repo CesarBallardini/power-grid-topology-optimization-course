@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+# MkDocs build output, and the Material for MkDocs plugin cache
+site/
+.cache/
+.pre-commit.yaml
+# Local working folder for books: large PDFs and OCR text of in-copyright books that must not be redistributed.
+# Its README.md (the source index) stays local too.
+books/

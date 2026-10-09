@@ -1,0 +1,66 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Default-deny: every job below opts back in to exactly the scopes it needs.
+permissions: {}
+
+# A PR that gets a second push supersedes the first run rather than queueing
+# behind it.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup-python
+
+      - name: Configure pre-commit cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit|${{ hashFiles('.python-version', '.pre-commit-config.yaml') }}
+
+      # pre-commit is the single source of truth for lint, format and link
+      # checks: running the same hooks here is what stops CI and a local commit
+      # disagreeing about which ruff version or which rules applied.
+      # no-commit-to-branch is skipped because CI legitimately builds with main
+      # checked out.
+      - name: Run pre-commit hooks
+        run: SKIP=no-commit-to-branch uv run --frozen pre-commit run --all-files
+
+      # Unit tests for the maintenance tools. Tests marked `network` (live
+      # archive.org) are excluded by the default addopts, so a flaky external
+      # service cannot turn the build red. This mirrors `make test`.
+      - name: Run the test suite
+        run: uv run --frozen pytest
+
+  # Separate job: the docs build only needs the doc group, and a broken link
+  # between chapters should read as a docs failure, not a lint failure.
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup-python
+        with:
+          sync-args: "--group doc --frozen"
+
+      # --strict turns a dangling cross-reference, an anchor that does not
+      # exist or a page missing from the nav into a build failure, which is
+      # the only way the book stays honest.
+      - name: Build the course book
+        run: uv run --frozen mkdocs build --strict -d ./site

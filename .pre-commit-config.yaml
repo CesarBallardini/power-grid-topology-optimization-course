@@ -1,0 +1,107 @@
+# `pre-commit install` must wire the commit-msg stage too, not just pre-commit,
+# or the Conventional Commits check below is silently never run.
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+  - pre-push
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-yaml
+        # mkdocs.yml uses Python-specific tags (!!python/name:) for the
+        # Mermaid fence and the MathJax arithmatex setup, which a safe loader
+        # rejects; --unsafe checks the syntax without constructing them.
+        args: [--unsafe]
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        # Two trailing spaces are a hard line break in Markdown.
+        args: [--markdown-linebreak-ext=md]
+      - id: mixed-line-ending
+
+      # Work lands on a branch and through a PR, which is what the CI gates
+      # key off. CI runs pre-commit with SKIP=no-commit-to-branch, since a
+      # build legitimately has main checked out.
+      - id: no-commit-to-branch
+        args: [--branch=main]
+
+  # gitleaks is a Go binary rather than a PyPI package, so it comes from its
+  # own upstream repo instead of the `uv run --frozen` local hooks below.
+  #
+  # This hook scans staged changes only; `.gitleaks.toml` keeps an ad hoc
+  # whole-tree scan out of the gitignored directories.
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  # A course book is mostly links to external resources, and they rot. Hosts
+  # that answer bots with 403/429 regardless of the page (publishers, MOOC
+  # platforms, academic social networks) are ignored in
+  # .markdown-link-check.json, so a failure here is a link worth fixing.
+  - repo: https://github.com/tcort/markdown-link-check
+    rev: v3.15.0
+    hooks:
+      - id: markdown-link-check
+        args: [-q, -c, .markdown-link-check.json]
+
+  - repo: local
+    hooks:
+      # ruff runs through `uv run --frozen` (local hooks), not the
+      # astral-sh/ruff-pre-commit repo, so it always uses the exact version
+      # pinned in uv.lock -- a separately pinned pre-commit-hook revision can
+      # drift from what `make lint`/CI actually run. commitizen is local for
+      # the same reason.
+      - id: ruff-check
+        name: ruff check --fix
+        entry: uv run --frozen ruff check --fix
+        language: system
+        types: [python]
+
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --frozen ruff format
+        language: system
+        types: [python]
+
+      - id: uv-lock-check
+        name: uv lock --check
+        description: fail if uv.lock is out of sync with pyproject.toml
+        entry: uv lock --check
+        language: system
+        pass_filenames: false
+
+      # Conventional Commits. A squash merge takes the PR *title* as the commit
+      # subject, so the same check runs over the title in
+      # .github/workflows/validate_pr_title.yaml.
+      - id: commitizen
+        name: commitizen (conventional commit message)
+        entry: uv run --frozen cz check --commit-msg-file
+        language: system
+        stages: [commit-msg]
+
+      # Runs at push time, not commit time: the branch name is what GitHub
+      # derives a default pull request title from, and that title is what
+      # validate-pr-title rejects. Catching it here costs one push instead of
+      # one round trip through CI.
+      - id: check-branch-name
+        name: branch name and PR title convention
+        entry: .pre-commit-hooks/check-branch-name.sh
+        language: script
+        stages: [pre-push]
+        pass_filenames: false
+        always_run: true
+        # pre-commit swallows stdout on success, which would hide the pull
+        # request title advice -- the whole point of the hook.
+        verbose: true

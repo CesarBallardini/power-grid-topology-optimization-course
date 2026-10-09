@@ -1,0 +1,75 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*khanacademy\\.org"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*allaboutcircuits\\.com"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*fulcrum\\.org"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*ieeexplore\\.ieee\\.org"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*researchgate\\.net"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*classcentral\\.com"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*coursera\\.org"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*doi\\.org"
+    },
+    {
+      "pattern": "^https?://dl\\.acm\\.org"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*sciencedirect\\.com"
+    },
+    {
+      "pattern": "^https?://link\\.springer\\.com"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*tandfonline\\.com"
+    },
+    {
+      "pattern": "^https?://onlinelibrary\\.wiley\\.com"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*udemy\\.com"
+    },
+    {
+      "pattern": "^https?://([a-z0-9-]+\\.)*techrxiv\\.org"
+    },
+    {
+      "pattern": "^https://cesarballardini\\.github\\.io/curso-optimizacion-redes-electricas"
+    },
+    {
+      "pattern": "^\\.\\./print_page/"
+    },
+    {
+      "pattern": "^https?://povinelli\\.eece\\.mu\\.edu"
+    },
+    {
+      "pattern": "^https?://www\\.cs\\.ou\\.edu"
+    },
+    {
+      "pattern": "^https?://microelectronics\\.tudelft\\.nl"
+    },
+    {
+      "pattern": "^https?://people\\.cs\\.gmu\\.edu"
+    }
+  ],
+  "timeout": "20s",
+  "retryOn429": true,
+  "retryCount": 3,
+  "fallbackRetryDelay": "30s",
+  "aliveStatusCodes": [
+    200,
+    206
+  ]
+}

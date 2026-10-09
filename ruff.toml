@@ -1,0 +1,44 @@
+line-length = 119
+target-version = "py314"
+# The maintenance tools are scripts on pytest's pythonpath, not a package; listing
+# tools/ here makes isort treat them as first-party imports in the tests.
+src = [".", "tools"]
+# ruff 0.16 also formats Python code blocks inside Markdown. The book's snippets
+# quote ToOp and library code in their own style, and the pre-commit hooks only
+# see Python files, so keep `make lint`/`make format` to Python as well.
+extend-exclude = ["*.md"]
+
+[lint]
+select = [
+    "E", "F", "W",  # pycodestyle + pyflakes
+    "I",            # isort
+    "N",            # pep8-naming
+    "UP",           # pyupgrade
+    "B",            # flake8-bugbear
+    "C90",          # mccabe complexity -- honors [lint.mccabe] max-complexity below
+    "S",            # flake8-bandit
+    "SIM",          # flake8-simplify
+    "RET",          # flake8-return
+    "PIE",          # flake8-pie
+    "TCH",          # flake8-type-checking
+    "YTT",          # flake8-2020
+    "D",            # pydocstyle
+]
+ignore = [
+    "D203",  # one-blank-line-before-class -- conflicts with D211
+    "D213",  # multi-line-summary-second-line -- conflicts with D212
+]
+
+[lint.pydocstyle]
+convention = "google"
+
+[lint.mccabe]
+max-complexity = 15
+
+[lint.per-file-ignores]
+# assert is the idiomatic way to write a test assertion; it's disallowed
+# in application code because `python -O` strips asserts at runtime.
+"tests/**" = ["S101", "D"]
+
+[format]
+quote-style = "single"

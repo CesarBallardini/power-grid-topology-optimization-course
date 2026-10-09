@@ -1,0 +1,69 @@
+[project]
+name = "curso-optimizacion-redes-electricas"
+# Placeholder required by the [project] table: nothing is built or distributed.
+# The git tag is the real version (commitizen version_provider = "scm" below),
+# and the docs workflow publishes the site under that tag with mike.
+version = "0.0.0"
+description = "Power grid topology optimization course, from algebra to ToOp: an MkDocs book plus the tools that keep its citations honest."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.uv]
+# A course book, not a package: uv manages the environment and the lockfile but
+# never builds or installs the project itself.
+package = false
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-mock",
+    "ruff",
+    "pre-commit",
+    "commitizen",
+]
+doc = [
+    # MkDocs 2.0 removes the plugin system outright, which would take
+    # mike and print-site with it, and moves config from YAML to TOML with no
+    # migration path. Bump deliberately, not incidentally.
+    # See https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+    #
+    # 9.7.5 is the first Material release that caps mkdocs <2 itself, so the
+    # floor here is what makes the protection intrinsic rather than depending
+    # on the explicit cap above.
+    "mkdocs>=1.6,<2",
+    "mkdocs-material>=9.7.5",
+    "mike>=2.1",
+    "mkdocs-print-site-plugin",
+]
+
+[tool.commitizen]
+# Conventional Commits, enforced in two places: the commit-msg pre-commit hook
+# on every local commit, and `cz check` over the PR title in CI (a squash merge
+# takes the PR title as the commit subject, so that is the one that lands).
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "pep440"
+# The git tag is the single source of truth for the version -- nothing to bump
+# in a tracked file, so a release is a tag and not a commit.
+version_provider = "scm"
+update_changelog_on_bump = false
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers -m 'not network'"
+testpaths = ["tests"]
+# The maintenance tools are plain scripts, not a package: putting tools/ on the
+# path lets the tests import them by module name.
+pythonpath = ["tools"]
+markers = [
+    "network: tests that hit a live external service (archive.org), excluded by default, run with -m network",
+]
+# Warnings are failures, like every other gate here -- a DeprecationWarning is
+# a future breakage that has already been diagnosed for us, and the only way it
+# stays visible is if it stops the build.
+#
+# Each ignore added below must name a specific message, never a bare category,
+# and must say why it cannot simply be fixed. Anything not listed is an error.
+filterwarnings = [
+    "error",
+]

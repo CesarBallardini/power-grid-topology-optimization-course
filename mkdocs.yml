@@ -1,0 +1,135 @@
+site_name: Power Grid Topology Optimization
+site_description: >-
+  A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp,
+  the open-source GPU topology optimization engine for power grids.
+site_author: Cesar Ballardini
+site_url: https://cesarballardini.github.io/curso-optimizacion-redes-electricas/
+repo_url: https://github.com/CesarBallardini/curso-optimizacion-redes-electricas
+repo_name: CesarBallardini/curso-optimizacion-redes-electricas
+
+# Rebuild on changes to the auto-appended abbreviations when serving.
+watch:
+  - includes
+
+# Warnings are failures. A renamed chapter file silently orphans every link to it otherwise, and the book
+# rots without the build ever going red.
+strict: true
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.footer
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tooltips
+  # navigation.instant is deliberately not enabled: the print-site plugin does not support it.
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra:
+  version:
+    provider: mike
+
+extra_javascript:
+  - javascripts/mathjax.js
+  # Pinned: bump deliberately, together with the font path in docs/javascripts/mathjax.js.
+  - https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js
+
+plugins:
+  - search
+  # print-site must be the last plugin so it sees every page as the others leave it.
+  - print-site:
+      add_to_navigation: true
+      print_page_title: Power Grid Topology Optimization — full book
+      add_cover_page: true
+      add_table_of_contents: true
+      toc_depth: 2
+      enumerate_headings: false
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  # Acronym tooltips everywhere: the glossary (Appendix D) generates includes/abbreviations.md.
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Home: index.md
+  - Course guide: course-guide.md
+  - "Part 0 — Orientation":
+      - "0. Orientation and setup": part-0-orientation/ch00-orientation-and-setup.md
+  - "Part I — Mathematical foundations":
+      - "1. Complex numbers and phasor arithmetic": part-1-math/ch01-complex-numbers.md
+      - "2. Linear algebra for networks": part-1-math/ch02-linear-algebra.md
+      - "3. Graph theory for power grids": part-1-math/ch03-graph-theory.md
+      - "4. Numerical linear algebra and floating point": part-1-math/ch04-numerical-linear-algebra.md
+      - "5. Probability for stochastic search": part-1-math/ch05-probability.md
+      - "6. Nonlinear equations and Newton–Raphson": part-1-math/ch06-newton-raphson.md
+  - "Part II — Electricity and circuits":
+      - "7. Electromagnetism refresher": part-2-circuits/ch07-electromagnetism.md
+      - "8. DC circuits and nodal analysis in matrix form": part-2-circuits/ch08-dc-circuits.md
+      - "9. AC steady state and complex power": part-2-circuits/ch09-ac-steady-state.md
+      - "10. Three-phase systems and the per-unit system": part-2-circuits/ch10-three-phase-per-unit.md
+      - "11. Transformers, phase-shifting transformers, machines and HVDC": part-2-circuits/ch11-transformers-psts-hvdc.md
+  - "Part III — Power systems and grid computations":
+      - "12. The power grid and its operation": part-3-power-systems/ch12-power-grid-operation.md
+      - "13. Substations, grid models and data formats": part-3-power-systems/ch13-substations-grid-models.md
+      - "14. Network component models and network matrices": part-3-power-systems/ch14-component-models.md
+      - "15. AC power flow": part-3-power-systems/ch15-ac-power-flow.md
+      - "16. DC power flow": part-3-power-systems/ch16-dc-power-flow.md
+      - "17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening": part-3-power-systems/ch17-sensitivity-factors-1.md
+      - "18. Sensitivity factors II: low-rank updates for topology changes": part-3-power-systems/ch18-sensitivity-factors-2.md
+      - "19. Operational security and performance metrics": part-3-power-systems/ch19-operational-security.md
+      - "20. Protection, short circuit and switching feasibility": part-3-power-systems/ch20-protection-short-circuit.md
+      - "21. Coordinated security analysis, capacity calculation and remedial action optimization": part-3-power-systems/ch21-coordinated-security-rao.md
+      - "22. Import and preprocessing: from grid model to search space": part-3-power-systems/ch22-import-preprocessing.md
+  - "Part IV — Optimization":
+      - "23. Optimization modeling: LP, duality, MILP and complexity": part-4-optimization/ch23-optimization-modeling.md
+      - "24. Heuristics and evolutionary algorithms": part-4-optimization/ch24-evolutionary-algorithms.md
+      - "25. Quality-diversity and MAP-Elites": part-4-optimization/ch25-quality-diversity.md
+      - "26. Experimental methodology for stochastic optimizers": part-4-optimization/ch26-experimental-methodology.md
+      - "27. True Pareto multi-objective optimization": part-4-optimization/ch27-pareto-multi-objective.md
+      - "28. Topology optimization in power systems": part-4-optimization/ch28-topology-optimization.md
+      - "29. Learning-based topology control": part-4-optimization/ch29-learning-based-control.md
+  - "Part V — Computing":
+      - "30. Scientific Python": part-5-computing/ch30-scientific-python.md
+      - "31. JAX and GPU computing fundamentals": part-5-computing/ch31-jax-gpu-fundamentals.md
+      - "32. JAX in ToOp: internals and GPU tuning": part-5-computing/ch32-jax-in-toop.md
+      - "33. Testing, debugging and profiling scientific and JAX code": part-5-computing/ch33-testing-debugging-profiling.md
+      - "34. Engineering the pipeline": part-5-computing/ch34-pipeline-engineering.md
+  - "Part VI — Capstone":
+      - "35. Capstone: reading ToOp end to end": part-6-capstone/ch35-capstone.md
+  - Appendices:
+      - "A. University syllabi": appendices/a-syllabi.md
+      - "B. Bibliography": appendices/b-books.md
+      - "C. ToOp concept map": appendices/c-toop-concept-map.md
+      - "D. Glossary": appendices/d-glossary.md
