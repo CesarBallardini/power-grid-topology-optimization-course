@@ -68,6 +68,12 @@
     },
     {
       "pattern": "^https?://([a-z0-9-]+\\.)*ethz\\.ch"
+    },
+    {
+      "pattern": "^https?://eur-lex\\.europa\\.eu"
+    },
+    {
+      "pattern": "^https?://www\\.programmes\\.uliege\\.be"
     }
   ],
   "httpHeaders": [
