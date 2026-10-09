@@ -38,7 +38,7 @@ Chapter dependencies are defined in `docs/index.md` (Mermaid flowchart) and enfo
 
 1. Create a git tag: `git tag v1.0.0`
 2. Push the tag: `git push origin v1.0.0`
-3. GitHub Actions publishes to https://cesarballardini.github.io/curso-optimizacion-redes-electricas/
+3. GitHub Actions publishes to https://katra.ballardini.com.ar/power-grid-topology-optimization-course/
 4. `mike` automatically updates `/latest/` and maintains version menu
 
 Tag format: `vX.Y.Z` (PEP 440, enforced by commitizen). Squash merges take PR title as commit subject.
