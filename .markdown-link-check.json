@@ -62,18 +62,9 @@
     },
     {
       "pattern": "^https?://people\\.cs\\.gmu\\.edu"
-    }
-  ],
-  "httpHeaders": [
+    },
     {
-      "urls": [
-        "https://www.vvz.ethz.ch",
-        "https://www.vorlesungen.ethz.ch"
-      ],
-      "headers": {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
-        "Accept-Language": "en-US,en;q=0.9"
-      }
+      "pattern": "^https?://([a-z0-9-]+\\.)*ethz\\.ch"
     }
   ],
   "timeout": "20s",
