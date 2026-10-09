@@ -1,12 +1,22 @@
 name: docs
 
-# Published per release tag with mike, so the site carries one version per
-# release with `latest` pointing at the newest, rather than tracking whatever
-# happens to be on main.
+# Two kinds of publish, both with mike:
+#   - a release tag publishes that version and moves `latest` to it, so
+#     numbered versions always match their tags;
+#   - a push to main that touches the book (or a manual run) publishes the
+#     `dev` version, so the site can be refreshed without cutting a tag.
 
 on:
   push:
     tags: ["v*"]
+    branches: [main]
+    paths:
+      - docs/**
+      - includes/**
+      - mkdocs.yml
+      - pyproject.toml
+      - uv.lock
+      - .github/workflows/docs.yaml
   workflow_dispatch:
 
 permissions: {}
@@ -39,20 +49,26 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       # The course is not a package, so there is no installed version to read:
-      # a tag push publishes that tag, and a manual run republishes the newest
-      # tag reachable from the checked-out ref.
+      # a tag push publishes that tag; anything else (a push to main, a manual
+      # run) publishes `dev`.
       - name: Resolve the version to publish
         run: |
           set -euo pipefail
           if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            TAG="$GITHUB_REF_NAME"
+            echo "DOCS_VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+            echo "DOCS_ALIAS=latest" >> "$GITHUB_ENV"
           else
-            TAG=$(git describe --tags --abbrev=0)
+            echo "DOCS_VERSION=dev" >> "$GITHUB_ENV"
+            echo "DOCS_ALIAS=" >> "$GITHUB_ENV"
           fi
-          echo "DOCS_VERSION=${TAG#v}" >> "$GITHUB_ENV"
 
+      # $DOCS_ALIAS is deliberately unquoted: empty for dev (no alias moves),
+      # `latest` for a release.
       - name: Deploy with mike
         run: |
           set -euo pipefail
-          uv run --frozen mike deploy --push --update-aliases "$DOCS_VERSION" latest
-          uv run --frozen mike set-default --push latest
+          uv run --frozen mike deploy --push --update-aliases "$DOCS_VERSION" $DOCS_ALIAS
+
+      - name: Make latest the default version
+        if: github.ref_type == 'tag'
+        run: uv run --frozen mike set-default --push latest

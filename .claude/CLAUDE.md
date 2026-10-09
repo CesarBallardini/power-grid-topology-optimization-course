@@ -40,6 +40,7 @@ Chapter dependencies are defined in `docs/index.md` (Mermaid flowchart) and enfo
 2. Push the tag: `git push origin v1.0.0`
 3. GitHub Actions publishes to https://katra.ballardini.com.ar/power-grid-topology-optimization-course/
 4. `mike` automatically updates `/latest/` and maintains version menu
+5. A push to `main` that changes the book (or `gh workflow run docs`) refreshes `/dev/` without a tag
 
 Tag format: `vX.Y.Z` (PEP 440, enforced by commitizen). Squash merges take PR title as commit subject.
 

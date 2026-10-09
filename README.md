@@ -18,7 +18,7 @@ university syllabi consulted, the bibliography (archive.org access status and Sp
 map of the ToOp code. All material is in English.
 
 **Read it online:** <https://katra.ballardini.com.ar/power-grid-topology-optimization-course/>
-(published from release tags; a printable single-page version is included).
+(released versions are published from tags and `dev` follows `main`; a printable single-page version is included).
 
 ## Working on the book
 
@@ -51,5 +51,6 @@ mkdocs.yml                 site configuration and navigation
 ## Releasing an edition
 
 The site is versioned with [mike](https://github.com/jimporter/mike). Pushing a tag `vX.Y.Z` runs the `docs`
-workflow, which publishes that version to GitHub Pages and points `latest` at it. Commit messages and pull
+workflow, which publishes that version to GitHub Pages and points `latest` at it. A push to `main` that changes
+the book (or `gh workflow run docs`) refreshes the `dev` version instead, without a tag. Commit messages and pull
 request titles follow [Conventional Commits](https://www.conventionalcommits.org/).
