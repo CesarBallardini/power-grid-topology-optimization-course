@@ -8,7 +8,7 @@ help: ## Show this list of available targets
 
 install: ## Sync the environment (from the committed lockfile) and install the git hooks
 	uv sync --all-groups --frozen
-	uv run --frozen pre-commit install
+	uv run --frozen python -m pre_commit install
 
 lint: ## Check formatting and lint rules without modifying files
 	uv run --frozen ruff check .
@@ -38,7 +38,7 @@ abbreviations: ## Regenerate the acronym tooltips (includes/abbreviations.md) fr
 	uv run --frozen python tools/gen_abbreviations.py
 
 precommit: ## Run all pre-commit hooks against every file
-	uv run --frozen pre-commit run --all-files
+	uv run --frozen python -m pre_commit run --all-files
 
 clean: ## Remove the built site and tool caches
 	rm -rf site/ .pytest_cache/ .ruff_cache/ .cache/
