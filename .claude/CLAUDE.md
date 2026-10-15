@@ -23,7 +23,7 @@ Chapter dependencies are defined in `docs/index.md` (Mermaid flowchart) and enfo
 
 1. **Edit chapter files** in `docs/part-*/ch*.md` — they auto-build with live reload (`make docs-serve`)
 2. **Check formatting** — run `make lint` before committing (ruff enforces style)
-3. **Verify links** — `make docs` (strict mode catches broken internal links; external links checked via pre-commit)
+3. **Verify links** — `make docs` (strict mode catches broken internal links; external links are checked locally only, with `make links`, never in CI)
 4. **Update glossary** — if you add new acronyms, run `make abbreviations` to regenerate tooltips
 5. **Commit with Conventional Commits** — hook enforces `docs: <message>` or `fix: <message>` format
 
@@ -31,6 +31,7 @@ Chapter dependencies are defined in `docs/index.md` (Mermaid flowchart) and enfo
 
 - **`make check-books`** — Verify every archive.org link still works (network test, run weekly)
 - **`make check-toop`** — Validate ToOp source paths cited in the book (requires `../ToOp` sibling repo)
+- **`make links`** — Check every external link (network, ~2.5 min). Local only, never in CI: GitHub runner IPs are blocked by many hosts. `202` counts as alive, since eur-lex answers every bot with a 202 firewall challenge. A few links fail from anywhere (techrxiv 403, tudelft/gmu/ou time out in the checker); confirm by opening the link, not by trusting the exit code
 - **`make test`** — Run unit tests on maintenance tools (72 tests)
 - **`make docs`** — Full strict build: any warning fails the build
 
@@ -43,6 +44,24 @@ Chapter dependencies are defined in `docs/index.md` (Mermaid flowchart) and enfo
 5. A push to `main` that changes the book (or `gh workflow run docs`) refreshes `/dev/` without a tag
 
 Tag format: `vX.Y.Z` (PEP 440, enforced by commitizen). Squash merges take PR title as commit subject.
+
+`gh-pages` is the published site, written only by `mike` (one folder per version, plus `latest` and `dev`). It shares no history with `main`, so GitHub's "behind/ahead" for it is meaningless: never merge into it or edit it by hand. Pages is configured as "Deploy from a branch" → `gh-pages` `/` (not "GitHub Actions").
+
+## CI
+
+One workflow file per independent job, each with a README badge:
+
+- `check.yml` — pre-commit hooks (without `markdown-link-check`) and pytest
+- `build.yml` — `mkdocs build --strict`
+- `docs.yaml` — publishes with `mike`: `v*` tag → that version + `latest`; push to `main` touching the book, or manual run → `dev`
+- `validate_pr_title.yaml` — Conventional Commits check on the PR title
+
+There is no link-check workflow on purpose. The `main` ruleset has no required status checks; if you add some, use the job names `check`, `build` and `validate-pr-title`.
+
+## Windows notes
+
+- `uv` script launchers in `.venv/Scripts` (`pre-commit.exe`, `cz.exe`, ...) can break with "uv trampoline failed to canonicalize script path". Local hooks and Make targets therefore call tools as modules (`python -m pre_commit`, `python -m commitizen`). Repair a broken venv with `uv sync --all-groups --frozen --reinstall`.
+- `markdown-link-check` sometimes reports "files were modified by this hook" with no dead links listed; rerun.
 
 ## Chapter Conventions
 
@@ -79,7 +98,7 @@ All tools are plain Python scripts in `tools/`:
 - `mkdocs.yml` — site config, navigation structure, Material theme settings
 - `pyproject.toml` — uv environment (dev/doc groups), commitizen config, pytest settings
 - `.pre-commit-config.yaml` — git hooks: ruff (lint/format), commitizen (message validation), markdown-link-check
-- `.markdown-link-check.json` — skip lists for unreliable domains (institutional servers, paywalls)
+- `.markdown-link-check.json` — link checker settings; the only ignore rule is the plugin-injected `../print_page/` link, with no per-host exceptions
 - `Makefile` — convenience targets for all common tasks
 
 ## Style & Tone
