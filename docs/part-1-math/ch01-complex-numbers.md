@@ -41,7 +41,7 @@
   - MIT OCW 18.04 *Complex Variables with Applications*, Topic 1 notes (no videos)
     <https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/>.
   - Full complex analysis courses in video, for students who want more: Coursera *Introduction to Complex
-    Analysis* (Wesleyan, Bonfert-Taylor; paid, with a free trial) <https://www.coursera.org/learn/complex-analysis>;
+    Analysis* (Wesleyan, Bonfert-Taylor; paid, with a free trial; no free audit shown) <https://www.coursera.org/learn/complex-analysis>;
     NPTEL *Complex Analysis* (IIT Guwahati, Sree Krishna) <https://nptel.ac.in/courses/111103070>.
   - Refresher, precalculus level: Khan Academy complex numbers
     <https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:complex>; Welch Labs, "Imaginary Numbers Are
@@ -60,6 +60,12 @@
   - GeoGebra Classic (free, runs in the browser): <https://www.geogebra.org/classic>; manual page
     "Complex Numbers" (`abs`, `arg`, `conjugate`): <https://geogebra.github.io/docs/manual/en/Complex_Numbers/>.
   - Python `cmath` module: <https://docs.python.org/3/library/cmath.html>.
+  - Real Python, "Simplify Complex Numbers With Python" (Zaczyński, free tutorial)
+    <https://realpython.com/python-complex-numbers/>: the `complex` type, rectangular and polar forms, and
+    `cmath`, with downloadable code.
+  - Real Python video course *Exploring the Python math Module* (Aguilar, 21 lessons; **Real Python subscribers
+    only**) <https://realpython.com/courses/exploring-python-math-module/>. For this chapter, watch "The cmath
+    Module vs the math Module" and "NumPy vs math".
   - GNU Octave, "Complex Arithmetic" (`abs`, `angle`, `conj`): <https://docs.octave.org/latest/Complex-Arithmetic.html>.
 
 ## Worked example
