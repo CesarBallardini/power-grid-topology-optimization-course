@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 .PHONY: help install lint format test docs docs-serve check-books check-toop \
-        abbreviations precommit clean
+        abbreviations precommit links clean
 
 help: ## Show this list of available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "\033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -39,6 +39,9 @@ abbreviations: ## Regenerate the acronym tooltips (includes/abbreviations.md) fr
 
 precommit: ## Run all pre-commit hooks against every file
 	uv run --frozen python -m pre_commit run --all-files
+
+links: ## Check every external link in the book (network; some hosts fail from anywhere, judge by opening the link)
+	uv run --frozen python -m pre_commit run markdown-link-check --all-files
 
 clean: ## Remove the built site and tool caches
 	rm -rf site/ .pytest_cache/ .ruff_cache/ .cache/

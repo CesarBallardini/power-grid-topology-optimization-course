@@ -1,90 +1,7 @@
 {
   "ignorePatterns": [
     {
-      "pattern": "^https?://([a-z0-9-]+\\.)*khanacademy\\.org"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*allaboutcircuits\\.com"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*fulcrum\\.org"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*ieeexplore\\.ieee\\.org"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*researchgate\\.net"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*classcentral\\.com"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*coursera\\.org"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*doi\\.org"
-    },
-    {
-      "pattern": "^https?://dl\\.acm\\.org"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*sciencedirect\\.com"
-    },
-    {
-      "pattern": "^https?://link\\.springer\\.com"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*tandfonline\\.com"
-    },
-    {
-      "pattern": "^https?://onlinelibrary\\.wiley\\.com"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*udemy\\.com"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*techrxiv\\.org"
-    },
-    {
-      "pattern": "^https://katra\\.ballardini\\.com\\.ar/power-grid-topology-optimization-course"
-    },
-    {
-      "pattern": "^https://github\\.com/CesarBallardini/power-grid-topology-optimization-course/actions/"
-    },
-    {
       "pattern": "^\\.\\./print_page/"
-    },
-    {
-      "pattern": "^https?://povinelli\\.eece\\.mu\\.edu"
-    },
-    {
-      "pattern": "^https?://www\\.cs\\.ou\\.edu"
-    },
-    {
-      "pattern": "^https?://microelectronics\\.tudelft\\.nl"
-    },
-    {
-      "pattern": "^https?://people\\.cs\\.gmu\\.edu"
-    },
-    {
-      "pattern": "^https?://([a-z0-9-]+\\.)*ethz\\.ch"
-    },
-    {
-      "pattern": "^https?://eur-lex\\.europa\\.eu"
-    },
-    {
-      "pattern": "^https?://www\\.programmes\\.uliege\\.be"
-    }
-  ],
-  "httpHeaders": [
-    {
-      "urls": [
-        "https://services.publishing.umich.edu"
-      ],
-      "headers": {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
-        "Accept-Language": "en-US,en;q=0.9"
-      }
     }
   ],
   "timeout": "20s",
@@ -93,6 +10,7 @@
   "fallbackRetryDelay": "30s",
   "aliveStatusCodes": [
     200,
+    202,
     206
   ]
 }

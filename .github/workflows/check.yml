@@ -35,9 +35,8 @@ jobs:
       # checks: running the same hooks here is what stops CI and a local commit
       # disagreeing about which ruff version or which rules applied.
       # no-commit-to-branch is skipped because CI legitimately builds with main
-      # checked out. markdown-link-check is skipped here and runs in the
-      # `links` workflow: it is network-bound and takes minutes, so it must not
-      # hold up lint and tests.
+      # checked out. markdown-link-check is skipped here: links are checked
+      # locally (`make links`), since GitHub's runner IPs are blocked by many hosts.
       - name: Run pre-commit hooks
         run: SKIP=no-commit-to-branch,markdown-link-check uv run --frozen pre-commit run --all-files
 
