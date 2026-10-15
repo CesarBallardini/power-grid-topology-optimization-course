@@ -33,7 +33,7 @@ On commit, `markdown-link-check` checks every link in each staged file, not only
 
 - **`make check-books`** — Verify every archive.org link still works (network test, run weekly)
 - **`make check-toop`** — Validate ToOp source paths cited in the book (requires `../ToOp` sibling repo)
-- **`make links`** — Check every external link (network, ~2.5 min). Local only, never in CI: GitHub runner IPs are blocked by many hosts. `202` counts as alive, since eur-lex answers every bot with a 202 firewall challenge. A few links fail from anywhere (techrxiv 403, tudelft/gmu/ou time out in the checker); confirm by opening the link, not by trusting the exit code
+- **`make links`** — Check every external link (network, ~2.5 min). Local only, never in CI: GitHub runner IPs are blocked by many hosts. `202` counts as alive, since eur-lex answers every bot with a 202 firewall challenge. A few links fail from anywhere (techrxiv 403, udemy 403 for scripted requests, tudelft/gmu/ou time out in the checker); confirm by opening the link, not by trusting the exit code
 - **`make test`** — Run unit tests on maintenance tools (72 tests)
 - **`make docs`** — Full strict build: any warning fails the build
 
@@ -74,7 +74,31 @@ There is no link-check workflow on purpose. The `main` ruleset has no required s
 - **Lab** section describes hands-on exercises with required tools (Jupyter, NumPy, JAX, etc.)
 - **Exercises** are graded tasks; labs are lab-based checkpoints per semester
 - **Resources** cite freely available books (archive.org labels: FREE, BORROW, PRINT-DISABLED)
+- **Video courses** in Resources are online university or college courses that are well known and recognized (MIT OCW, NPTEL, Coursera/edX from named universities, faculty lecture series such as Brunton's), or courses built on a popular textbook of the subject. Prefer college level; precalculus material stays only as a labelled "Refresher". Udemy courses are allowed where no recognized course fits the topic, marked as paid and not university. Mark paid or subscriber-only courses as such (for example **Real Python subscribers only**; the maintainer is a subscriber). **Every online course states whether it can be audited for free**, with one of: `free` (NPTEL, OCW, YouTube, Hugging Face), `free to audit` (edX), `paid, with a free trial; no free audit shown` (Coursera), `paid` (Udemy), `Real Python subscribers only`. Check the course page (see "Checking course pages") and never assume
+- **Real Python free tutorials** are valid resources on their own: cite them without looking for a companion video
 - **Tools in labs** are free and run on Windows, macOS and Linux. Commercial or Windows-only tools appear only as optional steps or resources. Example: PowerWorld Simulator (free demo limited to 13 buses, so IEEE 14 does not fit) is in the course guide's tool table, the Chapter 15 lab (step 6), and its free training modules are cited in chapters 13, 15, 17 and 19
+
+## Checking course pages
+
+Course sites (Udemy, Coursera, Real Python, VideoLectures) often answer scripted requests with 403 or 404, and WebFetch is refused by some. Before judging a link dead or a course unverifiable, fetch the public page with `curl` and a full set of Chrome headers; a user agent alone is not enough (Udemy gave 403 with only the user agent and 200 with all of these). Run it in Git Bash:
+
+```bash
+UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+curl -s -L -A "$UA" \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' \
+  -H 'Accept-Language: en-US,en;q=0.9' \
+  -H 'sec-ch-ua: "Chromium";v="130", "Google Chrome";v="130", "Not?A_Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'Sec-Fetch-Dest: document' -H 'Sec-Fetch-Mode: navigate' -H 'Sec-Fetch-Site: none' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -o page.html -w '%{http_code}\n' "$URL"
+```
+
+- Free-audit status, from the saved HTML: edX pages have `"isAccessibleForFree":true`, an `auditTrack` string and a "How to Audit a Course" link, with the certificate price in the JSON-LD `offers` ("Partially Free"); Coursera pages show "Free trial", "Financial Aid available" and no audit option (the "Full Course, No Certificate" option is only visible after signing in, so check it logged in before claiming a free audit); Udemy is paid.
+- Read the title, instructor, lecture count and topics from the saved HTML (`og:title`, `og:description`, the JSON-LD `instructor` and `ratingValue`); leave ratings and student counts out of the book, they change.
+- YouTube videos and playlists: check `https://www.youtube.com/oembed?url=<video url>&format=json` for the title and channel, and the playlist page for `numVideosText`.
+- Members-only Real Python lessons show "Unlock All Content"; a real 404 stays 404 with these headers (Coursera `discrete-optimization`), so then say so in the entry.
+- This is for reading public pages only. Do not log in, and do not work around a page that asks for sign-in.
 
 ## Bibliography & Archive.org
 
@@ -103,7 +127,7 @@ All tools are plain Python scripts in `tools/`:
 - `mkdocs.yml` — site config, navigation structure, Material theme settings
 - `pyproject.toml` — uv environment (dev/doc groups), commitizen config, pytest settings
 - `.pre-commit-config.yaml` — git hooks: ruff (lint/format), commitizen (message validation), markdown-link-check
-- `.markdown-link-check.json` — link checker settings; the only ignore rule is the plugin-injected `../print_page/` link, with no per-host exceptions; alive status codes are 200, 202 (bot challenges such as eur-lex's) and 206
+- `.markdown-link-check.json` — link checker settings; the only ignore rule is the plugin-injected `../print_page/` link, with no per-host exceptions; every request carries the full Chrome header set (global `httpHeaders` entry for `http://` and `https://`, the same headers as in "Checking course pages"); alive status codes are 200, 202 (bot challenges such as eur-lex's) and 206. Udemy and techrxiv still answer 403 to the checker even with these headers (their bot protection looks at the TLS fingerprint of Node, which a config cannot change, while `curl` gets 200), so judge those two by opening them
 - `Makefile` — convenience targets for all common tasks
 
 ## Style & Tone
