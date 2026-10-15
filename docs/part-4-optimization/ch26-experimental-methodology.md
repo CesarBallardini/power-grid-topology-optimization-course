@@ -62,6 +62,19 @@
 
 ## Resources
 
+- Courses and videos:
+  - MIT OCW 18.650 *Statistics for Applications* (Rigollet), Lectures 7–9 and 11–12 (parametric hypothesis
+    testing, $p$-values, testing goodness of fit)
+    <https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-videos/>: the
+    testing vocabulary this chapter builds on.
+  - Eftimov & Korošec, "Smart-sized Benchmarking for Black-Box Optimization", tutorial at the ESSAI and ACAI
+    2023 summer schools: problem selection, performance measures and statistical comparison of stochastic
+    optimizers, with the Deep Statistical Comparison method of their Springer book
+    <https://videolectures.net/videos/ESSAIandACAI2023_eftimov_korosec_benchmarking>. The page lists a duration
+    of about 6 hours 20 minutes. Issue: I could not confirm whether VideoLectures.net asks for a free account
+    to play it, and my automated fetch of the page was refused with "Unauthorized".
+  - No university course covers benchmarking stochastic optimizers; the rank tests, effect sizes and runtime
+    ECDFs come from the papers below.
 - Papers:
   - Bartz-Beielstein, Doerr, van den Berg, Bossek et al., "Benchmarking in Optimization: Best Practice and Open
     Issues", arXiv:2007.03488, 2020. **Main reading**: sections on goals, problem instances, algorithms,

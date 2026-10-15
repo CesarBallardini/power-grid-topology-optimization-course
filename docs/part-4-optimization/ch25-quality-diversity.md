@@ -57,8 +57,18 @@
     arXiv:2605.10128, 2026. The ToOp optimizer paper.**
 - Online: QD community site <https://quality-diversity.github.io/>; QDax <https://github.com/adaptive-intelligent-robotics/QDax>
   and docs <https://qdax.readthedocs.io/>; pyribs tutorials <https://docs.pyribs.org/en/stable/tutorials.html>.
-- No textbook covers quality-diversity, and no syllabus in the survey teaches it: this chapter is taught from
-  papers.
+- Tutorials (video):
+  - Imperial College London, *Introduction to Machine Learning*, Module 7.7 "MAP Elites" (a lecture video inside
+    an evolutionary algorithms module) <https://www.youtube.com/watch?v=ZVCz1DpVhyA>. Issue: it is one short
+    lecture of a machine learning course, not a quality-diversity course; the module pages
+    (<https://intro2ml.pages.doc.ic.ac.uk/spring2025/modules/module7/map-elites>) are an archived 2024/25
+    edition.
+  - Cully, Mouret & Doncieux, "Quality-Diversity Optimisation", GECCO 2020 tutorial
+    <https://www.youtube.com/watch?v=nyOPJxY--kA>.
+  - Clune, Lehman & Stanley, "Recent Advances in Population-Based Search for Deep Neural Networks", ICML 2019
+    tutorial <https://www.youtube.com/watch?v=g6HiuEnbwJE>.
+- No textbook covers quality-diversity, no syllabus in the survey teaches it, and no university video course
+  on it exists (only the single Imperial lecture above): this chapter is taught from papers.
 
 ## Worked example
 

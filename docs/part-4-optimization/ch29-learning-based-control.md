@@ -62,6 +62,19 @@
 
 ## Resources
 
+- Courses and videos:
+  - Silver (UCL and DeepMind), *Reinforcement Learning*, 2015
+    <https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ>; slides
+    <https://www.davidsilver.uk/teaching/>. Built on Sutton & Barto: Lectures 2–3 (MDPs, dynamic programming),
+    4–5 (model-free prediction and control: TD learning, Sarsa, Q-learning), 6 (value function approximation,
+    DQN) and 7 (policy gradient, actor–critic) cover this chapter.
+  - Brunskill (Stanford), CS234 *Reinforcement Learning*, Spring 2024
+    <https://www.youtube.com/playlist?list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX>: Lectures 1–7 (MDP planning,
+    policy evaluation, Q-learning and function approximation, policy search) as a second view of the same
+    fundamentals.
+  - Leskovec (Stanford), CS224W *Machine Learning with Graphs*, 2021
+    <https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn>: Lectures 6.1–7.3 (introduction
+    to graph neural networks, a single GNN layer, stacking layers) for the GNN surrogates.
 - Free texts and courses:
   - Sutton & Barto, *Reinforcement Learning: An Introduction*, 2nd ed. (2018): Ch. 3 (finite MDPs), Ch. 4
     (dynamic programming), Ch. 6 (temporal-difference learning, Q-learning), Ch. 9 (function approximation),

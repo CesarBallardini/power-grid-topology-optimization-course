@@ -36,10 +36,26 @@
 
 ## Resources
 
-- Courses: MIT OCW 18.335J (S. G. Johnson)
-  <https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/>; Cornell CS 4220
-  (Bindel) <https://www.cs.cornell.edu/courses/cs4220/2023sp/>; fast.ai *Computational Linear Algebra*
-  notebooks <https://github.com/fastai/numerical-linear-algebra>.
+- Courses and videos:
+  - MIT OCW 18.065 *Matrix Methods in Data Analysis, Signal Processing, and Machine Learning* (Strang):
+    <https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/>.
+    Lecture 8 "Norms of Vectors and Matrices", Lecture 10 "Survey of Difficulties with Ax = b" (condition
+    number) and Lecture 14 "Low Rank Changes in A and Its Inverse" (Sherman–Morrison–Woodbury).
+  - Chasnov (HKUST), *Numerical Methods for Engineers*, lectures free on YouTube
+    <https://www.youtube.com/playlist?list=PLkZjai-2Jcxn35XnijUtqqEg0Wi5Sn8ab>: Lectures 1–2 (binary numbers,
+    double precision) and 24–29 (Gaussian elimination, partial pivoting, LU, operation counts). The same
+    course is on Coursera (paid, with a free trial; no free audit shown) <https://www.coursera.org/learn/numerical-methods-engineers>.
+  - Davis, *Direct Methods for Sparse Linear Systems* (42 lectures, graduate level)
+    <https://www.youtube.com/playlist?list=PL5EvFKC69QIyRLFuxWRnH6hIw6e1-bBXB>, by the author of KLU and
+    UMFPACK, for students who want the inside of a sparse direct solver.
+  - fast.ai *Computational Linear Algebra* (University of San Francisco, Thomas): notebooks
+    <https://github.com/fastai/numerical-linear-algebra> and lecture videos
+    <https://www.youtube.com/playlist?list=PLtmWHNX-gukIc92m1K0P6bIOnZb-mg0hY>. Lectures 1 (accuracy, memory,
+    speed), 5 (LU factorization) and 6 (sparse storage).
+  - MIT OCW 18.335J *Introduction to Numerical Methods* (S. G. Johnson; notes, no videos)
+    <https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/>; Cornell CS 4220
+    *Numerical Analysis: Linear and Nonlinear Problems* (Bindel; notes, no videos)
+    <https://www.cs.cornell.edu/courses/cs4220/2023sp/>.
 - Free texts:
   - Driscoll & Braun, *Fundamentals of Numerical Computation*: §2.4 LU, §2.6 pivoting, §2.7 norms, §2.8
     conditioning, §2.9 Cholesky and structure, §7.4 symmetry and definiteness, §8.1 sparsity. FREE

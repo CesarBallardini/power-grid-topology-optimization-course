@@ -49,10 +49,21 @@
 
 ## Resources
 
-- Courses: MIT OCW 6.100L <https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/>;
-  Software Carpentry *Programming with Python* <https://swcarpentry.github.io/python-novice-inflammation/> and
-  *Version Control with Git* <https://swcarpentry.github.io/git-novice/>;
-  MIT *The Missing Semester* (shell, git) <https://missing.csail.mit.edu/>.
+- Courses and videos:
+  - MIT OCW 6.100L *Introduction to CS and Programming Using Python* (Bell), lecture videos
+    <https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/>:
+    Lectures 7–8 (functions), 17–19 (classes and inheritance) and 25 "Plotting" (matplotlib).
+  - MIT *The Missing Semester of Your CS Education* (IAP 2026, lecture videos and notes)
+    <https://missing.csail.mit.edu/>: Lecture 1 (the shell), Lecture 5 "Version Control and Git", Lecture 6
+    "Packaging and Shipping Code" (virtual environments, `uv` lock files, Docker and Docker Compose) and
+    Lecture 9 "Code Quality" (linting, testing, coverage, pre-commit hooks).
+  - Software Carpentry *Programming with Python* <https://swcarpentry.github.io/python-novice-inflammation/> and
+    *Version Control with Git* <https://swcarpentry.github.io/git-novice/> (lesson notes, no videos).
+  - Real Python video courses (**Real Python subscribers only**): *Python Plotting With Matplotlib* (Cepalia,
+    18 lessons) <https://realpython.com/courses/python-plotting-matplotlib/>, whose "Creating a Colored Matrix"
+    lesson and heat-map exercise match the matrix plots of this chapter; *Working With Python Polars* (Trudeau,
+    11 lessons) <https://realpython.com/courses/working-with-python-polars/>, including "Working With
+    LazyFrames" (lazy vs eager evaluation).
 - Free texts:
   - Downey, *Think Python*, 3rd ed.: <https://allendowney.github.io/ThinkPython/>.
   - VanderPlas, *Python Data Science Handbook*, Ch. 2 NumPy and Ch. 3 pandas:

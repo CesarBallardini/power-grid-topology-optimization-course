@@ -47,9 +47,15 @@
   §7.4.1 linear sensitivity factors, **Appendix 7B "Calculation of Network Sensitivity Factors"** (7B.1 PTDF,
   7B.2 LODF, 7B.3 compensated PTDF). Verified against the publisher's table of contents. Required or
   recommended in 11 syllabi. **NOT ON IA** (3rd ed.), so use a library copy.
-- Free: Overbye ECEN 615 sensitivity analysis lectures (<https://overbye.engr.tamu.edu/course-2/>), the best
-  free substitute for Appendix 7B; MATPOWER manual §4.5 "Linear Shift Factors" (PTDF for single and distributed
-  slack, LODF) and §9.5.4–9.5.5 (`makeLODF`, `makePTDF`) <https://matpower.org/docs/MATPOWER-manual.pdf>.
+- Courses and videos:
+  - NPTEL *Economic Operations and Control of Power Systems* (IIT Kanpur, G. Mirle Vishwanath & N. P. Padhy)
+    <https://nptel.ac.in/courses/108104191>: Lecture 40 derives generation shift factors, PTDF and LODF from
+    $\theta = X P$, with the outaged line modelled as a pair of injections; Lecture 41 ranks contingencies with a
+    performance index on a three-bus DC example.
+  - Overbye, TAMU ECEN 615 sensitivity analysis lectures (slides, no videos)
+    <https://overbye.engr.tamu.edu/course-2/>, the best free substitute for Appendix 7B.
+- Free: MATPOWER manual §4.5 "Linear Shift Factors" (PTDF for single and distributed slack, LODF) and
+  §9.5.4–9.5.5 (`makeLODF`, `makePTDF`) <https://matpower.org/docs/MATPOWER-manual.pdf>.
 - Free: PowerWorld training module I11 "Linear Sensitivity Analysis", slides and the supplement "Linear
   Analysis Techniques in PowerWorld Simulator"
   <https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/linear-sensitivity-analysis>,

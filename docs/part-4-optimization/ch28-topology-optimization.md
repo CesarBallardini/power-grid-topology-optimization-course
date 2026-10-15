@@ -72,6 +72,19 @@
   - Chatzivasileiadis, "Lecture Notes on Optimal Power Flow (OPF)", arXiv:1811.00943.
   - Coffrin, Hijazi & Van Hentenryck, "The QC Relaxation: A Theoretical and Computational Study on Optimal Power
     Flow", *IEEE Trans. Power Systems* 31(4):3008–3018, 2016, doi:10.1109/TPWRS.2015.2463111.
+- Videos (research talks, not courses; no university video course covers transmission switching):
+  - Ruiz (2016), "Transmission Topology Optimization in Large-scale Power Networks", IMA lecture on
+    near-optimal topology control co-optimized with dispatch and commitment, with results on PJM models; Ruiz is
+    the first author of the sensitivity-based paper cited below
+    <https://mathinstitutes.org/videos/10758>.
+  - Chatzivasileiadis (DTU), "Introduction to DC-OPF, AC-OPF and Convex Relaxations", in three parts, the
+    video companion of the lecture notes cited below (Part 1
+    <https://www.youtube.com/watch?v=f92h6LL4ao8>, Part 2 <https://www.youtube.com/watch?v=uWoFY045F1g>, Part 3
+    <https://www.youtube.com/watch?v=WUfU0TkdTZA>).
+  - Sun (Georgia Tech, 2017), "Optimal Transmission Switching with DC and AC Power Flows: New Formulations and
+    Strong Relaxations", BIRS workshop talk (about 21 minutes); Sun is a co-author of the Kocuk, Dey & Sun paper
+    cited below
+    <https://www.birs.ca/events/2017/5-day-workshops/17w5165/videos/watch/201703061031-Sun.html>.
 - Transmission switching and busbar splitting:
   - Fisher, O'Neill & Ferris, "Optimal Transmission Switching", *IEEE Trans. Power Systems* 23(3):1346–1355,
     2008, doi:10.1109/TPWRS.2008.922256. **Core reading** for the MILP formulation.

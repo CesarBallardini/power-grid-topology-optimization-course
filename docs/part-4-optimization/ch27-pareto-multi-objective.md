@@ -98,13 +98,18 @@
     *OR Spektrum* 22(4), 2000.
   - Abido, "Environmental/economic power dispatch using multiobjective evolutionary algorithms", *IEEE Trans.
     Power Systems* 18(4), 2003.
-- Lectures and tutorials: Brockhoff, "Evolutionary Multiobjective Optimization" tutorial, GECCO 2019
-  <http://www.cmap.polytechnique.fr/~dimo.brockhoff/publicationListFiles/broc2019a.pdf>; Brockhoff & Tušar,
-  "Benchmarking Multiobjective Optimizers 2.0", GECCO 2023
-  <http://www.cmap.polytechnique.fr/~dimo.brockhoff/publicationListFiles/bt2023a.pdf>; Brockhoff, EMO I and
-  EMO II lectures, Université Paris-Saclay 2019
-  <http://www.cmap.polytechnique.fr/~dimo.brockhoff/advancedOptSaclay/2019/slides.php>; MIT OCW ESD.77
-  lecture 14 on multiobjective optimization.
+- Lectures and tutorials:
+  - NPTEL *Traditional and Non-Traditional Optimization Tools* (IIT Kharagpur, Pratihar)
+    <https://nptel.ac.in/courses/112105235>: Lectures 22–26 (multi-objective optimization).
+  - MIT OCW IDS.338J (formerly ESD.77) *Multidisciplinary System Design Optimization* (de Weck and Willcox),
+    Lectures 14–15 "Multi-objective optimization I/II" (notes, no videos)
+    <https://ocw.mit.edu/courses/ids-338j-multidisciplinary-system-design-optimization-spring-2010/pages/lecture-notes/>.
+  - Brockhoff, "Evolutionary Multiobjective Optimization" tutorial, GECCO 2019 (slides)
+    <http://www.cmap.polytechnique.fr/~dimo.brockhoff/publicationListFiles/broc2019a.pdf>; Brockhoff & Tušar,
+    "Benchmarking Multiobjective Optimizers 2.0", GECCO 2023 (slides)
+    <http://www.cmap.polytechnique.fr/~dimo.brockhoff/publicationListFiles/bt2023a.pdf>; Brockhoff, EMO I and
+    EMO II lectures, Université Paris-Saclay 2019 (slides, no videos)
+    <http://www.cmap.polytechnique.fr/~dimo.brockhoff/advancedOptSaclay/2019/slides.php>.
 - Software: pymoo (NSGA-II/III, MOEA/D, SMS-EMOA, `HV`, `IGD`, `IGDPlus`, `NonDominatedSorting`,
   `HighTradeoffPoints`, `PseudoWeights`, `ASF`) <https://pymoo.org>; moocore (hypervolume, ε-indicator,
   `is_nondominated`) <https://multi-objective.github.io/moocore/python/>; QDax MOME and NSGA-II/SPEA2 baselines

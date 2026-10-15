@@ -37,9 +37,22 @@
 
 ## Resources
 
-- Courses: Coursera *Electric Power Systems* (University at Buffalo) <https://www.coursera.org/learn/electric-power-systems>;
-  MIT OCW 6.061 <https://ocw.mit.edu/courses/6-061-introduction-to-electric-power-systems-spring-2011/>;
-  DelftX *Smart Grids Integration and Modeling* (edX).
+- Courses and videos:
+  - Kirschen (University of Washington), lectures on his textbook *Fundamentals of Power System Economics*
+    <https://labs.ece.uw.edu/real/videos.html>. Lectures 01–02 (introduction, organization of electricity
+    markets) and 11 "Effect of transmission network" (markets with transmission constraints, locational
+    marginal prices, financial transmission rights) cover the market part of this chapter.
+  - MIT OCW 15.031J *Energy Decisions, Markets, and Policies*, Lecture 17 "(Yesterday's &) Today's Electric
+    Power System" (Schmalensee)
+    <https://ocw.mit.edu/courses/15-031j-energy-decisions-markets-and-policies-spring-2012/resources/lecture-17-yesterday2019s-todays-electric-power-system/>:
+    grid architecture, transmission, baseload and peaking units, market models.
+  - DelftX *Smart Grids: Analysis, Automation and Data* (TU Delft, Palensky, Rueda Torres et al.; free to audit)
+    <https://www.edx.org/learn/smart-grids/delft-university-of-technology-smart-grids-the-basics>: how grids
+    are monitored and operated, power flow, substation automation.
+  - Coursera *Electric Power Systems* (University at Buffalo, Grinberg; introductory; paid, with a free trial; no free audit shown)
+    <https://www.coursera.org/learn/electric-power-systems>.
+  - MIT OCW 6.061 *Introduction to Electric Power Systems* (Kirtley), notes and problem sets (no videos)
+    <https://ocw.mit.edu/courses/6-061-introduction-to-electric-power-systems-spring-2011/>.
 - Regulation: Commission Regulation (EU) 2017/1485, System Operation Guideline (SO GL):
   <https://eur-lex.europa.eu/eli/reg/2017/1485/oj/eng>.
 - Data:

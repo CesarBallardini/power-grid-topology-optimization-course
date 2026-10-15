@@ -28,10 +28,19 @@
 
 ## Resources
 
-- Courses: Coursera *Linear Circuits 2: AC Analysis* (Georgia Tech)
-  <https://www.coursera.org/learn/linear-circuits-ac-analysis>; MIT OCW 6.061 notes Ch. 1–2 (network theory,
-  AC power flow in linear networks), FREE
-  <https://ocw.mit.edu/courses/6-061-introduction-to-electric-power-systems-spring-2011/pages/readings/>.
+- Courses and videos:
+  - Coursera *Linear Circuits 2: AC Analysis* (Georgia Tech, Ferri; paid, with a free trial; no free audit shown)
+    <https://www.coursera.org/learn/linear-circuits-ac-analysis>. Module 1 (phasors, impedance, AC circuit
+    analysis) and Module 4 (RMS values, power factor, power triangles, AC power transfer).
+  - MIT OCW 6.002 *Circuits and Electronics* (Agarwal, Spring 2007), Lecture 16 "Sinusoidal Steady State" and
+    Lecture 17 "The Impedance Model"
+    <https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/video_galleries/video-lectures/>.
+  - NPTEL *Network Analysis* (IIT Kharagpur, Bhattacharya) <https://nptel.ac.in/courses/108105159>.
+    Lectures 26–33: phasor analysis, active and reactive power, complex power, and mesh and nodal analysis of
+    AC circuits.
+  - MIT OCW 6.061 *Introduction to Electric Power Systems* (Kirtley, Spring 2011), notes Ch. 1–2 (network
+    theory, AC power flow in linear networks; notes, no videos), FREE
+    <https://ocw.mit.edu/courses/6-061-introduction-to-electric-power-systems-spring-2011/pages/readings/>.
 - Free texts: Kuphaldt Vol. II AC <https://www.ibiblio.org/kuphaldt/electricCircuits/AC/>; Ulaby et al. (open
   access).
 - Textbooks: the sinusoidal steady-state and AC power chapters of the circuit books in [Chapter 8](ch08-dc-circuits.md).

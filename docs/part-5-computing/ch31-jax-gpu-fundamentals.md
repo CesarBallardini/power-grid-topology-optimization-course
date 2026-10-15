@@ -59,8 +59,18 @@
     <https://docs.jax.dev/en/latest/notebooks/Common_Gotchas_in_JAX.html>.
   - "GPU memory allocation" <https://docs.jax.dev/en/latest/gpu_memory_allocation.html> and "GPU performance tips"
     <https://docs.jax.dev/en/latest/gpu_performance_tips.html>.
-- UvA Deep Learning course, *Introduction to JAX*:
-  <https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/JAX/tutorial2/Introduction_to_JAX.html>.
+- Courses and videos:
+  - UvA Deep Learning course (Lippe, University of Amsterdam), *Tutorial 2 (JAX): Introduction to JAX+Flax*
+    (notebook, no videos)
+    <https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/JAX/tutorial2/Introduction_to_JAX.html>.
+  - El Hajj (American University of Beirut), *GPU Computing* lectures built on Kirk, Hwu & El Hajj's
+    *Programming Massively Parallel Processors* (CUDA C, Spring 2021)
+    <https://www.youtube.com/playlist?list=PLRRuQYjFhpmubuwx-w8X964ofVkW1T8O4>: Lectures 02 "Data Parallel
+    Programming", 04 "GPU Architecture", 05 "Memory and Tiling", 16 "Sparse Matrix Computation (COO and CSR)" and
+    21 "Pinned Memory and Streams" (host–device transfer). JAX hides the kernels, not the cost model.
+  - CMU 10-414/714 *Deep Learning Systems* (Chen), Lecture 12 "GPU Acceleration"
+    <https://www.youtube.com/watch?v=jYCxVirq4d0>: the GPU execution model and memory hierarchy, with vector and
+    matrix examples. Course page <https://dlsyscourse.org/>.
 - Equinox <https://docs.kidger.site/equinox/> and jaxtyping <https://docs.kidger.site/jaxtyping/> ("Runtime type
   checking" <https://docs.kidger.site/jaxtyping/api/runtime-type-checking/>).
 - Blondel & Roulet, *The Elements of Differentiable Programming*, arXiv:2403.14606 (free book; background).

@@ -39,6 +39,13 @@
 - Free notes: Chatzivasileiadis, "Lecture Notes on Optimal Power Flow" (DTU), arXiv:1811.00943 (DC power flow
   and DC-OPF); Molzahn & Hiskens, "A Survey of Relaxations and Approximations of the Power Flow Equations",
   *Foundations and Trends in Electric Energy Systems* 4(1–2), 2019.
+- Free videos: Chatzivasileiadis (DTU), "Introduction to DC-OPF, AC-OPF and Convex Relaxations", three parts on
+  the channel *DTU: Lectures on Power & Energy Systems*: Part 1
+  <https://www.youtube.com/watch?v=f92h6LL4ao8>, Part 2 <https://www.youtube.com/watch?v=uWoFY045F1g>, Part 3
+  <https://www.youtube.com/watch?v=WUfU0TkdTZA>. Issue: it is a talk, not a full course, and I did not check which
+  part covers the DC model; the notes above are the written version.
+- Free slides: Overbye, TAMU ECEN 615 *Methods of Electric Power System Analysis*, Fall 2025, Lecture 6 (DC
+  power flow; slides, no videos) <https://overbye.engr.tamu.edu/ecen-615-fall-2025/lecture-notes/>.
 - Documentation: MATPOWER manual §3.7 "DC Modeling" and §4.2 "DC Power Flow"
   <https://matpower.org/docs/MATPOWER-manual.pdf>; pandapower DC power flow
   <https://pandapower.readthedocs.io/en/latest/powerflow/dc.html>.

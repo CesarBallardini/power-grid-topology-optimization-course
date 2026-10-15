@@ -102,7 +102,12 @@
   analysis and handling), Art. 72 (operational security analysis in operational planning).
 - Textbook: Wood, Wollenberg & Sheblé 3rd ed., Ch. 7 (security, contingency analysis and selection) and §8.12
   (security-constrained OPF with DC power flow). (11 syllabi) **NOT ON IA** (3rd ed.), so use a library copy.
-- Free: Overbye TAMU ECEN 460 (contingency analysis, SCOPF, LMP) <https://overbye.engr.tamu.edu/course-2/ecen460sp25/>.
+- Courses and videos:
+  - NPTEL *Economic Operations and Control of Power Systems* (IIT Kanpur, G. Mirle Vishwanath & N. P. Padhy)
+    <https://nptel.ac.in/courses/108104191>: Lectures 39–41 "Power System Security I–III" (the N-1 criterion,
+    the functions of security analysis, linear sensitivity factors, contingency ranking with a performance index).
+  - Overbye, TAMU ECEN 460 (contingency analysis, SCOPF, LMP; slides, no videos)
+    <https://overbye.engr.tamu.edu/course-2/ecen460sp25/>.
 - Free: PowerWorld training modules I9 "Limit Monitoring"
   <https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/limit-monitoring> and I10
   "Contingency Analysis"

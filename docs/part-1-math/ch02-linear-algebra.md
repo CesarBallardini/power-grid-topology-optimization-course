@@ -43,13 +43,21 @@
 - Courses and videos:
   - 3Blue1Brown, *Essence of Linear Algebra* (start here for intuition):
     <https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab>.
-  - MIT OCW 18.06SC (Strang): <https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/>. Unit I
-    "Factorization into A = LU" and "Graphs, Networks, Incidence Matrices"; Unit III "Symmetric Matrices
-    and Positive Definiteness" and "Left and Right Inverses; Pseudoinverse". Lecture 12 of 18.06 (2010) is
-    the graphs lecture.
-  - MIT OCW 18.085 (Strang), the $A^\top C A$ framework for springs and circuits:
-    <https://ocw.mit.edu/courses/18-085-computational-science-and-engineering-i-fall-2008/>.
-  - Alternatives: edX UTAustinX *LAFF*; Coursera *Matrix Algebra for Engineers* (HKUST, free notes).
+  - MIT OCW 18.06SC *Linear Algebra* (Strang): <https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/>.
+    Unit I "Factorization into A = LU" and "Graphs, Networks, Incidence Matrices"; Unit III "Symmetric
+    Matrices and Positive Definiteness" and "Left and Right Inverses; Pseudoinverse". Lecture 12 of 18.06
+    (2010) is the graphs lecture.
+  - MIT OCW 18.085 *Computational Science and Engineering I* (Strang), the $A^\top C A$ framework for springs
+    and circuits: <https://ocw.mit.edu/courses/18-085-computational-science-and-engineering-i-fall-2008/>.
+    Lecture 8 "Springs and Masses", Lecture 12 "Graphs and Networks" and Lecture 13 "Kirchhoff's Current Law".
+  - Alternatives: edX UTAustinX *Linear Algebra – Foundations to Frontiers* (UT Austin, van de Geijn & Myers;
+    free to audit)
+    <https://www.edx.org/learn/linear-algebra/the-university-of-texas-at-austin-linear-algebra-foundations-to-frontiers>;
+    Coursera *Matrix Algebra for Engineers* (HKUST, Chasnov; paid, with a free trial; no free audit shown)
+    <https://www.coursera.org/learn/matrix-algebra-engineers>, whose lectures are free on YouTube
+    <https://www.youtube.com/playlist?list=PLkZjai-2Jcxlg-Z1roB0pUwFU-P58tvOx> (Lecture 5 inner and outer
+    products, 14–15 LU, 21–24 the four subspaces and rank) with free notes
+    <https://www.math.hkust.edu.hk/~machas/matrix-algebra-for-engineers.pdf>.
 - Free texts:
   - Boyd & Vandenberghe, *Introduction to Applied Linear Algebra (VMLS)*, FREE
     <https://web.stanford.edu/~boyd/vmls/>. Main reference of Berkeley EECS 16A; Ch. 7 has incidence

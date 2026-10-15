@@ -81,6 +81,18 @@
 
 ## Resources
 
+- Courses and videos:
+  - MIT *The Missing Semester of Your CS Education* (IAP 2026, lecture videos and notes): Lecture 4 "Debugging and
+    Profiling" <https://missing.csail.mit.edu/2026/debugging-profiling/> (logging, debuggers, sampling vs tracing
+    profilers, flame graphs; the notes name cProfile and py-spy for Python) and Lecture 9 "Code Quality"
+    <https://missing.csail.mit.edu/2026/code-quality/> (testing, property-based tests with Hypothesis, coverage).
+  - Real Python video courses (**Real Python subscribers only**): *Testing Your Code With pytest* (Trudeau,
+    8 lessons) <https://realpython.com/courses/testing-your-code-with-pytest/>, with "Providing Fixtures" and
+    "Parameterizing Your Tests"; *Debugging in Python With pdb* (Cepalia, 11 lessons)
+    <https://realpython.com/courses/python-debugging-pdb/>; *Profiling Performance in Python* (Vahid, 9 lessons)
+    <https://realpython.com/courses/profiling-performance/>: `timeit`, cProfile with pstats, and Pyinstrument.
+  - ArjanCodes, "Property-Based Testing In Python: Hypothesis is AWESOME" (YouTube)
+    <https://www.youtube.com/watch?v=mkgd9iOiICc>.
 - JAX documentation: "Introduction to debugging" <https://docs.jax.dev/en/latest/debugging.html>; "JAX debugging
   flags" <https://docs.jax.dev/en/latest/debugging/flags.html>; "Profiling computation"
   <https://docs.jax.dev/en/latest/profiling.html>; "Device memory profiling"

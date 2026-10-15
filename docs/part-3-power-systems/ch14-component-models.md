@@ -36,10 +36,17 @@
 
 ## Resources
 
-- Free: Overbye, TAMU ECEN 615 lecture slides <https://overbye.engr.tamu.edu/course-2/>; NPTEL *Power System
-  Analysis* (A. K. Sinha, IIT Kharagpur) <https://nptel.ac.in/courses/108105067>; MATPOWER User's Manual
-  (branch model) <https://matpower.org/docs/MATPOWER-manual.pdf>; pandapower element documentation
-  <https://pandapower.readthedocs.io/>.
+- Courses and videos:
+  - NPTEL *Power System Analysis* (IIT Kharagpur, A. K. Sinha) <https://nptel.ac.in/courses/108105067>:
+    Lectures 7–8 (transmission line modeling, long line), 12 (transformer model) and 15 (load model).
+  - NPTEL *Computer Aided Power System Analysis* (IIT Roorkee, Biswarup Das)
+    <https://nptel.ac.in/courses/108107127>: Lectures 1–2 (models of generators, lines, transformers with and
+    without tap changer, loads) and 3 (building the bus admittance matrix).
+  - Overbye, TAMU ECEN 615 *Methods of Electric Power System Analysis*, Fall 2025 (slides, no videos)
+    <https://overbye.engr.tamu.edu/ecen-615-fall-2025/lecture-notes/>: Lectures 3 (per unit, $Y_\text{bus}$),
+    7 (transformers with off-nominal taps and phase shifts) and 16 (Kron reduction, Ward equivalents).
+- Free: MATPOWER User's Manual (branch model) <https://matpower.org/docs/MATPOWER-manual.pdf>; pandapower
+  element documentation <https://pandapower.readthedocs.io/>.
 - Software: MATPOWER <https://matpower.org/> (source <https://github.com/MATPOWER/matpower>), which runs in GNU
   Octave <https://octave.org/>. The MATPOWER 8.1 manual lists GNU Octave 6.2 or later for all features
   (§2.1); §3.2 describes the branch model and §3.6 the network equations used below.

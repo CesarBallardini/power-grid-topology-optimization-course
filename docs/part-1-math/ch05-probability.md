@@ -32,7 +32,16 @@
 
 ## Resources
 
-- Courses: MIT OCW 18.05 <https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/>.
+- Courses and videos:
+  - Harvard *Statistics 110: Probability* (Blitzstein), built on Blitzstein & Hwang's *Introduction to
+    Probability*: <https://www.youtube.com/playlist?list=PL2SOU6wwxB0uwwH80KTQ6ht66KWxbzTIo>. Lectures 8–9
+    (random variables, expectation), 11 "The Poisson distribution", 12–13 (uniform and normal), 14 "Location,
+    Scale, and LOTUS" (functions of a random variable) and 25 "Order Statistics and Conditional Expectation".
+  - MIT OCW 6.041 *Probabilistic Systems Analysis and Applied Probability* (Tsitsiklis, 2010):
+    <https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/>.
+    Lectures 5–8 (discrete and continuous random variables, expectations) and 10–11 (derived distributions).
+  - MIT OCW 18.05 *Introduction to Probability and Statistics* (class notes and slides, no lecture videos)
+    <https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/>.
 - Free texts: Grinstead & Snell, *Introduction to Probability* <https://math.dartmouth.edu/~prob/prob/prob.pdf>;
   *OpenIntro Statistics* <https://www.openintro.org/book/os/>.
 - Textbook: Ross, *A First Course in Probability*. **PRINT-DISABLED**.
