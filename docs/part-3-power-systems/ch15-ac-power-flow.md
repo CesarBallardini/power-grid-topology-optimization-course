@@ -38,7 +38,9 @@
 - Distributed slack: participation factors and how they change the Jacobian; OpenLoadFlow balance types.
 - Initialization (flat, DC, previous values); convergence failures and what they indicate (voltage collapse,
   islands, bad data); why the initialization can decide which solution you get.
-- Tools: MATPOWER `runpf` and `mpoption` in Octave; `pandapower.runpp`; `pypowsybl.loadflow.run_ac`.
+- Tools: MATPOWER `runpf` and `mpoption` in Octave; `pandapower.runpp`; `pypowsybl.loadflow.run_ac`;
+  optionally PowerWorld Simulator, the commercial tool used in the labs of several surveyed courses
+  ([Appendix A](../appendices/a-syllabi.md)).
 
 ## Learning outcomes
 
@@ -55,8 +57,12 @@
   <https://github.com/e2nIEE/pandapower/tree/master/tutorials> and AC power flow documentation
   <https://pandapower.readthedocs.io/en/latest/powerflow/ac.html>; PowSyBl OpenLoadFlow parameters
   <https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/loadflow/parameters.html>.
+- Free: PowerWorld training module I7 "Power Flow Analysis and Voltage Control" (slides)
+  <https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/voltage-control>, background
+  for lab step 6.
 - Software: GNU Octave <https://octave.org/> with MATPOWER <https://matpower.org/>; GeoGebra
-  <https://www.geogebra.org/classic>.
+  <https://www.geogebra.org/classic>; PowerWorld Simulator demo (Windows only, up to 13 buses)
+  <https://www.powerworld.com/download-purchase/demo-software>.
 - Papers: Tinney & Hart, "Power flow solution by Newton's method", *IEEE Trans. PAS* 86(11), 1967; Stott &
   Alsaç, "Fast decoupled load flow", *IEEE Trans. PAS* 93(3), 1974.
 - Textbooks:
@@ -157,7 +163,8 @@ results_fd = runpf(mpc, mpopt);
 
 !!! example "Lab: Newton–Raphson from scratch, then break it"
 
-    Tools: Jupyter + NumPy + matplotlib + pandapower; optionally Octave + MATPOWER and pypowsybl.
+    Tools: Jupyter + NumPy + matplotlib + pandapower; optionally Octave + MATPOWER, pypowsybl and PowerWorld
+    Simulator.
 
     1. Implement Newton–Raphson for a 5-bus grid (reuse [Chapter 6](../part-1-math/ch06-newton-raphson.md) code
        and the $Y_\text{bus}$ of [Chapter 14](ch14-component-models.md)), with the Jacobian of the worked example.
@@ -170,6 +177,10 @@ results_fd = runpf(mpc, mpopt);
     5. Optional: with `pypowsybl.network.create_ieee14()`, run `pypowsybl.loadflow.run_ac` with
        `Parameters(distributed_slack=False)` and with `distributed_slack=True`, and tabulate how generator active
        powers and the largest branch flows change.
+    6. Optional (Windows): build the 5-bus grid of step 1 in the PowerWorld Simulator demo, with the same MVA
+       base, solve it, and compare bus voltages and branch flows with your solver. The demo is limited to
+       13 buses, so IEEE 14 does not fit. Then repeat one failure of step 3 and compare how Simulator reports it
+       with your iteration history.
 
 ## Exercises
 

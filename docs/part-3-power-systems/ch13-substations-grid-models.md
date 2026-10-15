@@ -36,7 +36,8 @@
   `make_optimal_separation_set` removes candidates that duplicate another one (or its A/B mirror) and, for
   tables with at least `clip_at_size` rows (default 100), also those within `clip_hamming_distance` of another.
 - "Topo-vect" (two nodes per substation) as the solver's view of a station.
-- Data formats: UCTE-DEF, CGMES / CIM, PowSyBl IIDM/XIIDM, pandapower JSON, MATPOWER.
+- Data formats: UCTE-DEF, CGMES / CIM, PowSyBl IIDM/XIIDM, pandapower JSON, MATPOWER. PowerWorld Simulator
+  keeps cases in its own `.pwb` (binary) and `.aux` (text) files, which ToOp does not read.
 - Merging models from several TSOs (boundaries, tie lines); single-line diagrams.
 - Forward link: state estimation and topology errors (a breaker status that is wrong in the model) are treated
   in [Chapter 22](ch22-import-preprocessing.md).
@@ -61,6 +62,8 @@
     <https://cim-cgmes.github.io/>.
   - UCTE data exchange format specification (cited in ToOp):
     <https://eepublicdownloads.entsoe.eu/clean-documents/pre2015/publications/ce/otherreports/UCTE-format.pdf>.
+  - PowerWorld training module I4 "Auxiliary File Format, Data Section" (slides), on the `.aux` text format:
+    <https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/auxiliary-files-data-section>.
 - Papers: Heidarifar & Ghasemi, "A Network Topology Optimization Model Based on Substation and Node-Breaker
   Modeling", *IEEE Trans. Power Systems* 31(1):247–255, 2016.
 - Reference: Westinghouse, *Electrical Transmission and Distribution Reference Book* (1964). **BORROW**
