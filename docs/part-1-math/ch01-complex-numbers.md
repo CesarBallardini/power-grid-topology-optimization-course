@@ -29,10 +29,23 @@
 
 ## Resources
 
-- Courses and videos: Khan Academy complex numbers
-  (<https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:complex>); Welch Labs, "Imaginary Numbers
-  Are Real" (<https://www.youtube.com/playlist?list=PLiaHhY2iBX9g6KIvZ_703G3KJXapKkNaF>); MIT OCW 18.04,
-  Topic 1 (<https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/>).
+- Courses and videos:
+  - Brunton (University of Washington), *Engineering Math: Crash Course in Complex Analysis*
+    <https://www.youtube.com/playlist?list=PLMrJAkhIeNNQBRslPb7I0yTnES981R8Cg>. L01 (complex arithmetic, Euler's
+    formula, polar coordinates), L02 (Euler's formula) and L05 (roots of unity) cover this chapter; L06 onward
+    (analytic functions, contour integrals, residues) goes beyond what the course uses.
+  - MIT OCW 18.03 *Differential Equations*, Lecture 6 "Complex Numbers and Complex Exponentials" (Mattuck)
+    <https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/resources/lecture-6-complex-numbers-and-complex-exponentials/>:
+    complex exponentials as a tool for sinusoidal inputs, the road to the phasors of
+    [Chapter 9](../part-2-circuits/ch09-ac-steady-state.md).
+  - MIT OCW 18.04 *Complex Variables with Applications*, Topic 1 notes (no videos)
+    <https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/>.
+  - Full complex analysis courses in video, for students who want more: Coursera *Introduction to Complex
+    Analysis* (Wesleyan, Bonfert-Taylor; paid, with a free trial) <https://www.coursera.org/learn/complex-analysis>;
+    NPTEL *Complex Analysis* (IIT Guwahati, Sree Krishna) <https://nptel.ac.in/courses/111103070>.
+  - Refresher, precalculus level: Khan Academy complex numbers
+    <https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:complex>; Welch Labs, "Imaginary Numbers Are
+    Real" <https://www.youtube.com/playlist?list=PLiaHhY2iBX9g6KIvZ_703G3KJXapKkNaF>.
 - Free texts: OpenStax *Precalculus 2e* §8.5
   (<https://openstax.org/books/precalculus-2e/pages/8-5-polar-form-of-complex-numbers>); Beck, Marchesi,
   Pixton & Sabalka, *A First Course in Complex Analysis*, Ch. 1 (FREE, <https://matthbeck.github.io/complex.html>).

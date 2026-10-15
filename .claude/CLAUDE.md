@@ -25,7 +25,9 @@ Chapter dependencies are defined in `docs/index.md` (Mermaid flowchart) and enfo
 2. **Check formatting** — run `make lint` before committing (ruff enforces style)
 3. **Verify links** — `make docs` (strict mode catches broken internal links; external links are checked locally only, with `make links`, never in CI)
 4. **Update glossary** — if you add new acronyms, run `make abbreviations` to regenerate tooltips
-5. **Commit with Conventional Commits** — hook enforces `docs: <message>` or `fix: <message>` format
+5. **Commit with Conventional Commits** — commitizen (`cz_conventional_commits`) enforces `<type>: <message>`; the book uses `docs:` and `fix:`, CI changes `ci:`
+
+On commit, `markdown-link-check` checks every link in each staged file, not only the lines changed, so an old link that fails can block an unrelated edit. pre-commit runs with the **staged** `.pre-commit-config.yaml` and `.markdown-link-check.json` (unstaged changes are stashed). After opening the link to confirm it works, skip only that hook: `SKIP=markdown-link-check git commit ...`.
 
 ### Maintenance Tasks
 
@@ -62,6 +64,8 @@ There is no link-check workflow on purpose. The `main` ruleset has no required s
 
 - `uv` script launchers in `.venv/Scripts` (`pre-commit.exe`, `cz.exe`, ...) can break with "uv trampoline failed to canonicalize script path". Local hooks and Make targets therefore call tools as modules (`python -m pre_commit`, `python -m commitizen`). Repair a broken venv with `uv sync --all-groups --frozen --reinstall`.
 - `markdown-link-check` sometimes reports "files were modified by this hook" with no dead links listed; rerun.
+- Commands typed with the `!` prefix in Claude Code run in Git Bash, not PowerShell: set a variable for one command as `SKIP=hook git commit ...`. In Git Bash, `$env:SKIP=...` silently sets nothing.
+- `uv run` can recreate `.venv` (for example after a Python upgrade) with only the default groups, so `make docs` fails with "Failed to spawn: mkdocs". Restore every group with `uv sync --all-groups --frozen`.
 
 ## Chapter Conventions
 
@@ -70,6 +74,7 @@ There is no link-check workflow on purpose. The `main` ruleset has no required s
 - **Lab** section describes hands-on exercises with required tools (Jupyter, NumPy, JAX, etc.)
 - **Exercises** are graded tasks; labs are lab-based checkpoints per semester
 - **Resources** cite freely available books (archive.org labels: FREE, BORROW, PRINT-DISABLED)
+- **Tools in labs** are free and run on Windows, macOS and Linux. Commercial or Windows-only tools appear only as optional steps or resources. Example: PowerWorld Simulator (free demo limited to 13 buses, so IEEE 14 does not fit) is in the course guide's tool table, the Chapter 15 lab (step 6), and its free training modules are cited in chapters 13, 15, 17 and 19
 
 ## Bibliography & Archive.org
 
@@ -98,7 +103,7 @@ All tools are plain Python scripts in `tools/`:
 - `mkdocs.yml` — site config, navigation structure, Material theme settings
 - `pyproject.toml` — uv environment (dev/doc groups), commitizen config, pytest settings
 - `.pre-commit-config.yaml` — git hooks: ruff (lint/format), commitizen (message validation), markdown-link-check
-- `.markdown-link-check.json` — link checker settings; the only ignore rule is the plugin-injected `../print_page/` link, with no per-host exceptions
+- `.markdown-link-check.json` — link checker settings; the only ignore rule is the plugin-injected `../print_page/` link, with no per-host exceptions; alive status codes are 200, 202 (bot challenges such as eur-lex's) and 206
 - `Makefile` — convenience targets for all common tasks
 
 ## Style & Tone
