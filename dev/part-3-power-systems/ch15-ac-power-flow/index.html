@@ -2299,7 +2299,9 @@ here, and so does the AC–DC mismatch correction applied to DC flows
 <li>Distributed slack: participation factors and how they change the Jacobian; OpenLoadFlow balance types.</li>
 <li>Initialization (flat, DC, previous values); convergence failures and what they indicate (voltage collapse,
   islands, bad data); why the initialization can decide which solution you get.</li>
-<li>Tools: MATPOWER <code>runpf</code> and <code>mpoption</code> in Octave; <code>pandapower.runpp</code>; <code>pypowsybl.loadflow.run_ac</code>.</li>
+<li>Tools: MATPOWER <code>runpf</code> and <code>mpoption</code> in Octave; <code>pandapower.runpp</code>; <code>pypowsybl.loadflow.run_ac</code>;
+  optionally PowerWorld Simulator, the commercial tool used in the labs of several surveyed courses
+  (<a href="../../appendices/a-syllabi/">Appendix A</a>).</li>
 </ul>
 <h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2316,8 +2318,12 @@ here, and so does the AC–DC mismatch correction applied to DC flows
   <a href="https://github.com/e2nIEE/pandapower/tree/master/tutorials">https://github.com/e2nIEE/pandapower/tree/master/tutorials</a> and AC power flow documentation
   <a href="https://pandapower.readthedocs.io/en/latest/powerflow/ac.html">https://pandapower.readthedocs.io/en/latest/powerflow/ac.html</a>; PowSyBl OpenLoadFlow parameters
   <a href="https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/loadflow/parameters.html">https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/loadflow/parameters.html</a>.</li>
+<li>Free: PowerWorld training module I7 "Power Flow Analysis and Voltage Control" (slides)
+  <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/voltage-control">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/voltage-control</a>, background
+  for lab step 6.</li>
 <li>Software: GNU Octave <a href="https://octave.org/">https://octave.org/</a> with MATPOWER <a href="https://matpower.org/">https://matpower.org/</a>; GeoGebra
-  <a href="https://www.geogebra.org/classic">https://www.geogebra.org/classic</a>.</li>
+  <a href="https://www.geogebra.org/classic">https://www.geogebra.org/classic</a>; PowerWorld Simulator demo (Windows only, up to 13 buses)
+  <a href="https://www.powerworld.com/download-purchase/demo-software">https://www.powerworld.com/download-purchase/demo-software</a>.</li>
 <li>Papers: Tinney &amp; Hart, "Power flow solution by Newton's method", <em>IEEE Trans. PAS</em> 86(11), 1967; Stott &amp;
   Alsaç, "Fast decoupled load flow", <em>IEEE Trans. PAS</em> 93(3), 1974.</li>
 <li>Textbooks:</li>
@@ -2398,7 +2404,8 @@ OpenLoadFlow, the balance type selects <span class="arithmatex">\(k\)</span> (pr
 <h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Lab: Newton–Raphson from scratch, then break it</p>
-<p>Tools: Jupyter + NumPy + matplotlib + pandapower; optionally Octave + MATPOWER and pypowsybl.</p>
+<p>Tools: Jupyter + NumPy + matplotlib + pandapower; optionally Octave + MATPOWER, pypowsybl and PowerWorld
+Simulator.</p>
 <ol>
 <li>Implement Newton–Raphson for a 5-bus grid (reuse <a href="../../part-1-math/ch06-newton-raphson/">Chapter 6</a> code
    and the <span class="arithmatex">\(Y_\text{bus}\)</span> of <a href="../ch14-component-models/">Chapter 14</a>), with the Jacobian of the worked example.
@@ -2411,6 +2418,10 @@ OpenLoadFlow, the balance type selects <span class="arithmatex">\(k\)</span> (pr
 <li>Optional: with <code>pypowsybl.network.create_ieee14()</code>, run <code>pypowsybl.loadflow.run_ac</code> with
    <code>Parameters(distributed_slack=False)</code> and with <code>distributed_slack=True</code>, and tabulate how generator active
    powers and the largest branch flows change.</li>
+<li>Optional (Windows): build the 5-bus grid of step 1 in the PowerWorld Simulator demo, with the same MVA
+   base, solve it, and compare bus voltages and branch flows with your solver. The demo is limited to
+   13 buses, so IEEE 14 does not fit. Then repeat one failure of step 3 and compare how Simulator reports it
+   with your iteration history.</li>
 </ol>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>

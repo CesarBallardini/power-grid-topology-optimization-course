@@ -2318,7 +2318,8 @@ and couplers.</p>
   <code>make_optimal_separation_set</code> removes candidates that duplicate another one (or its A/B mirror) and, for
   tables with at least <code>clip_at_size</code> rows (default 100), also those within <code>clip_hamming_distance</code> of another.</li>
 <li>"Topo-vect" (two nodes per substation) as the solver's view of a station.</li>
-<li>Data formats: UCTE-DEF, <abbr title="Common Grid Model Exchange Standard">CGMES</abbr> / <abbr title="Common Information Model">CIM</abbr>, PowSyBl <abbr title="iTesla Internal Data Model">IIDM</abbr>/<abbr title="Extended iTesla Internal Data Model (XML)">XIIDM</abbr>, pandapower JSON, MATPOWER.</li>
+<li>Data formats: UCTE-DEF, <abbr title="Common Grid Model Exchange Standard">CGMES</abbr> / <abbr title="Common Information Model">CIM</abbr>, PowSyBl <abbr title="iTesla Internal Data Model">IIDM</abbr>/<abbr title="Extended iTesla Internal Data Model (XML)">XIIDM</abbr>, pandapower JSON, MATPOWER. PowerWorld Simulator
+  keeps cases in its own <code>.pwb</code> (binary) and <code>.aux</code> (text) files, which ToOp does not read.</li>
 <li>Merging models from several TSOs (boundaries, tie lines); single-line diagrams.</li>
 <li>Forward link: state estimation and topology errors (a breaker status that is wrong in the model) are treated
   in <a href="../ch22-import-preprocessing/">Chapter 22</a>.</li>
@@ -2343,6 +2344,8 @@ and couplers.</p>
     <a href="https://cim-cgmes.github.io/">https://cim-cgmes.github.io/</a>.</li>
 <li>UCTE data exchange format specification (cited in ToOp):
     <a href="https://eepublicdownloads.entsoe.eu/clean-documents/pre2015/publications/ce/otherreports/UCTE-format.pdf">https://eepublicdownloads.entsoe.eu/clean-documents/pre2015/publications/ce/otherreports/UCTE-format.pdf</a>.</li>
+<li>PowerWorld training module I4 "Auxiliary File Format, Data Section" (slides), on the <code>.aux</code> text format:
+    <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/auxiliary-files-data-section">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/auxiliary-files-data-section</a>.</li>
 <li>Papers: Heidarifar &amp; Ghasemi, "A Network Topology Optimization Model Based on Substation and Node-Breaker
   Modeling", <em>IEEE Trans. Power Systems</em> 31(1):247–255, 2016.</li>
 <li>Reference: Westinghouse, <em>Electrical Transmission and Distribution Reference Book</em> (1964). <strong>BORROW</strong>

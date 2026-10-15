@@ -3701,8 +3701,19 @@ the prerequisites of each lab, is taught first. The dependency flowchart is in t
 <td>The engine studied in the course, run in a container</td>
 <td><a href="https://github.com/eliagroup/ToOp">https://github.com/eliagroup/ToOp</a></td>
 </tr>
+<tr>
+<td>PowerWorld Simulator (optional)</td>
+<td>Flows and voltages on an animated one-line diagram; a cross-check in the AC power flow lab</td>
+<td><a href="https://www.powerworld.com/download-purchase/demo-software">https://www.powerworld.com/download-purchase/demo-software</a></td>
+</tr>
 </tbody>
 </table>
+<p>PowerWorld Simulator is a commercial tool that runs only on 64-bit Windows. Its free demo, licensed for
+education and evaluation, solves cases of up to 13 buses, so no lab requires it. Thomas Overbye, the original
+developer of Simulator, co-authored the Glover–Sarma–Overbye textbook (12 syllabi, tied with Grainger &amp; Stevenson
+as the most cited power system analysis text in <a href="#appendices-a-syllabi-summary-most-cited-books-by-subject">Appendix A</a>),
+and PowerWorld grew out of his work at the University of Illinois. Many students coming from those programs
+will have used it.</p>
 <p><a href="#part-0-orientation-ch00-orientation-and-setup">Chapter 0</a> sets up ToOp in a container (the supported
 path on Windows). A <abbr title="Graphics processing unit">GPU</abbr> is optional: every lab runs on CPU, with smaller grids.</p>
 <h2 id="course-guide-printable-version">Printable version<a class="headerlink" href="#course-guide-printable-version" title="Permanent link">&para;</a></h2>
@@ -5406,7 +5417,8 @@ and couplers.</p>
   <code>make_optimal_separation_set</code> removes candidates that duplicate another one (or its A/B mirror) and, for
   tables with at least <code>clip_at_size</code> rows (default 100), also those within <code>clip_hamming_distance</code> of another.</li>
 <li>"Topo-vect" (two nodes per substation) as the solver's view of a station.</li>
-<li>Data formats: UCTE-DEF, <abbr title="Common Grid Model Exchange Standard">CGMES</abbr> / <abbr title="Common Information Model">CIM</abbr>, PowSyBl <abbr title="iTesla Internal Data Model">IIDM</abbr>/<abbr title="Extended iTesla Internal Data Model (XML)">XIIDM</abbr>, pandapower JSON, MATPOWER.</li>
+<li>Data formats: UCTE-DEF, <abbr title="Common Grid Model Exchange Standard">CGMES</abbr> / <abbr title="Common Information Model">CIM</abbr>, PowSyBl <abbr title="iTesla Internal Data Model">IIDM</abbr>/<abbr title="Extended iTesla Internal Data Model (XML)">XIIDM</abbr>, pandapower JSON, MATPOWER. PowerWorld Simulator
+  keeps cases in its own <code>.pwb</code> (binary) and <code>.aux</code> (text) files, which ToOp does not read.</li>
 <li>Merging models from several TSOs (boundaries, tie lines); single-line diagrams.</li>
 <li>Forward link: state estimation and topology errors (a breaker status that is wrong in the model) are treated
   in <a href="#part-3-power-systems-ch22-import-preprocessing">Chapter 22</a>.</li>
@@ -5431,6 +5443,8 @@ and couplers.</p>
     <a href="https://cim-cgmes.github.io/">https://cim-cgmes.github.io/</a>.</li>
 <li>UCTE data exchange format specification (cited in ToOp):
     <a href="https://eepublicdownloads.entsoe.eu/clean-documents/pre2015/publications/ce/otherreports/UCTE-format.pdf">https://eepublicdownloads.entsoe.eu/clean-documents/pre2015/publications/ce/otherreports/UCTE-format.pdf</a>.</li>
+<li>PowerWorld training module I4 "Auxiliary File Format, Data Section" (slides), on the <code>.aux</code> text format:
+    <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/auxiliary-files-data-section">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/auxiliary-files-data-section</a>.</li>
 <li>Papers: Heidarifar &amp; Ghasemi, "A Network Topology Optimization Model Based on Substation and Node-Breaker
   Modeling", <em>IEEE Trans. Power Systems</em> 31(1):247–255, 2016.</li>
 <li>Reference: Westinghouse, <em>Electrical Transmission and Distribution Reference Book</em> (1964). <strong>BORROW</strong>
@@ -5700,7 +5714,9 @@ here, and so does the AC–DC mismatch correction applied to DC flows
 <li>Distributed slack: participation factors and how they change the Jacobian; OpenLoadFlow balance types.</li>
 <li>Initialization (flat, DC, previous values); convergence failures and what they indicate (voltage collapse,
   islands, bad data); why the initialization can decide which solution you get.</li>
-<li>Tools: MATPOWER <code>runpf</code> and <code>mpoption</code> in Octave; <code>pandapower.runpp</code>; <code>pypowsybl.loadflow.run_ac</code>.</li>
+<li>Tools: MATPOWER <code>runpf</code> and <code>mpoption</code> in Octave; <code>pandapower.runpp</code>; <code>pypowsybl.loadflow.run_ac</code>;
+  optionally PowerWorld Simulator, the commercial tool used in the labs of several surveyed courses
+  (<a href="#appendices-a-syllabi">Appendix A</a>).</li>
 </ul>
 <h2 id="part-3-power-systems-ch15-ac-power-flow-learning-outcomes">Learning outcomes<a class="headerlink" href="#part-3-power-systems-ch15-ac-power-flow-learning-outcomes" title="Permanent link">&para;</a></h2>
 <ul>
@@ -5717,8 +5733,12 @@ here, and so does the AC–DC mismatch correction applied to DC flows
   <a href="https://github.com/e2nIEE/pandapower/tree/master/tutorials">https://github.com/e2nIEE/pandapower/tree/master/tutorials</a> and AC power flow documentation
   <a href="https://pandapower.readthedocs.io/en/latest/powerflow/ac.html">https://pandapower.readthedocs.io/en/latest/powerflow/ac.html</a>; PowSyBl OpenLoadFlow parameters
   <a href="https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/loadflow/parameters.html">https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/loadflow/parameters.html</a>.</li>
+<li>Free: PowerWorld training module I7 "Power Flow Analysis and Voltage Control" (slides)
+  <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/voltage-control">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/voltage-control</a>, background
+  for lab step 6.</li>
 <li>Software: GNU Octave <a href="https://octave.org/">https://octave.org/</a> with MATPOWER <a href="https://matpower.org/">https://matpower.org/</a>; GeoGebra
-  <a href="https://www.geogebra.org/classic">https://www.geogebra.org/classic</a>.</li>
+  <a href="https://www.geogebra.org/classic">https://www.geogebra.org/classic</a>; PowerWorld Simulator demo (Windows only, up to 13 buses)
+  <a href="https://www.powerworld.com/download-purchase/demo-software">https://www.powerworld.com/download-purchase/demo-software</a>.</li>
 <li>Papers: Tinney &amp; Hart, "Power flow solution by Newton's method", <em>IEEE Trans. PAS</em> 86(11), 1967; Stott &amp;
   Alsaç, "Fast decoupled load flow", <em>IEEE Trans. PAS</em> 93(3), 1974.</li>
 <li>Textbooks:</li>
@@ -5799,7 +5819,8 @@ OpenLoadFlow, the balance type selects <span class="arithmatex">\(k\)</span> (pr
 <h2 id="part-3-power-systems-ch15-ac-power-flow-lab">Lab<a class="headerlink" href="#part-3-power-systems-ch15-ac-power-flow-lab" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Lab: Newton–Raphson from scratch, then break it</p>
-<p>Tools: Jupyter + NumPy + matplotlib + pandapower; optionally Octave + MATPOWER and pypowsybl.</p>
+<p>Tools: Jupyter + NumPy + matplotlib + pandapower; optionally Octave + MATPOWER, pypowsybl and PowerWorld
+Simulator.</p>
 <ol>
 <li>Implement Newton–Raphson for a 5-bus grid (reuse <a href="#part-1-math-ch06-newton-raphson">Chapter 6</a> code
    and the <span class="arithmatex">\(Y_\text{bus}\)</span> of <a href="#part-3-power-systems-ch14-component-models">Chapter 14</a>), with the Jacobian of the worked example.
@@ -5812,6 +5833,10 @@ OpenLoadFlow, the balance type selects <span class="arithmatex">\(k\)</span> (pr
 <li>Optional: with <code>pypowsybl.network.create_ieee14()</code>, run <code>pypowsybl.loadflow.run_ac</code> with
    <code>Parameters(distributed_slack=False)</code> and with <code>distributed_slack=True</code>, and tabulate how generator active
    powers and the largest branch flows change.</li>
+<li>Optional (Windows): build the 5-bus grid of step 1 in the PowerWorld Simulator demo, with the same MVA
+   base, solve it, and compare bus voltages and branch flows with your solver. The demo is limited to
+   13 buses, so IEEE 14 does not fit. Then repeat one failure of step 3 and compare how Simulator reports it
+   with your iteration history.</li>
 </ol>
 </div>
 <h2 id="part-3-power-systems-ch15-ac-power-flow-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch15-ac-power-flow-exercises" title="Permanent link">&para;</a></h2>
@@ -6023,6 +6048,10 @@ timestep.</p>
 <li>Free: Overbye ECEN 615 sensitivity analysis lectures (<a href="https://overbye.engr.tamu.edu/course-2/">https://overbye.engr.tamu.edu/course-2/</a>), the best
   free substitute for Appendix 7B; MATPOWER manual §4.5 "Linear Shift Factors" (<abbr title="Power transfer distribution factor">PTDF</abbr> for single and distributed
   slack, <abbr title="Line outage distribution factor">LODF</abbr>) and §9.5.4–9.5.5 (<code>makeLODF</code>, <code>makePTDF</code>) <a href="https://matpower.org/docs/MATPOWER-manual.pdf">https://matpower.org/docs/MATPOWER-manual.pdf</a>.</li>
+<li>Free: PowerWorld training module I11 "Linear Sensitivity Analysis", slides and the supplement "Linear
+  Analysis Techniques in PowerWorld Simulator"
+  <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/linear-sensitivity-analysis">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/linear-sensitivity-analysis</a>,
+  a visual introduction to <abbr title="Power transfer distribution factor">PTDF</abbr> and <abbr title="Line outage distribution factor">LODF</abbr> before you code them. The exercises need Simulator (Windows only).</li>
 <li>Papers:</li>
 <li>Ronellenfitsch, Timme &amp; Witthaut, "A Dual Method for Computing Power Transfer Distribution Factors",
     <em>IEEE Trans. Power Systems</em>, doi:10.1109/TPWRS.2016.2589464. Open access: arXiv:1510.04645. Reading
@@ -6598,6 +6627,12 @@ the wrong thing.</p>
 <li>Textbook: Wood, Wollenberg &amp; Sheblé 3rd ed., Ch. 7 (security, contingency analysis and selection) and §8.12
   (security-constrained <abbr title="Optimal power flow">OPF</abbr> with DC power flow). (11 syllabi) <strong>NOT ON IA</strong> (3rd ed.), so use a library copy.</li>
 <li>Free: Overbye TAMU ECEN 460 (contingency analysis, <abbr title="Security-constrained optimal power flow">SCOPF</abbr>, <abbr title="Locational marginal price">LMP</abbr>) <a href="https://overbye.engr.tamu.edu/course-2/ecen460sp25/">https://overbye.engr.tamu.edu/course-2/ecen460sp25/</a>.</li>
+<li>Free: PowerWorld training modules I9 "Limit Monitoring"
+  <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/limit-monitoring">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/limit-monitoring</a> and I10
+  "Contingency Analysis"
+  <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/contingency-analysis">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/contingency-analysis</a>
+  (slides): how a commercial tool defines contingency lists, monitored elements and violations. The exercises
+  need Simulator (Windows only).</li>
 <li>Documentation:</li>
 <li>ToOp: <code>docs/topology_optimizer/metrics.md</code>, <code>docs/contingency_analysis/propagation.md</code>,
     <code>docs/contingency_analysis/result_filtering.md</code>, <code>docs/dc_solver/busbar_outage.md</code>, <code>docs/wall_of_shame.md</code>
