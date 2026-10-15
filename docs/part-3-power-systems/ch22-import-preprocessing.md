@@ -143,6 +143,10 @@
     <https://pandapower.readthedocs.io/en/latest/estimation.html>.
   - pandapower diagnostic function (disconnected elements, implausible impedances, wrong switch configuration)
     <https://pandapower.readthedocs.io/en/latest/powerflow/diagnostic.html>.
+- Course: NPTEL *Economic Operations and Control of Power Systems* (IIT Kanpur, G. Mirle Vishwanath & N. P.
+  Padhy) <https://nptel.ac.in/courses/108104191>, Lecture 45: weighted least squares state estimation from
+  $z = h(x) + e$, the gain matrix and the Gauss–Newton iteration. Lectures 46–49 turn to phasor measurement
+  units.
 - Textbooks on state estimation:
   - Grainger & Stevenson, *Power System Analysis* (1994), chapter "State estimation of power systems".
     (12 syllabi) **BORROW** [`powersystemanaly0000grai_w3w3`](https://archive.org/details/powersystemanaly0000grai_w3w3).

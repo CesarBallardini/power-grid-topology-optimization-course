@@ -31,7 +31,16 @@
 
 ## Resources
 
-- Courses: MIT OCW 8.02 (Spring 2019 or 2007) <https://ocw.mit.edu/courses/8-02-physics-ii-electricity-and-magnetism-spring-2019/>.
+- Courses and videos:
+  - MIT OCW 8.02 *Physics II: Electricity and Magnetism* (Dourmashkin, Rajagopal et al., Spring 2019)
+    <https://ocw.mit.edu/courses/8-02-physics-ii-electricity-and-magnetism-spring-2019/>. The page leads to three
+    free MITx modules with lecture videos on the Open Learning Library: 8.02.1x (fields, potential, capacitors),
+    8.02.2x (DC circuits, magnetic fields and forces) and 8.02.3x (Faraday's law, inductors in DC and AC
+    circuits). The Spring 2007 version
+    <https://ocw.mit.edu/courses/8-02-physics-ii-electricity-and-magnetism-spring-2007/> has notes, no videos.
+  - Open Yale Courses PHYS 201 *Fundamentals of Physics II* (Shankar) <https://oyc.yale.edu/physics/phys-201>.
+    Lectures 5–13 cover this chapter: potential, capacitors, resistance, circuits and magnetism, Ampère's law,
+    Lenz's and Faraday's laws, and LCR circuits with DC and AC voltage.
 - Free text: OpenStax *University Physics Vol. 2*, Ch. 7–10 (potential, capacitance, current, DC circuits)
   and Ch. 13–15 (induction, inductance, AC circuits): <https://openstax.org/details/books/university-physics-volume-2>.
 - Textbooks:

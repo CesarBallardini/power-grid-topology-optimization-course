@@ -33,8 +33,14 @@
 
 ## Resources
 
+- Courses and videos:
+  - NPTEL *Fundamentals of Electrical Engineering* (IIT Kharagpur, Das) <https://nptel.ac.in/courses/108105112>.
+    Lectures 47–50 "Three phase circuits".
+  - NPTEL *Power System Analysis* (IIT Kharagpur, Sinha) <https://nptel.ac.in/courses/108105067>. Lecture 2
+    "Introduction to Single Line Diagram" (per-unit system, change of base, a worked example) and, at awareness
+    level, Lecture 26 "Symmetrical Component Analysis".
 - Free texts: Kuphaldt Vol. II, Ch. 10 "Polyphase AC Circuits"; MIT 6.061 notes Ch. 3 (polyphase networks)
-  and Ch. 4 (symmetrical components); Overbye, ECEN 615 Lecture 3 (per unit, Ybus)
+  and Ch. 4 (symmetrical components); Overbye, ECEN 615 Lecture 3 slides (per unit, Ybus)
   <https://overbye.engr.tamu.edu/wp-content/uploads/sites/146/2022/09/Lecture-3.pdf>.
 - Textbooks: the three-phase chapter of any [Chapter 8](ch08-dc-circuits.md) circuit book; Chapman ([Chapter 11](ch11-transformers-psts-hvdc.md)) Ch. 2 for per-unit
   transformer models.

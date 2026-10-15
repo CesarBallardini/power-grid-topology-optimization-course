@@ -38,8 +38,22 @@
 
 ## Resources
 
-- Courses: Coursera *Introduction to Graph Theory* (UC San Diego) <https://www.coursera.org/learn/graphs>;
-  NPTEL Graph Theory (IISc, Chandran) <https://nptel.ac.in/courses/106108054>; MIT OCW 6.042J graph units.
+- Courses and videos:
+  - MIT OCW 6.042J *Mathematics for Computer Science* (Leighton & van Dijk, 2010):
+    <https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/>. Lecture 6 "Graph Theory
+    and Coloring", Lecture 8 "Graph Theory II: Minimum Spanning Trees" (connectivity, trees) and Lecture 10
+    "Graph Theory III" (directed graphs, adjacency matrices).
+  - MIT OCW 6.006 *Introduction to Algorithms* (Demaine, Ku & Solomon, 2020):
+    <https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/>. Lecture 9 "Breadth-First
+    Search", Lecture 10 "Depth-First Search" and Lecture 13 "Dijkstra".
+  - MIT OCW 18.065 *Matrix Methods in Data Analysis, Signal Processing, and Machine Learning* (Strang),
+    Lecture 35 "Finding Clusters in Graphs": the Fiedler vector, an eigenvector of the graph Laplacian, splits
+    a graph in two
+    <https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/resources/lecture-35-finding-clusters-in-graphs-second-project-handwriting/>.
+  - Coursera *Introduction to Graph Theory* (UC San Diego, Kulikov & Podolskii; paid, with a free trial; no free audit shown)
+    <https://www.coursera.org/learn/graphs>.
+  - NPTEL *Graph Theory* (IISc, Chandran), graduate level <https://nptel.ac.in/courses/106108054>. Lectures
+    9–10 (2- and 3-connected graphs, Menger's theorem) match this chapter.
 - Free texts:
   - Diestel, *Graph Theory*, free preview edition, Ch. 1 (bridges, cycle and cut space) and Ch. 3
     (connectivity): <https://diestel-graph-theory.com/basic.html>.

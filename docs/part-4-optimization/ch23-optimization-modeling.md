@@ -45,11 +45,54 @@
 
 ## Resources
 
-- Courses: MIT OCW 6.251J *Introduction to Mathematical Programming*
-  <https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/>; MIT OCW 15.053
-  <https://ocw.mit.edu/courses/15-053-optimization-methods-in-management-science-spring-2013/>; Stanford
-  EE364a / edX CVX101 *Convex Optimization* <https://web.stanford.edu/class/ee364a/>; Coursera *Basic Modeling
-  for Discrete Optimization* (Melbourne) <https://www.coursera.org/learn/basic-modeling>.
+- Courses and videos:
+  - NPTEL *Fundamentals of Operations Research* (IIT Madras, Srinivasan) <https://nptel.ac.in/courses/112106134>:
+    Lectures 1–12 (formulations, graphical method, simplex, duality, sensitivity analysis). Its sequel, NPTEL
+    *Advanced Operations Research* (IIT Madras, Srinivasan) <https://nptel.ac.in/courses/112106131>: Lectures
+    12–16 (integer programming formulations, zero-one problems, branch and bound, cutting planes).
+  - Boyd (Stanford), EE364a *Convex Optimization I*, 2023 lectures
+    <https://www.youtube.com/playlist?list=PLoROMvodv4rMJqxxviPa4AmDClvcbHi6h>; course page
+    <https://web.stanford.edu/class/ee364a/>. The lectures follow Boyd & Vandenberghe; this chapter needs only
+    convex sets, convex functions, problem classes and duality (book Ch. 2–5). The same course is on edX as
+    *Convex Optimization* (StanfordOnline, self-paced, free audit track)
+    <https://www.edx.org/learn/engineering/stanford-university-convex-optimization>.
+  - MIT OCW 6.046J *Design and Analysis of Algorithms*, Lecture 16 "Complexity: P, NP, NP-completeness,
+    Reductions" (Demaine)
+    <https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-16-complexity-p-np-np-completeness-reductions/>.
+  - MIT OCW 6.251J *Introduction to Mathematical Programming* (notes, no videos)
+    <https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/>; MIT OCW 15.053
+    *Optimization Methods in Management Science* (notes, no videos)
+    <https://ocw.mit.edu/courses/15-053-optimization-methods-in-management-science-spring-2013/>.
+  - Coursera *Basic Modeling for Discrete Optimization* (The Chinese University of Hong Kong, Lee and Stuckey;
+    paid, with a free trial; no free audit shown) <https://www.coursera.org/learn/basic-modeling>: modeling in MiniZinc.
+  - Gurobi free video tutorials (vendor training, not a university course): *Linear Programming* playlist (17
+    videos) <https://www.youtube.com/playlist?list=PLHiHZENG6W8BeAfJfZ3myo5dsSQjEV5pJ>; *Optimization 101 for
+    Data Scientists* (12 videos) <https://www.youtube.com/playlist?list=PLHiHZENG6W8B_65-Unq-G59PtQtEc1Xj4>;
+    the mixed-integer series starts at "MILP Tutorial Overview" <https://www.youtube.com/watch?v=mUjkCeLx6_4>,
+    with the notebook "Introduction to Mathematical Optimization Modeling"
+    <https://www.gurobi.com/jupyter_models/introduction-to-mathematical-optimization-modeling/>.
+  - Udemy (paid, not university courses; check the current price on the course page). The pages were checked in
+    October 2026:
+    - *Optimization with Python: Complete Pyomo Bootcamp A-Z* (Shirzadi; 41 lectures, 2024): linear, integer
+      and nonlinear programming in Pyomo with CPLEX, IPOPT and COUENNE
+      <https://www.udemy.com/course/optimization-with-python-complete-pyomo-bootcamp-a-z>.
+    - *Mathematical Optimization with GAMS and Pyomo (Python)* (Shahandeh and Kammammettu; 52 lectures, 2024): 16
+      business problems, including an MILP power scheduling example
+      <https://www.udemy.com/course/mathematical-optimization-with-gams-and-pyomo-python/>.
+    - *Linear Programming basics* (Patel; 32 lectures, 2022): simplex method, duality and sensitivity analysis;
+      it does not cover MILP <https://www.udemy.com/course/linear-programming-basics/>.
+    - Issue: Udemy answers plain scripted requests with 403, so `make links` and the link-check hook may flag
+      these links; open them in a browser to confirm.
+  - Coursera *Solving Algorithms for Discrete Optimization* (The Chinese University of Hong Kong; check the
+    enrollment terms on the page) <https://www.coursera.org/learn/solving-algorithms-discrete-optimization>.
+    Issue: the related course *Discrete Optimization* (University of Melbourne; Van Hentenryck and Coffrin;
+    constraint programming, local search and mixed-integer programming) could not be linked: its page
+    `coursera.org/learn/discrete-optimization` returned 404 in October 2026, so it may have been retired or
+    moved. A video of Van Hentenryck on the course is on Coursera's YouTube channel
+    <https://www.youtube.com/watch?v=Y2Cv_cdKo0A>.
+  - Davidson & Jenkins, *Power Systems Optimization* (Princeton MAE/ENE 539, UC San Diego MAE 243; notebooks and
+    homeworks, no videos): LP and MILP in Julia/JuMP applied to economic dispatch, unit commitment and DC
+    optimal power flow <https://github.com/power-systems-optimization-course/power-systems-optimization>.
 - Free texts:
   - Boyd & Vandenberghe, *Convex Optimization* (6 syllabi), Ch. 2–5: FREE
     <https://web.stanford.edu/~boyd/cvxbook/>.

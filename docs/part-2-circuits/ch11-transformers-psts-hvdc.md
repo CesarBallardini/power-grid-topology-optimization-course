@@ -44,9 +44,22 @@
 
 ## Resources
 
-- Courses and notes: MIT OCW 6.061 notes Ch. 6 (magnetic circuits) and Ch. 9 (synchronous machines); MIT
-  OCW 6.685 *Electric Machines* <https://ocw.mit.edu/courses/6-685-electric-machines-fall-2013/>; MIT OCW
-  6.622 *Power Electronics* (awareness) <https://ocw.mit.edu/courses/6-622-power-electronics-spring-2023/>.
+- Courses and videos:
+  - NPTEL *Electrical Machines* (IIT Delhi, Bhuvaneshwari) <https://nptel.ac.in/courses/108102146>.
+    Modules 1–5 (magnetic circuits, ideal and practical transformers, equivalent circuit, per-unit notation,
+    three-phase transformers) and Modules 11–12 (synchronous machines: equivalent circuit, phasor diagram,
+    power-angle relationship).
+  - NPTEL *Power System Analysis* (IIT Kharagpur, Sinha) <https://nptel.ac.in/courses/108105067>. Lecture 12
+    "Transformer Model" (ideal and real transformers, equivalent circuit, three-phase and three-winding
+    transformers) and Lectures 13–14 "Synchronous Machine Model".
+  - MIT OCW 6.622 *Power Electronics* (Perreault, Spring 2023), at awareness level
+    <https://ocw.mit.edu/courses/6-622-power-electronics-spring-2023/video_galleries/video-lectures/>. Lecture 1
+    for the big picture; Lectures 21–23 (three-phase systems and inverters) for the converters behind VSC HVDC.
+  - MIT OCW 6.061 *Introduction to Electric Power Systems* (Kirtley, Spring 2011), notes Ch. 6 (magnetic
+    circuits) and Ch. 9 (synchronous machines; notes, no videos)
+    <https://ocw.mit.edu/courses/6-061-introduction-to-electric-power-systems-spring-2011/pages/readings/>.
+  - MIT OCW 6.685 *Electric Machines* (Kirtley, Fall 2013; notes, no videos)
+    <https://ocw.mit.edu/courses/6-685-electric-machines-fall-2013/>.
 - Free texts: Kuphaldt Vol. II, Ch. 9 (transformers); PowSyBl transformer model documentation (cited in ToOp;
   the original page `www.powsybl.org/pages/documentation/grid/model/` is gone, archived copy of August 2024:
   <https://web.archive.org/web/20240816020722/https://www.powsybl.org/pages/documentation/grid/model/#transformers>).

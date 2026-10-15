@@ -50,6 +50,14 @@
 
 ## Resources
 
+- Courses and videos:
+  - MIT OCW 6.034 *Artificial Intelligence* (Winston), Lecture 4 "Search: Depth-First, Hill Climbing, Beam"
+    <https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/resources/lecture-4-search-depth-first-hill-climbing-beam/>
+    and Lecture 13 "Learning: Genetic Algorithms"
+    <https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/resources/lecture-13-learning-genetic-algorithms/>.
+  - NPTEL *Traditional and Non-Traditional Optimization Tools* (IIT Kharagpur, Pratihar)
+    <https://nptel.ac.in/courses/112105235>: Lectures 4–12 (binary- and real-coded genetic algorithms, schema
+    theorem, constraint handling) and Lecture 20 (simulated annealing).
 - Free texts:
   - Luke, *Essentials of Metaheuristics*, 2nd ed.: Ch. 2 single-state methods, Ch. 3 population methods,
     Ch. 4 representation. FREE <https://people.cs.gmu.edu/~sean/book/metaheuristics/>.

@@ -52,8 +52,18 @@
 
 ## Resources
 
-- Free: Overbye ECEN 615 power flow lectures; MATPOWER manual (§4.1 AC power flow, Table 4-2 power flow
-  options) <https://matpower.org/docs/MATPOWER-manual.pdf>; pandapower power flow tutorials
+- Courses and videos:
+  - NPTEL *Computer Aided Power System Analysis* (IIT Roorkee, Biswarup Das)
+    <https://nptel.ac.in/courses/108107127>: Lectures 6 (power flow equations, bus types), 7–10 (Gauss–Seidel),
+    11–15 (Newton–Raphson in polar coordinates: Jacobian, algorithm, example), 16–19 (rectangular
+    coordinates, generator reactive power limits) and 20–22 (fast decoupled load flow).
+  - NPTEL *Power System Analysis* (IIT Kharagpur, A. K. Sinha) <https://nptel.ac.in/courses/108105067>:
+    Lectures 16–22 (Power Flow I–VII) and 24 (review of power flow study).
+  - Overbye, TAMU ECEN 615 *Methods of Electric Power System Analysis*, Fall 2025 (slides, no videos)
+    <https://overbye.engr.tamu.edu/ecen-615-fall-2025/lecture-notes/>: Lectures 4–5 (Newton–Raphson, decoupled
+    and fast decoupled power flow) and 7–8 (advanced power flow: tap changers, phase shifters, reactive limits).
+- Free: MATPOWER manual (§4.1 AC power flow, Table 4-2 power flow options)
+  <https://matpower.org/docs/MATPOWER-manual.pdf>; pandapower power flow tutorials
   <https://github.com/e2nIEE/pandapower/tree/master/tutorials> and AC power flow documentation
   <https://pandapower.readthedocs.io/en/latest/powerflow/ac.html>; PowSyBl OpenLoadFlow parameters
   <https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/loadflow/parameters.html>.

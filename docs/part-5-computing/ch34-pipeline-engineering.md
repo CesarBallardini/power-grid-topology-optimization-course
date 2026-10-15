@@ -64,11 +64,23 @@
 
 ## Resources
 
+- Courses and videos:
+  - Confluent Developer free video courses <https://developer.confluent.io/courses/> (vendor training): *Apache
+    Kafka 101* <https://developer.confluent.io/courses/apache-kafka/events/> (topics, partitions, producers,
+    consumers) and *Apache Kafka for Python Developers* <https://developer.confluent.io/courses/kafka-python/intro/>
+    (the confluent-kafka client); the hands-on exercises need a Confluent Cloud account.
+  - MIT *The Missing Semester of Your CS Education* (IAP 2026), Lecture 6 "Packaging and Shipping Code" (video and
+    notes) <https://missing.csail.mit.edu/2026/shipping-code/>: lock files, containers, Docker Compose,
+    configuration and services.
+  - Real Python video course *Using Pydantic to Simplify Python Data Validation* (Jones, 13 lessons; **Real Python
+    subscribers only**) <https://realpython.com/courses/pydantic-simplify-data-validation/>: models, fields,
+    validators and settings.
+  - ArjanCodes, "NEVER Worry About Data Science Projects Configs Again" (YouTube; Hydra configuration)
+    <https://www.youtube.com/watch?v=tEsPyYnzt8s>.
 - Wilson et al., *Research Software Engineering with Python* (free) <https://third-bit.com/py-rse/>;
   Scientific Python Development Guide <https://learn.scientific-python.org/development/>.
-- Confluent Developer free Kafka courses <https://developer.confluent.io/courses/>; confluent-kafka Python client
-  <https://docs.confluent.io/kafka-clients/python/current/overview.html>; Protobuf Python tutorial
-  <https://protobuf.dev/getting-started/pythontutorial/>; Ray Core walkthrough
+- confluent-kafka Python client <https://docs.confluent.io/kafka-clients/python/current/overview.html>;
+  Protobuf Python tutorial <https://protobuf.dev/getting-started/pythontutorial/>; Ray Core walkthrough
   <https://docs.ray.io/en/latest/ray-core/walkthrough.html> and Ray Dashboard
   <https://docs.ray.io/en/latest/ray-observability/getting-started.html>; h5py quick start
   <https://docs.h5py.org/en/stable/quick.html>; Pydantic <https://docs.pydantic.dev/>; Pandera

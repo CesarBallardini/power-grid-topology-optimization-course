@@ -88,6 +88,14 @@
 - Standard: IEC 60909-0:2016, *Short-circuit currents in three-phase a.c. systems, Part 0: Calculation of
   currents* <https://webstore.iec.ch/en/publication/24100> (paid; the pandapower documentation summarizes the
   method).
+- Courses and videos:
+  - NPTEL *Power System Analysis* (IIT Kharagpur, A. K. Sinha) <https://nptel.ac.in/courses/108105067>:
+    Lectures 25–32 (short-circuit analysis, symmetrical components, sequence networks, unbalanced faults, fault
+    analysis of large systems with $Z_\text{bus}$).
+  - NPTEL *Power System Protection* (IIT Kharagpur, A. K. Pradhan) <https://nptel.ac.in/courses/108105167>:
+    Lectures 1–4 (faults, elements of a protection scheme, sequence components review), 11–12 (overcurrent
+    relay characteristics and coordination), 20–23 (distance relaying, apparent impedance), 29–31 (fault
+    resistance, load encroachment, power swing) and 48 (busbar protection).
 - Textbooks:
   - Grainger & Stevenson, *Power System Analysis* (1994): chapters "Symmetrical faults", "Symmetrical components
     and sequence networks" and "Unsymmetrical faults". (12 syllabi) **BORROW**

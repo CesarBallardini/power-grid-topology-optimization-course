@@ -32,12 +32,24 @@
 
 ## Resources
 
-- Courses:
+- Courses and videos:
   - MIT OCW 6.002 *Circuits and Electronics* (Agarwal, Spring 2007):
     <https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/>. Lecture videos on
-    archive.org, **FREE** [`MIT6.002S07`](https://archive.org/details/MIT6.002S07).
-  - Coursera *Linear Circuits 1: DC Analysis* (Georgia Tech): <https://www.coursera.org/learn/linear-circuits-dcanalysis>.
-  - NPTEL *Networks and Systems* (V.G.K. Murti, IIT Madras): <https://nptel.ac.in/courses/108106075>.
+    archive.org, **FREE** [`MIT6.002S07`](https://archive.org/details/MIT6.002S07). Lecture 2 "Basic Circuit
+    Analysis Method" and Lecture 3 "Superposition, Thévenin and Norton" cover this chapter.
+  - Coursera *Linear Circuits 1: DC Analysis* (Georgia Tech, Ferri; paid, with a free trial; no free audit shown):
+    <https://www.coursera.org/learn/linear-circuits-dcanalysis>. Modules 2–4: KVL and KCL, mesh and node
+    analysis, Thévenin and Norton equivalents, superposition.
+  - NPTEL *Networks and Systems* (IIT Madras, Murti): <https://nptel.ac.in/courses/108106075>; 50 lectures,
+    also on the NPTEL YouTube channel <https://www.youtube.com/playlist?list=PLB0226234D8AEFB72>. Mostly a
+    signals and systems course (Fourier, Laplace, discrete-time, state variables), so watch only Lectures 34–37
+    "Network Theorems" (1–4) for this chapter; Lectures 1–6 "Introductory Concepts" are an optional warm-up.
+  - NPTEL *Basic Electrical Circuits* (IIT Madras, Krishnapura): <https://nptel.ac.in/courses/108106172>.
+    Week 4 (nodal analysis, including the structure of the conductance matrix) and Weeks 5–6 (mesh analysis,
+    superposition, Thévenin and Norton, maximum power transfer).
+  - NPTEL *Network Analysis* (IIT Kharagpur, Bhattacharya): <https://nptel.ac.in/courses/108105159>.
+    Lectures 1–8 (KVL, KCL, mesh and nodal analysis), 51–58 (network theorems, including Tellegen's) and
+    59–67 (graph theory applied to network analysis: mesh, nodal and cut-set analysis).
 - Free texts:
   - Ulaby, Maharbiz & Furse, *Circuit Analysis and Design*, 3rd ed. (2025), open access from Michigan
     Publishing: <https://services.publishing.umich.edu/Books/C/Circuit-Analysis-and-Design2>.

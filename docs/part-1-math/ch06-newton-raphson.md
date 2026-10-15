@@ -27,9 +27,19 @@
 
 ## Resources
 
-- Courses: Coursera *Numerical Methods for Engineers* (HKUST, Chasnov)
-  <https://www.coursera.org/learn/numerical-methods-engineers> with free notes
-  <https://www.math.hkust.edu.hk/~machas/numerical-methods.pdf>; MIT OCW 18.330.
+- Courses and videos:
+  - Coursera *Numerical Methods for Engineers* (HKUST, Chasnov; paid, with a free trial; no free audit shown)
+    <https://www.coursera.org/learn/numerical-methods-engineers> with free notes
+    <https://www.math.hkust.edu.hk/~machas/numerical-methods.pdf>. The lectures are free on YouTube
+    <https://www.youtube.com/playlist?list=PLkZjai-2Jcxn35XnijUtqqEg0Wi5Sn8ab>: Lectures 14–17 (Newton's
+    method, secant method, order of convergence, convergence of Newton's method), 18–19 (Newton fractals: the
+    root reached depends on the starting point) and 33–34 (systems of nonlinear equations).
+  - MIT OCW 10.34 *Numerical Methods Applied to Chemical Engineering* (Swan, 2015), graduate level:
+    <https://ocw.mit.edu/courses/10-34-numerical-methods-applied-to-chemical-engineering-fall-2015/>. Session 7
+    "Solutions of Nonlinear Equations; Newton-Raphson Method" and Session 8 "Quasi-Newton-Raphson Methods"
+    (Broyden).
+  - MIT OCW 18.330 *Introduction to Numerical Analysis* (Demanet; notes, no videos), chapter "Nonlinear
+    Equations": <https://ocw.mit.edu/courses/18-330-introduction-to-numerical-analysis-spring-2012/>.
 - Free text: Driscoll & Braun, *FNC*, §4.3 Newton's method, §4.5 nonlinear systems, §4.6 quasi-Newton.
 - Textbooks:
   - Burden & Faires, *Numerical Analysis* (4 syllabi): Ch. 10 (nonlinear systems, Newton, Broyden).

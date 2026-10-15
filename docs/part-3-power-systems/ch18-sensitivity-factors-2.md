@@ -75,6 +75,10 @@
     analysis and topology optimization", arXiv:2509.19976 (extension).
 - Background: Hager, "Updating the Inverse of a Matrix", *SIAM Review* 31(2), 1989,
   doi:10.1137/1031049; Higham on Sherman–Morrison–Woodbury ([Chapter 4](../part-1-math/ch04-numerical-linear-algebra.md)).
+- Course: MIT OCW 18.065 *Matrix Methods in Data Analysis, Signal Processing, and Machine Learning*, Lecture 14
+  "Low Rank Changes in A and Its Inverse" (Strang)
+  <https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/resources/lecture-14-low-rank-changes-in-a-and-its-inverse/>:
+  the Sherman–Morrison–Woodbury formula on which every update in this chapter rests.
 - ToOp: `docs/dc_solver/busbar_outage.md`; tests that double as executable specifications:
   `packages/dc_solver_pkg/tests/jax/test_cross_coupler_flow.py` (cross-coupler flows against PTDF flows of the
   split grid), `packages/dc_solver_pkg/tests/jax/test_busbar_outage.py` (busbar outages against
