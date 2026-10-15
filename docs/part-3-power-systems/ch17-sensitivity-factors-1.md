@@ -50,6 +50,10 @@
 - Free: Overbye ECEN 615 sensitivity analysis lectures (<https://overbye.engr.tamu.edu/course-2/>), the best
   free substitute for Appendix 7B; MATPOWER manual §4.5 "Linear Shift Factors" (PTDF for single and distributed
   slack, LODF) and §9.5.4–9.5.5 (`makeLODF`, `makePTDF`) <https://matpower.org/docs/MATPOWER-manual.pdf>.
+- Free: PowerWorld training module I11 "Linear Sensitivity Analysis", slides and the supplement "Linear
+  Analysis Techniques in PowerWorld Simulator"
+  <https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/linear-sensitivity-analysis>,
+  a visual introduction to PTDF and LODF before you code them. The exercises need Simulator (Windows only).
 - Papers:
   - Ronellenfitsch, Timme & Witthaut, "A Dual Method for Computing Power Transfer Distribution Factors",
     *IEEE Trans. Power Systems*, doi:10.1109/TPWRS.2016.2589464. Open access: arXiv:1510.04645. Reading

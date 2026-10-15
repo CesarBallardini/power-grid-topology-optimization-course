@@ -46,10 +46,11 @@ repos:
     hooks:
       - id: gitleaks
 
-  # A course book is mostly links to external resources, and they rot. Hosts
-  # that answer bots with 403/429 regardless of the page (publishers, MOOC
-  # platforms, academic social networks) are ignored in
-  # .markdown-link-check.json, so a failure here is a link worth fixing.
+  # A course book is mostly links to external resources, and they rot. This
+  # check runs locally only (`make links`, or on commit for the staged files),
+  # never in CI: GitHub's runner IPs are blocked by many hosts, so CI results
+  # say nothing about the links. Some hosts also fail from anywhere (bot
+  # blocks, slow servers), so judge a failure by opening the link.
   - repo: https://github.com/tcort/markdown-link-check
     rev: v3.15.0
     hooks:

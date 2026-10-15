@@ -103,6 +103,12 @@
 - Textbook: Wood, Wollenberg & Sheblé 3rd ed., Ch. 7 (security, contingency analysis and selection) and §8.12
   (security-constrained OPF with DC power flow). (11 syllabi) **NOT ON IA** (3rd ed.), so use a library copy.
 - Free: Overbye TAMU ECEN 460 (contingency analysis, SCOPF, LMP) <https://overbye.engr.tamu.edu/course-2/ecen460sp25/>.
+- Free: PowerWorld training modules I9 "Limit Monitoring"
+  <https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/limit-monitoring> and I10
+  "Contingency Analysis"
+  <https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/contingency-analysis>
+  (slides): how a commercial tool defines contingency lists, monitored elements and violations. The exercises
+  need Simulator (Windows only).
 - Documentation:
   - ToOp: `docs/topology_optimizer/metrics.md`, `docs/contingency_analysis/propagation.md`,
     `docs/contingency_analysis/result_filtering.md`, `docs/dc_solver/busbar_outage.md`, `docs/wall_of_shame.md`

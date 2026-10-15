@@ -65,6 +65,14 @@ Every lab states the tools it uses. Students need:
 | GeoGebra | Phasors, the complex plane, two-bus power transfer, LP geometry, Pareto fronts | <https://www.geogebra.org> |
 | pandapower and pypowsybl | Grid models, AC/DC power flow, contingency analysis | <https://pandapower.readthedocs.io/>, <https://powsybl.readthedocs.io/projects/pypowsybl/en/latest/> |
 | ToOp | The engine studied in the course, run in a container | <https://github.com/eliagroup/ToOp> |
+| PowerWorld Simulator (optional) | Flows and voltages on an animated one-line diagram; a cross-check in the AC power flow lab | <https://www.powerworld.com/download-purchase/demo-software> |
+
+PowerWorld Simulator is a commercial tool that runs only on 64-bit Windows. Its free demo, licensed for
+education and evaluation, solves cases of up to 13 buses, so no lab requires it. Thomas Overbye, the original
+developer of Simulator, co-authored the Glover–Sarma–Overbye textbook (12 syllabi, tied with Grainger & Stevenson
+as the most cited power system analysis text in [Appendix A](appendices/a-syllabi.md#summary-most-cited-books-by-subject)),
+and PowerWorld grew out of his work at the University of Illinois. Many students coming from those programs
+will have used it.
 
 [Chapter 0](part-0-orientation/ch00-orientation-and-setup.md) sets up ToOp in a container (the supported
 path on Windows). A GPU is optional: every lab runs on CPU, with smaller grids.
