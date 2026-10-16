@@ -10,8 +10,9 @@
     `docs/topology_optimizer/ac/ac_loop.md`).
 
     - **Exact formulations as the yardstick.** DC optimal transmission switching is a MILP and NP-hard; you will
-      formulate and solve it for a small grid and see where exact methods stop scaling, which is the reason
-      ToOp's DC stage is a GPU heuristic.
+      formulate and solve it for a small grid, where a MILP solver still finishes in a fraction of a second,
+      and count the topologies a brute force would need, to see why exact methods stop scaling on grids with
+      hundreds of lines and N-1 constraints, which is the reason ToOp's DC stage is a GPU heuristic.
     - **Acceptance.** `evaluate_acceptance` in `optimizer/ac/scoring_functions.py` compares each candidate's AC
       metrics with the unsplit grid's using multiplicative thresholds (defaults in
       `optimizer/interfaces/messages/ac_params.py`). Knowing exactly what it does, and where it misleads, is the
@@ -198,11 +199,22 @@ non-trivial.
     1. Solve DC-OPF for IEEE 30 from the worked example and check the flows against your DC power flow. Print the
        duals of the nodal balance constraints (locational marginal prices) and explain where they differ.
     2. Add switching with the big-M formulation. Solve for $k = 1, 2, 3$ and for 5, 10, 20 and all 41 switchable
-       lines; record cost, switched lines, solve time and MIP gap in a pandas table.
-    3. Add N-1 security for the 5 most critical contingencies with your LODFs (as linear constraints in the flows),
-       then add violated contingencies one at a time (lazy generation) until none remains. Record the iterations.
+       lines; record cost, switched lines, solve time and MIP gap in a pandas table. Do not expect the solve
+       time to blow up: on IEEE 30 HiGHS closes every one of these MILPs, 41 binaries included, with a zero gap
+       in well under a second. Measure it, count the topologies a brute force over at most $k$ open lines would
+       enumerate (1 351 with 20 lines and $k = 3$, 11 522 with 41), and explain why branch and bound sees
+       nothing of that growth here and on which grids (hundreds of lines, N-1 constraints) it does. For a case
+       where the solver does struggle, try IEEE 118 or a larger MATPOWER case with the same code.
+    3. Add N-1 security for the 5 most critical contingencies with your LODFs (as linear constraints in the flows)
+       to the DC-OPF of step 1, with the topology fixed, then add violated contingencies one at a time (lazy
+       generation) until none remains. Record the iterations. The LODF constraints are exact only for a fixed
+       topology: once lines can open, the LODFs themselves depend on the switching variables, and an OTS MILP
+       with N-1 needs one copy of the network angles per contingency (or shift factors recomputed per candidate
+       topology), which [Exercise 3](#exercises) takes up.
     4. Compare the switching decisions and the time with the brute-force and GA results of Chapter 24 and with the
        number of topologies per second ToOp reports in `res.json` (`total_branch_combis` and the run time).
+
+    Solutions: [Lab A](solutions.md#lab-a) · Notebook: [lab.ipynb](src/lab.ipynb).
 
 !!! example "Lab B: the AC stage in practice"
 
@@ -226,18 +238,36 @@ non-trivial.
        instruction an operator could read. Compare the number of switch operations with `switching_distance` in
        `ac_metrics.json` and in `dc_info`.
 
+    Solutions: [Lab B](solutions.md#lab-b) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. Derive a valid big-M for a switchable line in a network where the line lies on a cycle of $m$ other lines with
    known ratings and susceptances. Why is a bound over all topologies harder? *(pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. On a 3-bus network, show that switching off a line can lower the DC-OPF cost (Braess-like behavior), and read
    the explanation from the dual values. *(Jupyter: PuLP + HiGHS)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Awareness: for each of SOCP/QC/SDP relaxation, shift-factor MILP, lazy N-1 constraints and Benders
    decomposition, write two sentences on what it would change if used to validate or seed ToOp's DC search, and
    which ToOp stage it would compete with. *(pen and paper)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. Write a two-page comparison of a MILP (with lazy N-1 constraints), a rule-based expert system and ToOp for the
    same operational question: which switching actions relieve a given N-1 overload in the next day's grid.
    Cover scalability, guarantees, AC feasibility and operator interpretability. *(pen and paper)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Given `unsplit_ac_metrics.json` with `overload_energy_n_1 = 0.0`, `critical_branch_count_n_1 = 0` and
    `non_converging_loadflows = 2`, and a candidate with `0.4`, `1` and `1` (and no disconnected branches), which
    check rejects it first, and what would you change in the acceptance rule? *(pen and paper)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

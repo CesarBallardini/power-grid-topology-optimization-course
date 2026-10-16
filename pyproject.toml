@@ -21,6 +21,7 @@ dev = [
     "ruff",
     "pre-commit",
     "commitizen",
+    "nbstripout>=0.9.1",
 ]
 doc = [
     # MkDocs 2.0 removes the plugin system outright, which would take
@@ -37,13 +38,19 @@ doc = [
     "mkdocs-print-site-plugin",
 ]
 labs = [
+    "beartype>=0.23.1",
     "highspy>=1.15.1",
     "hypothesis>=6.170.0",
+    "ipykernel>=7.4.0",
     "jax>=0.11.2",
+    "jaxtyping>=0.3.11",
     "matplotlib>=3.11.2",
+    "nbclient>=0.11.0",
+    "nbformat>=5.11.1",
     "networkx>=3.7",
     "numpy>=2.4.6",
     "pandapower>=3.5.6",
+    "polars>=2.0.0",
     "pulp>=3,<4",
     "pypowsybl>=1.16.1",
     "scipy>=1.18.1",
@@ -70,6 +77,7 @@ pythonpath = ["tools"]
 markers = [
     "network: tests that hit a live external service (archive.org), excluded by default, run with -m network",
     "toop: chapter tests that import ToOp; they skip themselves unless ToOp is importable, run them with make test-toop",
+    "labs: chapter tests that need the labs container (Grid2Op, Stable-Baselines3, QDax, pymoo, moocore); they skip themselves unless the library is importable, run them with make test-labs",
 ]
 # Warnings are failures, like every other gate here -- a DeprecationWarning is
 # a future breakage that has already been diagnosed for us, and the only way it
@@ -82,4 +90,9 @@ filterwarnings = [
     # pandapower's own case57 (used by the Chapter 30 script) ships without the tap_dependency_table that
     # pandapower 3 introduced; the warning comes from their test data, not from code in this repository.
     "ignore:tap_dependency_table is missing in net:DeprecationWarning",
+    # pyzmq on Windows: the default Proactor event loop lacks add_reader, so zmq starts a selector thread and
+    # says so. Turning this into an error inside that thread leaves nbclient waiting for a kernel that never
+    # answers (tests/test_notebooks.py hung for the full timeout). The recommended fix, setting the selector
+    # event-loop policy, is itself deprecated in Python 3.14.
+    "ignore:Proactor event loop does not implement add_reader:RuntimeWarning",
 ]

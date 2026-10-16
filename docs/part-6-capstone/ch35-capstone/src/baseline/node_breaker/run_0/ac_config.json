@@ -1,0 +1,6 @@
+{
+  "n_processes": 1,
+  "k_best_topos": 4,
+  "critical_voltage_jump_percent": 5.0,
+  "critical_va_diff_degree": 20.0
+}

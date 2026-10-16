@@ -138,23 +138,52 @@ pypowsybl updates the network and exposes results as columns of `get_lines()`, `
        with matplotlib. Save the notebook with outputs cleared, and commit it on a branch of your own course
        repository with a Conventional Commits message.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
+!!! note "Known discrepancy: the reference implementation's docstrings have drifted"
+
+    In `packages/dc_solver_pkg/tests/numpy_reference.py` (lab step 3) the module docstring cites a
+    `bsdf_check_split` function "also used to pre-filter the action set" that no longer exists in the file, and
+    the comments of `calc_lodf` describe shapes `(M,)` and `(E, M)` while its signature takes a single `int`, a
+    trace of an earlier vectorized version. Read the code, not the docstrings, when the two disagree.
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. *(Jupyter: NumPy + pytest)* Write `incidence_matrix(from_bus, to_bus, n_bus) -> np.ndarray` with type hints,
    and a parametrized pytest test that checks each row sums to zero for three small graphs. Run it with
    `uv run pytest`.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(Jupyter: NumPy + matplotlib)* Build a random 200×200 sparse symmetric matrix with SciPy, solve a linear
    system with `scipy.sparse.linalg.spsolve` and with dense `numpy.linalg.solve`, and plot the run time of both
    against matrix size.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: pypowsybl + pandas + matplotlib)* Load `pypowsybl.network.create_ieee14()`, run an AC load flow, and
    plot active power `p1` of every line as a bar chart sorted by magnitude. Repeat with `run_dc` and put both
    series in one figure.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Jupyter: pandas + Polars)* Convert `net.res_line` of pandapower's `case57` to Polars, keep lines with
    `loading_percent` above the median, and compute the mean loading grouped by `from_bus`. Write the same query in
    pandas and compare the code.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(git)* Create a repository, make three commits whose messages follow Conventional Commits (`feat:`, `fix:`,
    `docs:`), install one pre-commit hook (for example `trailing-whitespace`), and show a commit it rejects. Which
    title would ToOp's `validate_pr_title.yaml` reject: `Fix/some slug`, `fix: handle empty action set`, or
    `update docs`?
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. *(ToOp container)* Inside the container run `which python` and `uv run which python`, then `docker compose
    down` and `up -d` again. Which state survives the restart and why (named volume vs container layer)?
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

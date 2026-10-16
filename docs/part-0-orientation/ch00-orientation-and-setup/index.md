@@ -137,20 +137,38 @@ and a toy grid has too little work to fill the card. Every lab in this book runs
        a generator writes an already-imported folder.)
     4. Write down every term you do not understand yet; revisit the list at the end of Parts III and IV.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. In one paragraph for a non-engineer, explain why switching a line *out* of service can reduce congestion on
    another line. Keep your answer; you will check it against the DC power flow model in
    [Chapter 16](../../part-3-power-systems/ch16-dc-power-flow/index.md).
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. For each of the four action types, name what physically changes in a substation or on a line, and whether you
    expect it to cost money to execute.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(ToOp container)* Start a container with `JAX_PLATFORMS=cpu` set (for example
    `docker compose exec -e JAX_PLATFORMS=cpu toop-cpu uv run python -c "import jax; print(jax.devices())"`) and
    explain what the output shows. On a GPU machine, what would this variable let you compare?
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(ToOp container)* Run `uv run pytest packages/interfaces_pkg/tests -q` inside the container. How many tests
    pass, and how long does the run take? Keep the number: [Chapter 30](../../part-5-computing/ch30-scientific-python/index.md)
    explains what a test suite is for.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Jupyter)* In `example1_dc_loadflow_example.ipynb`, print `static_information.dynamic_information.n_nodes` and
    `n_branches`. The grid is called "57-bus", yet the numbers differ from 57. Write a hypothesis;
    `case57_data_powsybl` in `dc_solver/example_grids.py` and
    [Chapter 13](../../part-3-power-systems/ch13-substations-grid-models/index.md) give the answer.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

@@ -191,19 +191,40 @@ OpenLoadFlow, the balance type selects $k$ (proportional to $P_\text{max}$, to t
        13 buses, so IEEE 14 does not fit. Then repeat one failure of step 3 and compare how Simulator reports it
        with your iteration history.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. For a two-bus system (slack bus 1 at $1\angle 0$, PQ bus 2 with load $P + jQ$, line reactance $X$), write the
    power flow equations and the $2 \times 2$ Jacobian, and do two Newton iterations by hand for
    $X = 0.1$, $P = 1$, $Q = 0.5$ p.u.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(GeoGebra)* Two-bus power transfer: with sliders for $|V_1|$, $|V_2|$, $X$ and $\delta$, plot
    $P = |V_1||V_2|\sin\delta / X$ and $Q_2 = (|V_1||V_2|\cos\delta - |V_2|^2)/X$. Find the maximum transfer and
    explain what happens to Newton–Raphson near $\delta = 90^\circ$.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: NumPy)* Verify the polar Jacobian formulas of the worked example against central finite
    differences on IEEE 14, then time the dense and `scipy.sparse` versions.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Octave + MATPOWER)* Solve `case118` with `pf.alg` set to `NR`, `FDXB` and `GS`; tabulate iterations and time,
    and explain the ranking with the cost per iteration of each method.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Explain why a DC power flow can give a solution for a topology whose AC power flow diverges. List three
    physical causes and the symptom each leaves in the iteration history.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. *(pypowsybl)* Repeat the distributed-slack comparison of the lab with `BalanceType.PROPORTIONAL_TO_GENERATION_P`
    and `BalanceType.PROPORTIONAL_TO_GENERATION_P_MAX`. Which generators pick up the losses in each case?
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

@@ -93,18 +93,42 @@ matters when you read the repertoire as a trade-off curve ([Chapter 27](../ch27-
     **Tools:** Jupyter with ToOp (container from [Chapter 0](../../part-0-orientation/ch00-orientation-and-setup/index.md)),
     NumPy, pandas and matplotlib.
 
-    1. Run `notebooks/example2_small_grid_toop.ipynb` unchanged and open `res.json` in the run directory.
+    The small example grid is tiny: one relevant substation and ten actions, so the whole search space is ten
+    topologies, `split_subs` is 0 or 1, and the first epoch already evaluates every topology. It is the right
+    size to learn the mechanics (where the archive is written, what a cell holds, how a heatmap is drawn) and
+    the wrong size to see the archive change: with an exhaustive repertoire after epoch 0, neither the
+    descriptor weights nor the cell counts of step 4 can alter the proposed set. Run steps 1–3 on the small
+    grid and step 4 on a grid with several relevant substations, such as the complex example grid of
+    `notebooks/example3_e2e_pipeline.ipynb` or `data/case57_data_powsybl`
+    ([Chapter 22](../../part-3-power-systems/ch22-import-preprocessing/index.md)).
+
+    1. Run `notebooks/example2_small_grid_toop.ipynb` unchanged and open `res.json` in the run directory. Note
+       the epoch at which `max_fitness` is reached and how many epochs follow it without any change.
     2. The notebook overrides the default descriptors with a single `split_subs` descriptor of 4 cells and runs
        for 30 seconds. Change `ga_config` to use two descriptors, for example
        `[{"metric": "split_subs", "num_cells": 4}, {"metric": "switching_distance", "num_cells": 20}]`, set
        `"plot": True` and rerun. The heatmap is written by `plot_repertoire` to `plots/` inside the results
        `stats_dir`. Note that empty cells (fitness $-\infty$) are drawn with a value slightly below the worst
-       finite fitness, so they look like bad cells.
+       finite fitness, so they look like bad cells. `"plot": True` also saves one PNG after *every* epoch, and
+       on this grid drawing costs more than optimizing: the same 30 s give about 125 epochs with the plot
+       against about 1 140 without. Switch it off again before any run whose epoch count matters.
     3. Build your own heatmap from `res.json` with pandas and matplotlib: one cell per
        (`split_subs`, `switching_distance`) pair from `best_topos[*].metrics.extra_scores`, colored by fitness,
        empty cells left blank. Compute coverage and QD-score (shift fitness by the unsplit `initial_fitness`).
-    4. Change the `target_metrics` weights (for example add `("critical_branch_count_n_1", w)` for two values of
-       `w`) and, separately, the number of cells. Explain how the set of proposed topologies changes.
+    4. On the larger grid, change the `target_metrics` weights (for example add
+       `("critical_branch_count_n_1", w)` for two values of `w`) and, separately, the number of cells. Explain
+       how the set of proposed topologies changes. If you try this on the small grid first, explain why the
+       three elites and their order stay the same whatever you do: the archive is exhaustive and the same
+       action is best on both metrics, so a weight only rescales the fitness.
+
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
+!!! note "Known discrepancy: the DC stage cannot start on Windows"
+
+    `optimizer/dc/main.py` names the TensorBoard folder `str(datetime.now())`, whose colons are illegal in a
+    Windows path, so a run outside the Linux container dies with `WinError 123` before the first epoch. Inside
+    the container nothing is needed; on Windows, patch the timestamp format before the run (the lab's
+    `small_grid_toop.py` shows how).
 
 !!! warning "The notebook's busbar-outage settings are silently ignored"
 
@@ -119,19 +143,31 @@ matters when you read the repertoire as a trade-off curve ([Chapter 27](../ch27-
 
 ## Exercises
 
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
+
 1. Implement MAP-Elites in NumPy for the line-switching problem of the [Chapter 24](../ch24-evolutionary-algorithms/index.md)
    lab with descriptors "number of switched lines" (0–3) and "maximum N-0 loading after switching" binned into
    5 cells. Plot coverage and QD-score against evaluations and compare the best cell with your GA.
    *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. For `me_descriptors = (split_subs: 5 cells, switching_distance: 45 cells)`, list the cell indices that can
    hold a topology with exactly 2 split substations. Which cells can hold topologies that are not represented
    exactly by their descriptor values? *(pen and paper)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. Construct a one-dimensional deceptive fitness landscape where a GA with elitism converges to a local optimum
    but MAP-Elites with a suitable descriptor finds the global one. Explain the stepping-stone argument.
    *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. In the ToOp output, `summarize` drops every cell elite whose fitness does not beat the unsplit grid. What
    does this do to coverage computed from `res.json`, and how would you compute the true coverage?
    *(pen and paper)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
 5. The default repertoire has 225 cells. Add `disconnected_branches` with 3 cells as a third descriptor: how many
    cells result, how many bytes do the fitness values alone need as float64, and why does
    `plot_repertoire` refuse to draw it? *(pen and paper)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

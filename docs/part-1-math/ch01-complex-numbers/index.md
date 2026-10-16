@@ -132,14 +132,27 @@ libraries) and in Octave:
        (inductive, capacitive, purely resistive). For each, verify `S = V * conj(I)` and compare `abs(S)` with
        `sqrt(P**2 + Q**2)`. State the sign of Q for each load.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. By hand, compute $\dfrac{(3 + 4j)(1 - j)}{2j}$ in rectangular and polar form. *Answer:* $0.5 - j3.5 =
    3.536\angle -81.87^\circ$.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. For $z = -1 - j$, compare $\arctan(y/x)$ with `atan2(y, x)`. Which one gives the argument of $z$, and why?
    *(Jupyter: `math.atan`, `math.atan2`)* *Hint:* one returns $45^\circ$, the other $-135^\circ$.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Show that $1 + a + a^2 = 0$ for $a = e^{j2\pi/3}$, first geometrically in GeoGebra (vector sum of the three
    arrows), then algebraically. *(GeoGebra)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. A transformer adds a voltage $\Delta u = V_n \cdot n \cdot s/100$ at step angle $\varphi$ to its nominal
    voltage $V_n$, where $n$ is the number of tap steps from neutral and $s$ the step in percent. Show that the
    resulting phase shift is $\arg\left(1 + \frac{\Delta u}{V_n} e^{j\varphi}\right) = \operatorname{atan2}(\Delta u
@@ -147,6 +160,11 @@ libraries) and in Octave:
    `contingency/pandapower/pandapower_helpers/results/va_diff_results.py`. Evaluate it for $V_n = 400$ kV,
    $n = 5$, $s = 1\%$ and $\varphi = 90^\circ$ and $60^\circ$. *(Pen and paper, check in Octave or Python)*
    *Answer:* $2.86^\circ$ and $2.42^\circ$.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Draw a rotating phasor in GeoGebra: sliders `t` and `ω`, point `u = cos(ω t) + i sin(ω t)`, and the point
    `(t, x(u))` with trace on. Which familiar function do you get, and what is the role of $\omega$?
    *(GeoGebra)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

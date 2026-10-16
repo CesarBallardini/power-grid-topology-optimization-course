@@ -1,0 +1,43 @@
+# Labs container of the course (see README.md): the libraries that the course .venv does not carry, pinned to the
+# versions resolved on 2026-10-16. uv.lock next to this file locks the whole tree; the Dockerfile installs it with
+# `uv sync --frozen`. After changing a pin, run `uv lock` here and rebuild the image.
+[project]
+name = "course-labs"
+version = "0"
+description = "Labs container of the Power Grid Topology Optimization course"
+requires-python = "==3.11.*"
+dependencies = [
+    "numpy==2.4.6",
+    "scipy==1.17.1",
+    "pandas==2.3.3",
+    "matplotlib==3.11.2",
+    "networkx==3.6.1",
+    "pandapower==3.5.6",
+    "pytest==9.1.1",
+    "nbformat==5.11.1",
+    "nbclient==0.11.0",
+    "ipykernel==7.4.0",
+    "grid2op==1.12.6",
+    "lightsim2grid==1.2.0",
+    "gymnasium==1.4.0",
+    "stable-baselines3==2.9.0",
+    "torch==2.14.1",
+    "jax[cpu]==0.10.2",
+    "qdax==0.5.0",
+    "pymoo==0.6.2",
+    "moocore==0.3.2",
+]
+
+[tool.uv]
+package = false
+# The image is Linux; locking only for it keeps the CPU torch wheels of the PyTorch index resolvable
+environments = ["sys_platform == 'linux'"]
+
+# CPU-only torch (no CUDA libraries in the image) from the PyTorch index, for torch alone
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }

@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help install lint format test docs docs-serve check-books check-toop \
+.PHONY: help install lint format test docs docs-serve check-books check-toop test-toop test-labs \
         abbreviations precommit links clean
 
 help: ## Show this list of available targets
@@ -35,7 +35,13 @@ test-toop: ## Run the chapter tests marked `toop` with ToOp's own interpreter (T
 	@py="$(TOOP_PYTHON)"; \
 	if [ -z "$$py" ]; then py=$$(ls ../ToOp/.venv/bin/python ../ToOp/.venv/Scripts/python.exe 2>/dev/null | head -1); fi; \
 	if [ -z "$$py" ]; then echo "ToOp interpreter not found: set TOOP_PYTHON or create ../ToOp/.venv"; exit 1; fi; \
-	"$$py" -m pytest -m toop -o addopts="" -p no:cacheprovider -W ignore $$(find docs -name 'test_*_toop.py')
+	"$$py" -m pytest -m toop -o addopts="" -p no:cacheprovider -W ignore $$(find docs -name 'test_*_toop.py') tests/test_notebooks.py
+
+test-labs: ## Run the chapter tests and notebooks marked `labs` inside the labs container (docker/labs; build it first)
+	@repo=$$(pwd); case "$$(uname -s)" in MINGW*|MSYS*) repo=$$(cygpath -m "$$repo");; esac; \
+	MSYS_NO_PATHCONV=1 docker run --rm -v "$$repo:/course" -v course-labs-data:/root/data_grid2op -w /course \
+	  course-labs:latest python -m pytest -m labs -o addopts="" -p no:cacheprovider -W ignore \
+	  $$(find docs -name 'test_*_labs.py') tests/test_notebooks.py
 
 check-toop: ## Check that every cited ToOp path exists (TOOP_REPO, default ../ToOp)
 	uv run --frozen python tools/check_toop_paths.py docs

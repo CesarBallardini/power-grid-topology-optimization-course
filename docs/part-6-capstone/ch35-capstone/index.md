@@ -274,20 +274,42 @@ control-room engineer rather than for a programmer:
     5. **Pick your discrepancy.** Verify one item of the discrepancy list with a minimal reproduction and file it as
        the first issue of your project.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab_toop.ipynb](src/lab_toop.ipynb) (needs ToOp).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. *(Jupyter: pandas)* From a `res.json`, rebuild the table of `best_topos` with fitness and every `extra_scores`
    metric, and check that `fitness` equals the negated weighted sum of `target_metrics` for every row. Which
    topology would you give an operator who accepts at most one split substation?
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(ToOp container)* Reproduce the silent drop of `worst_k_contingent_cases` in
    `optimizer/ac/scoring_functions.py` with a two-line example, write the failing test, and draft the pull request
    title and body as they would pass `validate_pr_title.yaml`.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: pypowsybl)* For one split station, generate the before and after single-line diagrams, highlight the
    switches listed in `orao_summary.json`, and write the switching steps in operator language.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Jupyter: NumPy + matplotlib)* For the topologies of your baseline run, plot DC switching distance against AC
    switching distance. Relate what you see to the note in `docs/topology_optimizer/metrics.md`.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. For project 7, derive the DC sensitivity of every branch flow to a setpoint change $\Delta P$ on an HVDC link
    between buses $i$ and $j$, and show that it equals $\Delta P\,(\mathrm{PTDF}_{\cdot,i}-\mathrm{PTDF}_{\cdot,j})$ up to
    the sign convention. Where would this column live in ToOp's data structures?
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. Pick one project and write a one-page experimental plan: research question, baseline, metrics, budget, number of
    seeds, statistical test, and the figure that would answer the question.
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

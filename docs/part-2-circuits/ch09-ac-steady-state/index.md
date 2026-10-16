@@ -83,22 +83,44 @@ $$
     4. Repeat with $V_1 = 1.05$ and $V_2 = 0.95$ pu and separate the error caused by the angle linearization from
        the error caused by assuming flat voltage magnitudes.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. A series RL load, $R = 10\ \Omega$ and $L = 50$ mH, is fed by 230 V at 50 Hz. Compute $Z$, $I$, $S$ and the power
    factor, then the capacitance in parallel that raises the power factor to 0.95. *(Pen and paper, check in
    Octave)* *Answer:* $Z = 10 + j15.71\ \Omega$, $|I| = 12.35$ A, $S = 1526 + j2396$ VA, $\text{pf} = 0.537$,
    $C \approx 114\ \mu\text{F}$.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Rotating phasors: in GeoGebra, animate `u = V_m (cos(ω t + φ) + i sin(ω t + φ))` with sliders and trace
    `(t, x(u))`. Show that the phasor $V_m e^{j\varphi}$ is the value of the rotating vector at $t = 0$. *(GeoGebra)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Sample $v(t) = \sqrt{2}\, V \cos\omega t$ and $i(t) = \sqrt{2}\, I \cos(\omega t - \varphi)$, compute
    $p(t) = v(t)\,i(t)$, and verify numerically that its mean is $P = VI\cos\varphi$ and its oscillation
    amplitude is $S = VI$. *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. From the worked example, show that for $\delta = 0$ reactive power flows from the bus with the higher voltage
    magnitude, and explain why the DC approximation ignores $Q$ altogether. *(Pen and paper)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Solve a three-node AC circuit (two sources, an RL branch, an RC branch) with complex nodal analysis,
    `Y \ I` in Octave or `np.linalg.solve` in NumPy, and verify that the sum of complex powers injected equals
    the sum absorbed. *(Octave or Jupyter: NumPy)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. A branch limit is a current $I_{\max}$. If the DC model converts it to $P_{\max} = V I_{\max}$ (power factor 1,
    as with ToOp's `dc_power_factor=1.0`) but the branch operates at power factor 0.95, by how much does the DC
    limit overestimate the admissible active power? *(Pen and paper)* *Answer:* about 5.3%.
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

@@ -124,6 +124,16 @@ $\hat A_{12} = 0.08$ means a run of A beats a run of B only 8% of the time. Use 
 instead when the samples are paired, for example the same seed on the same instance for both configurations
 across several different instances.
 
+!!! note "Known discrepancies in `docs/benchmark.md`"
+
+    ToOp's `docs/benchmark.md` (commit `ba1874e`) documents a `ga_config.split_subs=2,5` override that
+    `toop-engine-benchmark/benchmark_toop.py` never reads: the script builds the `split_subs` descriptor as
+    `{"metric": "split_subs", "num_cells": cfg.lf_config.max_num_splits}`, so the cell count comes from
+    `lf_config.max_num_splits`, and the key is not defined in `configs/ga_config/ga_config.yaml` either (Hydra
+    rejects it unless written `+ga_config.split_subs`). The page also writes `config/` for the
+    `toop-engine-benchmark/configs/` folder and `assess_benchmark.py` for `assess_benchmarks.py`. Exercise 4
+    walks through the check.
+
 ## Lab
 
 !!! example "Lab: 10 seeds, 2 configurations, one honest conclusion"
@@ -150,21 +160,35 @@ across several different instances.
        `total_branch_combis`, and truncate all runs to the smallest common epoch to compare them under an equal
        budget.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. A paper reports "our method found the best topology in 1 of 20 runs; the baseline never did" and compares only
    the best run of each method. List three things wrong with this report and propose a better table.
    *(pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. Three configurations are run on 8 grid instances (5 seeds each, median taken per instance). Apply the Friedman
    test with `scipy.stats.friedmanchisquare`, then Holm-corrected pairwise signed-rank tests, on synthetic data
    where one configuration is slightly better. *(Jupyter: NumPy + SciPy)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. Build a performance profile $\rho_s(\tau)$ for three solvers over 20 instances from a table of times to reach a
    target, including failures, and interpret $\rho_s(1)$ and $\rho_s(\tau)$ for large $\tau$.
    *(Jupyter: NumPy + pandas + matplotlib)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. Using ToOp's `docs/benchmark.md`, write a Hydra multirun command that sweeps `ga_config.random_seed` over 10
    values and `ga_config.runtime_seconds` over two values with `toop-engine-benchmark/benchmark_toop.py`.
    Check every key against `toop-engine-benchmark/configs/ga_config/ga_config.yaml`: is the documented
    `ga_config.split_subs` override defined there, and does the script read it? *(pen and paper)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
 5. Simulate the power of the rank-sum test: for true median differences of 0, 1, 2 and 4 MW with standard
    deviation 3 MW, estimate by Monte Carlo the probability of $p < 0.05$ with 5, 10 and 30 runs per
    configuration. How many runs would you schedule? *(Jupyter: NumPy + SciPy + matplotlib)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

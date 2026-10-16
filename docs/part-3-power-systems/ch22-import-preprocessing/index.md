@@ -216,7 +216,9 @@ can give different action sets.
     2. **Inspect the folder.** Load every `masks/*.npy` with NumPy and tabulate the number of `True` entries;
        read `nminus1_definition.json`, `importer_auxiliary_data.json`, `static_information_stats.json` and
        `action_set.json` with pandas. Count actions per `bus_group_id` and compare each station's count with the
-       upper bound $2^{d-1} - d$.
+       upper bound $2^{d-1} - d$. `action_set.json` alone will not do: it stores the stations without their
+       actions, which live as diffs in `action_set_diffs.hdf5`; load both with `load_action_set(json, hdf5)`
+       and count the expanded actions.
     3. **Watch the funnel.** Re-run `load_grid(DirFileSystem(str(data_folder)), parameters=...,
        status_update_fn=record)` with a callback `record(stage, message, *, stats=None)` that appends the stage
        name and `stats` to a list. Plot `n_nodes`, `n_branches`, `n_relevant_subs`, `n_actions` and
@@ -230,27 +232,46 @@ can give different action sets.
        relevant substations after preprocessing.
     6. **A larger grid.** Repeat steps 1–3 on `create_complex_grid_battery_hvdc_svc_3w_trafo()` (generated and
        imported as in `notebooks/example3_e2e_pipeline.ipynb`) and compare its `stats` with those of the
-       node-breaker grid. Then set `cutoff_voltage` back to 220 kV and reproduce the first item of the
-       "optimizer found nothing" checklist.
+       node-breaker grid. Then raise `cutoff_voltage` to 400 kV and reproduce the first item of the
+       "optimizer found nothing" checklist (`n_relevant_subs == 0`, `n_actions == 0`, and no error). One might
+       expect ToOp's usual 220 kV cutoff to do it, but this grid's switchable stations are at 380 kV: with
+       220 kV the importer still keeps 6 relevant substations and preprocessing 5 with 100 actions.
+
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab_toop.ipynb](src/lab_toop.ipynb) (needs ToOp).
 
 ## Exercises
 
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
+
 1. Pen and paper: a station has six branches, one of which is a bridge. List how many actions survive
    enumeration, isolation removal and the bridge-lookup filter, and which assignments the bridge lookup removes.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. *(Jupyter: NumPy)* Implement the node reduction of `reduce_ptdf_and_nodal_injections` for a 10-bus DC grid:
    keep 4 significant buses, collapse the rest into one column, and verify that the reduced PTDF reproduces all
    branch flows exactly for the reference injections but not after changing an injection at a collapsed bus.
    Why is that acceptable for ToOp?
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. *(Jupyter: NumPy)* With the loadflow-based limit rule and $f = 1.2$, $m = 0.05$, plot the new limit against the
    loadflow current for an old limit of 1 000 A. At which current does each branch of the clip become active, and
    what happens to a border line that is unloaded in the base case?
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. *(Jupyter: pandapower)* On `pandapower.networks.case14()`, run a power flow, create voltage and power
    measurements from the results with Gaussian noise ($\sigma$ = 1 % and 2 %), run `pandapower.estimation.estimate`,
    then corrupt one flow measurement by 30 % and find it with `chi2_analysis` and `remove_bad_data`. Finally
    simulate a topology error by opening a line in the model but not in the measurements, and describe the
    residual pattern.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
 5. *(Jupyter: NumPy)* DC state estimation: with $z = H\theta + e$ for line flows and injections of the
    [Chapter 16](../ch16-dc-power-flow/index.md) model, compute the WLS estimate, the residuals and $J$, and check the
    chi-square test at 95 % for $m - n$ degrees of freedom.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
 6. Pen and paper: for each item of the "optimizer found nothing" checklist in the Topics, name the artifact
    and field you would read first and one data-quality cause from this chapter that produces it.
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

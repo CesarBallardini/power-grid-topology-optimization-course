@@ -183,19 +183,37 @@ The graduate papers of this chapter are long; read them in this order and depth.
        solution for a reference point such as "at most 3 switching actions and 1 split"; discuss a posteriori
        selection vs ToOp's a priori weights.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb) · Lab 5 with QDax in the labs container (`docker/labs`): [lab_labs.ipynb](src/lab_labs.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb). Exercises 3 and 4 with pymoo and moocore run in the labs container (`docker/labs`): [exercises_labs.ipynb](src/exercises_labs.ipynb).
 
 1. For the points $(1, 9), (3, 4), (4, 3.5), (6, 2), (9, 1)$ (both minimized), find the non-dominated set, the
    supported points and the unsupported ones. Show with a GeoGebra slider on the weight that the weighted sum
    never selects the unsupported ones. *(GeoGebra)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Prove that every optimum of a weighted sum with strictly positive weights is Pareto optimal, and give an
    example with a zero weight whose optimum is only weakly Pareto optimal. *(pen and paper)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Implement fast non-dominated sorting and crowding distance in NumPy and test them against pymoo's
    `NonDominatedSorting` on 1,000 random points in 3 objectives. *(Jupyter: NumPy + pymoo)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. Compute the two-objective hypervolume of a front by sorting and summing rectangles, compare with moocore, and
    plot how the value changes when the reference point moves from the nadir point to 1.1 and 2 times the
    nadir. *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. With `n_cells_per_dim = (5, 45)`, give two topologies in different cells where one dominates the other in
    (`split_subs`, `switching_distance`, `overload_energy_n_1`), and two in the same edge cell that would be in
    different cells without clipping. What does each case mean for an operator reading the repertoire?
    *(pen and paper)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

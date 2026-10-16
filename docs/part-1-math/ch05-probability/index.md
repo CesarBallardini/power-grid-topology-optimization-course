@@ -66,24 +66,43 @@
        child generators with `rng.spawn(4)`. Compare with how `mutate.py` splits a JAX key into
        `substation_key` and `disconnection_key` before sampling.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. Let $N \sim \text{Poisson}(\lambda)$ and $K = \min(\max(N, 1), m)$. Show that $P(K = 1) = e^{-\lambda}(1 + \lambda)$,
    $P(K = k) = e^{-\lambda}\lambda^k / k!$ for $1 < k < m$ and $P(K = m) = P(N \ge m)$. For $\lambda = 2$, $m = 3$
    compute the three probabilities and $E[K]$. *(Pen and paper)* *Answer:* $0.406$, $0.271$, $0.323$;
    $E[K] \approx 1.917$, below the unclipped mean 2.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Show that $E[\max(N, 1)] = \lambda + e^{-\lambda}$ and explain why clipping at 1 alone raises the mean while
    clipping at $m$ lowers it. *(Pen and paper)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. ToOp samples PST tap steps from integers $k \in [-\lceil 4\sigma \rceil, \lceil 4\sigma \rceil]$ with weights
    $\propto e^{-k^2 / (2\sigma^2)}$ (`_build_discrete_pst_step_distribution` in
    `optimizer/dc/genetic_functions/mutation/mutate_nodal_inj.py`). For $\sigma = 1$ tabulate the probabilities,
    and compute the probability that a PST selected for mutation does not move. With a selection probability
    of 0.2 per PST (the default), what fraction of PSTs actually change tap in one mutation, ignoring reset
    and clipping? *(Jupyter: NumPy + pandas)* *Answer:* $P(k = 0) \approx 0.399$; about 12%.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. For $n$ independent Uniform(0, 1) values, show that $E[\max] = n/(n+1)$ and check it by simulation for
    $n = 1, 10, 100$. Relate it to "the worst of many contingencies is almost always high". *(Pen and paper,
    then Jupyter: NumPy)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. A stochastic optimizer returns a best cost $C = 100 + 10\,Z$ with $Z \sim \mathcal{N}(0, 1)$ per run. Simulate
    30 runs for two variants whose means differ by 3. Plot both empirical CDFs and report mean, median and
    the 10% and 90% quantiles. Would one run per variant have told them apart? *(Jupyter: NumPy + pandas +
    matplotlib)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

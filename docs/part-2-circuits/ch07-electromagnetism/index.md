@@ -74,19 +74,37 @@
     4. Plot the instantaneous power $p(t) = e(t)^2 / R$ into a resistor and show that its mean equals
        $E_{\text{RMS}}^2/R$: this is why RMS values are used for AC power.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. An aluminium conductor ($\rho \approx 2.82\cdot10^{-8}\ \Omega\,\text{m}$) is 100 km long with a
    500 mm² cross-section. Compute its resistance and the Joule losses at 1 000 A. *(Pen and paper)*
    *Answer:* $5.64\ \Omega$; $5.64$ MW.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. A two-conductor line made of the conductor of Exercise 1 delivers 200 MW. Compare the current and the
    losses at 200 kV and at 400 kV, and state the scaling law. *(Pen and paper)* *Answer:* 1 000 A and
    11.3 MW vs 500 A and 2.8 MW; losses scale as $1/V^2$.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. For the coil of the lab, compute the peak and RMS EMF by hand. *(Pen and paper)* *Answer:* $157.1$ V and
    $111.1$ V.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. Compute the energy stored in a 1 H inductor carrying 1 000 A and in a 1 µF capacitor at 230.9 kV. Explain
    why the current through an inductor and the voltage across a capacitor cannot change instantaneously.
    *(Pen and paper)*
-5. Sample $v(t) = 325 \sin(2\pi 50 t)$ and verify numerically that its RMS is about 230 V. How many samples per
-   period do you need for 0.1% accuracy if the sampling window is not an integer number of periods?
-   *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+5. Sample $v(t) = 325 \sin(2\pi 50 t)$ and verify numerically that its RMS is about 230 V. Over a window that
+   is an integer number of periods, how many samples per period does the discrete RMS need to be exact? Over
+   a window that is *not* an integer number of periods (say 1.4, 10.4 or 40.4 periods), show that adding samples
+   does not reduce the error, and work out how long the window must be for 0.1 % accuracy, or how a power
+   meter avoids the question by synchronising the window to whole periods. One would expect denser sampling to
+   help; it does not, because the error is a window effect, the extra fraction of a period in the mean of
+   $\sin^2$, which the sampling density cannot remove. *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

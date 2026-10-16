@@ -120,19 +120,35 @@ incidence matrix of the three branches over the nodes $\{0, 1, 2\}$.
     6. Keep `nodal_solve`: it becomes the DC power flow in
        [Chapter 16](../../part-3-power-systems/ch16-dc-power-flow/index.md) by replacing conductances with susceptances.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. By hand, write the nodal equations of a Wheatstone bridge (4 nodes, 5 resistors, one current source) and
    find the condition on the resistors for zero current in the middle branch. *(Pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. Solve the circuit of the worked example by mesh analysis and check that you get the same voltages. Then
    solve both formulations in Octave. *(Pen and paper, then Octave)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. Tellegen's theorem: for any branch voltages $u = Av$ and any branch currents $j$ that satisfy KCL
    ($A^\top j = i$), show that $u^\top j = v^\top i$. Use it to prove the power balance of lab step 2.
    *(Pen and paper)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. Show that grounding a different node changes all node voltages by the same constant and leaves every
    branch current unchanged. Check it with `nodal_solve`. *(Pen and paper, then Jupyter: NumPy)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
 5. In lab step 5, lower the coupler conductance to $10^3$ S and to $10$ S. How does the coupler current depart
    from the KCL imbalance of the unsplit network, and why does the approximation need a closed, near-ideal
    coupler? *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
 6. Read `_compute_bus_a_imbalance` in ToOp's `dc_solver/jax/cross_coupler_flow.py` and map each term of its
    formula to the quantities of lab step 5. *(Code reading)*
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

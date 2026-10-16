@@ -134,18 +134,36 @@ between the candidate's coupler state and the current one) separately.
        `per_station_switching_distance` (`dc_solver/preprocess/helpers/switching_distance.py`). Verify the
        reassignment and coupler distances by hand.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab_toop.ipynb](src/lab_toop.ipynb) (needs ToOp).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. Draw a double-busbar, single-breaker substation with four line bays and one coupler. Give its node-breaker,
    bus-breaker and bus-branch representations, and list which switches change when one line moves to the other
    busbar.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Explain why a disconnector must not interrupt load current and how that constrains the sequence of
    switching operations for a busbar reassignment.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: Python + NetworkX)* Generalize the worked example to a ring of $n$ busbars with $n$ couplers. Count
    the two-component coupler states for $n = 3,\dots,12$, compare with the closed form $\binom{n}{2}$, and time
    the brute force as $n$ grows toward ToOp's limit of 20.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Jupyter: NumPy)* Given the candidates as a Boolean array of shape (candidates, 2, assets) and a target
    vector, compute the reassignment distance of the worked example with and without the A/B swap in one
    vectorized expression. Construct an example where ignoring the swap overstates the distance.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(pypowsybl)* Create `pypowsybl.network.create_four_substations_node_breaker_network()`, list its voltage
    levels and switches, and for one voltage level classify the switches into breakers and disconnectors.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

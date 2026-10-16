@@ -102,23 +102,39 @@ fails. In Octave, `fsolve(@(v) [v(1)^2 + v(2)^2 - 4; exp(v(1)) + v(2) - 1], [1; 
     6. Keep the function: after [Chapter 15](../../part-3-power-systems/ch15-ac-power-flow/index.md) you reuse it for a
        3-bus AC power flow.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. By hand, apply Newton to $f(x) = x^2 - 2$ from $x_0 = 1$ for three steps and show that the error is roughly
    squared each time. *(Pen and paper)* *Answer:* $1.5$, $1.41667$, $1.414216$; errors $8.6\cdot10^{-2}$,
    $2.5\cdot10^{-3}$, $2.1\cdot10^{-6}$.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. Newton on $f(x) = \arctan x$ converges from $x_0 = 1.3$ but diverges from $x_0 = 1.5$. Find the critical
    starting point where $x_1 = -x_0$ (it solves $2x = (1 + x^2)\arctan x$, about $1.3917$) and show that damping
    rescues the divergent case. *(Jupyter: NumPy + SciPy `brentq`)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. Apply Newton to $f(x) = (x - 1)^2$ from $x_0 = 0$. Show that the error only halves each step, and explain
    why a zero derivative at the root destroys quadratic convergence. *(Pen and paper)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. Preview of power flow: two buses joined by a lossless reactance $X$ (per unit) with $|V_1| = |V_2| = 1$
    transfer $P = \sin\delta / X$. Solve $\sin\delta - PX = 0$ for $\delta$ with Newton from $\delta_0 = 0$ for
    $PX = 0.5$, $0.99$ and $1.2$. Describe what happens in the last case and connect it with ToOp reporting
    non-converging load flows as a metric. *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
 5. Broyden's method replaces $J$ by an approximation updated with a rank-1 correction each step. Implement
    the "good Broyden" update, keep the inverse up to date with Sherman–Morrison, and compare iteration counts
    with Newton on the worked example. *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
 6. Solve the worked example with Octave `fsolve`, requesting the output structure
    (`[x, fval, info, output] = fsolve(...)`), and compare `output.iterations` with your Newton code.
    *(Octave)*
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

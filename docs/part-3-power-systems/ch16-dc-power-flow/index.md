@@ -135,21 +135,40 @@ before comparing two tools.
        the worked example into account.
     5. Optional: repeat step 2 with MATPOWER's `rundcpf` on `case57` in Octave.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. Starting from $p_f = \frac{|V_f||V_t|}{x}\sin(\theta_f - \theta_t)$, bound the relative error of the DC flow
    for $|\theta_f - \theta_t| \le 10^\circ$ and $|V| \in [0.95, 1.05]$ p.u.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Show that the flows of a DC power flow do not depend on which bus is the slack when the injections sum to
    zero, and that the voltage angles do.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: NumPy)* Build $B_\text{bus}$ and $B_f$ for IEEE 14 from the branch table, solve the DC power flow
    with a sparse factorization (`scipy.sparse.linalg.splu`), and reuse the factorization for 1,000 random
    balanced injection vectors stacked as a `(n_timesteps, n_bus)` array. Compare the time with 1,000 separate
    solves.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Octave + MATPOWER)* For `case14`, verify that `Bbus` from `makeBdc` equals $A^\top \operatorname{diag}(b) A$
    with $b = 1/(x\tau)$, and that `Pfinj` is zero unless a branch has a nonzero `SHIFT`. Add a 3° shift to one
    transformer and check the equivalent-injection formula.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Jupyter: NumPy)* Implement ToOp's PSDF column
    $\text{PSDF}_{\ell k} = b_k(\delta_{\ell k} - \text{PTDF}_{\ell f_k} + \text{PTDF}_{\ell t_k})$
    (in radians, before ToOp's conversion to MW per degree) and confirm it against a
    DC power flow with a phase shift $\varphi_k$ modeled as equivalent injections. Then state which sign convention
    for the grid model's angle would make the minus in `get_shift_angles` necessary.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
