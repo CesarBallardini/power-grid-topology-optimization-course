@@ -31,6 +31,12 @@ docs-serve: ## Serve the course book locally with live reload
 check-books: ## Check every archive.org access label against archive.org (network)
 	uv run --frozen python tools/check_archive_labels.py docs
 
+test-toop: ## Run the chapter tests marked `toop` with ToOp's own interpreter (TOOP_PYTHON, default: the venv in ../ToOp)
+	@py="$(TOOP_PYTHON)"; \
+	if [ -z "$$py" ]; then py=$$(ls ../ToOp/.venv/bin/python ../ToOp/.venv/Scripts/python.exe 2>/dev/null | head -1); fi; \
+	if [ -z "$$py" ]; then echo "ToOp interpreter not found: set TOOP_PYTHON or create ../ToOp/.venv"; exit 1; fi; \
+	"$$py" -m pytest -m toop -o addopts="" -p no:cacheprovider -W ignore $$(find docs -name 'test_*_toop.py')
+
 check-toop: ## Check that every cited ToOp path exists (TOOP_REPO, default ../ToOp)
 	uv run --frozen python tools/check_toop_paths.py docs
 

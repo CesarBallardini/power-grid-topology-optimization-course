@@ -122,25 +122,8 @@ A DC power flow written in JAX is differentiable. Its Jacobian with respect to t
 PTDF, so automatic differentiation reproduces [Chapter 17](../../part-3-power-systems/ch17-sensitivity-factors-1/index.md)
 without deriving anything:
 
-```python
-import jax
-import jax.numpy as jnp
-
-jax.config.update("jax_enable_x64", True)
-
-lines = jnp.array([[0, 1], [1, 2], [0, 2]])        # 3-bus ring, bus 0 is the slack
-b = jnp.array([10.0, 5.0, 8.0])                    # line susceptances
-A = jnp.zeros((3, 3)).at[jnp.arange(3), lines[:, 0]].set(1.0).at[jnp.arange(3), lines[:, 1]].set(-1.0)
-B_f = b[:, None] * A                               # branch flows = B_f @ theta
-B_bus = A.T @ B_f                                  # nodal susceptance matrix
-
-def flows(p_noslack):
-    theta = jnp.concatenate([jnp.zeros(1), jnp.linalg.solve(B_bus[1:, 1:], p_noslack)])
-    return B_f @ theta
-
-p = jnp.array([-1.0, 0.5])                         # injections at buses 1 and 2
-print(flows(p))              # [ 0.6176 -0.3824 -0.1176]
-print(jax.jacfwd(flows)(p))  # PTDF columns of buses 1 and 2: [[-0.7647 -0.2941] [0.2353 -0.2941] [-0.2353 -0.7059]]
+```python title="jax_ptdf.py"
+--8<-- "docs/part-4-optimization/ch29-learning-based-control/src/jax_ptdf.py"
 ```
 
 The gradient exists with respect to continuous quantities (injections, susceptances) but not with respect to a

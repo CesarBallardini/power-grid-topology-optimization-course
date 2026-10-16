@@ -141,33 +141,8 @@ The linking constraints $x_{ij} \le y_i$ are the "strong" formulation. The aggre
 $\sum_j x_{ij} \le |J|\, y_i$ is a big-M constraint with $M = |J|$: it describes the same integer solutions but a
 weaker LP relaxation, so branch and bound explores more nodes.
 
-```python
-import pulp
-
-f = {"A": 10, "B": 12, "C": 8}
-c = {("A", 1): 2, ("A", 2): 4, ("A", 3): 5, ("A", 4): 7,
-     ("B", 1): 6, ("B", 2): 3, ("B", 3): 2, ("B", 4): 4,
-     ("C", 1): 7, ("C", 2): 6, ("C", 3): 5, ("C", 4): 2}
-I, J = list(f), [1, 2, 3, 4]
-
-def solve(strong: bool, relax: bool):
-    m = pulp.LpProblem("ufl", pulp.LpMinimize)
-    y = pulp.LpVariable.dicts("open", I, 0, 1, cat="Continuous" if relax else "Binary")
-    x = pulp.LpVariable.dicts("assign", c, lowBound=0)
-    m += pulp.lpSum(f[i] * y[i] for i in I) + pulp.lpSum(c[k] * x[k] for k in c)
-    for j in J:
-        m += pulp.lpSum(x[i, j] for i in I) == 1
-    if strong:
-        for i, j in c:
-            m += x[i, j] <= y[i]
-    else:  # big-M with M = |J|
-        for i in I:
-            m += pulp.lpSum(x[i, j] for j in J) <= len(J) * y[i]
-    m.solve(pulp.HiGHS(msg=False))
-    return pulp.value(m.objective), {i: y[i].value() for i in I}
-
-for strong in (True, False):
-    print("strong" if strong else "big-M", solve(strong, relax=False), solve(strong, relax=True))
+```python title="facility_location.py"
+--8<-- "docs/part-4-optimization/ch23-optimization-modeling/src/facility_location.py"
 ```
 
 Both formulations find the optimum 27 (open only B). The LP relaxation of the strong formulation is already

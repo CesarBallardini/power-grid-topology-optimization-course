@@ -114,23 +114,8 @@
 Ten independent runs per configuration on one instance are independent samples, so use the rank-sum test, and
 report an effect size next to the $p$-value:
 
-```python
-import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
-
-rng = np.random.default_rng(0)
-a = rng.normal(42.0, 3.0, size=10)   # final overload energy [MW] of 10 runs, configuration A
-b = rng.normal(39.0, 3.0, size=10)   # configuration B (lower is better)
-
-res = stats.mannwhitneyu(a, b, alternative="two-sided")
-# Vargha-Delaney A12: probability that a random run of A beats (is lower than) a random run of B
-a12 = (np.sum(a[:, None] < b[None, :]) + 0.5 * np.sum(a[:, None] == b[None, :])) / (a.size * b.size)
-print(f"U={res.statistic:.1f}  p={res.pvalue:.4f}  A12={a12:.2f}")   # U=92.0  p=0.0017  A12=0.08
-
-for x, label in ((a, "A"), (b, "B")):
-    stats.ecdf(x).cdf.plot(plt.gca(), label=label)
-plt.xlabel("final overload energy [MW]"); plt.ylabel("fraction of runs"); plt.legend(); plt.show()
+```python title="compare_runs.py"
+--8<-- "docs/part-4-optimization/ch26-experimental-methodology/src/compare_runs.py"
 ```
 
 $\hat A_{12} = 0.08$ means a run of A beats a run of B only 8% of the time. Use `stats.wilcoxon` (signed-rank)

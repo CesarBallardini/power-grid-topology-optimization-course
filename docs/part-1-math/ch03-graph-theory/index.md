@@ -97,30 +97,10 @@
     power system package is needed.
 
     1. Save the branch list of the IEEE 14-bus test case (lines and transformers, bus numbers from 1) as
-       `ieee14_edges.csv` and load it with `pd.read_csv`:
+       `ieee14_edges.csv` (the chapter's `src` folder has a copy) and load it with `pd.read_csv`:
 
-        ```text
-        from_bus,to_bus
-        1,2
-        1,5
-        2,3
-        2,4
-        2,5
-        3,4
-        4,5
-        4,7
-        4,9
-        5,6
-        6,11
-        6,12
-        6,13
-        7,8
-        7,9
-        9,10
-        9,14
-        10,11
-        12,13
-        13,14
+        ```text title="ieee14_edges.csv"
+        --8<-- "docs/part-1-math/ch03-graph-theory/src/ieee14_edges.csv"
         ```
 
     2. Build a graph with `nx.from_pandas_edgelist(df, "from_bus", "to_bus", create_using=nx.MultiGraph)`

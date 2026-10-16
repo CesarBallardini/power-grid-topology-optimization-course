@@ -190,23 +190,8 @@ previous ones (`compute_bus_splits`), and `compute_cross_coupler_flows` reapplie
 the same order, recomputing $c$ from the already updated flows. `test_compute_cross_coupler_flow_against_ptdf`
 checks that the result equals $H' P'$.
 
-```python
-import numpy as np
-
-def bsdf_split(H, frm, to, b, i, nb, bus_a, P):
-    """H has the extra column nb (a copy of column i); bus_a lists branch ids that stay on node i."""
-    a_from = [l for l in bus_a if frm[l] == i]
-    a_to = [l for l in bus_a if to[l] == i]
-    other = {l: (to[l] if frm[l] == i else frm[l]) for l in bus_a}
-    p_c = H[a_to].sum(0) - H[a_from].sum(0)
-    p_c[i] += 1.0                                         # i is not the slack
-    num = sum(b[l] * (H[:, other[l]] - H[:, i]) for l in bus_a)
-    for l in bus_a:
-        num[l] += (1.0 if l in a_from else -1.0) * b[l]
-    den = sum(b[l] for l in bus_a) - sum(b[l] * (p_c[other[l]] - p_c[nb]) for l in bus_a)
-    beta = num / den
-    c = p_c @ P
-    return H + np.outer(beta, p_c), H @ P + c * beta     # updated PTDF and flows
+```python title="bsdf.py"
+--8<-- "docs/part-3-power-systems/ch18-sensitivity-factors-2/src/bsdf.py"
 ```
 
 ### Injection reassignment, injection outages and busbar outages

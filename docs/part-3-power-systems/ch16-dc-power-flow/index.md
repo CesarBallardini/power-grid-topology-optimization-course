@@ -82,29 +82,15 @@ $$
 
 The slack bus absorbs the imbalance $P_s = -\sum_{i \ne s} P_i$.
 
-```python
-import numpy as np
-
-def dc_power_flow(frm, to, x, p, slack):
-    n, m = len(p), len(frm)
-    A = np.zeros((m, n)); A[np.arange(m), frm] = 1.0; A[np.arange(m), to] = -1.0
-    b = 1.0 / x
-    B = A.T @ np.diag(b) @ A
-    keep = np.arange(n) != slack
-    theta = np.zeros(n)
-    theta[keep] = np.linalg.solve(B[np.ix_(keep, keep)], p[keep])
-    return np.diag(b) @ A @ theta          # branch flows, from -> to
+```python title="dc_power_flow.py"
+--8<-- "docs/part-3-power-systems/ch16-dc-power-flow/src/dc_power_flow.py"
 ```
 
 **Octave + MATPOWER.** `makeBdc` returns exactly these four objects, and `rundcpf` is a wrapper that sets the
 model option to `'DC'` before calling `runpf` (manual §4.4 and §9.5.2):
 
-```octave
-define_constants;
-mpc = ext2int(loadcase('case14'));
-[Bbus, Bf, Pbusinj, Pfinj] = makeBdc(mpc);
-results = rundcpf(mpc, mpoption('out.all', 0));
-disp(results.branch(1:5, PF).')          % MW, from end
+```octave title="matpower_dcpf.m"
+--8<-- "docs/part-3-power-systems/ch16-dc-power-flow/src/matpower_dcpf.m"
 ```
 
 **Sign conventions.** ToOp's PSDF (`dc_solver/preprocess/helpers/psdf.py`) corresponds to a branch flow

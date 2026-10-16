@@ -39,6 +39,7 @@ max-complexity = 15
 # assert is the idiomatic way to write a test assertion; it's disallowed
 # in application code because `python -O` strips asserts at runtime.
 "tests/**" = ["S101", "D"]
+"docs/**/src/test_*.py" = ["S101", "D"]
 
 [format]
 quote-style = "single"

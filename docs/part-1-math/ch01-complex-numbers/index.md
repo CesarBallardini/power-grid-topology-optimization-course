@@ -101,22 +101,12 @@ $$
 The current lags the voltage by the impedance angle, and $P = 846.4$ W, $Q = 634.8$ var. In plain Python (no
 libraries) and in Octave:
 
-```python
-import cmath, math
-
-V, Z = 230, 40 + 30j
-I = V / Z
-S = V * I.conjugate()
-print(abs(I), math.degrees(cmath.phase(I)))   # 4.6  -36.87
-print(S, abs(S), math.hypot(S.real, S.imag))  # (846.4+634.8j)  1058.0  1058.0
+```python title="phasor_power.py"
+--8<-- "docs/part-1-math/ch01-complex-numbers/src/phasor_power.py"
 ```
 
-```octave
-V = 230; Z = 40 + 30i;
-I = V / Z;
-S = V * conj(I)
-[abs(I), angle(I) * 180 / pi]
-[abs(S), hypot(real(S), imag(S))]
+```octave title="phasor_power.m"
+--8<-- "docs/part-1-math/ch01-complex-numbers/src/phasor_power.m"
 ```
 
 ## Lab

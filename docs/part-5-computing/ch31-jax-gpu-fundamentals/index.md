@@ -101,21 +101,8 @@ $$
 Write the function for **one** outage, with no Python branching on array values, then let `vmap` add the batch
 axis and `jit` compile the whole batch:
 
-```python
-import jax
-import jax.numpy as jnp
-
-jax.config.update("jax_enable_x64", True)   # before creating any array
-
-def n1_flows(ptdf, from_bus, to_bus, p, outage):
-    f0 = ptdf @ p
-    col = ptdf[:, from_bus[outage]] - ptdf[:, to_bus[outage]]
-    denom = 1.0 - col[outage]                  # zero exactly for a bridge
-    lodf = jnp.where(jnp.arange(ptdf.shape[0]) == outage, -1.0, col / denom)
-    return f0 + lodf * f0[outage], jnp.abs(denom) > 1e-11   # flows and a success flag, no exception
-
-screen = jax.jit(jax.vmap(n1_flows, in_axes=(None, None, None, None, 0)))
-flows, ok = screen(ptdf, from_bus, to_bus, p, jnp.arange(n_branch))   # shape (n_branch, n_branch)
+```python title="n1_screen.py"
+--8<-- "docs/part-5-computing/ch31-jax-gpu-fundamentals/src/n1_screen.py"
 ```
 
 Three habits to notice. The bridge case returns a flag instead of raising, because a compiled batch cannot stop

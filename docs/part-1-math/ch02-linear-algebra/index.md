@@ -104,41 +104,14 @@ $$
 Each row of $A$ sums to zero, so $A\mathbf{1} = 0$ and $G\mathbf{1} = 0$: $G$ is singular, and for a connected
 network its null space is exactly the span of $\mathbf{1}$.
 
-```python
-import numpy as np
-
-fr = np.array([0, 1, 2, 2])          # from nodes
-to = np.array([1, 2, 0, 3])          # to nodes
-g = np.array([1.0, 2.0, 1.0, 0.5])   # conductances in S
-m, n = len(fr), 4
-
-A = np.zeros((m, n))
-A[np.arange(m), fr] = 1.0
-A[np.arange(m), to] = -1.0
-G = A.T @ np.diag(g) @ A             # same as np.einsum("ki,k,kj->ij", A, g, A)
-
-w, V = np.linalg.eigh(G)
-print(np.round(w, 4))                # [0. 0.6106 3.091 5.2984]: one zero eigenvalue
-print(V[:, 0])                       # +-[0.5 0.5 0.5 0.5]: the constant vector
-
-i = np.array([1.0, 0.0, 0.0, -1.0])  # inject 1 A at node 0, withdraw at node 3
-v = np.zeros(n)
-v[1:] = np.linalg.solve(G[1:, 1:], i[1:])   # ground node 0
-print(v, g * (A @ v))                # node voltages and branch currents
+```python title="laplacian.py"
+--8<-- "docs/part-1-math/ch02-linear-algebra/src/laplacian.py"
 ```
 
 The same in Octave (indices start at 1):
 
-```octave
-fr = [1 2 3 3]; to = [2 3 1 4]; g = [1 2 1 0.5]; m = numel(fr); n = 4;
-A = zeros(m, n);
-A(sub2ind([m n], 1:m, fr)) = 1;
-A(sub2ind([m n], 1:m, to)) = -1;
-G = A' * diag(g) * A
-eig(G)                   % one zero eigenvalue
-null(G)                  % constant vector, up to sign
-i = [1; 0; 0; -1];
-v = [0; G(2:end, 2:end) \ i(2:end)]
+```octave title="laplacian.m"
+--8<-- "docs/part-1-math/ch02-linear-algebra/src/laplacian.m"
 ```
 
 ## Lab
@@ -152,13 +125,12 @@ v = [0; G(2:end, 2:end) \ i(2:end)]
 
     Use this network of 6 nodes and 7 branches (conductances in siemens):
 
-    ```python
-    fr = [0, 0, 1, 1, 2, 3, 4]
-    to = [1, 2, 2, 3, 4, 4, 5]
-    g  = [10, 5, 8, 4, 6, 3, 2]
+    ```python title="lab_network.py"
+    --8<-- "docs/part-1-math/ch02-linear-algebra/src/lab_network.py"
     ```
 
-    1. Write `incidence(fr, to, n)` returning $A$, and form $G = A^\top \operatorname{diag}(g) A$. Check that
+    1. Write your own `incidence(fr, to, n)` returning $A$ (compare it with the one in `laplacian.py` above
+       afterwards), and form $G = A^\top \operatorname{diag}(g) A$. Check that
        $G$ is symmetric, that every row sums to zero and that `np.linalg.eigvalsh(G)` has exactly one zero
        eigenvalue (up to round-off).
     2. Delete branch `(4, 5)` and recompute. Count the zero eigenvalues and compute `null_space(G)`: explain
