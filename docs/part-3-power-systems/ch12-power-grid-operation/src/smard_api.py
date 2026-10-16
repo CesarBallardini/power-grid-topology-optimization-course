@@ -59,7 +59,8 @@ def fetch_json(url: str, timeout: float = TIMEOUT_S) -> dict | None:
         if error.code == 404:
             return None
         raise SmardUnavailableError(f'SMARD answered HTTP {error.code} for {url}') from error
-    except (urllib.error.URLError, TimeoutError, OSError) as error:
+    # RuntimeError: in the browser (JupyterLite, Pyodide) there are no TLS sockets, and urlopen says so this way.
+    except (urllib.error.URLError, TimeoutError, OSError, RuntimeError) as error:
         raise SmardUnavailableError(
             f'cannot reach SMARD ({error}); check the network connection, then retry'
         ) from error

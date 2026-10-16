@@ -25,6 +25,11 @@ updates:
           - "*"
     cooldown:
       default-days: 10
+    # pulp 4.0 removed the API the chapters use (LpVariable.dicts, LpStatus), which is why pyproject.toml
+    # pins it >=3,<4; without this rule the group PR widens the pin and fails the tests.
+    ignore:
+      - dependency-name: "pulp"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"

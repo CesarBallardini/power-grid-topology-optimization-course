@@ -80,6 +80,16 @@ reproduces the idea of its SCOPF example in Python, so no lab depends on the com
 [Chapter 0](part-0-orientation/ch00-orientation-and-setup/index.md) sets up ToOp in a container (the supported
 path on Windows). A GPU is optional: every lab runs on CPU, with smaller grids.
 
+### Notebooks in the browser
+
+Each chapter's notebooks (examples, lab and exercises) are pages of this book, with a **Download the notebook**
+button. The notebooks that need only NumPy, SciPy, pandas, matplotlib, NetworkX, pandapower or pydantic, about
+two thirds of them, also have a **Run in your browser** button. It opens the notebook in JupyterLite, where Python runs inside the
+browser tab (Pyodide): nothing to install and no account. The first run downloads the Python packages, tens of
+megabytes, and your edits stay in that browser only, so download the notebook to keep your work. Notebooks that
+need JAX, pypowsybl, PuLP, ToOp or the labs container have no Run button: run them in the local setup of
+Chapter 0.
+
 ## Printable version
 
 The whole book is also available as a single page, with a table of contents, for printing or saving as PDF

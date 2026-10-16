@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help install lint format test docs docs-serve check-books check-toop test-toop test-labs \
+.PHONY: help install lint format test docs docs-serve check-books check-toop test-toop test-labs test-lite \
         abbreviations precommit links clean
 
 help: ## Show this list of available targets
@@ -42,6 +42,13 @@ test-labs: ## Run the chapter tests and notebooks marked `labs` inside the labs 
 	MSYS_NO_PATHCONV=1 docker run --rm -v "$$repo:/course" -v course-labs-data:/root/data_grid2op -w /course \
 	  course-labs:latest python -m pytest -m labs -o addopts="" -p no:cacheprovider -W ignore \
 	  $$(find docs -name 'test_*_labs.py') tests/test_notebooks.py
+
+test-lite: ## Run the notebooks the book offers to run in the browser, in Pyodide under Node (node container)
+	uv run --frozen python tools/notebook_hooks.py stage .cache/lite-contents
+	@repo=$$(pwd); case "$$(uname -s)" in MINGW*|MSYS*) repo=$$(cygpath -m "$$repo");; esac; \
+	MSYS_NO_PATHCONV=1 docker run --rm --name lite-test -u "$$(id -u):$$(id -g)" -e HOME=/tmp \
+	  -v "$$repo:/course" -w /course node:24.21.0-bookworm-slim \
+	  sh -c 'npm ci --prefix lite --no-audit --no-fund --loglevel=error && node lite/run_in_pyodide.mjs .cache/lite-contents'
 
 check-toop: ## Check that every cited ToOp path exists (TOOP_REPO, default ../ToOp)
 	uv run --frozen python tools/check_toop_paths.py docs

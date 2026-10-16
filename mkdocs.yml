@@ -48,6 +48,15 @@ extra_javascript:
 
 plugins:
   - search
+  # Every chapter notebook (docs/part-*/chNN-slug/src/*.ipynb) becomes a page of the book, .../src/lab/, so the
+  # chapters' [lab.ipynb](src/lab.ipynb) links open it. Only notebooks: the default would turn src/*.py into pages
+  # too and break the links to them. Committed notebooks have no outputs, so nothing is executed. The
+  # tools/notebook_hooks.py hook (below) fixes the notebooks' links and adds the Download and Run buttons.
+  - mkdocs-jupyter:
+      include: ["*.ipynb"]
+      execute: false
+      include_source: true
+      ignore_h1_titles: false
   # print-site must be the last plugin so it sees every page as the others leave it.
   - print-site:
       add_to_navigation: true
@@ -56,6 +65,11 @@ plugins:
       add_table_of_contents: true
       toc_depth: 2
       enumerate_headings: false
+
+# Notebook pages: link fix-up, math, Download and Run buttons, and the JupyterLite site in <site>/lite for the
+# notebooks that run in the browser (Pyodide). See the module docstring.
+hooks:
+  - tools/notebook_hooks.py
 
 markdown_extensions:
   - abbr

@@ -86,6 +86,13 @@ def test_fetch_json_maps_network_errors(monkeypatch: pytest.MonkeyPatch):
     with pytest.raises(SmardUnavailableError, match='cannot reach SMARD'):
         fetch_json('https://www.smard.de/x')
 
+    def no_tls(url, timeout):  # what urlopen raises in Pyodide (JupyterLite)
+        raise RuntimeError('TLS not supported in this environment')
+
+    monkeypatch.setattr(smard_api.urllib.request, 'urlopen', no_tls)
+    with pytest.raises(SmardUnavailableError, match='cannot reach SMARD'):
+        fetch_json('https://www.smard.de/x')
+
     def not_found(url, timeout):
         raise urllib.error.HTTPError(url, 404, 'Not Found', None, None)
 
