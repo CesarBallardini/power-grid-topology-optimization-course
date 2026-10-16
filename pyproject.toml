@@ -51,7 +51,7 @@ labs = [
     "numpy>=2.4.6",
     "pandapower>=3.5.6",
     "polars>=2.0.0",
-    "pulp>=3,<4",
+    "pulp>=3,<5",
     "pypowsybl>=1.16.1",
     "scipy>=1.18.1",
 ]
