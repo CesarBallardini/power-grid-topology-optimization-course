@@ -54,3 +54,19 @@ def test_lab7_knee_and_achievement_function_pick_the_one_split_topology():
     assert toop_front.as_tuple(r['asf']) == r['best_feasible'] == (1184.119297, 2.0, 1.0)
     assert np.allclose(r['pseudo_weights'].sum(axis=1), 1.0)
     assert r['weighted_sum_winner'] == (1160.36575, 10.0, 4.0)
+
+
+def test_gpu_runs_do_a_third_of_the_work_and_reach_the_same_front():
+    g = toop_front.gpu_vs_cpu()
+    assert g is not None and len(g) == 10 and (g['elites'] == 29).all()
+    gpu, cpu = g[g['config'] == 'gpu'], g[g['config'] == 'cpu']
+    assert gpu['evaluations'].max() < cpu['evaluations'].min()
+    assert (g['evaluations'] == 800 * g['epochs'] + 8).all()  # 100 iterations of 8 topologies per epoch
+    assert toop_front.compare(g, 'epochs', ('gpu', 'cpu'))['p'] < 0.01
+    assert toop_front.compare(g, 'hv', ('gpu', 'cpu'))['p'] > 0.5
+    assert g.attrs['joint_hv'] == pytest.approx(g.attrs['lab4_joint_hv'])
+    assert sorted(g.loc[g['hv'] < g.attrs['lab4_joint_hv'] - 1e-9, 'run']) == ['cpu_s4', 'gpu_s4']
+
+
+def test_gpu_comparison_is_skipped_without_fixtures(tmp_path):
+    assert toop_front.gpu_vs_cpu(tmp_path) is None

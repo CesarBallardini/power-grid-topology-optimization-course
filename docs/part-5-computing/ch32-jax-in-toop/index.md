@@ -146,7 +146,8 @@
        compile time, topologies per second and peak memory (`nvidia-smi` on GPU with
        `XLA_PYTHON_CLIENT_PREALLOCATE=false`; `docker stats` on CPU, stopping before the container limit). Draw a
        heat map as in `dc_solver/jax/parse_batch_size_finder.ipynb`, find the out-of-memory boundary on GPU, and
-       repeat one point with `JAX_ENABLE_X64` off to measure the float64 penalty on your device.
+       repeat one point in float32 to measure the float64 penalty on your device (ToOp switches `jax_enable_x64`
+       on when it is imported, so `JAX_ENABLE_X64=0` alone is not enough: convert the inputs to 32 bits first).
 
     Solutions: [Lab](solutions.md#lab) · Notebook: [lab_toop.ipynb](src/lab_toop.ipynb) (runs in the ToOp
     container).

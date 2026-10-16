@@ -7,8 +7,8 @@ that the memory figures are real use, not JAX's 75 % preallocation::
 
     python gpu_compare_toop.py env
     python gpu_compare_toop.py compile ROOT [REPEATS]
-    python gpu_compare_toop.py sweep ROOT [float32]
-    python gpu_compare_toop.py agree ROOT
+    python gpu_compare_toop.py sweep ROOT [float32] [bsdf=4,16,...] [inj=1,4,...]
+    python gpu_compare_toop.py agree ROOT [case300|case57] [N_TOPOLOGIES]
 
 ``ROOT`` holds the preprocessed grids (``solver_lab_toop.grid_folder``). ``compile`` and ``sweep`` start a fresh
 Python process per measurement: a compilation happens once per process, and JAX's peak-memory counter cannot be
@@ -156,6 +156,31 @@ class SmiSampler:
         return {**dict(zip(keys, (float(v) for v in values), strict=False)), 'throttle': hex(mask)}
 
 
+class RssSampler:
+    """Peak resident set of this process [bytes] while the context is open, sampled every ``interval`` seconds."""
+
+    def __init__(self, interval: float = 0.02):
+        """Sample every ``interval`` seconds once the context is entered."""
+        self.interval, self.peak, self._stop = interval, 0, threading.Event()
+        self._thread = threading.Thread(target=self._run, daemon=True)
+
+    def _run(self) -> None:
+        process = psutil.Process()
+        while not self._stop.is_set():
+            self.peak = max(self.peak, process.memory_info().rss)
+            self._stop.wait(self.interval)
+
+    def __enter__(self):
+        """Start sampling."""
+        self._thread.start()
+        return self
+
+    def __exit__(self, *exc) -> None:
+        """Stop sampling."""
+        self._stop.set()
+        self._thread.join()
+
+
 def to_float32(tree):
     """A copy of a ToOp pytree in 32 bits: float64 to float32, int64 to int32 (the int64 sentinel to int32's).
 
@@ -193,8 +218,9 @@ def measure_point(si, bsdf: int, injection: int, n_topologies: int, repeats: int
 
     The first call compiles and runs; one more call warms up; the median of ``repeats`` calls is the steady state.
     ``compile_s`` is the first call minus that median. Memory: JAX's peak bytes in use on the GPU, the
-    ``nvidia-smi`` peak of the card, and on the CPU the growth of the process's resident set (as in
-    ``solver_lab_toop.batch_sweep``).
+    ``nvidia-smi`` peak of the card, and on the CPU the peak growth of the process's resident set, sampled every
+    20 ms (``solver_lab_toop.batch_sweep`` reads the resident set only after the calls, when XLA has already
+    freed its temporaries).
     """
     sc = replace(si.solver_config, batch_size_bsdf=bsdf, batch_size_injection=injection)
     di = si.dynamic_information
@@ -205,7 +231,7 @@ def measure_point(si, bsdf: int, injection: int, n_topologies: int, repeats: int
     row = {'bsdf': bsdf, 'injection': injection, 'n_topologies': n_topologies, 'float32': float32}
     rss_before = psutil.Process().memory_info().rss
     try:
-        with SmiSampler() as smi:
+        with SmiSampler() as smi, RssSampler() as rss:
             _, first = timed(run_solver, topologies, None, None, di, sc)
             timed(run_solver, topologies, None, None, di, sc)
             steady = statistics.median(timed(run_solver, topologies, None, None, di, sc)[1] for _ in range(repeats))
@@ -218,7 +244,7 @@ def measure_point(si, bsdf: int, injection: int, n_topologies: int, repeats: int
         'steady_s': steady,
         'topologies_per_s': n_topologies / steady,
         **dict(zip(('peak_device_mb', 'device_limit_mb'), device_memory_mb(), strict=True)),
-        'rss_growth_mb': (psutil.Process().memory_info().rss - rss_before) / 1e6,
+        'rss_peak_growth_mb': (rss.peak - rss_before) / 1e6,
         **smi.summary(),
     }
 
@@ -281,24 +307,37 @@ def differences(a: dict, b: dict) -> dict:
     """Largest absolute and relative differences of two ``solve_on`` results, on the entries both trust.
 
     An outage that islands the grid has ``success`` False and a meaningless flow row (a division by a
-    denominator that is zero up to rounding), so N-1 entries are compared where both runs succeeded, and
-    ``pf_n_1_max`` (a sorted maximum over all outages) for the topologies whose outages all succeeded.
+    denominator that is zero up to rounding). The flows and ``pf_n_1_max`` are therefore compared on the
+    topologies whose outages all succeeded, the ones ToOp's ``success`` accepts. ``n_0_max_abs_flagged`` and
+    ``n_1_max_abs_flagged`` are the differences on the other topologies (N-1: their valid outages only); a split
+    that makes an outage island the grid can make the whole solve ill-conditioned.
     ``missed_failures`` counts the outages ``b`` flags as islanding and ``a`` does not, and ``missed_max_flow`` is
-    the largest flow ``a`` reports for them: numbers that look valid and are not.
+    the largest flow ``a`` reports for them: numbers that look valid and are not. A topology whose N-0 flows are
+    not finite (a split this precision cannot solve) is left out of every comparison and counted in
+    ``unsolved_topologies``.
     """
-    ok = a['success'] & b['success']
+    solved = np.isfinite(a['n_0']).all(axis=(1, 2)) & np.isfinite(b['n_0']).all(axis=(1, 2))
+    ok = a['success'] & b['success'] & solved[:, None]
     whole = ok.all(axis=1)
     pairs = {
-        'n_0': (a['n_0'], b['n_0']),
-        'n_1': (a['n_1'][:, 0][ok], b['n_1'][:, 0][ok]),
+        'n_0': (a['n_0'][whole], b['n_0'][whole]),
+        'n_1': (a['n_1'][whole, 0], b['n_1'][whole, 0]),
         'pf_n_1_max': (a['pf_n_1_max'][whole], b['pf_n_1_max'][whole]),
     }
     out = {
         'topologies': len(ok),
+        'unsolved_topologies': (
+            int((~np.isfinite(a['n_0']).all(axis=(1, 2))).sum()),
+            int((~np.isfinite(b['n_0']).all(axis=(1, 2))).sum()),
+        ),
         'failed_outages': (int((~a['success']).sum()), int((~b['success']).sum())),
         'success_flags_equal': bool((a['success'] == b['success']).all()),
         'topologies_compared_pf': int(whole.sum()),
     }
+    flagged = solved & ~whole
+    rows = ok & flagged[:, None]
+    out['n_0_max_abs_flagged'] = float(np.abs(a['n_0'] - b['n_0'])[flagged].max()) if flagged.any() else None
+    out['n_1_max_abs_flagged'] = float(np.abs(a['n_1'] - b['n_1'])[:, 0][rows].max()) if rows.any() else None
     missed = a['success'] & ~b['success']
     out['missed_failures'] = int(missed.sum())
     out['missed_max_flow'] = float(np.max(np.abs(a['n_1'][:, 0][missed]))) if missed.any() else None
@@ -354,7 +393,10 @@ def main() -> None:
         print(json.dumps(measure_point(si, b, i, n, float32='float32' in args[4:])))
     elif command == 'sweep':
         print('backend:', jax.default_backend(), '-', jax.devices()[0].device_kind)
-        for r in sweep(args[0], float32='float32' in args[1:]):
+        options = dict(a.split('=') for a in args[1:] if '=' in a)
+        sizes = {k: tuple(int(v) for v in options[k].split(',')) for k in ('bsdf', 'inj') if k in options}
+        grid = {'bsdf_sizes': sizes.get('bsdf', BSDF_SIZES), 'injection_sizes': sizes.get('inj', INJECTION_SIZES)}
+        for r in sweep(args[0], float32='float32' in args[1:], **grid):
             head = f'bsdf {r.get("bsdf", 0):5d} inj {r.get("injection", 0):3d} n {r.get("n_topologies", 0):5d}'
             if 'error' in r:
                 print(head, r['error'])
@@ -363,12 +405,14 @@ def main() -> None:
                 f'  peak {r["peak_device_mb"]:7.0f} MB  smi {r["smi_peak_mib"]:5.0f}/{r["smi_baseline_mib"]:4.0f} MiB'
                 f'  {r["clock_mhz"]:5.0f} MHz {r["power_w"]:5.1f} W {r["temp_c"]:3.0f} C {r["throttle"]}'
                 if r['peak_device_mb'] is not None and r['smi_peak_mib'] is not None
-                else f'  RSS +{r["rss_growth_mb"]:7.1f} MB'
+                else f'  peak RSS +{r["rss_peak_growth_mb"]:7.1f} MB'
             )
             print(f'{head}  compile {r["compile_s"]:6.2f} s  {r["topologies_per_s"]:9.1f} topologies/s{gpu}')
     elif command == 'agree':
-        si = setup(grid_folder('case300', Path(args[0])), 'case300')
-        print(json.dumps(agreement(si), indent=1))
+        case = args[1] if len(args) > 1 else 'case300'
+        si = setup(grid_folder(case, Path(args[0])), case)
+        n = int(args[2]) if len(args) > 2 else 64
+        print(case, n, 'topologies:', json.dumps(agreement(si, n_topologies=n), indent=1))
     else:
         raise SystemExit(f'unknown command {command!r}; see the module docstring')
 

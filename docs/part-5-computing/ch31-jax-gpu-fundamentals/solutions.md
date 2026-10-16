@@ -6,10 +6,11 @@ The code is in the chapter's `src` folder: [`n1_screen.py`](src/n1_screen.py) (t
 [`compile_count.py`](src/compile_count.py), [`control_flow.py`](src/control_flow.py),
 [`lodf_precision.py`](src/lodf_precision.py), [`shape_check.py`](src/shape_check.py) and
 [`n1_loop_vs_vec.m`](src/n1_loop_vs_vec.m), each with a test next to it. Every script prints the numbers quoted
-below when run from the `src` folder. All JAX numbers are **CPU** numbers (JAX 0.11 on the course environment,
-Python 3.14, Windows; the laptop has no NVIDIA GPU), with `jax_enable_x64` on; the jaxtyping exercise ran with
+below when run from the `src` folder. The JAX numbers are **CPU** numbers (JAX 0.11 on the course environment,
+Python 3.14, Windows), with `jax_enable_x64` on, except the CPU against GPU comparison of Lab step 3, which ran on
+an NVIDIA GPU and a CPU in ToOp's GPU container (JAX 0.5.3; details there). The jaxtyping exercise ran with
 ToOp's environment (jaxtyping 0.2.38, beartype 0.22, JAX 0.5.3, ToOp commit `ba1874e`), which is the one that
-has those libraries. GPU behaviour is described, not measured.
+has those libraries. Elsewhere, GPU behaviour is described, not measured.
 
 ## Lab
 
@@ -46,14 +47,51 @@ has those libraries. GPU behaviour is described, not measured.
     0.1 s for the small grids: that is compilation, which does not depend on the data, plus the one-time
     backend start-up in the first row. The float64 penalty on this CPU is 1.5–3× in the steady state
     (26.9 vs 8.9 ms, 156 vs 104 ms), mostly memory traffic: the float64 output of `case2869pegase` is 168 MB,
-    twice the float32 one. *GPU: not run here.* Expect the first call to be no faster (compilation is the same
-    work, and the arrays must be copied to the device), the steady state of the two small grids to be *slower*
-    than CPU (a few tens of microseconds of launch latency per call dominate a 0.1 ms job), and the GPU to win
-    from roughly a thousand branches up, by one to two orders of magnitude on the Pegase cases in float32. In
-    float64 a consumer GeForce card has about 1/32 of its float32 arithmetic throughput, so the float64 penalty
-    is large where the kernel is compute-bound and about 2× where it is bandwidth-bound; a data-centre card
-    (A100, H100) has a 2× penalty throughout. Measure it with the same two numbers per grid and put the four
-    lines (CPU/GPU × float32/float64) on the same plot.
+    twice the float32 one.
+
+    *CPU against GPU.* The same `timing_sweep.py` runs in the ToOp GPU environment of
+    [Chapter 32](../ch32-jax-in-toop/solutions.md) (its solutions describe it), which has JAX, the CUDA plugin
+    and pandapower: image `toop-toop-gpu:latest`, ToOp `ba1874e`'s `uv.lock`, JAX 0.5.3 with
+    `jax-cuda12-plugin` 0.5.3 (CUDA runtime 12.9), Python 3.11, an NVIDIA GeForce RTX 3050 Laptop GPU
+    (4 096 MiB, 35 W, driver 617.42), `docker run --cpus 4`, on an otherwise idle machine. Only `JAX_PLATFORMS`
+    changes: `cpu` for the CPU, `cuda,cpu` for the GPU. `python timing_sweep.py repeat 3` runs one discarded
+    warm-up sweep and then three sweeps, and prints the medians:
+
+    | Grid | Branches | CPU first [s] | CPU float64 | CPU float32 | GPU first [s] | GPU float64 | GPU float32 |
+    |---|---|---|---|---|---|---|---|
+    | case118 | 186 | 0.064 | 0.241 ms | 0.123 ms | 0.150 | 0.224 ms | 0.188 ms |
+    | case300 | 411 | 0.052 | 0.470 ms | 0.391 ms | 0.133 | 1.560 ms | 1.501 ms |
+    | case1354pegase | 1 991 | 0.654 | 33.9 ms | 14.1 ms | 0.154 | 5.04 ms | 3.89 ms |
+    | case2869pegase | 4 582 | 2.657 | 227 ms | 161 ms | 0.186 | 31.9 ms | 25.9 ms |
+
+    The "first" columns are the float64 first calls; the float32 first calls are 0.06–0.20 s on the CPU and
+    0.12–0.28 s on the GPU. The CPU of this container (JAX 0.5.3, four cores) is slower than the course
+    environment of the table above (JAX 0.11, Windows, all cores), so compare devices only within one table.
+    On log-log axes the GPU's steady-state line is flat at 0.2–1.6 ms for the two small grids, where the time
+    is kernel launches and not arithmetic. From case1354pegase to case2869pegase it rises with a slope close
+    to 2, like the CPU's, but six to seven times lower. **The GPU starts to win between 411 and 1 991
+    branches.** On case118 the two devices tie (0.22 against 0.24 ms), and on case300 the CPU is 3.3 times
+    faster. On case1354pegase the GPU is 6.7 times faster in float64 and 3.6 times in float32, and on
+    case2869pegase 7.1 and 6.2 times. The GPU's first call is a flat 0.13–0.19 s: compilation plus copying the
+    PTDF to the device. On the CPU the first float64 call of the two Pegase grids is much slower than its
+    float32 call (0.65 against 0.08 s, 2.66 against 0.20 s). That float64 call is the first to write a 32 or
+    168 MB output in the process. Fresh memory pages are the likely cost, since the float32 call that follows
+    can reuse them.
+
+    The float64 penalty on this card is small, 1.0–1.3 times (31.9 against 25.9 ms on case2869pegase). The
+    1/32 float64 arithmetic rate of a GeForce card never shows, because the screening is a rank-one update per
+    outage, which reads and writes $n_{branch}^2$ numbers and does almost no arithmetic per number. It is
+    bound by memory bandwidth, and float64 only doubles the bytes. On the CPU the penalty is 1.2–2.4 times.
+
+    The results agree. `python timing_sweep.py agree` screens each grid on the GPU and on the CPU, each
+    device building its own PTDF, and compares the flows of the outages both flag as valid. In float64 the
+    largest difference is 1.5e-14 of the largest flow on case118, 7.5e-14 on case300, 6.6e-13 on
+    case1354pegase (1.4e-9 MW) and 1.3e-13 on case2869pegase, with identical bridge flags. Float32 against
+    float64 on the GPU differs by 2.9e-7, 1.1e-6, 1.2e-6 and 1.0e-3 of the largest flow: 2.25 MW on
+    case2869pegase, where the float32 rounding of a few near-bridge outages is amplified as in Exercise 4. All
+    bridges are still flagged, because the PTDF is built in float64 and only then cast, so a bridge's
+    denominator is cast from an exact zero. When the whole computation is in float32, as in Chapter 32's ToOp
+    runs, some bridges are not flagged.
 
     ```python title="timing_sweep.py"
     --8<-- "docs/part-5-computing/ch31-jax-gpu-fundamentals/src/timing_sweep.py"

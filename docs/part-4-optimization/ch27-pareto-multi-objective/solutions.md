@@ -16,7 +16,9 @@ container (image `toop-course:cpu`, ToOp `ba1874e`) on the complex example grid 
 with 60 s of search and a CPU budget of `docker run --cpus 4` (three containers ran side by side, so a run took 61 to
 70 s of wall time and used about 1.2 cores). Their `res.json` files are in
 [`src/toop_front/`](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch27-pareto-multi-objective/src/toop_front){ target="_blank" }
-(about 13 KB each) and [`toop_front.py`](src/toop_front.py) prints every number quoted from them.
+(about 13 KB each) and [`toop_front.py`](src/toop_front.py) prints every number quoted from them. Ten more runs,
+the default repertoire on an NVIDIA GPU and again on the CPU of the same container, are in `src/toop_front_gpu/`
+(Lab 4, *CPU against GPU*).
 
 ## Lab
 
@@ -160,10 +162,47 @@ with 60 s of search and a CPU budget of `docker run --cpus 4` (three containers 
    fronts is meaningful only with the same reference point, and the extreme points gain weight as the reference
    moves away.
 
+    *CPU against GPU.* The five `fine` seeds were run again in ToOp's GPU container, described in
+    [Chapter 32's solutions](../../part-5-computing/ch32-jax-in-toop/solutions.md): image
+    `toop-toop-gpu:latest`, ToOp `ba1874e`, JAX 0.5.3 with the CUDA 12 plugin, and an NVIDIA GeForce RTX 3050
+    Laptop GPU (4 096 MiB, driver 617.42). Each seed ran twice. The GPU run used `toop_front_toop.py WORK_DIR
+    --gpu`, which only sets `num_cuda_devices` to 1, with `JAX_PLATFORMS=cuda,cpu`; ToOp's log reports
+    `device='cuda:0'` and `fp_dtype='float64'`. The CPU run used the same container with `JAX_PLATFORMS=cpu`.
+    Every run had a fresh container with `--cpus 4`, one at a time, on an otherwise idle machine. The
+    `res.json` files are in [`src/toop_front_gpu/`](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch27-pareto-multi-objective/src/toop_front_gpu){ target="_blank" },
+    and `toop_front.gpu_vs_cpu` compares them, normalized as above (medians, with min–max in parentheses):
+
+    | Per 60 s run | GPU | CPU, same container |
+    |---|---|---|
+    | epochs | 134 (126–136) | 381 (378–391) |
+    | evaluations (`total_branch_combis`) | 107 208 (100 808–108 808) | 304 808 (302 408–312 808) |
+    | wall time | 71.9 s (71.4–72.0) | 66.0 s (65.9–66.0) |
+    | non-dominated elites, of 29 | 6 (4–6) | 6 (5–6) |
+    | hypervolume | 0.8364 (0.8148–0.8364) | 0.8364 (0.8182–0.8364) |
+    | IGD+ | 0 (0–0.0176) | 0 (0–0.0091) |
+
+    The GPU does **a third of the work** of four CPU cores in the same time: every GPU run is below every CPU
+    run in epochs and evaluations (two-sided Mann–Whitney $p = 0.008$). The front quality is the same ($p = 1.0$
+    for the hypervolume, IGD+ and the non-dominated count). Four runs on each device reach Lab 4's joint front
+    and its hypervolume 0.8364, and seed 4 misses on both. On the GPU it misses exactly as `fine_s4` did,
+    finding $(1163.21, 8)$ and $(1172.16, 4)$; on the CPU only $(1172.16, 4)$ replaces $(1169.12, 4)$, for
+    0.8182. The ten runs together have Lab 4's four-point front.
+
+    The GPU loses because of ToOp's default batch. An epoch is 100 iterations of `batch_size = 8` topologies
+    (evaluations = 800 × epochs + 8 for the initial batch), and Chapter 32's solutions measured the same
+    effect on the solver alone. A call with a few topologies costs 2.3–3.2 times more on this GPU than on the CPU,
+    because of kernel launches and copies, while batches of a thousand run 19–21 times faster. To profit from
+    the GPU, the search needs a much larger batch per iteration, and that changes the algorithm, not only the
+    device. The idle CPU also did 1.7 times the epochs of the `toop_front/` runs (381 against 227), which ran
+    three containers side by side. A wall-clock budget measures the machine's load as much as the algorithm,
+    which is why Chapter 26 asks for budgets in evaluations.
+
     ```python title="toop_front.py (Labs 3 and 4)"
     --8<-- "docs/part-4-optimization/ch27-pareto-multi-objective/src/toop_front.py:weights"
 
     --8<-- "docs/part-4-optimization/ch27-pareto-multi-objective/src/toop_front.py:quality"
+
+    --8<-- "docs/part-4-optimization/ch27-pareto-multi-objective/src/toop_front.py:gpu"
     ```
 
     ```python title="toop_front_toop.py (the runs, ToOp's interpreter)"

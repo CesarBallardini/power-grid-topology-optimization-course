@@ -7,9 +7,22 @@ The code is in the chapter's `src` folder: [`solver_lab_toop.py`](src/solver_lab
 [`int_widths.py`](src/int_widths.py) and [`pmap_donate.py`](src/pmap_donate.py) run anywhere; each has a test
 next to it (`test_*_toop.py` for the ToOp ones, run with `make test-toop`). Every script prints the numbers quoted
 below when run from the `src` folder. The ToOp numbers were produced with ToOp commit `ba1874e` on **CPU**
-(JAX 0.5.3, Python 3.11, Windows); there is no NVIDIA GPU on the machine that wrote this, so every GPU
-measurement is described, not done. The other scripts ran in the course environment (JAX 0.11, NumPy 2.4,
-Python 3.14) and again with ToOp's interpreter where the versions matter.
+(JAX 0.5.3, Python 3.11, Windows). Lab steps 2 and 4 were then measured again on CPU *and* GPU in one container
+with [`gpu_compare_toop.py`](src/gpu_compare_toop.py) (environment below); the GPU behaviour of Exercise 5 is
+described, not measured. The other scripts ran in the course environment (JAX 0.11, NumPy 2.4, Python 3.14) and
+again with ToOp's interpreter where the versions matter.
+
+**GPU environment.** An NVIDIA GeForce RTX 3050 Laptop GPU (4 096 MiB, 35 W power limit), Windows driver 617.42,
+reached through Docker Desktop's WSL2 backend (`docker run --gpus all`). The image is `toop-toop-gpu:latest`, built
+from the course fork's `docker/Dockerfile` with `INSTALL_CUDA=true`, which adds `jax[cuda12]` at the JAX version
+of `uv.lock`. ToOp `ba1874e` is bind-mounted read-only at `/app`, and the environment in `/opt/venv` (a named
+volume) is synced to that commit's `uv.lock` with `uv sync --frozen --inexact`, which keeps the CUDA wheels:
+JAX, jaxlib and `jax-cuda12-plugin` 0.5.3, CUDA runtime 12.9.79, cuDNN 9.24, Python 3.11.16
+(`python gpu_compare_toop.py env` prints them). CPU and GPU runs use this same container and differ only in
+`JAX_PLATFORMS`: `cpu`, or `cuda,cpu` for the GPU (ToOp's preprocessing also asks for the CPU device, so `cuda`
+alone fails with "Unknown backend cpu"). Every run had `--cpus 4`, `XLA_PYTHON_CLIENT_PREALLOCATE=false` and an
+otherwise idle machine, and every measurement starts a fresh Python process: a compilation happens once per
+process, and JAX's peak-memory counter cannot be reset.
 
 ## Lab
 
@@ -45,6 +58,22 @@ Python 3.14) and again with ToOp's interpreter where the versions matter.
     the compiled programs of the core instead, `iterate_symmetric_sequential._cache_size()`, which answers the
     same question exactly; `jax.no_tracing()` works around the jitted core itself, which is how
     `packages/topology_optimizer_pkg/tests/test_jax_compilation.py` uses it.
+
+    *CPU against GPU.* `python gpu_compare_toop.py compile ROOT 5` runs `compile_vs_run` in one discarded
+    warm-up process and then in five fresh processes; medians, same container, `JAX_PLATFORMS` switched:
+
+    | Call | CPU | GPU |
+    |---|---|---|
+    | `run_solver`, call 1 | 1 209 ms | 2 337 ms |
+    | `run_solver`, calls 2 and 3 | 6.6 ms, 7.4 ms | 19.0 ms, 17.0 ms |
+    | `run_solver_symmetric`, `passthrough`, call 1 | 777 ms | 1 469 ms |
+    | `run_solver_symmetric`, `passthrough`, calls 2 and 3 | 4.5 ms, 4.3 ms | 13.7 ms, 13.7 ms |
+    | `run_solver_symmetric`, fresh `lambda`, calls 1, 2, 3 | 704 ms, 766 ms, 719 ms | 1 307 ms, 1 303 ms, 1 291 ms |
+
+    The pattern is the same on both devices, because the cache keys do not depend on the device. The GPU
+    compiles about twice as slowly (XLA's GPU pipeline does more work and emits device code), and on four
+    case57 topologies a cached call is 2.3–3.2 times *slower* than on the CPU: a job this small is all kernel
+    launches and host–device copies. The GPU only pays off with large batches (step 4).
 
     ```python title="solver_lab_toop.py (Lab 2)"
     --8<-- "docs/part-5-computing/ch32-jax-in-toop/src/solver_lab_toop.py:compile"
@@ -124,13 +153,80 @@ Python 3.14) and again with ToOp's interpreter where the versions matter.
     does not matter with one timestep. Memory grows with `batch_size_bsdf` (a PTDF and an LODF block per
     topology in the batch), which is the knob the chapter says to cut first on an out-of-memory error, and
     `batch_size_injection` next. Compile time is 0.8–1.3 s for every point, so a sweep costs more in
-    compilation than in running. *GPU: not run here.* Expect the opposite shape of the throughput map: a GPU
-    needs a large `batch_size_bsdf` to fill its lanes (throughput rising steeply from 4 to 64 or more, then
-    flattening), a hard out-of-memory boundary where `batch_size_bsdf × (n_branches × n_nodes + n_branches²) ×
-    8 bytes` plus the injection buffers exceed the VRAM `nvidia-smi` shows (with
-    `XLA_PYTHON_CLIENT_PREALLOCATE=false`, so the reading is real usage, not the 75 % preallocation), and a
-    float64 penalty of up to about 32× on a consumer GeForce card against 2× on a data-centre card, measured by
-    repeating one point in a fresh process with `JAX_ENABLE_X64=0` (the flag is read when JAX starts).
+    compilation than in running.
+
+    *CPU against GPU.* `gpu_compare_toop.sweep` repeats the sweep in the GPU environment above, one fresh process
+    per point, with 1 024 unsplit topologies (or `batch_size_bsdf` of them when that is larger), one compiling
+    call, one warm-up call and the median of five. Memory is JAX's peak of bytes in use on the GPU
+    (`memory_stats()`, checked against `nvidia-smi`, which adds the CUDA context of the whole card) and the peak
+    growth of the process's resident set on the CPU, sampled every 20 ms (reading it after the calls, as above,
+    misses the temporaries XLA has already freed). `batch_size_injection` (1, 4, 16 and 64) changes nothing on
+    either device with one timestep: GPU throughput stays within 2 % across it. The rows below are
+    `batch_size_injection = 1`:
+
+    | `batch_size_bsdf` | CPU float64 [topologies/s] | GPU float64 [topologies/s] | CPU peak RSS growth | GPU peak memory | GPU float32 [topologies/s] | GPU float32 peak |
+    |---|---|---|---|---|---|---|
+    | 4 | 372 | 4 290 | 76 MB | 22 MB | 12 652 | 8 MB |
+    | 16 | 285 | 5 026 | 99 MB | 39 MB | 16 380 | 21 MB |
+    | 64 | 270 | 5 130 | 226 MB | 140 MB | 16 702 | 71 MB |
+    | 256 | 352 | 5 235 | 721 MB | 389 MB | 19 925 | 272 MB |
+    | 1 024 | 283 | 5 306 | 2 694 MB | 1 535 MB | 19 839 | 672 MB |
+    | 2 048 | 260 | 5 392 | 5 345 MB | 3 069 MB | 22 663 | 1 343 MB |
+    | 4 096 | 237 | out of memory | 10 639 MB | – | 23 286 | 2 685 MB |
+    | 8 192 | – | – | – | – | out of memory | – |
+
+    In float64 the GPU is 11.5 times faster than the four CPU cores at `batch_size_bsdf = 4` and 19–21 times
+    faster from 1 024 up. Its throughput is already high at 4 and rises only by a quarter up to 2 048: the batch
+    of 1 024 topologies is processed in a `fori_loop` over BSDF batches, and even a batch of 4 keeps this
+    small card busy. Compilation takes 2.3–3.0 s per point on the GPU and 1.4–2.1 s on the CPU. Memory grows
+    linearly, about 1.5 MB per topology in the BSDF batch in float64 (0.66 MB in float32) on the GPU and
+    2.6 MB on the CPU, so `batch_size_bsdf` is indeed the knob that sets the footprint. The out-of-memory
+    boundary is between 2 048 and 4 096 in float64: 4 096 fails with `RESOURCE_EXHAUSTED: Out of memory while
+    trying to allocate 6117278032 bytes`, a single 6.1 GB buffer on a 4 GB card. The limit is not the card but
+    JAX's allocator: even with preallocation off it stops at 75 % of the memory (`bytes_limit` 3 221 MB), and
+    2 048 with 16 384 topologies peaked at 3 216 MB, right at that edge. `XLA_PYTHON_CLIENT_MEM_FRACTION`
+    moves the limit. `nvidia-smi` showed 2 138 MiB at 1 024 and 3 148 MiB at 2 048, the JAX peak plus the
+    CUDA context (90–160 MiB at rest). In float32 everything halves, and the boundary moves to between 4 096
+    and 8 192. A laptop GPU throttles: every float64 point drew the full 35 W, with the software power cap in
+    `nvidia-smi`'s clock-event reasons, mostly at 1.4–1.55 GHz of a 2.1 GHz maximum and 52–60 °C. That is why each
+    point has a warm-up call and a median.
+
+    *The float64 penalty.* ToOp switches `jax_enable_x64` on when `convert_to_jax` is imported, so
+    `JAX_ENABLE_X64=0` alone does not give a float32 run. `gpu_compare_toop.to_float32` narrows the static
+    information and the topologies (float64 to float32, int64 to int32, with the int64 padding sentinel mapped
+    to int32's), and then switches x64 off before the first solver call (`sweep ROOT float32`). On the GPU,
+    float32 is 2.9 times faster at `batch_size_bsdf = 4` and 3.7–4.2 times faster from 1 024 up. That is far from
+    the 1/32 float64 rate of a GeForce card, because the solver moves more data than it multiplies. On the CPU
+    the ratio is 1.6–2.0. Speed is not the reason ToOp stays in float64, though. Take 64 random case300
+    topologies, each splitting up to two of the 14 relevant substations (`python gpu_compare_toop.py agree
+    ROOT`). Float32 flags only 4 of the 12 outages that island a split grid. The other 8 come back as
+    successful, with flows up to 1 472.5 MW computed from a denominator that is rounding noise: plausible
+    numbers that the optimizer would trust. On the 59 topologies whose outages all succeed, float32 is close:
+    3.2e-3 MW on the N-0 flows (2.5e-6 of the largest, 1 294.5 MW), 1.2e-2 MW on the N-1 flows (5.7e-6) and
+    5.7e-6 relative on `pf_n_1_max`. On case57 (`agree ROOT case57 8`), one of 8 random topologies (actions
+    `[54, 49]`) cannot be solved in float32 at all: its N-0 flows come back infinite and all 84 outages fail.
+    In float64 it solves, but 3 of its outages island the grid, so ToOp rejects it.
+
+    *Agreement of the devices.* The same topologies in float64 on the CPU and the GPU, in one process. On
+    case300 the success flags are identical: the same 12 islanding outages, in 5 topologies. On the 59
+    topologies ToOp accepts, the largest differences are 4.1e-12 MW on the N-0 flows (3.2e-15 relative),
+    2.1e-11 MW on the N-1 flows (1.0e-14) and 1.4e-17 on `pf_n_1_max` (6.8e-16). The 5 rejected topologies
+    differ by 1.5e-12 MW (N-0) and 7.2e-12 MW (their valid N-1 outages). These differences are rounding, from a
+    different order of summation in the GPU kernels. The rows of an islanding outage are meaningless on both
+    devices (a division by a near-zero denominator), and they differ. The case57 topology `[54, 49]` shows
+    what ill-conditioning does even in float64: CPU and GPU differ by 0.21 MW on its N-0 flows and 0.24 MW on
+    its valid N-1 flows, while its 7 accepted neighbours agree to 7e-13 MW. Compare results only where ToOp's
+    `success` is True, and treat a topology that it rejects as unsolved, not as nearly solved.
+
+    ```python title="gpu_compare_toop.py (one sweep point)"
+    --8<-- "docs/part-5-computing/ch32-jax-in-toop/src/gpu_compare_toop.py:point"
+    ```
+
+    ```python title="gpu_compare_toop.py (CPU against GPU, float32 against float64)"
+    --8<-- "docs/part-5-computing/ch32-jax-in-toop/src/gpu_compare_toop.py:agree"
+    ```
+
+    [Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch32-jax-in-toop/src){ target="_blank" } to see or download all the files of this chapter.
 
 ## Exercise 1
 
