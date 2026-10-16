@@ -67,6 +67,25 @@
     only**) <https://realpython.com/courses/exploring-python-math-module/>. For this chapter, watch "The cmath
     Module vs the math Module" and "NumPy vs math".
   - GNU Octave, "Complex Arithmetic" (`abs`, `angle`, `conj`): <https://docs.octave.org/latest/Complex-Arithmetic.html>.
+  - Worked examples in Octave (written, free):
+    - Smith (Stanford CCRMA), *Mathematics of the DFT*, "Complex Numbers in Matlab and Octave": `abs`, `angle`,
+      `conj` and `exp(j*theta)` with worked output <https://ccrma.stanford.edu/~jos/st/Complex_Numbers_Matlab_Octave.html>;
+      mirror <https://www.dsprelated.com/dspbooks/mdft/Complex_Numbers_Matlab_Octave.html>.
+    - Duke Calculus Consortium, MATLAB Tutor, part 14: a worksheet with `real`, `imag`, `abs`, `conj` and how
+      `angle` behaves across its range <https://sites.math.duke.edu/education/ccp/materials/engin/mlabtutor/mlabtut14.html>.
+      It is written for MATLAB, not Octave; these commands are the same in both.
+  - Video course on Octave in general: EPFLx *MATLAB and Octave for Beginners* (EPFL; free to audit, no
+    certificate; beginner level, about 5 hours; matrices, plots and functions)
+    <https://www.edx.org/learn/matlab/ecole-polytechnique-federale-de-lausanne-matlab-and-octave-for-beginners>.
+    Issue: I could not read its syllabus, so complex numbers are not confirmed to be covered.
+  - Coursera Octave courses by EDUCBA (a training company, not a university; paid, with a free trial; no free
+    audit shown; beginner level):
+    - *Octave Programming: Analyze, Apply & Implement* (3 modules, about 9 hours)
+      <https://www.coursera.org/learn/octave-programming-analyze-apply-implement>. Its syllabus has a 2-minute
+      lecture "Operations on Complex Variables", so complex numbers get only a brief mention.
+    - *GNU Octave: Apply, Implement & Design Functions*
+      <https://www.coursera.org/learn/gnu-octave-apply-implement-design-functions>. Issue: I saw no
+      complex-number content on its page.
 
 ## Worked example
 

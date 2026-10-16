@@ -33,7 +33,7 @@ On commit, `markdown-link-check` checks every link in each staged file, not only
 
 - **`make check-books`** — Verify every archive.org link still works (network test, run weekly)
 - **`make check-toop`** — Validate ToOp source paths cited in the book (requires `../ToOp` sibling repo)
-- **`make links`** — Check every external link (network, ~2.5 min). Local only, never in CI: GitHub runner IPs are blocked by many hosts. `202` counts as alive, since eur-lex answers every bot with a 202 firewall challenge. A few links fail from anywhere (techrxiv 403, udemy 403 for scripted requests, tudelft/gmu/ou time out in the checker); confirm by opening the link, not by trusting the exit code
+- **`make links`** — Check every external link (network, ~2.5 min). Local only, never in CI: GitHub runner IPs are blocked by many hosts. `202` counts as alive, since eur-lex answers every bot with a 202 firewall challenge. A few links fail from anywhere (techrxiv 403, udemy 403 and realpython.com 403 for scripted requests, tudelft/gmu/ou time out in the checker); confirm by opening the link, not by trusting the exit code
 - **`make test`** — Run unit tests on maintenance tools (72 tests)
 - **`make docs`** — Full strict build: any warning fails the build
 
@@ -127,7 +127,7 @@ All tools are plain Python scripts in `tools/`:
 - `mkdocs.yml` — site config, navigation structure, Material theme settings
 - `pyproject.toml` — uv environment (dev/doc groups), commitizen config, pytest settings
 - `.pre-commit-config.yaml` — git hooks: ruff (lint/format), commitizen (message validation), markdown-link-check
-- `.markdown-link-check.json` — link checker settings; the only ignore rule is the plugin-injected `../print_page/` link, with no per-host exceptions; every request carries the full Chrome header set (global `httpHeaders` entry for `http://` and `https://`, the same headers as in "Checking course pages"); alive status codes are 200, 202 (bot challenges such as eur-lex's) and 206. Udemy and techrxiv still answer 403 to the checker even with these headers (their bot protection looks at the TLS fingerprint of Node, which a config cannot change, while `curl` gets 200), so judge those two by opening them
+- `.markdown-link-check.json` — link checker settings; the only ignore rule is the plugin-injected `../print_page/` link, with no per-host exceptions; every request carries the full Chrome header set (global `httpHeaders` entry for `http://` and `https://`, the same headers as in "Checking course pages"); alive status codes are 200, 202 (bot challenges such as eur-lex's) and 206. Udemy, techrxiv and realpython.com still answer 403 to the checker even with these headers (their bot protection appears to look at the TLS fingerprint of Node, which a config cannot change, while `curl` with the same headers gets 200), so judge those three hosts by opening them
 - `Makefile` — convenience targets for all common tasks
 
 ## Style & Tone
