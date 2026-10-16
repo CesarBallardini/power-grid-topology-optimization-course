@@ -2197,8 +2197,9 @@ followed by expensive AC validation that runs concurrently and pulls candidates 
 <code>docs/topology_optimizer/ac/ac_loop.md</code>).</p>
 <ul>
 <li><strong>Exact formulations as the yardstick.</strong> DC optimal transmission switching is a <abbr title="Mixed-integer linear programming">MILP</abbr> and NP-hard; you will
-  formulate and solve it for a small grid and see where exact methods stop scaling, which is the reason
-  ToOp's DC stage is a <abbr title="Graphics processing unit">GPU</abbr> heuristic.</li>
+  formulate and solve it for a small grid, where a <abbr title="Mixed-integer linear programming">MILP</abbr> solver still finishes in a fraction of a second,
+  and count the topologies a brute force would need, to see why exact methods stop scaling on grids with
+  hundreds of lines and N-1 constraints, which is the reason ToOp's DC stage is a <abbr title="Graphics processing unit">GPU</abbr> heuristic.</li>
 <li><strong>Acceptance.</strong> <code>evaluate_acceptance</code> in <code>optimizer/ac/scoring_functions.py</code> compares each candidate's AC
   metrics with the unsplit grid's using multiplicative thresholds (defaults in
   <code>optimizer/interfaces/messages/ac_params.py</code>). Knowing exactly what it does, and where it misleads, is the
@@ -2378,12 +2379,22 @@ non-trivial.</p>
 <li>Solve DC-<abbr title="Optimal power flow">OPF</abbr> for IEEE 30 from the worked example and check the flows against your DC power flow. Print the
    duals of the nodal balance constraints (locational marginal prices) and explain where they differ.</li>
 <li>Add switching with the big-M formulation. Solve for <span class="arithmatex">\(k = 1, 2, 3\)</span> and for 5, 10, 20 and all 41 switchable
-   lines; record cost, switched lines, solve time and MIP gap in a pandas table.</li>
-<li>Add N-1 security for the 5 most critical contingencies with your LODFs (as linear constraints in the flows),
-   then add violated contingencies one at a time (lazy generation) until none remains. Record the iterations.</li>
+   lines; record cost, switched lines, solve time and MIP gap in a pandas table. Do not expect the solve
+   time to blow up: on IEEE 30 HiGHS closes every one of these MILPs, 41 binaries included, with a zero gap
+   in well under a second. Measure it, count the topologies a brute force over at most <span class="arithmatex">\(k\)</span> open lines would
+   enumerate (1 351 with 20 lines and <span class="arithmatex">\(k = 3\)</span>, 11 522 with 41), and explain why branch and bound sees
+   nothing of that growth here and on which grids (hundreds of lines, N-1 constraints) it does. For a case
+   where the solver does struggle, try IEEE 118 or a larger MATPOWER case with the same code.</li>
+<li>Add N-1 security for the 5 most critical contingencies with your LODFs (as linear constraints in the flows)
+   to the DC-<abbr title="Optimal power flow">OPF</abbr> of step 1, with the topology fixed, then add violated contingencies one at a time (lazy
+   generation) until none remains. Record the iterations. The <abbr title="Line outage distribution factor">LODF</abbr> constraints are exact only for a fixed
+   topology: once lines can open, the LODFs themselves depend on the switching variables, and an <abbr title="Optimal transmission switching">OTS</abbr> <abbr title="Mixed-integer linear programming">MILP</abbr>
+   with N-1 needs one copy of the network angles per contingency (or shift factors recomputed per candidate
+   topology), which <a href="#exercises">Exercise 3</a> takes up.</li>
 <li>Compare the switching decisions and the time with the brute-force and <abbr title="Genetic algorithm">GA</abbr> results of Chapter 24 and with the
    number of topologies per second ToOp reports in <code>res.json</code> (<code>total_branch_combis</code> and the run time).</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab-a">Lab A</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Lab B: the AC stage in practice</p>
@@ -2407,22 +2418,39 @@ run of that notebook's <code>run_pipeline</code> call.</p>
    instruction an operator could read. Compare the number of switch operations with <code>switching_distance</code> in
    <code>ac_metrics.json</code> and in <code>dc_info</code>.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab-b">Lab B</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Derive a valid big-M for a switchable line in a network where the line lies on a cycle of <span class="arithmatex">\(m\)</span> other lines with
-   known ratings and susceptances. Why is a bound over all topologies harder? <em>(pen and paper)</em></li>
-<li>On a 3-bus network, show that switching off a line can lower the DC-<abbr title="Optimal power flow">OPF</abbr> cost (Braess-like behavior), and read
-   the explanation from the dual values. <em>(Jupyter: PuLP + HiGHS)</em></li>
-<li>Awareness: for each of <abbr title="Second-order cone programming">SOCP</abbr>/QC/<abbr title="Semidefinite programming">SDP</abbr> relaxation, shift-factor <abbr title="Mixed-integer linear programming">MILP</abbr>, lazy N-1 constraints and Benders
+<li>
+<p>Derive a valid big-M for a switchable line in a network where the line lies on a cycle of <span class="arithmatex">\(m\)</span> other lines with
+   known ratings and susceptances. Why is a bound over all topologies harder? <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>On a 3-bus network, show that switching off a line can lower the DC-<abbr title="Optimal power flow">OPF</abbr> cost (Braess-like behavior), and read
+   the explanation from the dual values. <em>(Jupyter: PuLP + HiGHS)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>Awareness: for each of <abbr title="Second-order cone programming">SOCP</abbr>/QC/<abbr title="Semidefinite programming">SDP</abbr> relaxation, shift-factor <abbr title="Mixed-integer linear programming">MILP</abbr>, lazy N-1 constraints and Benders
    decomposition, write two sentences on what it would change if used to validate or seed ToOp's DC search, and
-   which ToOp stage it would compete with. <em>(pen and paper)</em></li>
-<li>Write a two-page comparison of a <abbr title="Mixed-integer linear programming">MILP</abbr> (with lazy N-1 constraints), a rule-based expert system and ToOp for the
+   which ToOp stage it would compete with. <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>Write a two-page comparison of a <abbr title="Mixed-integer linear programming">MILP</abbr> (with lazy N-1 constraints), a rule-based expert system and ToOp for the
    same operational question: which switching actions relieve a given N-1 overload in the next day's grid.
-   Cover scalability, guarantees, AC feasibility and operator interpretability. <em>(pen and paper)</em></li>
-<li>Given <code>unsplit_ac_metrics.json</code> with <code>overload_energy_n_1 = 0.0</code>, <code>critical_branch_count_n_1 = 0</code> and
+   Cover scalability, guarantees, AC feasibility and operator interpretability. <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Given <code>unsplit_ac_metrics.json</code> with <code>overload_energy_n_1 = 0.0</code>, <code>critical_branch_count_n_1 = 0</code> and
    <code>non_converging_loadflows = 2</code>, and a candidate with <code>0.4</code>, <code>1</code> and <code>1</code> (and no disconnected branches), which
-   check rejects it first, and what would you change in the acceptance rule? <em>(pen and paper)</em></li>
+   check rejects it first, and what would you change in the acceptance rule? <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

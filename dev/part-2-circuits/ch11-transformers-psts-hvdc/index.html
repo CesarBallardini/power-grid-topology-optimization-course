@@ -2286,30 +2286,51 @@ The sign of <span class="arithmatex">\(\alpha\)</span> here is a modeling choice
    susceptances instead of conductances) and compute the change of every branch flow per degree by
    finite differences. This column of sensitivities is what ToOp's <abbr title="Phase shift distribution factor">PSDF</abbr> stores.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>An ideal 380/110 kV transformer feeds a 10 Ω impedance on its 110 kV side. What impedance is seen from the
-   380 kV side? <em>(Pen and paper)</em> <em>Answer:</em> <span class="arithmatex">\(10 \cdot (380/110)^2 \approx 119.3\ \Omega\)</span>.</li>
-<li>ToOp replaces a transformer's reactance <span class="arithmatex">\(x\)</span> by <span class="arithmatex">\(x/\rho\)</span> in the DC model (<code>get_trafos</code> in
+<li>
+<p>An ideal 380/110 kV transformer feeds a 10 Ω impedance on its 110 kV side. What impedance is seen from the
+   380 kV side? <em>(Pen and paper)</em> <em>Answer:</em> <span class="arithmatex">\(10 \cdot (380/110)^2 \approx 119.3\ \Omega\)</span>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>ToOp replaces a transformer's reactance <span class="arithmatex">\(x\)</span> by <span class="arithmatex">\(x/\rho\)</span> in the DC model (<code>get_trafos</code> in
    <code>dc_solver/preprocess/powsybl/powsybl_helpers.py</code>, commented as equivalent to PowSyBl's
    <code>dc_use_transformer_ratio = True</code>). For <span class="arithmatex">\(\rho = 1.05\)</span>, by what percentage does the branch susceptance change,
-   and does the transformer attract more or less flow in a meshed network? <em>(Pen and paper)</em></li>
-<li>A three-winding transformer has pairwise short-circuit reactances <span class="arithmatex">\(x_{12} = 0.10\)</span>, <span class="arithmatex">\(x_{13} = 0.25\)</span> and
+   and does the transformer attract more or less flow in a meshed network? <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>A three-winding transformer has pairwise short-circuit reactances <span class="arithmatex">\(x_{12} = 0.10\)</span>, <span class="arithmatex">\(x_{13} = 0.25\)</span> and
    <span class="arithmatex">\(x_{23} = 0.20\)</span> pu on a common base. Compute the star equivalent <span class="arithmatex">\(x_1 = (x_{12} + x_{13} - x_{23})/2\)</span> and its
    cyclic permutations, and explain why an outage of this transformer removes three branches at once.
-   <em>(Pen and paper)</em> <em>Answer:</em> <span class="arithmatex">\(x_1 = 0.075\)</span>, <span class="arithmatex">\(x_2 = 0.025\)</span>, <span class="arithmatex">\(x_3 = 0.175\)</span> pu.</li>
-<li>Build two tap tables with pandas for a <abbr title="Phase-shifting transformer">PST</abbr> with taps <span class="arithmatex">\(-16 \dots 16\)</span>: one with constant <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(\alpha\)</span> from
+   <em>(Pen and paper)</em> <em>Answer:</em> <span class="arithmatex">\(x_1 = 0.075\)</span>, <span class="arithmatex">\(x_2 = 0.025\)</span>, <span class="arithmatex">\(x_3 = 0.175\)</span> pu.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>Build two tap tables with pandas for a <abbr title="Phase-shifting transformer">PST</abbr> with taps <span class="arithmatex">\(-16 \dots 16\)</span>: one with constant <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(\alpha\)</span> from
    the atan2 formula of <a href="../../part-1-math/ch01-complex-numbers/">Chapter 1</a> (1% per step at <span class="arithmatex">\(90^\circ\)</span>), one where
    <span class="arithmatex">\(x\)</span> grows by 1% per tap away from neutral. Apply the same test as <code>get_linear_pst</code> in DC mode (<code>np.allclose</code>
    on <code>x</code>) to each. Is <span class="arithmatex">\(\alpha\)</span> exactly proportional to the tap number in the first table? <em>(Jupyter: pandas +
-   NumPy)</em></li>
-<li>Draw the phasor diagram of a symmetric <abbr title="Phase-shifting transformer">PST</abbr> and a quadrature booster with the same phase shift in
-   GeoGebra, and measure the output magnitude of each. <em>(GeoGebra)</em></li>
-<li>An <abbr title="High-voltage direct current">HVDC</abbr> link between buses 1 and 3 of a three-bus AC ring is a pair of injections <span class="arithmatex">\(-P_{dc}\)</span> at bus 1 and
+   NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Draw the phasor diagram of a symmetric <abbr title="Phase-shifting transformer">PST</abbr> and a quadrature booster with the same phase shift in
+   GeoGebra, and measure the output magnitude of each. <em>(GeoGebra)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p>An <abbr title="High-voltage direct current">HVDC</abbr> link between buses 1 and 3 of a three-bus AC ring is a pair of injections <span class="arithmatex">\(-P_{dc}\)</span> at bus 1 and
    <span class="arithmatex">\(+P_{dc}\)</span> at bus 3. With <code>nodal_solve</code>, show that every AC branch flow is affine in <span class="arithmatex">\(P_{dc}\)</span> and find the
    setpoint that unloads the most loaded AC line. Why would optimizing <span class="arithmatex">\(P_{dc}\)</span> be a continuous action,
-   unlike a busbar split? <em>(Jupyter: NumPy + matplotlib)</em></li>
+   unlike a busbar split? <em>(Jupyter: NumPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

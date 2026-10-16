@@ -2367,25 +2367,50 @@ withdrawn at node 0).</p>
    percent while <code>float64</code> stays below <span class="arithmatex">\(10^{-9}\)</span>. Relate this to ToOp's <code>float64</code> policy and its <code>1e-11</code>
    denominator threshold.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Verify the Sherman–Morrison identity by multiplying <span class="arithmatex">\((M + uv^\top)\)</span> by the right-hand side. What happens when
-   <span class="arithmatex">\(1 + v^\top M^{-1} u = 0\)</span>? <em>(Pen and paper)</em></li>
-<li>Show that for a connected network with a grounded node, <span class="arithmatex">\(g_k\, a_k^\top G_r^{-1} a_k \le 1\)</span>, with equality if
-   and only if branch <span class="arithmatex">\(k\)</span> is a bridge. <em>Hint:</em> series and parallel resistances. <em>(Pen and paper)</em></li>
-<li>Remove two branches at once with the Woodbury identity (<span class="arithmatex">\(U\)</span> has two columns, so you solve a 2×2 system).
+<li>
+<p>Verify the Sherman–Morrison identity by multiplying <span class="arithmatex">\((M + uv^\top)\)</span> by the right-hand side. What happens when
+   <span class="arithmatex">\(1 + v^\top M^{-1} u = 0\)</span>? <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>Show that for a connected network with a grounded node, <span class="arithmatex">\(g_k\, a_k^\top G_r^{-1} a_k \le 1\)</span>, with equality if
+   and only if branch <span class="arithmatex">\(k\)</span> is a bridge. <em>Hint:</em> series and parallel resistances. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>Remove two branches at once with the Woodbury identity (<span class="arithmatex">\(U\)</span> has two columns, so you solve a 2×2 system).
    Implement the 2×2 solve in closed form with a determinant check, then compare with <code>solve2x2</code> in ToOp's
-   <code>dc_solver/jax/unrolled_linalg.py</code>. <em>(Jupyter: NumPy)</em></li>
-<li>Floating point: print <code>np.finfo(np.float32)</code> and <code>np.finfo(np.float64)</code>; evaluate <code>0.1 + 0.2 == 0.3</code>,
+   <code>dc_solver/jax/unrolled_linalg.py</code>. <em>(Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>Floating point: print <code>np.finfo(np.float32)</code> and <code>np.finfo(np.float64)</code>; evaluate <code>0.1 + 0.2 == 0.3</code>,
    <code>1e16 + 1 - 1e16</code> and <code>np.sum([1.0, np.nan])</code>. Explain why ToOp's <code>compute_ptdf</code> ends with an assertion
-   that the result has no NaNs (<code>dc_solver/preprocess/helpers/ptdf.py</code>). <em>(Jupyter: NumPy)</em></li>
-<li>Sparse storage and fill-in: for the 40×40 grid network, store <span class="arithmatex">\(G_r\)</span> as CSC, factor it with
+   that the result has no NaNs (<code>dc_solver/preprocess/helpers/ptdf.py</code>). <em>(Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Sparse storage and fill-in: for the 40×40 grid network, store <span class="arithmatex">\(G_r\)</span> as CSC, factor it with
    <code>scipy.sparse.linalg.splu</code> using <code>permc_spec="NATURAL"</code> and <code>"COLAMD"</code>, and compare <code>nnz</code> of the factors
    with <code>nnz</code> of <span class="arithmatex">\(G_r\)</span>. In Octave, use <code>spy</code>, <code>nnz</code> and <code>symamd</code> for the same comparison.
-   <em>(Jupyter: SciPy, or Octave)</em></li>
-<li>Plot <code>np.linalg.cond(G_r)</code> against the weak conductance of lab step 4 on log–log axes and relate the slope
-   to the observed <code>float32</code> error. <em>(Jupyter: NumPy + matplotlib)</em></li>
+   <em>(Jupyter: SciPy, or Octave)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p>For the weak conductances of lab step 4, plot <code>np.linalg.cond</code> of <span class="arithmatex">\(G_r'\)</span>, the reduced conductance matrix
+   <em>after</em> removing <code>(4, 5)</code>, against <span class="arithmatex">\(g_w\)</span> on log–log axes and relate the slope to the observed <code>float32</code>
+   error. Plot <span class="arithmatex">\(\kappa_2(G_r)\)</span> of the matrix before the removal on the same axes and explain why it stays flat
+   at about 26 whatever <span class="arithmatex">\(g_w\)</span> is: while <code>(4, 5)</code> is present, node 5 is well connected and the tiny extra branch
+   changes nothing; only after the removal does node 5 hang on the weak branch, so the smallest eigenvalue of
+   <span class="arithmatex">\(G_r'\)</span> is about <span class="arithmatex">\(g_w\)</span> and the condition number grows as <span class="arithmatex">\(1/g_w\)</span>. <em>(Jupyter: NumPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

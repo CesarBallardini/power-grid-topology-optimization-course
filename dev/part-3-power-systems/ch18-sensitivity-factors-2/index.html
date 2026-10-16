@@ -2651,24 +2651,45 @@ checks that the result equals <span class="arithmatex">\(H' P'\)</span>.</p>
 <li>Apply the same steps in a different order (disconnection before split). Which final quantities are
    invariant, and which intermediate objects (the stored <span class="arithmatex">\(\beta\)</span> vectors, the cross-coupler flows) change?</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Write the <abbr title="Multi-outage distribution factor">MODF</abbr> for two outaged branches with the closed-form <span class="arithmatex">\(2 \times 2\)</span> inverse. Show that
-   <span class="arithmatex">\(\det(I - \mathcal H_{OO}) = 0\)</span> when the two branches form a cut set, even if neither is a bridge alone.</li>
-<li><em>(Jupyter: NumPy)</em> Verify the Woodbury update on IEEE 118 for 1, 2 and 3 simultaneous susceptance changes,
-   and time it against recomputing the <abbr title="Power transfer distribution factor">PTDF</abbr>. At what <span class="arithmatex">\(k\)</span> does recomputation win?</li>
-<li>Derive <span class="arithmatex">\(\beta = H'_{:,i} - H'_{:,b}\)</span> from the "inject the coupler flow" argument, and use it to show that the
-   bus-A branches' <span class="arithmatex">\(\beta\)</span> entries, oriented out of bus A, sum to one.</li>
-<li><em>(Jupyter: NumPy + matplotlib)</em> For every admissible two-way split of one IEEE 14 station, plot the
+<li>
+<p>Write the <abbr title="Multi-outage distribution factor">MODF</abbr> for two outaged branches with the closed-form <span class="arithmatex">\(2 \times 2\)</span> inverse. Show that
+   <span class="arithmatex">\(\det(I - \mathcal H_{OO}) = 0\)</span> when the two branches form a cut set, even if neither is a bridge alone.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> Verify the Woodbury update on IEEE 118 for 1, 2 and 3 simultaneous susceptance changes,
+   and time it against recomputing the <abbr title="Power transfer distribution factor">PTDF</abbr>. At what <span class="arithmatex">\(k\)</span> does recomputation win?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>Derive <span class="arithmatex">\(\beta = H'_{:,i} - H'_{:,b}\)</span> from the "inject the coupler flow" argument, and use it to show that the
+   bus-A branches' <span class="arithmatex">\(\beta\)</span> entries, oriented out of bus A, sum to one.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy + matplotlib)</em> For every admissible two-way split of one IEEE 14 station, plot the
    cross-coupler flow <span class="arithmatex">\(|c|\)</span> against the maximum post-split loading. Relate the plot to ToOp's <code>cross_coupler_flow</code>
-   penalty (<code>docs/topology_optimizer/metrics.md</code>).</li>
-<li>Count floating-point operations for: one <abbr title="Bus split distribution factor">BSDF</abbr> update, one <span class="arithmatex">\(k\)</span>-outage <abbr title="Multi-outage distribution factor">MODF</abbr>, the <abbr title="Line outage distribution factor">LODF</abbr> matrix for <span class="arithmatex">\(n_f\)</span> N-1
+   penalty (<code>docs/topology_optimizer/metrics.md</code>).</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Count floating-point operations for: one <abbr title="Bus split distribution factor">BSDF</abbr> update, one <span class="arithmatex">\(k\)</span>-outage <abbr title="Multi-outage distribution factor">MODF</abbr>, the <abbr title="Line outage distribution factor">LODF</abbr> matrix for <span class="arithmatex">\(n_f\)</span> N-1
    cases, and the N-1 flow matrix for <span class="arithmatex">\(T\)</span> timesteps. Explain which of them are embarrassingly parallel over a
-   batch of topologies.</li>
-<li><em>(Jupyter: NumPy)</em> Generate random meshed grids with one radial branch, compute <span class="arithmatex">\(1 - h_{kk}\)</span> for the radial
+   batch of topologies.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> Generate random meshed grids with one radial branch, compute <span class="arithmatex">\(1 - h_{kk}\)</span> for the radial
    branch, and report how often it is exactly zero. Discuss which of ToOp's tolerances would catch the bridge
-   (<a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>).</li>
+   (<a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>).</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

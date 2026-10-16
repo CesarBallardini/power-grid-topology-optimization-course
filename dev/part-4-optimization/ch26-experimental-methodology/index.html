@@ -2323,6 +2323,16 @@ report an effect size next to the <span class="arithmatex">\(p\)</span>-value:</
 <p><span class="arithmatex">\(\hat A_{12} = 0.08\)</span> means a run of A beats a run of B only 8% of the time. Use <code>stats.wilcoxon</code> (signed-rank)
 instead when the samples are paired, for example the same seed on the same instance for both configurations
 across several different instances.</p>
+<div class="admonition note">
+<p class="admonition-title">Known discrepancies in <code>docs/benchmark.md</code></p>
+<p>ToOp's <code>docs/benchmark.md</code> (commit <code>ba1874e</code>) documents a <code>ga_config.split_subs=2,5</code> override that
+<code>toop-engine-benchmark/benchmark_toop.py</code> never reads: the script builds the <code>split_subs</code> descriptor as
+<code>{"metric": "split_subs", "num_cells": cfg.lf_config.max_num_splits}</code>, so the cell count comes from
+<code>lf_config.max_num_splits</code>, and the key is not defined in <code>configs/ga_config/ga_config.yaml</code> either (Hydra
+rejects it unless written <code>+ga_config.split_subs</code>). The page also writes <code>config/</code> for the
+<code>toop-engine-benchmark/configs/</code> folder and <code>assess_benchmark.py</code> for <code>assess_benchmarks.py</code>. Exercise 4
+walks through the check.</p>
+</div>
 <h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Lab: 10 seeds, 2 configurations, one honest conclusion</p>
@@ -2348,25 +2358,34 @@ across several different instances.</p>
    <code>total_branch_combis</code>, and truncate all runs to the smallest common epoch to compare them under an equal
    budget.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>A paper reports "our method found the best topology in 1 of 20 runs; the baseline never did" and compares only
+<li>
+<p>A paper reports "our method found the best topology in 1 of 20 runs; the baseline never did" and compares only
    the best run of each method. List three things wrong with this report and propose a better table.
-   <em>(pen and paper)</em></li>
-<li>Three configurations are run on 8 grid instances (5 seeds each, median taken per instance). Apply the Friedman
+   <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.
+2. Three configurations are run on 8 grid instances (5 seeds each, median taken per instance). Apply the Friedman
    test with <code>scipy.stats.friedmanchisquare</code>, then Holm-corrected pairwise signed-rank tests, on synthetic data
-   where one configuration is slightly better. <em>(Jupyter: NumPy + SciPy)</em></li>
-<li>Build a performance profile <span class="arithmatex">\(\rho_s(\tau)\)</span> for three solvers over 20 instances from a table of times to reach a
+   where one configuration is slightly better. <em>(Jupyter: NumPy + SciPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.
+3. Build a performance profile <span class="arithmatex">\(\rho_s(\tau)\)</span> for three solvers over 20 instances from a table of times to reach a
    target, including failures, and interpret <span class="arithmatex">\(\rho_s(1)\)</span> and <span class="arithmatex">\(\rho_s(\tau)\)</span> for large <span class="arithmatex">\(\tau\)</span>.
-   <em>(Jupyter: NumPy + pandas + matplotlib)</em></li>
-<li>Using ToOp's <code>docs/benchmark.md</code>, write a Hydra multirun command that sweeps <code>ga_config.random_seed</code> over 10
+   <em>(Jupyter: NumPy + pandas + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.
+4. Using ToOp's <code>docs/benchmark.md</code>, write a Hydra multirun command that sweeps <code>ga_config.random_seed</code> over 10
    values and <code>ga_config.runtime_seconds</code> over two values with <code>toop-engine-benchmark/benchmark_toop.py</code>.
    Check every key against <code>toop-engine-benchmark/configs/ga_config/ga_config.yaml</code>: is the documented
-   <code>ga_config.split_subs</code> override defined there, and does the script read it? <em>(pen and paper)</em></li>
-<li>Simulate the power of the rank-sum test: for true median differences of 0, 1, 2 and 4 MW with standard
+   <code>ga_config.split_subs</code> override defined there, and does the script read it? <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.
+5. Simulate the power of the rank-sum test: for true median differences of 0, 1, 2 and 4 MW with standard
    deviation 3 MW, estimate by Monte Carlo the probability of <span class="arithmatex">\(p &lt; 0.05\)</span> with 5, 10 and 30 runs per
-   configuration. How many runs would you schedule? <em>(Jupyter: NumPy + SciPy + matplotlib)</em></li>
+   configuration. How many runs would you schedule? <em>(Jupyter: NumPy + SciPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

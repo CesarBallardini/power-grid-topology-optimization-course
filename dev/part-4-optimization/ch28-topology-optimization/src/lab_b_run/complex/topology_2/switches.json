@@ -1,0 +1,32 @@
+{
+  "VL_2W_MV_HV_MV_BREAKER": {
+    "kind": "BREAKER",
+    "voltage_level_id": "VL_2W_MV_HV_MV",
+    "open_before": false,
+    "open_after": true
+  },
+  "2W_MV_HV_PST1_DISCONNECTOR_53_0": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_2W_MV_HV_MV",
+    "open_before": false,
+    "open_after": true
+  },
+  "2W_MV_HV_PST1_DISCONNECTOR_53_1": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_2W_MV_HV_MV",
+    "open_before": true,
+    "open_after": false
+  },
+  "L152_DISCONNECTOR_14_0": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_2W_MV_HV_MV",
+    "open_before": false,
+    "open_after": true
+  },
+  "L152_DISCONNECTOR_14_1": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_2W_MV_HV_MV",
+    "open_before": true,
+    "open_after": false
+  }
+}

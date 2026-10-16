@@ -2335,27 +2335,55 @@ matplotlib; pandapower and pypowsybl.</p>
    with matplotlib. Save the notebook with outputs cleared, and commit it on a branch of your own course
    repository with a Conventional Commits message.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Known discrepancy: the reference implementation's docstrings have drifted</p>
+<p>In <code>packages/dc_solver_pkg/tests/numpy_reference.py</code> (lab step 3) the module docstring cites a
+<code>bsdf_check_split</code> function "also used to pre-filter the action set" that no longer exists in the file, and
+the comments of <code>calc_lodf</code> describe shapes <code>(M,)</code> and <code>(E, M)</code> while its signature takes a single <code>int</code>, a
+trace of an earlier vectorized version. Read the code, not the docstrings, when the two disagree.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li><em>(Jupyter: NumPy + pytest)</em> Write <code>incidence_matrix(from_bus, to_bus, n_bus) -&gt; np.ndarray</code> with type hints,
+<li>
+<p><em>(Jupyter: NumPy + pytest)</em> Write <code>incidence_matrix(from_bus, to_bus, n_bus) -&gt; np.ndarray</code> with type hints,
    and a parametrized pytest test that checks each row sums to zero for three small graphs. Run it with
-   <code>uv run pytest</code>.</li>
-<li><em>(Jupyter: NumPy + matplotlib)</em> Build a random 200×200 sparse symmetric matrix with SciPy, solve a linear
+   <code>uv run pytest</code>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy + matplotlib)</em> Build a random 200×200 sparse symmetric matrix with SciPy, solve a linear
    system with <code>scipy.sparse.linalg.spsolve</code> and with dense <code>numpy.linalg.solve</code>, and plot the run time of both
-   against matrix size.</li>
-<li><em>(Jupyter: pypowsybl + pandas + matplotlib)</em> Load <code>pypowsybl.network.create_ieee14()</code>, run an AC load flow, and
+   against matrix size.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: pypowsybl + pandas + matplotlib)</em> Load <code>pypowsybl.network.create_ieee14()</code>, run an AC load flow, and
    plot active power <code>p1</code> of every line as a bar chart sorted by magnitude. Repeat with <code>run_dc</code> and put both
-   series in one figure.</li>
-<li><em>(Jupyter: pandas + Polars)</em> Convert <code>net.res_line</code> of pandapower's <code>case57</code> to Polars, keep lines with
+   series in one figure.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: pandas + Polars)</em> Convert <code>net.res_line</code> of pandapower's <code>case57</code> to Polars, keep lines with
    <code>loading_percent</code> above the median, and compute the mean loading grouped by <code>from_bus</code>. Write the same query in
-   pandas and compare the code.</li>
-<li><em>(git)</em> Create a repository, make three commits whose messages follow Conventional Commits (<code>feat:</code>, <code>fix:</code>,
+   pandas and compare the code.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(git)</em> Create a repository, make three commits whose messages follow Conventional Commits (<code>feat:</code>, <code>fix:</code>,
    <code>docs:</code>), install one pre-commit hook (for example <code>trailing-whitespace</code>), and show a commit it rejects. Which
    title would ToOp's <code>validate_pr_title.yaml</code> reject: <code>Fix/some slug</code>, <code>fix: handle empty action set</code>, or
-   <code>update docs</code>?</li>
-<li><em>(ToOp container)</em> Inside the container run <code>which python</code> and <code>uv run which python</code>, then <code>docker compose
-   down</code> and <code>up -d</code> again. Which state survives the restart and why (named volume vs container layer)?</li>
+   <code>update docs</code>?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p><em>(ToOp container)</em> Inside the container run <code>which python</code> and <code>uv run which python</code>, then <code>docker compose
+   down</code> and <code>up -d</code> again. Which state survives the restart and why (named volume vs container layer)?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

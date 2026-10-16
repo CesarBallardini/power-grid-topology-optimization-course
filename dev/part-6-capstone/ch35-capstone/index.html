@@ -2557,24 +2557,45 @@ control-room engineer rather than for a programmer:</p>
 <li><strong>Pick your discrepancy.</strong> Verify one item of the discrepancy list with a minimal reproduction and file it as
    the first issue of your project.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab_toop.ipynb">lab_toop.ipynb</a> (needs ToOp).</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li><em>(Jupyter: pandas)</em> From a <code>res.json</code>, rebuild the table of <code>best_topos</code> with fitness and every <code>extra_scores</code>
+<li>
+<p><em>(Jupyter: pandas)</em> From a <code>res.json</code>, rebuild the table of <code>best_topos</code> with fitness and every <code>extra_scores</code>
    metric, and check that <code>fitness</code> equals the negated weighted sum of <code>target_metrics</code> for every row. Which
-   topology would you give an operator who accepts at most one split substation?</li>
-<li><em>(ToOp container)</em> Reproduce the silent drop of <code>worst_k_contingent_cases</code> in
+   topology would you give an operator who accepts at most one split substation?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(ToOp container)</em> Reproduce the silent drop of <code>worst_k_contingent_cases</code> in
    <code>optimizer/ac/scoring_functions.py</code> with a two-line example, write the failing test, and draft the pull request
-   title and body as they would pass <code>validate_pr_title.yaml</code>.</li>
-<li><em>(Jupyter: pypowsybl)</em> For one split station, generate the before and after single-line diagrams, highlight the
-   switches listed in <code>orao_summary.json</code>, and write the switching steps in operator language.</li>
-<li><em>(Jupyter: NumPy + matplotlib)</em> For the topologies of your baseline run, plot DC switching distance against AC
-   switching distance. Relate what you see to the note in <code>docs/topology_optimizer/metrics.md</code>.</li>
-<li>For project 7, derive the DC sensitivity of every branch flow to a setpoint change <span class="arithmatex">\(\Delta P\)</span> on an <abbr title="High-voltage direct current">HVDC</abbr> link
+   title and body as they would pass <code>validate_pr_title.yaml</code>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: pypowsybl)</em> For one split station, generate the before and after single-line diagrams, highlight the
+   switches listed in <code>orao_summary.json</code>, and write the switching steps in operator language.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy + matplotlib)</em> For the topologies of your baseline run, plot DC switching distance against AC
+   switching distance. Relate what you see to the note in <code>docs/topology_optimizer/metrics.md</code>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>For project 7, derive the DC sensitivity of every branch flow to a setpoint change <span class="arithmatex">\(\Delta P\)</span> on an <abbr title="High-voltage direct current">HVDC</abbr> link
    between buses <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span>, and show that it equals <span class="arithmatex">\(\Delta P\,(\mathrm{PTDF}_{\cdot,i}-\mathrm{PTDF}_{\cdot,j})\)</span> up to
-   the sign convention. Where would this column live in ToOp's data structures?</li>
-<li>Pick one project and write a one-page experimental plan: research question, baseline, metrics, budget, number of
-   seeds, statistical test, and the figure that would answer the question.</li>
+   the sign convention. Where would this column live in ToOp's data structures?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p>Pick one project and write a one-page experimental plan: research question, baseline, metrics, budget, number of
+   seeds, statistical test, and the figure that would answer the question.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

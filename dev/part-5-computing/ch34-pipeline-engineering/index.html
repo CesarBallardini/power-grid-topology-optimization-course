@@ -2192,9 +2192,10 @@ Kafka; pandapower N-1 runs in parallel with Ray (<code>docs/architecture/</code>
   (<code>optimizer/dc/main.py</code>); TensorBoard to see whether a run had plateaued (port 6006 is published by the course
   container). At ToOp commit <code>ba1874e</code> the log directory name is built from <code>str(datetime.datetime.now())</code>, whose
   colons are illegal in Windows paths (fixed on the course fork's <code>feat/add-docker-compose</code> branch).</li>
-<li>Parallel CPU work with Ray (<code>contingency/pandapower/contingency_analysis_pandapower.py</code>); in containers Ray and
-  JAX allocate through <code>/dev/shm</code>, whose 64 MB Docker default crashes opaquely (<code>--shm-size=2gb</code>); Ray's memory
-  monitor kills workers near the memory limit; <code>CLEANUP_RAY_AFTER_TESTS=true</code> in tests.</li>
+<li>Parallel CPU work with Ray (<code>contingency/pandapower/contingency_analysis_pandapower.py</code>); in containers shared
+  memory lives in <code>/dev/shm</code>, whose 64 MB Docker default fails opaquely: Ray quietly moves its object store to
+  disk, and a larger shared-memory write dies with <code>SIGBUS</code> (<code>--shm-size=2gb</code>); Ray's memory monitor kills workers
+  near the memory limit; <code>CLEANUP_RAY_AFTER_TESTS=true</code> in tests.</li>
 <li>Containers with Docker; documentation with MkDocs; C4 architecture diagrams (<code>docs/architecture/</code>).</li>
 </ul>
 <h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
@@ -2267,31 +2268,67 @@ Kafka; pandapower N-1 runs in parallel with Ray (<code>docs/architecture/</code>
    for writing logs but not the TensorBoard viewer), open port 6006 and decide whether the fitness had plateaued
    when the run stopped.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab_toop.ipynb">lab_toop.ipynb</a> (needs ToOp).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Known discrepancy: the DC stage cannot start on Windows</p>
+<p><code>optimizer/dc/main.py</code> names the TensorBoard folder <code>str(datetime.now())</code>, whose colons are illegal in a
+Windows path, so lab step 4 run outside the Linux container dies with <code>WinError 123</code> before the first
+epoch. Inside the container nothing is needed; on Windows, swap the timestamp format for one with dashes
+before the run (the course fork does this, and the lab's <code>tensorboard_log_toop.py</code> patches it at run
+time).</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li><em>(Jupyter: pandas)</em> In the lab's step 3, <code>poll_results_topic</code> returned an empty "added" dictionary although rows
-   were stored. Read <code>optimizer/ac/listener.py</code> and explain why. What would change if the DC run had not finished?</li>
-<li><em>(Jupyter: h5py + NumPy)</em> Load <code>static_information.hdf5</code> twice: with h5py directly and with
+<li>
+<p><em>(Jupyter: pandas)</em> In the lab's step 3, <code>poll_results_topic</code> returned an empty "added" dictionary although rows
+   were stored. Read <code>optimizer/ac/listener.py</code> and explain why. What would change if the DC run had not finished?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: h5py + NumPy)</em> Load <code>static_information.hdf5</code> twice: with h5py directly and with
    <code>load_static_information</code> from <code>dc_solver/jax/inputs.py</code>. List which datasets map to which <code>DynamicInformation</code>
-   fields, and which <code>SolverConfig</code> values are stored as HDF5 attributes (<code>file.attrs</code>) instead.</li>
-<li><em>(Hydra)</em> Following <code>docs/benchmark.md</code>, run a multirun on <code>grid=config_grid_node_breaker</code> over two values of
+   fields, and which <code>SolverConfig</code> values are stored as HDF5 attributes (<code>file.attrs</code>) instead.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Hydra)</em> Following <code>docs/benchmark.md</code>, run a multirun on <code>grid=config_grid_node_breaker</code> over two values of
    <code>ga_config.runtime_seconds</code> and two values of a parameter that really exists in <code>BatchedMEParameters</code> (the page's
    <code>ga_config.split_subs=2,5</code> is not a field; its config folder is <code>toop-engine-benchmark/configs/</code> and the script
    is <code>assess_benchmarks.py</code>), then aggregate the results with <code>assess_benchmarks</code>. Draw the directory tree Hydra
    creates and explain how you would make the sweep reproducible
-   (<a href="../../part-4-optimization/ch26-experimental-methodology/">Chapter 26</a>).</li>
-<li><em>(tyro)</em> Run <code>uv run python -m toop_engine_topology_optimizer.dc.main --help</code> and map five command-line flags to
+   (<a href="../../part-4-optimization/ch26-experimental-methodology/">Chapter 26</a>). At ToOp commit <code>ba1874e</code>
+   the DC results arrive (each job's <code>stats/res.json</code>) but the aggregation does not: every job dies in the AC
+   stage with <code>omegaconf.errors.ConfigKeyError: Missing key critical_va_diff_degree</code>, because
+   <code>benchmark_toop.py</code> builds an <code>ac_validation_cfg</code> with <code>n_processes</code> and <code>k_best_topos</code> only while
+   <code>save_ac_metrics_summary</code> also reads <code>critical_va_diff_degree</code> and <code>critical_voltage_jump_percent</code>; no
+   <code>benchmark_summary.json</code> is written and <code>assess_benchmarks</code> reports "No benchmark_summary.json files
+   found". Read the DC results from <code>stats/res.json</code> and the per-job <code>.hydra/overrides.yaml</code> instead, and note
+   what the benchmark would have to pass for the summary to appear.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(tyro)</em> Run <code>uv run python -m toop_engine_topology_optimizer.dc.main --help</code> and map five command-line flags to
    fields of <code>CLIArgs</code> in <code>optimizer/dc/main.py</code> (for example inside <code>ga_config</code> and <code>lf_config</code>). How does tyro turn
-   a nested Pydantic model into flags?</li>
-<li><em>(Docker)</em> Using the <code>docker run</code> form from ToOp's <code>docker/README.md</code> (course fork), start the CPU image once with
+   a nested Pydantic model into flags?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(Docker)</em> Using the <code>docker run</code> form from ToOp's <code>docker/README.md</code> (course fork), start the CPU image once with
    <code>--shm-size=64m</code> and once with <code>--shm-size=2gb</code>, and in each run
    <code>uv run pytest packages/contingency_analysis_pkg/tests/pandapower/test_contingency_analysis_pandapower.py -q</code>
    (these tests start Ray). Compare the outcomes and failure signatures, and explain why a small <code>/dev/shm</code> is not
-   reported as "out of shared memory".</li>
-<li>Draw a C4 container diagram of a deployment where the DC worker runs on a <abbr title="Graphics processing unit">GPU</abbr> node and three AC workers run on
+   reported as "out of shared memory".</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p>Draw a C4 container diagram of a deployment where the DC worker runs on a <abbr title="Graphics processing unit">GPU</abbr> node and three AC workers run on
    CPU nodes. Mark which state is in Kafka, which on the shared file system, and which only in a worker's SQLite
-   memory, and propose what must change so that an AC worker can be restarted without losing work.</li>
+   memory, and propose what must change so that an AC worker can be restarted without losing work.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

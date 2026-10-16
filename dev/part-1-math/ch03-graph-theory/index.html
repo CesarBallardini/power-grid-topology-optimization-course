@@ -2285,24 +2285,45 @@ power system package is needed.</p>
 <li>Stretch: repeat steps 2–3 on a larger edge list, such as the IEEE 118-bus branch table exported to CSV
    once the pandapower basics of <a href="../../part-5-computing/ch30-scientific-python/">Chapter 30</a> are covered.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>By hand, find the bridges and articulation points of a graph made of two triangles joined by a single
-   edge. Run Tarjan's DFS on it and write down the discovery times and low-link values. <em>(Pen and paper)</em></li>
-<li>Show that an edge is a bridge if and only if it lies on no cycle, and that removing a bridge from a
-   connected graph leaves exactly two components. <em>(Pen and paper)</em></li>
-<li>For the IEEE 14-bus edge list, compute the algebraic connectivity (second-smallest Laplacian eigenvalue)
+<li>
+<p>By hand, find the bridges and articulation points of a graph made of two triangles joined by a single
+   edge. Run Tarjan's DFS on it and write down the discovery times and low-link values. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>Show that an edge is a bridge if and only if it lies on no cycle, and that removing a bridge from a
+   connected graph leaves exactly two components. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>For the IEEE 14-bus edge list, compute the algebraic connectivity (second-smallest Laplacian eigenvalue)
    and see how it changes when each branch is removed in turn. Plot the values as a bar chart and compare the
-   worst branches with the bridge. <em>(Jupyter: NetworkX + NumPy + matplotlib)</em></li>
-<li>A station has <span class="arithmatex">\(n\)</span> busbars that can each be assigned to side A or B. Explain why there are <span class="arithmatex">\(2^{n-1}\)</span>
+   worst branches with the bridge. <em>(Jupyter: NetworkX + NumPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>A station has <span class="arithmatex">\(n\)</span> busbars that can each be assigned to side A or B. Explain why there are <span class="arithmatex">\(2^{n-1}\)</span>
    assignments up to swapping A and B, and <span class="arithmatex">\(2^{n-1} - 1\)</span> non-trivial ones. In the ring station of the lab, which
-   non-trivial bipartition cannot be reached by opening couplers, and why? <em>(Pen and paper)</em></li>
-<li>Two topologies are encoded as Boolean vectors of busbar assignments. Write a Hamming distance function in
+   non-trivial bipartition cannot be reached by opening couplers, and why? <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Two topologies are encoded as Boolean vectors of busbar assignments. Write a Hamming distance function in
    NumPy and explain why ToOp also computes the distance to the inverted vector
-   (<code>dc_solver/preprocess/helpers/switching_distance.py</code>). <em>(Jupyter: NumPy)</em></li>
-<li>Weighted shortest paths with a cutoff: on the IEEE 14-bus graph with unit weights, list all buses within
-   2 hops of bus 5 with <code>nx.single_source_dijkstra_path_length(G, 5, cutoff=2)</code>. <em>(Jupyter: NetworkX)</em></li>
+   (<code>dc_solver/preprocess/helpers/switching_distance.py</code>). <em>(Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p>Weighted shortest paths with a cutoff: on the IEEE 14-bus graph with unit weights, list all buses within
+   2 hops of bus 5 with <code>nx.single_source_dijkstra_path_length(G, 5, cutoff=2)</code>. <em>(Jupyter: NetworkX)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

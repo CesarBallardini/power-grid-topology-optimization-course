@@ -2294,24 +2294,41 @@ and a toy grid has too little work to fill the card. Every lab in this book runs
    a generator writes an already-imported folder.)</li>
 <li>Write down every term you do not understand yet; revisit the list at the end of Parts III and IV.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>In one paragraph for a non-engineer, explain why switching a line <em>out</em> of service can reduce congestion on
+<li>
+<p>In one paragraph for a non-engineer, explain why switching a line <em>out</em> of service can reduce congestion on
    another line. Keep your answer; you will check it against the DC power flow model in
-   <a href="../../part-3-power-systems/ch16-dc-power-flow/">Chapter 16</a>.</li>
-<li>For each of the four action types, name what physically changes in a substation or on a line, and whether you
-   expect it to cost money to execute.</li>
-<li><em>(ToOp container)</em> Start a container with <code>JAX_PLATFORMS=cpu</code> set (for example
+   <a href="../../part-3-power-systems/ch16-dc-power-flow/">Chapter 16</a>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>For each of the four action types, name what physically changes in a substation or on a line, and whether you
+   expect it to cost money to execute.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(ToOp container)</em> Start a container with <code>JAX_PLATFORMS=cpu</code> set (for example
    <code>docker compose exec -e JAX_PLATFORMS=cpu toop-cpu uv run python -c "import jax; print(jax.devices())"</code>) and
-   explain what the output shows. On a <abbr title="Graphics processing unit">GPU</abbr> machine, what would this variable let you compare?</li>
-<li><em>(ToOp container)</em> Run <code>uv run pytest packages/interfaces_pkg/tests -q</code> inside the container. How many tests
+   explain what the output shows. On a <abbr title="Graphics processing unit">GPU</abbr> machine, what would this variable let you compare?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(ToOp container)</em> Run <code>uv run pytest packages/interfaces_pkg/tests -q</code> inside the container. How many tests
    pass, and how long does the run take? Keep the number: <a href="../../part-5-computing/ch30-scientific-python/">Chapter 30</a>
-   explains what a test suite is for.</li>
-<li><em>(Jupyter)</em> In <code>example1_dc_loadflow_example.ipynb</code>, print <code>static_information.dynamic_information.n_nodes</code> and
+   explains what a test suite is for.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter)</em> In <code>example1_dc_loadflow_example.ipynb</code>, print <code>static_information.dynamic_information.n_nodes</code> and
    <code>n_branches</code>. The grid is called "57-bus", yet the numbers differ from 57. Write a hypothesis;
    <code>case57_data_powsybl</code> in <code>dc_solver/example_grids.py</code> and
-   <a href="../../part-3-power-systems/ch13-substations-grid-models/">Chapter 13</a> give the answer.</li>
+   <a href="../../part-3-power-systems/ch13-substations-grid-models/">Chapter 13</a> give the answer.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

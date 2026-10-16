@@ -2378,23 +2378,43 @@ Simulator.</p>
    13 buses, so IEEE 14 does not fit. Then repeat one failure of step 3 and compare how Simulator reports it
    with your iteration history.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>For a two-bus system (slack bus 1 at <span class="arithmatex">\(1\angle 0\)</span>, <abbr title="Load bus (active and reactive power specified)">PQ</abbr> bus 2 with load <span class="arithmatex">\(P + jQ\)</span>, line reactance <span class="arithmatex">\(X\)</span>), write the
+<li>
+<p>For a two-bus system (slack bus 1 at <span class="arithmatex">\(1\angle 0\)</span>, <abbr title="Load bus (active and reactive power specified)">PQ</abbr> bus 2 with load <span class="arithmatex">\(P + jQ\)</span>, line reactance <span class="arithmatex">\(X\)</span>), write the
    power flow equations and the <span class="arithmatex">\(2 \times 2\)</span> Jacobian, and do two Newton iterations by hand for
-   <span class="arithmatex">\(X = 0.1\)</span>, <span class="arithmatex">\(P = 1\)</span>, <span class="arithmatex">\(Q = 0.5\)</span> p.u.</li>
-<li><em>(GeoGebra)</em> Two-bus power transfer: with sliders for <span class="arithmatex">\(|V_1|\)</span>, <span class="arithmatex">\(|V_2|\)</span>, <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(\delta\)</span>, plot
+   <span class="arithmatex">\(X = 0.1\)</span>, <span class="arithmatex">\(P = 1\)</span>, <span class="arithmatex">\(Q = 0.5\)</span> p.u.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(GeoGebra)</em> Two-bus power transfer: with sliders for <span class="arithmatex">\(|V_1|\)</span>, <span class="arithmatex">\(|V_2|\)</span>, <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(\delta\)</span>, plot
    <span class="arithmatex">\(P = |V_1||V_2|\sin\delta / X\)</span> and <span class="arithmatex">\(Q_2 = (|V_1||V_2|\cos\delta - |V_2|^2)/X\)</span>. Find the maximum transfer and
-   explain what happens to Newton–Raphson near <span class="arithmatex">\(\delta = 90^\circ\)</span>.</li>
-<li><em>(Jupyter: NumPy)</em> Verify the polar Jacobian formulas of the worked example against central finite
-   differences on IEEE 14, then time the dense and <code>scipy.sparse</code> versions.</li>
-<li><em>(Octave + MATPOWER)</em> Solve <code>case118</code> with <code>pf.alg</code> set to <code>NR</code>, <code>FDXB</code> and <code>GS</code>; tabulate iterations and time,
-   and explain the ranking with the cost per iteration of each method.</li>
-<li>Explain why a DC power flow can give a solution for a topology whose AC power flow diverges. List three
-   physical causes and the symptom each leaves in the iteration history.</li>
-<li><em>(pypowsybl)</em> Repeat the distributed-slack comparison of the lab with <code>BalanceType.PROPORTIONAL_TO_GENERATION_P</code>
-   and <code>BalanceType.PROPORTIONAL_TO_GENERATION_P_MAX</code>. Which generators pick up the losses in each case?</li>
+   explain what happens to Newton–Raphson near <span class="arithmatex">\(\delta = 90^\circ\)</span>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> Verify the polar Jacobian formulas of the worked example against central finite
+   differences on IEEE 14, then time the dense and <code>scipy.sparse</code> versions.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(Octave + MATPOWER)</em> Solve <code>case118</code> with <code>pf.alg</code> set to <code>NR</code>, <code>FDXB</code> and <code>GS</code>; tabulate iterations and time,
+   and explain the ranking with the cost per iteration of each method.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Explain why a DC power flow can give a solution for a topology whose AC power flow diverges. List three
+   physical causes and the symptom each leaves in the iteration history.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p><em>(pypowsybl)</em> Repeat the distributed-slack comparison of the lab with <code>BalanceType.PROPORTIONAL_TO_GENERATION_P</code>
+   and <code>BalanceType.PROPORTIONAL_TO_GENERATION_P_MAX</code>. Which generators pick up the losses in each case?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

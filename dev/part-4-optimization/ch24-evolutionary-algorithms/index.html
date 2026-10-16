@@ -2309,21 +2309,30 @@ islands the grid. Validate a few values with a full DC power flow.</p>
    fitness against evaluations for all seeds in one matplotlib figure. Explain the spread between seeds; you
    will analyze it statistically in Chapter 26.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>For hill climbing with the "change one slot" neighborhood on the <span class="arithmatex">\(k\)</span>-subset problem, how many neighbors does
+<li>
+<p>For hill climbing with the "change one slot" neighborhood on the <span class="arithmatex">\(k\)</span>-subset problem, how many neighbors does
    a solution have? Give a two-line toy example where hill climbing gets stuck in a local optimum that simulated
-   annealing can leave. <em>(pen and paper)</em></li>
-<li>Implement simulated annealing for the lab problem with a geometric cooling schedule and compare the final
-   value after the same evaluation budget as the <abbr title="Genetic algorithm">GA</abbr>, for 10 seeds. <em>(Jupyter: NumPy + matplotlib)</em></li>
-<li>Show that switching benefits are not additive: find two lines <span class="arithmatex">\(a, b\)</span> in IEEE 30 with
+   annealing can leave. <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.
+2. Implement simulated annealing for the lab problem with a geometric cooling schedule and compare the final
+   value after the same evaluation budget as the <abbr title="Genetic algorithm">GA</abbr>, for 10 seeds. <em>(Jupyter: NumPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.
+3. Show that switching benefits are not additive: find two lines <span class="arithmatex">\(a, b\)</span> in IEEE 30 with
    <span class="arithmatex">\(E(\{a,b\}) - E(\emptyset) \ne \bigl(E(\{a\}) - E(\emptyset)\bigr) + \bigl(E(\{b\}) - E(\emptyset)\bigr)\)</span> and
-   explain with LODFs why. Why does this make greedy selection unreliable? <em>(Jupyter: NumPy)</em></li>
-<li>Compare "penalty" (<span class="arithmatex">\(-\infty\)</span> fitness) with "repair" (drop lines from <span class="arithmatex">\(D\)</span> until the grid is connected) for
-   islanding candidates: which one wastes fewer evaluations in your runs? <em>(Jupyter: NumPy + pandas)</em></li>
-<li>The No Free Lunch theorem says all algorithms perform equally on average over all problems. Explain in one
-   paragraph why this does not make the choice of operators for line switching irrelevant. <em>(pen and paper)</em></li>
+   explain with LODFs why. Why does this make greedy selection unreliable? <em>(Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.
+4. Compare "penalty" (<span class="arithmatex">\(-\infty\)</span> fitness) with "repair" (drop lines from <span class="arithmatex">\(D\)</span> until the grid is connected) for
+   islanding candidates: which one wastes fewer evaluations in your runs? <em>(Jupyter: NumPy + pandas)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.
+5. The No Free Lunch theorem says all algorithms perform equally on average over all problems. Explain in one
+   paragraph why this does not make the choice of operators for line switching irrelevant. <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

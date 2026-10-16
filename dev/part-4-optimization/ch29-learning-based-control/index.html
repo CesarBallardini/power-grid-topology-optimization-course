@@ -2351,22 +2351,39 @@ Alternative track: NumPy and JAX only.</p>
 your Chapter 16–17 code, train a two-layer MLP in JAX to predict all flows, and report the relative error
 per line and the speed-up. Then switch off one line not seen in training and measure how the error grows:
 this is the generalization problem that graph neural solvers address.</p>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a> · Steps 1–4 with Grid2Op in the labs container (<code>docker/labs</code>): <a href="src/lab_labs.ipynb">lab_labs.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Write the Bellman optimality equation for a two-state, two-action <abbr title="Markov decision process">MDP</abbr> with given transition probabilities and
-   rewards, and solve it by value iteration by hand for <span class="arithmatex">\(\gamma = 0.9\)</span>. <em>(pen and paper)</em></li>
-<li>A substation has 6 elements and 2 busbars. Count the bus assignments (with and without the symmetry of
+<li>
+<p>Write the Bellman optimality equation for a two-state, two-action <abbr title="Markov decision process">MDP</abbr> with given transition probabilities and
+   rewards, and solve it by value iteration by hand for <span class="arithmatex">\(\gamma = 0.9\)</span>. <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>A substation has 6 elements and 2 busbars. Count the bus assignments (with and without the symmetry of
    swapping the busbars), then the joint actions for 14 such substations. Relate the count to ToOp's per-station
-   action sets and to the reduction techniques of this chapter. <em>(pen and paper)</em></li>
-<li>Extend the worked example to differentiate the flows with respect to the susceptances <span class="arithmatex">\(b\)</span>, and verify one
-   column with finite differences. What does this gradient tell an operator? <em>(Jupyter: JAX + NumPy)</em></li>
-<li>Implement surrogate-assisted pre-screening in your Chapter 24 <abbr title="Genetic algorithm">GA</abbr>: evaluate every offspring with a cheap
+   action sets and to the reduction techniques of this chapter. <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>Extend the worked example to differentiate the flows with respect to the susceptances <span class="arithmatex">\(b\)</span>, and verify one
+   column with finite differences. What does this gradient tell an operator? <em>(Jupyter: JAX + NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>Implement surrogate-assisted pre-screening in your Chapter 24 <abbr title="Genetic algorithm">GA</abbr>: evaluate every offspring with a cheap
    linear surrogate fitted to the evaluated population, and compute the exact fitness only for the best 20%.
-   Compare evaluations-to-target with the plain <abbr title="Genetic algorithm">GA</abbr> over 10 seeds. <em>(Jupyter: NumPy + SciPy)</em></li>
-<li>Write a one-page brief for a <abbr title="Transmission system operator">TSO</abbr> on whether to deploy an <abbr title="Reinforcement learning">RL</abbr> topology agent, covering distribution shift, rare
+   Compare evaluations-to-target with the plain <abbr title="Genetic algorithm">GA</abbr> over 10 seeds. <em>(Jupyter: NumPy + SciPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Write a one-page brief for a <abbr title="Transmission system operator">TSO</abbr> on whether to deploy an <abbr title="Reinforcement learning">RL</abbr> topology agent, covering distribution shift, rare
    contingencies, guarantees, the role of simulation checks and how ToOp could validate the agent's proposals.
-   <em>(pen and paper)</em></li>
+   <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

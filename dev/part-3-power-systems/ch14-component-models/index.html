@@ -2312,21 +2312,38 @@ imaginary part (up to sign) is the DC matrix <span class="arithmatex">\(B_\text{
    transformer branches from their off-nominal taps and check the symmetry of <span class="arithmatex">\(Y_\text{bus}\)</span> numerically.</li>
 <li>Set a 5° phase shift on one transformer, rebuild, and measure <span class="arithmatex">\(\lVert Y_\text{bus} - Y_\text{bus}^\top \rVert\)</span>.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Build <span class="arithmatex">\(Y_\text{bus}\)</span> by inspection for a three-bus ring with series impedances <span class="arithmatex">\(j0.1\)</span>, <span class="arithmatex">\(j0.2\)</span>, <span class="arithmatex">\(j0.25\)</span> p.u.
-   and charging <span class="arithmatex">\(b_c = 0.02\)</span> p.u. on each line. Check that every row sums to the bus's total shunt admittance.</li>
-<li>A transformer with ratio <span class="arithmatex">\(\tau = 1.05\)</span> and no phase shift connects buses 1 and 2 with <span class="arithmatex">\(x = 0.1\)</span> p.u. Write its
-   <span class="arithmatex">\(Y_\text{br}\)</span> and draw the equivalent <span class="arithmatex">\(\pi\)</span> circuit implied by it. Why is the <span class="arithmatex">\(\pi\)</span> circuit asymmetric?</li>
-<li><em>(Octave + MATPOWER)</em> For <code>case14</code>, compute <span class="arithmatex">\(B_\text{bus} = A^\top \operatorname{diag}(1/x)\, A\)</span> ignoring taps and
-   compare it with the first output of <code>makeBdc(mpc)</code>. Explain every entry that differs.</li>
-<li><em>(Jupyter: NumPy)</em> Kron reduction: partition the buses of IEEE 14 into kept and eliminated sets, compute the
+<li>
+<p>Build <span class="arithmatex">\(Y_\text{bus}\)</span> by inspection for a three-bus ring with series impedances <span class="arithmatex">\(j0.1\)</span>, <span class="arithmatex">\(j0.2\)</span>, <span class="arithmatex">\(j0.25\)</span> p.u.
+   and charging <span class="arithmatex">\(b_c = 0.02\)</span> p.u. on each line. Check that every row sums to the bus's total shunt admittance.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>A transformer with ratio <span class="arithmatex">\(\tau = 1.05\)</span> and no phase shift connects buses 1 and 2 with <span class="arithmatex">\(x = 0.1\)</span> p.u. Write its
+   <span class="arithmatex">\(Y_\text{br}\)</span> and draw the equivalent <span class="arithmatex">\(\pi\)</span> circuit implied by it. Why is the <span class="arithmatex">\(\pi\)</span> circuit asymmetric?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Octave + MATPOWER)</em> For <code>case14</code>, compute <span class="arithmatex">\(B_\text{bus} = A^\top \operatorname{diag}(1/x)\, A\)</span> ignoring taps and
+   compare it with the first output of <code>makeBdc(mpc)</code>. Explain every entry that differs.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> Kron reduction: partition the buses of IEEE 14 into kept and eliminated sets, compute the
    Ward-type equivalent <span class="arithmatex">\(Y_{kk} - Y_{ke} Y_{ee}^{-1} Y_{ek}\)</span>, and show that it reproduces the kept-bus voltages
-   for a current injection pattern with zero injection at the eliminated buses.</li>
-<li><em>(Jupyter: NumPy + matplotlib)</em> For a 300 km line with given per-km parameters, compare the exact long-line
+   for a current injection pattern with zero injection at the eliminated buses.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy + matplotlib)</em> For a 300 km line with given per-km parameters, compare the exact long-line
    ABCD parameters with the nominal <span class="arithmatex">\(\pi\)</span> model as a function of length, and plot the relative error of the
-   series admittance.</li>
+   series admittance.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

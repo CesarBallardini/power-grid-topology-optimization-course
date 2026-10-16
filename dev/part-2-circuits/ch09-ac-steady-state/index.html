@@ -2242,26 +2242,47 @@ P_{12} \approx \frac{\delta}{X}.
 <li>Repeat with <span class="arithmatex">\(V_1 = 1.05\)</span> and <span class="arithmatex">\(V_2 = 0.95\)</span> pu and separate the error caused by the angle linearization from
    the error caused by assuming flat voltage magnitudes.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>A series <abbr title="Reinforcement learning">RL</abbr> load, <span class="arithmatex">\(R = 10\ \Omega\)</span> and <span class="arithmatex">\(L = 50\)</span> mH, is fed by 230 V at 50 Hz. Compute <span class="arithmatex">\(Z\)</span>, <span class="arithmatex">\(I\)</span>, <span class="arithmatex">\(S\)</span> and the power
+<li>
+<p>A series <abbr title="Reinforcement learning">RL</abbr> load, <span class="arithmatex">\(R = 10\ \Omega\)</span> and <span class="arithmatex">\(L = 50\)</span> mH, is fed by 230 V at 50 Hz. Compute <span class="arithmatex">\(Z\)</span>, <span class="arithmatex">\(I\)</span>, <span class="arithmatex">\(S\)</span> and the power
    factor, then the capacitance in parallel that raises the power factor to 0.95. <em>(Pen and paper, check in
    Octave)</em> <em>Answer:</em> <span class="arithmatex">\(Z = 10 + j15.71\ \Omega\)</span>, <span class="arithmatex">\(|I| = 12.35\)</span> A, <span class="arithmatex">\(S = 1526 + j2396\)</span> VA, <span class="arithmatex">\(\text{pf} = 0.537\)</span>,
-   <span class="arithmatex">\(C \approx 114\ \mu\text{F}\)</span>.</li>
-<li>Rotating phasors: in GeoGebra, animate <code>u = V_m (cos(ω t + φ) + i sin(ω t + φ))</code> with sliders and trace
-   <code>(t, x(u))</code>. Show that the phasor <span class="arithmatex">\(V_m e^{j\varphi}\)</span> is the value of the rotating vector at <span class="arithmatex">\(t = 0\)</span>. <em>(GeoGebra)</em></li>
-<li>Sample <span class="arithmatex">\(v(t) = \sqrt{2}\, V \cos\omega t\)</span> and <span class="arithmatex">\(i(t) = \sqrt{2}\, I \cos(\omega t - \varphi)\)</span>, compute
+   <span class="arithmatex">\(C \approx 114\ \mu\text{F}\)</span>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>Rotating phasors: in GeoGebra, animate <code>u = V_m (cos(ω t + φ) + i sin(ω t + φ))</code> with sliders and trace
+   <code>(t, x(u))</code>. Show that the phasor <span class="arithmatex">\(V_m e^{j\varphi}\)</span> is the value of the rotating vector at <span class="arithmatex">\(t = 0\)</span>. <em>(GeoGebra)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>Sample <span class="arithmatex">\(v(t) = \sqrt{2}\, V \cos\omega t\)</span> and <span class="arithmatex">\(i(t) = \sqrt{2}\, I \cos(\omega t - \varphi)\)</span>, compute
    <span class="arithmatex">\(p(t) = v(t)\,i(t)\)</span>, and verify numerically that its mean is <span class="arithmatex">\(P = VI\cos\varphi\)</span> and its oscillation
-   amplitude is <span class="arithmatex">\(S = VI\)</span>. <em>(Jupyter: NumPy + matplotlib)</em></li>
-<li>From the worked example, show that for <span class="arithmatex">\(\delta = 0\)</span> reactive power flows from the bus with the higher voltage
-   magnitude, and explain why the DC approximation ignores <span class="arithmatex">\(Q\)</span> altogether. <em>(Pen and paper)</em></li>
-<li>Solve a three-node AC circuit (two sources, an <abbr title="Reinforcement learning">RL</abbr> branch, an RC branch) with complex nodal analysis,
+   amplitude is <span class="arithmatex">\(S = VI\)</span>. <em>(Jupyter: NumPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>From the worked example, show that for <span class="arithmatex">\(\delta = 0\)</span> reactive power flows from the bus with the higher voltage
+   magnitude, and explain why the DC approximation ignores <span class="arithmatex">\(Q\)</span> altogether. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Solve a three-node AC circuit (two sources, an <abbr title="Reinforcement learning">RL</abbr> branch, an RC branch) with complex nodal analysis,
    <code>Y \ I</code> in Octave or <code>np.linalg.solve</code> in NumPy, and verify that the sum of complex powers injected equals
-   the sum absorbed. <em>(Octave or Jupyter: NumPy)</em></li>
-<li>A branch limit is a current <span class="arithmatex">\(I_{\max}\)</span>. If the DC model converts it to <span class="arithmatex">\(P_{\max} = V I_{\max}\)</span> (power factor 1,
+   the sum absorbed. <em>(Octave or Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p>A branch limit is a current <span class="arithmatex">\(I_{\max}\)</span>. If the DC model converts it to <span class="arithmatex">\(P_{\max} = V I_{\max}\)</span> (power factor 1,
    as with ToOp's <code>dc_power_factor=1.0</code>) but the branch operates at power factor 0.95, by how much does the DC
-   limit overestimate the admissible active power? <em>(Pen and paper)</em> <em>Answer:</em> about 5.3%.</li>
+   limit overestimate the admissible active power? <em>(Pen and paper)</em> <em>Answer:</em> about 5.3%.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

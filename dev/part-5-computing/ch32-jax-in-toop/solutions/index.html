@@ -1,0 +1,2738 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/dev/part-5-computing/ch32-jax-in-toop/solutions/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Chapter 32 – Solutions - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-32-solutions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 32 – Solutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-32-solutions">Chapter 32 – Solutions<a class="headerlink" href="#chapter-32-solutions" title="Permanent link">&para;</a></h1>
+<p>Solutions of the Lab and the Exercises of <a href="../">Chapter 32</a>. Try each task before reading its solution.
+The code is in the chapter's <code>src</code> folder: <a href="../src/solver_lab_toop.py"><code>solver_lab_toop.py</code></a> and
+<a href="../src/split_slots_toop.py"><code>split_slots_toop.py</code></a> run inside ToOp's environment (the container, or
+<code>../ToOp/.venv</code>), <a href="../src/stale_hash.py"><code>stale_hash.py</code></a>, <a href="../src/traced_loop.py"><code>traced_loop.py</code></a>,
+<a href="../src/int_widths.py"><code>int_widths.py</code></a> and <a href="../src/pmap_donate.py"><code>pmap_donate.py</code></a> run anywhere; each has a test
+next to it (<code>test_*_toop.py</code> for the ToOp ones, run with <code>make test-toop</code>). Every script prints the numbers quoted
+below when run from the <code>src</code> folder. The ToOp numbers were produced with ToOp commit <code>ba1874e</code> on <strong>CPU</strong>
+(JAX 0.5.3, Python 3.11, Windows); there is no NVIDIA <abbr title="Graphics processing unit">GPU</abbr> on the machine that wrote this, so every <abbr title="Graphics processing unit">GPU</abbr>
+measurement is described, not done. The other scripts ran in the course environment (JAX 0.11, NumPy 2.4,
+Python 3.14) and again with ToOp's interpreter where the versions matter.</p>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Setup.</strong> <code>solver_lab_toop.setup(folder)</code> writes <code>case57_data_powsybl</code> into the folder the first time, calls
+   <code>load_grid(DirFileSystem(folder), pandapower=False, parameters=PreprocessParameters(action_set_filter_bsdf_lodf=False,
+   fail_on_non_convergence=False))</code> and <code>run_initial_loadflow</code>, and returns the <code>StaticInformation</code>. The
+   preprocessed case57 has 72 nodes (57 buses plus a second busbar for each substation that can be split),
+   82 branches, 12 relevant substations (ToOp drops the ones with fewer than four non-bridge branches), 84 N-1
+   cases (81 branch outages and 3 generator outages), <code>number_most_affected = 30</code> and <code>batch_size_bsdf = 16</code>.
+   <code>default_topology(sc, batch_size=4)</code> is an <code>ActionIndexComputations</code> whose <code>action</code> array has shape <code>(4, 1)</code>:
+   one split slot, filled with the padding sentinel. <code>timed()</code> wraps every call in <code>jax.block_until_ready</code>;
+   without it the timer stops when the call is <em>dispatched</em>, not when it is done.</li>
+<li>
+<p><strong>Compile vs run.</strong> CPU, JAX 0.5.3, four unsplit topologies:</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>run_solver</code>, call 1</td>
+<td>1 050 ms (compiles)</td>
+</tr>
+<tr>
+<td><code>run_solver</code>, calls 2 and 3</td>
+<td>6.7 ms, 6.4 ms (cached)</td>
+</tr>
+<tr>
+<td><code>run_solver_symmetric</code>, <code>passthrough</code> defined once, call 1</td>
+<td>634 ms (compiles)</td>
+</tr>
+<tr>
+<td><code>run_solver_symmetric</code>, <code>passthrough</code>, calls 2 and 3</td>
+<td>3.9 ms, 3.7 ms (cached)</td>
+</tr>
+<tr>
+<td><code>run_solver_symmetric</code>, fresh <code>lambda</code>, calls 1, 2, 3</td>
+<td>574 ms, 579 ms, 613 ms (compiles every time)</td>
+</tr>
+</tbody>
+</table>
+<p>The first call pays for tracing and <abbr title="Accelerated Linear Algebra">XLA</abbr> compilation, about 150 times the cost of running the compiled
+program on this grid. <code>run_solver</code> builds a new <code>DefaultAggregateOutputFn</code> on every call, yet hits the
+cache, because that class defines <code>__hash__</code> as the <code>fixed_hash</code> it was given, <code>hash(solver_config)</code>, and
+<code>__eq__</code> as equality of hashes: two instances built from the same <code>sc</code> are the same cache key. A <code>lambda</code>
+expression evaluates to a new function object every time, function objects hash by identity, and
+<code>aggregate_output_fn</code> is in <code>static_argnames</code>, so each call is a new key and a new compilation. The
+pass-through function defined once at module level behaves like <code>DefaultAggregateOutputFn</code>. One practical
+note: under JAX 0.5.3, <code>jax.no_tracing()</code> cannot wrap <code>run_solver</code>, because the Python glue around the
+jitted core (<code>pad_topologies_action_index</code>, <code>prepare_result_storage</code>, the final slicing) dispatches eager
+primitives, which that version reports as "re-tracing function convert_element_type". The scripts count
+the compiled programs of the core instead, <code>iterate_symmetric_sequential._cache_size()</code>, which answers the
+same question exactly; <code>jax.no_tracing()</code> works around the jitted core itself, which is how
+<code>packages/topology_optimizer_pkg/tests/test_jax_compilation.py</code> uses it.</p>
+<div class="highlight"><span class="filename">solver_lab_toop.py (Lab 2)</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">compile_vs_run</span><span class="p">(</span><span class="n">si</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">"""Lab 2: three ``run_solver`` calls, then ``run_solver_symmetric`` with a fixed and with a fresh function."""</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">sc</span><span class="p">,</span> <span class="n">di</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">solver_config</span><span class="p">,</span> <span class="n">si</span><span class="o">.</span><span class="n">dynamic_information</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">topologies</span> <span class="o">=</span> <span class="n">default_topology</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">_</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">retraced</span> <span class="o">=</span> <span class="n">traced</span><span class="p">(</span><span class="n">run_solver</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="sa">f</span><span class="s1">'run_solver, call </span><span class="si">{</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">retraced</span><span class="p">))</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="n">_</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">retraced</span> <span class="o">=</span> <span class="n">traced</span><span class="p">(</span><span class="n">run_solver_symmetric</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">sc</span><span class="p">,</span> <span class="n">passthrough</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="sa">f</span><span class="s1">'run_solver_symmetric, passthrough defined once, call </span><span class="si">{</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">retraced</span><span class="p">))</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="n">fresh</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">lf</span><span class="p">:</span> <span class="p">(</span><span class="n">lf</span><span class="o">.</span><span class="n">n_0_matrix</span><span class="p">,</span> <span class="n">lf</span><span class="o">.</span><span class="n">n_1_matrix</span><span class="p">)</span>  <span class="c1"># noqa: E731 - the point is a new object per call</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="n">_</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">retraced</span> <span class="o">=</span> <span class="n">traced</span><span class="p">(</span><span class="n">run_solver_symmetric</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">sc</span><span class="p">,</span> <span class="n">fresh</span><span class="p">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="sa">f</span><span class="s1">'run_solver_symmetric, fresh lambda, call </span><span class="si">{</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">retraced</span><span class="p">))</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="k">return</span> <span class="n">rows</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch32-jax-in-toop/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+</li>
+<li>
+<p><strong>Find the trigger.</strong> <code>pf_n_1_max</code> has shape <code>(n_topologies, n_timesteps, number_most_affected)</code> and holds
+   relative loadings (flow over <code>max_mw_flow</code>), sorted; the baseline maximum is 18.6192 (this test grid has
+   tiny operational limits). "Compiled" below means the core gained a cache entry:</p>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Prediction</th>
+<th>Measured</th>
+<th><code>pf_n_1_max</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>same <code>sc</code>, second call</td>
+<td>cached</td>
+<td>cached, 6.6 ms</td>
+<td><code>(4, 1, 30)</code>, max 18.6192</td>
+</tr>
+<tr>
+<td><code>replace(sc)</code>, no field changed</td>
+<td>recompiles</td>
+<td>compiled, 730 ms</td>
+<td>unchanged</td>
+</tr>
+<tr>
+<td><code>replace(sc, number_most_affected=20)</code></td>
+<td>recompiles</td>
+<td>compiled, 756 ms</td>
+<td><code>(4, 1, 20)</code>, max 18.6192</td>
+</tr>
+<tr>
+<td><code>sc2 = replace(sc)</code>, warm-up, then <code>sc2.number_most_affected = 20</code> in place</td>
+<td>reuses incorrectly</td>
+<td>cached, 6.5 ms</td>
+<td><code>(4, 1, 30)</code>: the old 30 columns</td>
+</tr>
+<tr>
+<td><code>nodal_injections * 1.1</code> only</td>
+<td>reuses, flows unchanged</td>
+<td>cached, 7.0 ms</td>
+<td>max 18.6192, unchanged</td>
+</tr>
+<tr>
+<td><code>nodal_injections</code> and <code>unsplit_flow * 1.1</code></td>
+<td>reuses, flows × 1.1</td>
+<td>cached, 6.8 ms</td>
+<td>max 18.7222 (see below)</td>
+</tr>
+<tr>
+<td><code>max_mw_flow / 2</code>, same <code>sc</code></td>
+<td>reuses incorrectly</td>
+<td>cached, 7.0 ms</td>
+<td>max 18.6192: the old limits</td>
+</tr>
+<tr>
+<td><code>max_mw_flow / 2</code>, <code>replace(sc)</code></td>
+<td>recompiles</td>
+<td>compiled, 670 ms</td>
+<td>max 37.2385 = 2 × 18.6192</td>
+</tr>
+<tr>
+<td>batch of 8 topologies</td>
+<td>recompiles?</td>
+<td>cached, 111 ms</td>
+<td><code>(8, 1, 30)</code>, max 18.6192</td>
+</tr>
+</tbody>
+</table>
+<p>Every line follows from three facts. (i) <code>iterate_symmetric_sequential</code> is jitted with
+<code>static_argnames=("solver_config", "aggregate_output_fn")</code>, so those two objects are cache keys and
+everything in <code>DynamicInformation</code> is traced data. (ii) <code>SolverConfig.__hash__</code> is <code>id(self)</code>: <code>replace</code>
+makes a new object (new key, recompile, even with identical values), while an in-place assignment keeps the
+key and the stale program, which still writes 30 columns although <code>sc2.number_most_affected</code> says 20. (iii)
+<code>run_solver</code> builds <code>DefaultAggregateOutputFn</code> with <code>max_mw_flow=dynamic_information.branch_limits.max_mw_flow</code>
+stored as a Python attribute and <code>fixed_hash=hash(solver_config)</code>: inside the jitted core the function is
+static, so its <code>max_mw_flow</code> array is baked into the compiled program as a constant. Halving the limits in
+<code>DynamicInformation</code> with the same <code>sc</code> therefore changes nothing (the hash is the same, the constant is the
+old array), and <code>replace(sc)</code> forces a recompile that bakes in the new limits and doubles every relative
+loading. This is exactly the chapter's statement for commit <code>ba1874e</code>. Two details worth seeing: scaling
+<code>nodal_injections</code> alone does nothing because, with relevant substations present, the N-0 flows come from
+<code>dynamic_information.unsplit_flow</code> (passed to <code>compute_cross_coupler_flows</code> in
+<code>dc_solver/jax/compute_batch.py</code>), not from a fresh <code>ptdf @ nodal_injections</code>; scaling both multiplies the
+N-0 maxima by exactly 1.1 and the branch-outage N-1 entries too, but the three generator-outage entries by
+less (their delta P, <code>nonrel_injection_outage_deltap</code>, was not scaled), so the worst entry only moves from
+18.6192 to 18.7222. And the batch of 8 does <em>not</em> recompile, because <code>run_solver_symmetric</code> pads every batch
+to a multiple of <code>batch_size_bsdf = 16</code>: 4 and 8 topologies reach the core with identical shapes; the 111 ms
+are eager glue (padding and storage for the new size), not compilation. With <code>batch_size_bsdf = 4</code> it would
+recompile.</p>
+<p><em>Bug report.</em> <strong>Title:</strong> <code>run_solver</code> ignores a changed <code>branch_limits.max_mw_flow</code> unless <code>SolverConfig</code>
+is replaced. <strong>Version:</strong> ToOp <code>ba1874e</code>, JAX 0.5.3, CPU. <strong>Steps:</strong> load <code>case57_data_powsybl</code>;
+<code>base = run_solver(topologies, None, None, di, sc)</code>; <code>di2 = eqx.tree_at(lambda d: d.branch_limits.max_mw_flow,
+di, di.branch_limits.max_mw_flow / 2)</code>; <code>again = run_solver(topologies, None, None, di2, sc)</code>.
+<strong>Expected:</strong> <code>again.n_1_results.pf_n_1_max == 2 * base.n_1_results.pf_n_1_max</code>. <strong>Observed:</strong> identical to
+<code>base</code> (18.6192); with <code>replace(sc)</code> instead of <code>sc</code> the result is 37.2385 as expected. <strong>Cause:</strong>
+<code>DefaultAggregateOutputFn</code> (<code>dc_solver/jax/topology_looper.py</code>) stores <code>max_mw_flow</code> as an attribute of a
+static argument and hashes by <code>hash(solver_config)</code>, so the compiled program keeps the first limits it saw.
+<strong>Fix options:</strong> pass <code>max_mw_flow</code> through <code>lf_result</code>/the traced arguments instead of the static object,
+or include a hash of the limits (and of <code>branches_to_fail</code>) in <code>fixed_hash</code>.</p>
+<div class="highlight"><span class="filename">solver_lab_toop.py (Lab 3)</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">trigger_study</span><span class="p">(</span><span class="n">si</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">"""Lab 3: predict, then measure, what each change does to the compiled program."""</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">sc</span><span class="p">,</span> <span class="n">di</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">solver_config</span><span class="p">,</span> <span class="n">si</span><span class="o">.</span><span class="n">dynamic_information</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">topologies</span> <span class="o">=</span> <span class="n">default_topology</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">record</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="n">out</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">retraced</span> <span class="o">=</span> <span class="n">traced</span><span class="p">(</span><span class="n">run_solver</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">shape</span><span class="p">,</span> <span class="n">largest</span> <span class="o">=</span> <span class="n">pf_summary</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="p">{</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                <span class="s1">'change'</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>                <span class="s1">'prediction'</span><span class="p">:</span> <span class="n">prediction</span><span class="p">,</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>                <span class="s1">'retraced'</span><span class="p">:</span> <span class="n">retraced</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>                <span class="s1">'seconds'</span><span class="p">:</span> <span class="n">seconds</span><span class="p">,</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>                <span class="s1">'shape'</span><span class="p">:</span> <span class="n">shape</span><span class="p">,</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>                <span class="s1">'max'</span><span class="p">:</span> <span class="n">largest</span><span class="p">,</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            <span class="p">}</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="p">)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="k">return</span> <span class="n">out</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="n">record</span><span class="p">(</span><span class="s1">'baseline, first call'</span><span class="p">,</span> <span class="s1">'compiles'</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="n">record</span><span class="p">(</span><span class="s1">'baseline, second call'</span><span class="p">,</span> <span class="s1">'cached'</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="n">record</span><span class="p">(</span><span class="s1">'replace(sc), no field changed'</span><span class="p">,</span> <span class="s1">'recompiles'</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">replace</span><span class="p">(</span><span class="n">sc</span><span class="p">))</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="n">record</span><span class="p">(</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="s1">'replace(sc, number_most_affected=20)'</span><span class="p">,</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="s1">'recompiles, 20 columns'</span><span class="p">,</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="n">topologies</span><span class="p">,</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>        <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>        <span class="n">di</span><span class="p">,</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="n">replace</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">number_most_affected</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="p">)</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    <span class="n">sc_mutable</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>    <span class="n">record</span><span class="p">(</span><span class="s1">'fresh copy of sc, warm-up'</span><span class="p">,</span> <span class="s1">'recompiles'</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">sc_mutable</span><span class="p">)</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>    <span class="n">sc_mutable</span><span class="o">.</span><span class="n">number_most_affected</span> <span class="o">=</span> <span class="mi">20</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>    <span class="n">record</span><span class="p">(</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>        <span class="s1">'same copy, sc.number_most_affected = 20 in place'</span><span class="p">,</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>        <span class="s1">'reuses incorrectly: old columns'</span><span class="p">,</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>        <span class="n">topologies</span><span class="p">,</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>        <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>        <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>        <span class="n">di</span><span class="p">,</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>        <span class="n">sc_mutable</span><span class="p">,</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>    <span class="p">)</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>    <span class="n">di_inj</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">nodal_injections</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">di</span><span class="o">.</span><span class="n">nodal_injections</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">)</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>    <span class="n">record</span><span class="p">(</span><span class="s1">'nodal_injections * 1.1 only'</span><span class="p">,</span> <span class="s1">'reuses, flows unchanged'</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di_inj</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>    <span class="n">di_both</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">unsplit_flow</span><span class="p">,</span> <span class="n">di_inj</span><span class="p">,</span> <span class="n">di</span><span class="o">.</span><span class="n">unsplit_flow</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">)</span>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>    <span class="n">record</span><span class="p">(</span><span class="s1">'nodal_injections and unsplit_flow * 1.1'</span><span class="p">,</span> <span class="s1">'reuses, flows * 1.1'</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di_both</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>    <span class="n">di_half</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">branch_limits</span><span class="o">.</span><span class="n">max_mw_flow</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">di</span><span class="o">.</span><span class="n">branch_limits</span><span class="o">.</span><span class="n">max_mw_flow</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>    <span class="n">record</span><span class="p">(</span><span class="s1">'max_mw_flow / 2, same sc'</span><span class="p">,</span> <span class="s1">'reuses incorrectly: old limits baked in'</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di_half</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>    <span class="n">record</span><span class="p">(</span><span class="s1">'max_mw_flow / 2, replace(sc)'</span><span class="p">,</span> <span class="s1">'recompiles, new limits'</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di_half</span><span class="p">,</span> <span class="n">replace</span><span class="p">(</span><span class="n">sc</span><span class="p">))</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>    <span class="n">record</span><span class="p">(</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>        <span class="s1">'batch of 8 topologies'</span><span class="p">,</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>        <span class="s1">'reuses: 4 and 8 both pad to batch_size_bsdf'</span><span class="p">,</span>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>        <span class="n">default_topology</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>        <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>        <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>        <span class="n">di</span><span class="p">,</span>
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>        <span class="n">sc</span><span class="p">,</span>
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>    <span class="p">)</span>
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>    <span class="k">return</span> <span class="n">rows</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch32-jax-in-toop/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+</li>
+<li>
+<p><strong>Batch size and memory.</strong> <code>case300_powsybl</code> (first fifty bus groups relevant, 14 of them survive the
+   four-branch filter; 411 branches, 385 N-1 cases). <code>batch_sweep</code> runs 64 unsplit topologies for every
+   <code>(batch_size_bsdf, batch_size_injection)</code> pair, records the first call minus the steady state as compile
+   time, the steady-state throughput, and, as a CPU stand-in for <code>docker stats</code>, the growth of the process's
+   resident memory across the point (psutil). Two runs, CPU:</p>
+<table>
+<thead>
+<tr>
+<th><code>batch_size_bsdf</code></th>
+<th><code>batch_size_injection</code></th>
+<th>compile [s]</th>
+<th>topologies / s</th>
+<th>RSS growth [MB]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>1 / 2 / 4</td>
+<td>1.1–1.3 / 0.8–0.9 / 0.8–0.9</td>
+<td>513–676 / 546–659 / 582–633</td>
+<td>65–68 / 41 / 44–46</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1 / 2 / 4</td>
+<td>0.8–0.9 / 0.8 / 0.8</td>
+<td>470–548 / 466–487 / 466</td>
+<td>48–54 / 43–56 / 40</td>
+</tr>
+<tr>
+<td>16</td>
+<td>1 / 2 / 4</td>
+<td>0.9 / 1.2 / 1.0</td>
+<td>472 / 459 / 470</td>
+<td>75 / 52 / 48</td>
+</tr>
+<tr>
+<td>32</td>
+<td>1 / 2 / 4</td>
+<td>1.0 / 0.9 / 0.9</td>
+<td>460 / 468 / 468</td>
+<td>91 / 66 / 55</td>
+</tr>
+</tbody>
+</table>
+<p>On a CPU the heat map is flat: 460–680 topologies per second everywhere, slightly <em>better</em> for the smallest
+<abbr title="Bus split distribution factor">BSDF</abbr> batch (the intermediate <abbr title="Power transfer distribution factor">PTDF</abbr>/<abbr title="Line outage distribution factor">LODF</abbr> blocks of a small batch fit the cache), and the injection batch
+does not matter with one timestep. Memory grows with <code>batch_size_bsdf</code> (a <abbr title="Power transfer distribution factor">PTDF</abbr> and an <abbr title="Line outage distribution factor">LODF</abbr> block per
+topology in the batch), which is the knob the chapter says to cut first on an out-of-memory error, and
+<code>batch_size_injection</code> next. Compile time is 0.8–1.3 s for every point, so a sweep costs more in
+compilation than in running. <em><abbr title="Graphics processing unit">GPU</abbr>: not run here.</em> Expect the opposite shape of the throughput map: a <abbr title="Graphics processing unit">GPU</abbr>
+needs a large <code>batch_size_bsdf</code> to fill its lanes (throughput rising steeply from 4 to 64 or more, then
+flattening), a hard out-of-memory boundary where <code>batch_size_bsdf × (n_branches × n_nodes + n_branches²) ×
+8 bytes</code> plus the injection buffers exceed the VRAM <code>nvidia-smi</code> shows (with
+<code>XLA_PYTHON_CLIENT_PREALLOCATE=false</code>, so the reading is real usage, not the 75 % preallocation), and a
+float64 penalty of up to about 32× on a consumer GeForce card against 2× on a data-centre card, measured by
+repeating one point in a fresh process with <code>JAX_ENABLE_X64=0</code> (the flag is read when JAX starts).</p>
+</li>
+</ol>
+<h2 id="exercise-1">Exercise 1<a class="headerlink" href="#exercise-1" title="Permanent link">&para;</a></h2>
+<p><code>SolverConfig</code> holds, besides scalars, <code>HashableArrayWrapper</code> fields such as <code>branches_per_sub</code> and
+<code>rel_stat_map</code>, arrays with one entry per relevant substation. A value hash would have to hash those arrays
+(and compare them on every cache lookup, since <code>__eq__</code> runs after a hash match), on <em>every</em> call of
+<code>iterate_symmetric_sequential</code>, which the optimizer calls millions of times per run; <code>id(self)</code> costs nothing
+and, as the docstring says, "we expect only one instance of this class to be used at a time". That is the
+benefit. The risks: (1) <strong>stale programs</strong>: mutating a field in place keeps the key, so the compiled program
+ignores the new value silently (Lab 3: <code>number_most_affected = 20</code> still returned 30 columns), and the same
+mechanism leaks into <code>DefaultAggregateOutputFn</code>, whose <code>fixed_hash = hash(solver_config)</code> lets a changed
+<code>max_mw_flow</code> go unnoticed; (2) <strong>spurious recompilations</strong>: every <code>replace(...)</code>, every <code>load_grid</code> and every
+deserialization produces a new object, so two configurations with identical values never share a program
+(Lab 3: <code>replace(sc)</code> with no field changed cost 730 ms), which also makes the compile cache grow with every
+copy that stays alive; a third risk is that <code>id()</code> is recycled by the garbage collector, so a <em>new</em> object
+may reuse the id of a dead one and hit its cache entry with different values. A safer design: a frozen
+dataclass (<code>@dataclass(frozen=True)</code>, so in-place mutation is a <code>FrozenInstanceError</code>) whose <code>__hash__</code>
+combines the scalar fields with a hash of the array contents computed once in <code>__post_init__</code> (for example
+<code>hash(array.tobytes())</code> stored in a field, with <code>__eq__</code> comparing scalars and <code>np.array_equal</code> on the
+arrays). It costs one hash computation per object instead of per call, equal configurations share a
+program, and mutation is impossible instead of silent. Exercise 2 shows both designs side by side.</p>
+<h2 id="exercise-2">Exercise 2<a class="headerlink" href="#exercise-2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><span class="filename">stale_hash.py (the two designs)</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">IdentityConfig</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="sd">"""Static configuration hashed by object identity: the compile cache cannot see a mutated field."""</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">n_worst</span><span class="p">:</span> <span class="nb">int</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="sd">"""Identity, like ToOp's SolverConfig.__hash__."""</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="k">return</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="sd">"""Identity, like ToOp's SolverConfig.__eq__."""</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="k">class</span><span class="w"> </span><span class="nc">FrozenConfig</span><span class="p">:</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="sd">"""Static configuration hashed by value: a new value is a new cache key, an equal value hits the cache."""</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="n">n_worst</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch32-jax-in-toop/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+<p><code>worst = jax.jit(_worst, static_argnums=1)</code> returns the <code>config.n_worst</code> largest |flows|. With
+<code>IdentityConfig(n_worst=3)</code> the result has shape <code>(3,)</code>; after <code>config.n_worst = 5</code> in place it is still
+<code>(3,)</code>, the stale program, and the Python counter inside <code>_worst</code> confirms that the second call did not trace;
+<code>worst(flows, replace(config, n_worst=5))</code> traces again and returns <code>(5,)</code>. With <code>FrozenConfig</code>, 3 → <code>(3,)</code>,
+5 → <code>(5,)</code>, and a third call with a new <code>FrozenConfig(3)</code> is a cache hit: two traces in total. The test that
+would have caught the trap is the check that a result follows the configuration it was computed with,
+<code>assert worst(flows, config).shape == (config.n_worst,)</code> after the mutation: <code>test_stale_hash.py</code> shows it
+failing for <code>IdentityConfig</code> (wrapped in <code>pytest.raises(AssertionError)</code>, so the suite stays green) and passing
+for <code>FrozenConfig</code>. In ToOp's own suite, <code>test_jax_compilation.py</code> guards the other direction (no spurious
+retrace) with <code>jax.no_tracing()</code>; a test of this direction (a changed static field must change the output) is
+what was missing.</p>
+<h2 id="exercise-3">Exercise 3<a class="headerlink" href="#exercise-3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><span class="filename">traced_loop.py (the two loops)</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">_apply_fori</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">"""n_steps may be a tracer: fori_loop with a traced upper bound lowers to while_loop, compiled once."""</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">TRACES</span><span class="p">[</span><span class="s1">'fori'</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">acc</span><span class="p">):</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="k">return</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">return</span> <span class="n">lax</span><span class="o">.</span><span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">_apply_python</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="sd">"""n_steps must be a Python int: the loop is unrolled while tracing, once per distinct value."""</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">TRACES</span><span class="p">[</span><span class="s1">'python'</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="n">acc</span> <span class="o">=</span> <span class="mf">0.0</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="k">return</span> <span class="n">acc</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="n">apply_fori</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">_apply_fori</span><span class="p">)</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="n">apply_python</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">_apply_python</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch32-jax-in-toop/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+<p>Twenty Poisson draws clipped to <code>[1, 8]</code> (<code>[1, 1, 4, 1, 3, 4, 1, 1, 1, 1, 1, 1, 1, 3, 3, 1, 4, 3, 1, 1]</code>,
+three distinct values) give <strong>1 trace</strong> for the <code>fori_loop</code> version and <strong>3 traces</strong> for the Python <code>for</code>,
+one per distinct bound, and the same sums. <code>jax.make_jaxpr</code> shows why: the <code>fori_loop</code> with a traced bound
+lowers to a single <code>while</code> primitive whose <code>cond_jaxpr</code> compares the counter with the bound (an <em>input</em> of the
+jaxpr, <code>b:i64[]</code>), so the bound is data; the Python <code>for</code> is unrolled at trace time into three copies of the
+body (three <code>dynamic_slice</code> reads and three <code>add</code>s for <code>n_steps = 3</code>), so the bound is part of the program and
+a new value is a new program. Passing a traced bound to the Python version raises
+<code>TracerIntegerConversionError</code> (<code>range()</code> asks the tracer for an integer it does not have). <code>mutate.py</code> is in
+the first camp: <code>n_subs_mutated = jnp.clip(jax.random.poisson(...), 1, max_num_splits)</code> is a tracer and
+<code>jax.lax.fori_loop(0, n_subs_mutated, ...)</code> compiles once for every draw; <code>max_num_splits</code> (the array width)
+stays static and bounds the loop.</p>
+<h2 id="exercise-4">Exercise 4<a class="headerlink" href="#exercise-4" title="Permanent link">&para;</a></h2>
+<p><code>int_widths.py</code>, on this Windows machine, with the course environment (NumPy 2.4.6, Python 3.14) and with
+ToOp's (NumPy 2.3.5, Python 3.11), identically:</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>np.dtype(int)</code></td>
+<td><code>int64</code></td>
+</tr>
+<tr>
+<td><code>np.dtype("long")</code></td>
+<td><code>int32</code> (the C <code>long</code> is 32-bit on Windows)</td>
+</tr>
+<tr>
+<td><code>np.dtype(np.intp)</code></td>
+<td><code>int64</code></td>
+</tr>
+<tr>
+<td><code>np.random.randint(2**32)</code> / <code>default_rng().integers(2**32)</code></td>
+<td>works (3 653 403 231)</td>
+</tr>
+<tr>
+<td><code>jnp.full(3, 7, dtype=int).dtype</code> with <code>jax_enable_x64</code></td>
+<td><code>int64</code>, and <code>int_max()</code> is <span class="arithmatex">\(2^{63}-1\)</span></td>
+</tr>
+<tr>
+<td>the same without x64 (fresh process, <code>JAX_ENABLE_X64=0</code>)</td>
+<td><code>int32</code>, and <code>int_max()</code> is <span class="arithmatex">\(2^{31}-1\)</span></td>
+</tr>
+<tr>
+<td>the int64 maximum stored into an <code>int32</code> array</td>
+<td><code>-1</code></td>
+</tr>
+</tbody>
+</table>
+<p>Neither failure of the <code>int_dtype()</code> docstring reproduces: <code>dtype=int</code> is already 64-bit, so a sentinel of
+<span class="arithmatex">\(2^{63}-1\)</span> fits, and an <code>int</code> array meets an <code>int64</code> carry in <code>lax.scan</code> with equal types. The version
+matters because the docstring describes NumPy 1.x: there, <code>np.dtype(int)</code> <em>was</em> the C <code>long</code>, hence <code>int32</code>
+on Windows, and the two failures were real (<code>int_max()</code> truncated to <code>-1</code>, which Exercise 3 of
+<a href="../../ch31-jax-gpu-fundamentals/">Chapter 31</a> shows reading the last element instead of being dropped,
+and an <code>int32</code> array against an <code>int64</code> carry). NumPy 2.0 changed the default integer on Windows to 64-bit
+(<code>np.dtype(int)</code> is now <code>intp</code> everywhere) while leaving <code>'long'</code> on the C type, which is the one row of the
+table that still differs between platforms. ToOp pins NumPy 2.x, so the Windows bug is closed by the
+dependency; <code>int_dtype()</code> is still the right habit, because <code>jnp.int_</code> follows <code>jax_enable_x64</code> and keeps the
+array dtype and <code>int_max()</code> consistent with each other by construction, on every platform and in both
+precision modes.</p>
+<h2 id="exercise-5">Exercise 5<a class="headerlink" href="#exercise-5" title="Permanent link">&para;</a></h2>
+<p><code>pmap_donate.py</code> sets <code>XLA_FLAGS=--xla_force_host_platform_device_count=4</code> before <code>import jax</code> (the flag is
+read when the backend starts, so inside a notebook that already imported JAX the experiment runs in a
+subprocess, <code>run_in_subprocess()</code>). <code>jax.devices()</code> then lists four CPU devices (<code>cpu:0</code>–<code>cpu:3</code>;
+<code>TFRT_CPU_0</code>–<code>3</code> under ToOp's JAX 0.5.3). <code>jax.pmap(lambda x: 2 * x, donate_argnums=(0,))</code> over a <code>(4, 3)</code>
+input gives the right output (sum 132), and the donated input is still readable afterwards: its sum is 66 and
+<code>x.is_deleted()</code> is <code>False</code>, with no warning, in both JAX 0.11.2 and 0.5.3. On CPU the donation of <code>pmap</code>
+arguments is accepted and ignored. <code>jax.jit(..., donate_argnums=(0,))</code> on the same CPU <em>does</em> delete its input
+(<code>is_deleted()</code> is <code>True</code>, and reading it raises <code>RuntimeError: Array has been deleted</code>). <em><abbr title="Graphics processing unit">GPU</abbr>: not run here</em>;
+there the <code>pmap</code> input is deleted as well and <code>float(x.sum())</code> raises that <code>RuntimeError</code>, which is the
+behaviour the exercise expects you to see. ToOp donates the result storage (<code>donate_argnums=(3,)</code> in the
+<code>jax.pmap</code> of <code>iterate_symmetric_sequential</code> in <code>topology_looper.py</code>, and <code>donate_argnums=(0,)</code> on the epoch
+in <code>optimizer/dc/worker/optimizer.py</code>) because that buffer is the largest array the call touches, one row
+per topology of sparse N-0 and N-1 results, and the program only ever <em>overwrites</em> it slice by slice inside the
+<code>fori_loop</code> (<code>dynamic_update_slice_in_dim</code>). Without donation <abbr title="Accelerated Linear Algebra">XLA</abbr> must keep the input storage intact and
+allocate a second buffer of the same size for the output, doubling the peak memory of exactly the array that
+sets the batch-size limit; with donation the output reuses the input's device memory. The caller never needs
+the zero-filled storage again, so nothing is lost; the price is the rule this exercise demonstrates: a donated
+array must not be read afterwards, and on a device that honours donation the error is immediate.</p>
+<h2 id="exercise-6">Exercise 6<a class="headerlink" href="#exercise-6" title="Permanent link">&para;</a></h2>
+<p><em>Not run here</em>: the end-to-end DC stage needs the importer stage (a grid file through
+<code>run_pipeline</code>/<code>CgmesImporterParameters</code>), a static-information file and four optimizer runs of a fixed
+number of iterations; that is the exercise in the container. What <strong>was</strong> run is the cost the question is
+really about, isolated at the solver level: <code>split_slots_toop.py</code> calls <code>run_solver</code> on 64 unsplit
+topologies whose <code>action</code> array has 1, 2, 4, 8 or 16 columns, every slot holding the padding sentinel, so no
+substation is ever split and only the <em>number of slots</em> changes (this is what <code>max_num_splits</code> becomes
+inside the optimizer; <code>default_topology</code> itself uses one column). CPU, five steady-state repeats:</p>
+<table>
+<thead>
+<tr>
+<th>Slots</th>
+<th>case57 (82 branches, 84 N-1 cases) µs / topology</th>
+<th>vs 1 slot</th>
+<th>case300 (411 branches, 385 N-1 cases) µs / topology</th>
+<th>vs 1 slot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>188</td>
+<td>1.00</td>
+<td>1 997</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>2</td>
+<td>198</td>
+<td>1.05</td>
+<td>2 261</td>
+<td>1.13</td>
+</tr>
+<tr>
+<td>4</td>
+<td>188</td>
+<td>1.00</td>
+<td>2 342</td>
+<td>1.17</td>
+</tr>
+<tr>
+<td>8</td>
+<td>223</td>
+<td>1.18</td>
+<td>2 521</td>
+<td>1.26</td>
+</tr>
+<tr>
+<td>16</td>
+<td>251</td>
+<td>1.33</td>
+<td>2 941</td>
+<td>1.47</td>
+</tr>
+</tbody>
+</table>
+<p>Compile time is 0.8–1.0 s for every row. So yes: the extra slots are paid for even when every slot is empty,
+which is the README's statement ("the <abbr title="Bus split distribution factor">BSDF</abbr> module will perform a <abbr title="Bus split distribution factor">BSDF</abbr> computation for every substation
+regardless if only a few substations are actually split"), but the bill is smaller than "proportional to
+<code>max_num_splits</code>" suggests for the <em>whole</em> iteration: going from 1 to 16 slots costs +33 % on case57 and
++47 % on case300, because the per-slot <abbr title="Bus split distribution factor">BSDF</abbr> update (a rank-one <abbr title="Power transfer distribution factor">PTDF</abbr> update per slot and topology) is cheap
+next to the contingency analysis, whose size (N-1 cases × branches) does not depend on the slots. Expect the
+e2e plot of seconds per iteration against <code>max_num_splits</code> to be a line with a positive slope and a large
+intercept: linear in the slots, dominated by the N-1 part, with the mutation and selection stages adding a
+slot-independent constant. The practical rule from <code>example3_e2e_pipeline.ipynb</code> stands: set
+<code>max_num_splits</code> to the number of simultaneous splits an operator would accept (2 in the notebook), not to
+the number of relevant substations, and spend the saved time on a larger <code>batch_size</code>.</p>
+<div class="highlight"><span class="filename">split_slots_toop.py</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="sd">"""The price of unused split slots: solver time against the number of split slots (Chapter 32, Exercise 6).</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="sd">The optimizer's ``max_num_splits`` is the second dimension of the action array that reaches ``run_solver``.</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="sd">Here every slot holds the padding sentinel, so no substation is split, and the time still grows with the</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="sd">number of slots: the BSDF stage works on every slot. Run it with ToOp's interpreter from this folder.</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="sd">"""</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="kn">from</span><span class="w"> </span><span class="nn">solver_lab_toop</span><span class="w"> </span><span class="kn">import</span> <span class="n">grid_folder</span><span class="p">,</span> <span class="n">setup</span><span class="p">,</span> <span class="n">timed</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_dc_solver.jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_topology</span><span class="p">,</span> <span class="n">run_solver</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_dc_solver.jax.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ActionIndexComputations</span><span class="p">,</span> <span class="n">int_max</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="n">jax</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">'jax_enable_x64'</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">unsplit_with_slots</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">n_topologies</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_slots</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ActionIndexComputations</span><span class="p">:</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="sd">"""``n_topologies`` unsplit topologies whose action array has ``n_slots`` columns, all padding."""</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="n">base</span> <span class="o">=</span> <span class="n">default_topology</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">n_topologies</span><span class="p">)</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>    <span class="n">action</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n_topologies</span><span class="p">,</span> <span class="n">n_slots</span><span class="p">),</span> <span class="n">int_max</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>    <span class="k">return</span> <span class="n">ActionIndexComputations</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span> <span class="n">pad_mask</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_topologies</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">))</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="k">def</span><span class="w"> </span><span class="nf">slot_sweep</span><span class="p">(</span><span class="n">si</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">n_topologies</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">repeats</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">    </span><span class="sd">"""Compile time and steady-state seconds per topology for each number of split slots."""</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>    <span class="n">sc</span><span class="p">,</span> <span class="n">di</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">solver_config</span><span class="p">,</span> <span class="n">si</span><span class="o">.</span><span class="n">dynamic_information</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">slots</span><span class="p">:</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>        <span class="n">topologies</span> <span class="o">=</span> <span class="n">unsplit_with_slots</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">n_topologies</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>        <span class="n">_</span><span class="p">,</span> <span class="n">first</span> <span class="o">=</span> <span class="n">timed</span><span class="p">(</span><span class="n">run_solver</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>        <span class="n">steady</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">timed</span><span class="p">(</span><span class="n">run_solver</span><span class="p">,</span> <span class="n">topologies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">di</span><span class="p">,</span> <span class="n">sc</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeats</span><span class="p">))</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>            <span class="p">{</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>                <span class="s1">'slots'</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>                <span class="s1">'compile_s'</span><span class="p">:</span> <span class="n">first</span> <span class="o">-</span> <span class="n">steady</span><span class="p">,</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>                <span class="s1">'steady_s'</span><span class="p">:</span> <span class="n">steady</span><span class="p">,</span>
+<a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>                <span class="s1">'us_per_topology'</span><span class="p">:</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="n">steady</span> <span class="o">/</span> <span class="n">n_topologies</span><span class="p">,</span>
+<a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>            <span class="p">}</span>
+<a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>        <span class="p">)</span>
+<a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>    <span class="k">return</span> <span class="n">rows</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>
+<a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>
+<a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a><span class="w">    </span><span class="sd">"""Sweep 1 to 16 slots on case57 and on case300 (default_topology itself uses a single slot)."""</span>
+<a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>    <span class="n">root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
+<a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'case57'</span><span class="p">,</span> <span class="s1">'case300'</span><span class="p">):</span>
+<a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>        <span class="n">si</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">grid_folder</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">root</span><span class="p">),</span> <span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>        <span class="n">sc</span><span class="p">,</span> <span class="n">di</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">solver_config</span><span class="p">,</span> <span class="n">si</span><span class="o">.</span><span class="n">dynamic_information</span>
+<a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>        <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>            <span class="sa">f</span><span class="s1">'</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">di</span><span class="o">.</span><span class="n">n_branches</span><span class="si">}</span><span class="s1"> branches, </span><span class="si">{</span><span class="n">di</span><span class="o">.</span><span class="n">n_nminus1_cases</span><span class="si">}</span><span class="s1"> N-1 cases, </span><span class="si">{</span><span class="n">sc</span><span class="o">.</span><span class="n">n_sub_relevant</span><span class="si">}</span><span class="s1"> relevant subs, '</span>
+<a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>            <span class="sa">f</span><span class="s1">'default_topology columns = </span><span class="si">{</span><span class="n">default_topology</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span><span class="w"> </span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">, '</span>
+<a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a>            <span class="sa">f</span><span class="s1">'batch_size_bsdf = </span><span class="si">{</span><span class="n">sc</span><span class="o">.</span><span class="n">batch_size_bsdf</span><span class="si">}</span><span class="s1">'</span>
+<a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>        <span class="p">)</span>
+<a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a>        <span class="n">rows</span> <span class="o">=</span> <span class="n">slot_sweep</span><span class="p">(</span><span class="n">si</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+<a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="s2">"slots"</span><span class="si">:</span><span class="s1">&gt;5s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">"compile [s]"</span><span class="si">:</span><span class="s1">&gt;12s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">"steady [ms]"</span><span class="si">:</span><span class="s1">&gt;12s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">"us/topology"</span><span class="si">:</span><span class="s1">&gt;12s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">"vs 1 slot"</span><span class="si">:</span><span class="s1">&gt;10s</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+<a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>            <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a>                <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"slots"</span><span class="p">]</span><span class="si">:</span><span class="s1">5d</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"compile_s"</span><span class="p">]</span><span class="si">:</span><span class="s1">12.2f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"steady_s"</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e3</span><span class="si">:</span><span class="s1">12.1f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"us_per_topology"</span><span class="p">]</span><span class="si">:</span><span class="s1">12.1f</span><span class="si">}</span><span class="s1"> '</span>
+<a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a>                <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"steady_s"</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"steady_s"</span><span class="p">]</span><span class="si">:</span><span class="s1">10.2f</span><span class="si">}</span><span class="s1">'</span>
+<a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a>            <span class="p">)</span>
+<a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a>
+<a id="__codelineno-4-66" name="__codelineno-4-66" href="#__codelineno-4-66"></a>
+<a id="__codelineno-4-67" name="__codelineno-4-67" href="#__codelineno-4-67"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch32-jax-in-toop/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

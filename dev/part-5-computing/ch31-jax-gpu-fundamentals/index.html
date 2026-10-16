@@ -2338,27 +2338,55 @@ jaxtyping and beartype; the <code>toop-gpu</code> service if an NVIDIA <abbr tit
    pass a fresh <code>lambda</code> post-processing function on every call. Fix both, and prove the fix with
    <code>jax.no_tracing()</code>.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>For <code>g = jax.jit(f, static_argnums=1)</code>, predict how many times <code>f</code> is traced for the calls
+<li>
+<p>For <code>g = jax.jit(f, static_argnums=1)</code>, predict how many times <code>f</code> is traced for the calls
    <code>g(x3, 2)</code>, <code>g(y3, 2)</code>, <code>g(x4, 2)</code>, <code>g(x3, 3)</code>, <code>g(x3.astype(jnp.float32), 2)</code>, where <code>x3</code>, <code>y3</code> are float64
-   arrays of length 3 and <code>x4</code> of length 4. Then check your answer in a notebook. <em>(Jupyter: JAX)</em></li>
-<li><em>(Jupyter: JAX)</em> Write <code>clip_negative(x)</code> with <code>if x.sum() &gt; 0:</code> and call it under <code>jit</code>. Read the error, then
+   arrays of length 3 and <code>x4</code> of length 4. Then check your answer in a notebook. <em>(Jupyter: JAX)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: JAX)</em> Write <code>clip_negative(x)</code> with <code>if x.sum() &gt; 0:</code> and call it under <code>jit</code>. Read the error, then
    fix it twice, with <code>jnp.where</code> and with <code>lax.cond</code>. Which version evaluates both branches, and when does that
-   matter?</li>
-<li><em>(Jupyter: JAX + NumPy)</em> Pad a list of variable-length index arrays to a fixed length with a sentinel equal to
+   matter?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: JAX + NumPy)</em> Pad a list of variable-length index arrays to a fixed length with a sentinel equal to
    the array length, and gather with <code>x.at[idx].get(mode="fill", fill_value=0.0)</code>. What happens if the sentinel is
-   <code>-1</code> instead? Relate the answer to why production code chooses a large out-of-bounds sentinel.</li>
-<li><em>(Jupyter: JAX + matplotlib)</em> Compute the <abbr title="Line outage distribution factor">LODF</abbr> matrix of IEEE 118 in float32 and float64, and plot the absolute
+   <code>-1</code> instead? Relate the answer to why production code chooses a large out-of-bounds sentinel.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: JAX + matplotlib)</em> Compute the <abbr title="Line outage distribution factor">LODF</abbr> matrix of IEEE 118 in float32 and float64, and plot the absolute
    difference against <span class="arithmatex">\(|1-(\mathrm{PTDF}_{b,f_b}-\mathrm{PTDF}_{b,t_b})|\)</span>. Which outages lose the most accuracy in
-   float32, and what does that say about near-bridges (<a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>)?</li>
-<li><em>(Octave)</em> Implement N-1 screening of IEEE 118 twice in Octave: a <code>for</code> loop over outages, and one vectorized
+   float32, and what does that say about near-bridges (<a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>)?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(Octave)</em> Implement N-1 screening of IEEE 118 twice in Octave: a <code>for</code> loop over outages, and one vectorized
    matrix expression. Compare run times. Which JAX transformation plays the role of your vectorized rewrite, and
-   what does <code>jit</code> add on top?</li>
-<li><em>(Jupyter: JAX + jaxtyping)</em> Annotate <code>n1_flows</code> with <code>Float[Array, " n_branch n_bus"]</code>-style shapes, decorate
+   what does <code>jit</code> add on top?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Known discrepancy: MATPOWER's bridge masking fails on case118</p>
+<p>If you take the <abbr title="Line outage distribution factor">LODF</abbr> from MATPOWER 8.1, <code>makeLODF(mpc, H, true)</code> (bridge masking) stops on <code>case118</code>
+with <code>br(197): out of bound 186</code> inside <code>find_bridges</code>, which trips over the parallel branches of that
+case; it works on <code>case14</code>. Call <code>makeLODF(mpc, H)</code> without the option and mask the bridges yourself,
+as in <a href="../../part-3-power-systems/ch17-sensitivity-factors-1/">Chapter 17</a>.</p>
+</div>
+</li>
+<li>
+<p><em>(Jupyter: JAX + jaxtyping)</em> Annotate <code>n1_flows</code> with <code>Float[Array, " n_branch n_bus"]</code>-style shapes, decorate
    it with <code>@jaxtyped(typechecker=beartype)</code>, and call it with a <abbr title="Power transfer distribution factor">PTDF</abbr> whose number of columns does not match the
-   injection vector. What error do you get, and at which moment (tracing or execution)?</li>
+   injection vector. What error do you get, and at which moment (tracing or execution)?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

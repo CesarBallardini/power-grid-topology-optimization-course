@@ -7,16 +7,21 @@ n_0 = np.array([[80.0, -150.0, 49.0]])  # (timesteps, branches)
 n_1 = np.array([[[95.0, -210.0, 40.0], [120.0, -160.0, 55.0]]])  # (timesteps, contingencies, branches)
 
 
-def overload_energy_n1(n_1: np.ndarray, f_max: np.ndarray) -> float:
-    """Per branch the worst contingency's overload in MW, summed over branches and timesteps."""
+def overload_energy_n1(n_1: np.ndarray, f_max: np.ndarray, weight: np.ndarray | None = None) -> float:
+    """Per branch the worst contingency's overload in MW (times its ``weight``), summed over branches and timesteps."""
     over = np.clip(np.abs(n_1) - f_max, 0, None)
+    if weight is not None:
+        over = over * weight
     return float(over.max(axis=1).sum())
 
 
-def power_law_n1(n_1: np.ndarray, f_max: np.ndarray, alpha: float = 1.5) -> float:
+def power_law_n1(n_1: np.ndarray, f_max: np.ndarray, alpha: float = 1.5, weight: np.ndarray | None = None) -> float:
     """Like ``overload_energy_n1`` but each overload is weighted as (relᵅ − 1) f_max."""
     rel = np.clip(np.abs(n_1) / f_max, 1, None)
-    return float(((rel**alpha - 1) * f_max).max(axis=1).sum())
+    over = (rel**alpha - 1) * f_max
+    if weight is not None:
+        over = over * weight
+    return float(over.max(axis=1).sum())
 
 
 def critical_branch_count_n1(n_1: np.ndarray, f_max: np.ndarray) -> int:

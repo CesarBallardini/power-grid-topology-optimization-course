@@ -2252,24 +2252,42 @@ z_{\text{pu,new}} = z_{\text{pu,old}} \left(\frac{V_{\text{base,old}}}{V_{\text{
 <li>Compare your MW column with the formula used in ToOp's <code>powsybl_helpers.py</code> (<code>value * limit_voltage *
    1e-3 * math.sqrt(3)</code>) and state the units each factor assumes.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>A balanced wye load has <span class="arithmatex">\(Z_Y = 30 + j40\ \Omega\)</span> per phase on a 400 V (line-to-line) supply. Compute the line
-   current, total <span class="arithmatex">\(P\)</span> and <span class="arithmatex">\(Q\)</span>, and the equivalent delta impedance <span class="arithmatex">\(Z_\Delta = 3 Z_Y\)</span>. <em>(Pen and paper)</em></li>
-<li>Verify numerically that the instantaneous total power of a balanced three-phase set is constant in time,
-   unlike single-phase power. <em>(Jupyter: NumPy + matplotlib)</em></li>
-<li>The cascade relay model computes a phase voltage <span class="arithmatex">\(V_{LL}/\sqrt{3}\)</span>, an impedance magnitude <span class="arithmatex">\(|Z| = V_{\text{ph}}/I\)</span>
+<li>
+<p>A balanced wye load has <span class="arithmatex">\(Z_Y = 30 + j40\ \Omega\)</span> per phase on a 400 V (line-to-line) supply. Compute the line
+   current, total <span class="arithmatex">\(P\)</span> and <span class="arithmatex">\(Q\)</span>, and the equivalent delta impedance <span class="arithmatex">\(Z_\Delta = 3 Z_Y\)</span>. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>Verify numerically that the instantaneous total power of a balanced three-phase set is constant in time,
+   unlike single-phase power. <em>(Jupyter: NumPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>The cascade relay model computes a phase voltage <span class="arithmatex">\(V_{LL}/\sqrt{3}\)</span>, an impedance magnitude <span class="arithmatex">\(|Z| = V_{\text{ph}}/I\)</span>
    and an angle <span class="arithmatex">\(\operatorname{atan2}(Q, P)\)</span> (<code>get_complex_impedance</code> in
    <code>contingency/pandapower/cascade/detection/switch_preparation.py</code>). Compute <span class="arithmatex">\(R\)</span> and <span class="arithmatex">\(X\)</span> seen by a relay at
    380 kV with <span class="arithmatex">\(I = 1\,000\)</span> A, <span class="arithmatex">\(P = 600\)</span> MW and <span class="arithmatex">\(Q = 200\)</span> Mvar. <em>(Pen and paper)</em> <em>Answer:</em> <span class="arithmatex">\(|Z| \approx 219.4\ \Omega\)</span>,
-   <span class="arithmatex">\(R \approx 208.1\ \Omega\)</span>, <span class="arithmatex">\(X \approx 69.4\ \Omega\)</span>.</li>
-<li>A 1 600 MVA transformer has <span class="arithmatex">\(x = 0.15\)</span> pu on its own rating. Express it on a 100 MVA base, and explain why
+   <span class="arithmatex">\(R \approx 208.1\ \Omega\)</span>, <span class="arithmatex">\(X \approx 69.4\ \Omega\)</span>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>A 1 600 MVA transformer has <span class="arithmatex">\(x = 0.15\)</span> pu on its own rating. Express it on a 100 MVA base, and explain why
    the per-unit value does not depend on which side's voltage base is used when bases are chosen through the
-   turns ratio. <em>(Pen and paper)</em></li>
-<li>Symmetrical components (awareness): with <span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; a^2 &amp; a \\ 1 &amp; a &amp; a^2 \end{bmatrix}\)</span>,
+   turns ratio. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Symmetrical components (awareness): with <span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; a^2 &amp; a \\ 1 &amp; a &amp; a^2 \end{bmatrix}\)</span>,
    compute <span class="arithmatex">\(V_{012} = A^{-1} V_{abc}\)</span> for a set where phase b has dropped to 0.9 pu. <em>(Octave)</em> <em>Answer:</em>
-   <span class="arithmatex">\(|V_1| \approx 0.967\)</span>, <span class="arithmatex">\(|V_0| = |V_2| \approx 0.033\)</span> pu.</li>
+   <span class="arithmatex">\(|V_1| \approx 0.967\)</span>, <span class="arithmatex">\(|V_0| = |V_2| \approx 0.033\)</span> pu.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

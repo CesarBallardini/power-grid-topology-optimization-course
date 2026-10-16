@@ -2280,23 +2280,33 @@ incidence matrix of the three branches over the nodes <span class="arithmatex">\
 <li>Keep <code>nodal_solve</code>: it becomes the DC power flow in
    <a href="../../part-3-power-systems/ch16-dc-power-flow/">Chapter 16</a> by replacing conductances with susceptances.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>By hand, write the nodal equations of a Wheatstone bridge (4 nodes, 5 resistors, one current source) and
-   find the condition on the resistors for zero current in the middle branch. <em>(Pen and paper)</em></li>
-<li>Solve the circuit of the worked example by mesh analysis and check that you get the same voltages. Then
-   solve both formulations in Octave. <em>(Pen and paper, then Octave)</em></li>
-<li>Tellegen's theorem: for any branch voltages <span class="arithmatex">\(u = Av\)</span> and any branch currents <span class="arithmatex">\(j\)</span> that satisfy <abbr title="Kirchhoff's current law">KCL</abbr>
+<li>
+<p>By hand, write the nodal equations of a Wheatstone bridge (4 nodes, 5 resistors, one current source) and
+   find the condition on the resistors for zero current in the middle branch. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.
+2. Solve the circuit of the worked example by mesh analysis and check that you get the same voltages. Then
+   solve both formulations in Octave. <em>(Pen and paper, then Octave)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.
+3. Tellegen's theorem: for any branch voltages <span class="arithmatex">\(u = Av\)</span> and any branch currents <span class="arithmatex">\(j\)</span> that satisfy <abbr title="Kirchhoff's current law">KCL</abbr>
    (<span class="arithmatex">\(A^\top j = i\)</span>), show that <span class="arithmatex">\(u^\top j = v^\top i\)</span>. Use it to prove the power balance of lab step 2.
-   <em>(Pen and paper)</em></li>
-<li>Show that grounding a different node changes all node voltages by the same constant and leaves every
-   branch current unchanged. Check it with <code>nodal_solve</code>. <em>(Pen and paper, then Jupyter: NumPy)</em></li>
-<li>In lab step 5, lower the coupler conductance to <span class="arithmatex">\(10^3\)</span> S and to <span class="arithmatex">\(10\)</span> S. How does the coupler current depart
+   <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.
+4. Show that grounding a different node changes all node voltages by the same constant and leaves every
+   branch current unchanged. Check it with <code>nodal_solve</code>. <em>(Pen and paper, then Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.
+5. In lab step 5, lower the coupler conductance to <span class="arithmatex">\(10^3\)</span> S and to <span class="arithmatex">\(10\)</span> S. How does the coupler current depart
    from the <abbr title="Kirchhoff's current law">KCL</abbr> imbalance of the unsplit network, and why does the approximation need a closed, near-ideal
-   coupler? <em>(Jupyter: NumPy)</em></li>
-<li>Read <code>_compute_bus_a_imbalance</code> in ToOp's <code>dc_solver/jax/cross_coupler_flow.py</code> and map each term of its
-   formula to the quantities of lab step 5. <em>(Code reading)</em></li>
+   coupler? <em>(Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.
+6. Read <code>_compute_bus_a_imbalance</code> in ToOp's <code>dc_solver/jax/cross_coupler_flow.py</code> and map each term of its
+   formula to the quantities of lab step 5. <em>(Code reading)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

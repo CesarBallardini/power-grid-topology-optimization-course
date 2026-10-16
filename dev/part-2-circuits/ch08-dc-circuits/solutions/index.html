@@ -1,0 +1,2449 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/dev/part-2-circuits/ch08-dc-circuits/solutions/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Chapter 8 – Solutions - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-8-solutions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 8 – Solutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-8-solutions">Chapter 8 – Solutions<a class="headerlink" href="#chapter-8-solutions" title="Permanent link">&para;</a></h1>
+<p>Solutions of the Lab and the Exercises of <a href="../">Chapter 8</a>. Try each task before reading its solution.
+The code is in the chapter's <code>src</code> folder: <a href="../src/nodal.py"><code>nodal.py</code></a> (the nodal solver and the lab network;
+<code>python nodal.py</code> prints every number of the Lab answers and of Exercises 4 and 5), <a href="../src/wheatstone.py"><code>wheatstone.py</code></a>
+(<code>python wheatstone.py</code> prints those of Exercises 1 and 3) and <a href="../src/mesh_nodal.m"><code>mesh_nodal.m</code></a> (Exercise 2,
+Octave). The notebooks <a href="../src/examples.ipynb"><code>examples.ipynb</code></a>, <a href="../src/lab.ipynb"><code>lab.ipynb</code></a> and
+<a href="../src/exercises.ipynb"><code>exercises.ipynb</code></a> import these modules. The ToOp function of Exercise 6 was read at
+commit <code>ba1874e</code>.</p>
+<p>Node numbers start at 0 and branch <span class="arithmatex">\(k\)</span> runs from <code>fr[k]</code> to <code>to[k]</code>; a positive branch current flows that
+way. The lab network is the one of the <a href="../../../part-1-math/ch02-linear-algebra/">Chapter 2</a> lab: branches
+<span class="arithmatex">\((0,1)\)</span>, <span class="arithmatex">\((0,2)\)</span>, <span class="arithmatex">\((1,2)\)</span>, <span class="arithmatex">\((1,3)\)</span>, <span class="arithmatex">\((2,4)\)</span>, <span class="arithmatex">\((3,4)\)</span>, <span class="arithmatex">\((4,5)\)</span> with conductances <span class="arithmatex">\(10, 5, 8, 4, 6, 3, 2\)</span> S.</p>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong><code>nodal_solve</code>.</strong> The incidence matrix <span class="arithmatex">\(A\)</span> has one row per branch with <span class="arithmatex">\(+1\)</span> in the <code>fr</code> column and <span class="arithmatex">\(-1\)</span> in
+   the <code>to</code> column; <span class="arithmatex">\(A^\top \operatorname{diag}(g) A\)</span> is the weighted Laplacian of the network, singular because
+   its rows sum to zero. Deleting the ground row and column leaves the invertible <span class="arithmatex">\(G\)</span> of the chapter; the
+   solver fills the ground voltage with 0 and returns <span class="arithmatex">\(g \odot (Av)\)</span> as branch currents. The injection given
+   for the ground node is not used: ground supplies whatever balances the others. On the worked example it
+   returns <span class="arithmatex">\(v = (0, 1.2857, 0.4286)\)</span> V <span class="arithmatex">\(= (0, 18/14, 6/14)\)</span> and the branch currents <span class="arithmatex">\(1.2857\)</span> A through the 1 S
+   branch and <span class="arithmatex">\(1.7143\)</span> A through the 2 S and 4 S branches, which add up to the 3 A of the source.</p>
+<div class="highlight"><span class="filename">nodal.py: nodal_solve</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">incidence</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">"""Branch-node incidence matrix A (branches × nodes): +1 at the from node, −1 at the to node."""</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">fr</span><span class="p">),</span> <span class="n">n</span><span class="p">))</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">a</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fr</span><span class="p">)),</span> <span class="n">fr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">a</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fr</span><span class="p">)),</span> <span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">return</span> <span class="n">a</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">nodal_solve</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">inj</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ground</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="sd">"""Node voltages and branch currents of a resistive network with current injections.</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sd">    Builds A and G = Aᵀ diag(g) A, deletes the ground row and column, solves G_r v_r = i_r and returns the</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">    full voltage vector (0 at ``ground``) with the branch currents g ⊙ (A v), positive from ``fr`` to ``to``.</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">    The injection at the ground node is ignored: ground supplies whatever balances the others.</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">    """</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">incidence</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">gmat</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">@</span> <span class="n">a</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">keep</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">ground</span><span class="p">]</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">v</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">gmat</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">keep</span><span class="p">,</span> <span class="n">keep</span><span class="p">)],</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">inj</span><span class="p">,</span> <span class="nb">float</span><span class="p">)[</span><span class="n">keep</span><span class="p">])</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="k">return</span> <span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">@</span> <span class="n">v</span><span class="p">)</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-2-circuits/ch08-dc-circuits/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+</li>
+<li>
+<p><strong>The Chapter 2 network.</strong> With <span class="arithmatex">\(0.5\)</span> A into node 2, <span class="arithmatex">\(1\)</span> A out of node 5 and node 0 grounded, the voltages
+   are <span class="arithmatex">\(v = (0, -0.03041, -0.03918, -0.08889, -0.16686, -0.66686)\)</span> V and the branch currents, in branch order,
+   <span class="arithmatex">\((0.30409, 0.19591, 0.07018, 0.23392, 0.76608, 0.23392, 1.00000)\)</span> A. <abbr title="Kirchhoff's current law">KCL</abbr>: <span class="arithmatex">\(A^\top i\)</span> equals the injection
+   at every node to <span class="arithmatex">\(10^{-12}\)</span> once the ground injection is written as the <span class="arithmatex">\(+0.5\)</span> A it must supply (the two
+   branches leaving node 0 carry <span class="arithmatex">\(0.30409 + 0.19591 = 0.5\)</span> A). Power balance: the sources deliver
+   <span class="arithmatex">\(v^\top i = 0.5\,(0) + 0.5\,(-0.03918) - 1\,(-0.66686) = 0.647271\)</span> W and the branches dissipate
+   <span class="arithmatex">\(\sum_k g_k (Av)_k^2 = \sum_k i_k^2 / g_k = 0.647271\)</span> W, the same number (<a href="#exercise-3">Exercise 3</a> proves
+   it must be).</p>
+</li>
+<li>
+<p><strong>Superposition.</strong> Solving with the <span class="arithmatex">\(0.5\)</span> A alone and with the <span class="arithmatex">\(-1\)</span> A alone and adding the two voltage
+   vectors reproduces the voltages of step 2 to <span class="arithmatex">\(3\cdot10^{-17}\)</span> (<code>superposition_check</code>). The solution map
+   <span class="arithmatex">\(i \mapsto v = G^{-1} i\)</span> is linear, so it respects sums; this is the property that lets
+   <a href="../../../part-3-power-systems/ch17-sensitivity-factors-1/">Chapter 17</a> build flows from one
+   sensitivity per injection and add them.</p>
+</li>
+<li>
+<p><strong>Thévenin.</strong> Injecting 1 A at node 5 and withdrawing it at node 0 gives <span class="arithmatex">\(v_5 - v_0 = 0.71189\ \Omega\)</span>
+   (<code>thevenin_resistance</code>, one linear solve: the second solve of the chapter's "two linear solves" is only
+   needed when the open-circuit voltage is wanted too). The Chapter 3 effective resistance
+   <span class="arithmatex">\((e_5 - e_0)^\top L^+ (e_5 - e_0)\)</span> with the pseudoinverse of the full Laplacian is <span class="arithmatex">\(0.71189\ \Omega\)</span> too,
+   to <span class="arithmatex">\(10^{-12}\)</span>: they are the same quantity. Sanity check: node 5 hangs off node 4 through the single 2 S
+   branch (<span class="arithmatex">\(0.5\ \Omega\)</span>), so the Thévenin resistance must exceed <span class="arithmatex">\(0.5\ \Omega\)</span>; the rest of the network
+   between node 4 and ground adds <span class="arithmatex">\(0.21189\ \Omega\)</span>.</p>
+<div class="highlight"><span class="filename">nodal.py: Thévenin and effective resistance</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">thevenin_resistance</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">"""Thévenin (effective) resistance between nodes a and b: inject 1 A at a, withdraw it at b, read v_a − v_b."""</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">inj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">inj</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">inj</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">v</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">nodal_solve</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">inj</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">ground</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">v</span><span class="p">[</span><span class="n">b</span><span class="p">])</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">effective_resistance</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="sd">"""The Chapter 3 formula (e_a − e_b)ᵀ L⁺ (e_a − e_b) with the pseudoinverse of the full Laplacian."""</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="n">amat</span> <span class="o">=</span> <span class="n">incidence</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">lap</span> <span class="o">=</span> <span class="n">amat</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">@</span> <span class="n">amat</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">e</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">e</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">lap</span><span class="p">)</span> <span class="o">@</span> <span class="n">e</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Split a node.</strong> <code>split_node_2</code> moves branch <span class="arithmatex">\((2, 4)\)</span> to a new node 6 (busbar B), keeps <span class="arithmatex">\((0, 2)\)</span>, <span class="arithmatex">\((1, 2)\)</span>
+   and the <span class="arithmatex">\(0.5\)</span> A on node 2 (busbar A) and adds the coupler branch <span class="arithmatex">\((2, 6)\)</span> with <span class="arithmatex">\(10^6\)</span> S. The coupler
+   current is <span class="arithmatex">\(0.76608\)</span> A from A to B, across a drop of <span class="arithmatex">\(7.7\cdot10^{-7}\)</span> V. From the <strong>unsplit</strong> solution,
+   the imbalance at A is the flow into A over its two branches plus the injection at A:
+   <span class="arithmatex">\(0.19591 + 0.07018 + 0.5 = 0.76608\)</span> A, and the two agree to <span class="arithmatex">\(10^{-6}\)</span>. They must: in the unsplit network
+   <abbr title="Kirchhoff's current law">KCL</abbr> at node 2 says that whatever enters through <span class="arithmatex">\((0, 2)\)</span>, <span class="arithmatex">\((1, 2)\)</span> and the source leaves through <span class="arithmatex">\((2, 4)\)</span>,
+   and after the split the only way from A to <span class="arithmatex">\((2, 4)\)</span> is the coupler. When the coupler is ideal (zero
+   voltage drop) the split network has the same voltages as the unsplit one, so every other current is
+   unchanged and the coupler simply makes the hidden internal current of node 2 visible. This is the number
+   ToOp computes in <code>_compute_bus_a_imbalance</code> (<a href="#exercise-6">Exercise 6</a>).</p>
+<div class="highlight"><span class="filename">nodal.py: split_node_2</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">split_node_2</span><span class="p">(</span><span class="n">coupler_g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">"""Split node 2 of the lab network into busbar A (branches (0, 2), (1, 2), the 0.5 A) and busbar B (branch (2, 4)).</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Busbar B is a new node 6; a coupler branch (2, 6) of conductance ``coupler_g`` joins them. Returns the coupler</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    current (A to B), the KCL imbalance at A computed from the unsplit solution (flows into A over its branches</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="sd">    plus the injection at A) and the voltage across the coupler.</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="sd">    """</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">FR</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">*</span><span class="n">TO</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="o">*</span><span class="n">G</span><span class="p">,</span> <span class="n">coupler_g</span><span class="p">]</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">fr</span><span class="p">[</span><span class="n">FR</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># branch (2, 4) now leaves busbar B</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">inj</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">INJ</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">v</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">nodal_solve</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">inj</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">_</span><span class="p">,</span> <span class="n">i0</span> <span class="o">=</span> <span class="n">nodal_solve</span><span class="p">(</span><span class="n">FR</span><span class="p">,</span> <span class="n">TO</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">INJ</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">into_a</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i0</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">FR</span><span class="p">))</span> <span class="k">if</span> <span class="n">TO</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># branches (0, 2) and (1, 2) end at A</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'coupler'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="s1">'imbalance_a'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">into_a</span> <span class="o">+</span> <span class="n">INJ</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="s1">'coupler_volts'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">v</span><span class="p">[</span><span class="mi">6</span><span class="p">])}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Keep <code>nodal_solve</code>.</strong> With susceptances <span class="arithmatex">\(b_k = 1/x_k\)</span> in place of conductances, angles in place of
+   voltages and power injections in place of currents, the same function is the DC power flow
+   <span class="arithmatex">\(B\theta = P\)</span> of <a href="../../../part-3-power-systems/ch16-dc-power-flow/">Chapter 16</a>. Nothing to
+   compute here.</p>
+</li>
+</ol>
+<h2 id="exercise-1">Exercise 1<a class="headerlink" href="#exercise-1" title="Permanent link">&para;</a></h2>
+<p>Number the nodes 0 (bottom, ground), 1 (top), 2 (left) and 3 (right); <span class="arithmatex">\(R_1\)</span> joins 1–2, <span class="arithmatex">\(R_2\)</span> joins 1–3,
+<span class="arithmatex">\(R_3\)</span> joins 2–0, <span class="arithmatex">\(R_4\)</span> joins 3–0 and <span class="arithmatex">\(R_5\)</span> is the middle branch 2–3; the source pushes <span class="arithmatex">\(I\)</span> into node 1 and
+takes it from node 0. With <span class="arithmatex">\(g_k = 1/R_k\)</span>, <abbr title="Kirchhoff's current law">KCL</abbr> at the three ungrounded nodes reads</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+g_1 + g_2 &amp; -g_1 &amp; -g_2 \\
+-g_1 &amp; g_1 + g_3 + g_5 &amp; -g_5 \\
+-g_2 &amp; -g_5 &amp; g_2 + g_4 + g_5
+\end{bmatrix}
+\begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix}
+=
+\begin{bmatrix} I \\ 0 \\ 0 \end{bmatrix}.
+\]</div>
+<p>The middle current is <span class="arithmatex">\(g_5 (v_2 - v_3)\)</span>, zero exactly when <span class="arithmatex">\(v_2 = v_3\)</span>. Put <span class="arithmatex">\(v_2 = v_3 = w\)</span> in the second and
+third equations: the <span class="arithmatex">\(g_5\)</span> terms cancel and they become <span class="arithmatex">\(g_1 v_1 = (g_1 + g_3)\, w\)</span> and
+<span class="arithmatex">\(g_2 v_1 = (g_2 + g_4)\, w\)</span>, which are compatible only if <span class="arithmatex">\(g_1 (g_2 + g_4) = g_2 (g_1 + g_3)\)</span>, that is
+<span class="arithmatex">\(g_1 g_4 = g_2 g_3\)</span>, or in resistances</p>
+<div class="arithmatex">\[
+R_1 R_4 = R_2 R_3 \qquad \Big(\tfrac{R_1}{R_3} = \tfrac{R_2}{R_4}\Big).
+\]</div>
+<p>Both arms then divide <span class="arithmatex">\(v_1\)</span> in the same ratio, <span class="arithmatex">\(w = v_1 R_3/(R_1 + R_3) = v_1 R_4/(R_2 + R_4)\)</span>, and the
+condition does not involve <span class="arithmatex">\(R_5\)</span> or <span class="arithmatex">\(I\)</span>: a balanced bridge stays balanced for any middle resistor and any
+source. Numeric check with <code>bridge_currents</code>: <span class="arithmatex">\(R = (100, 200, 50, 100, 1000)\ \Omega\)</span> satisfies
+<span class="arithmatex">\(R_1 R_4 = R_2 R_3 = 10^4\)</span> and gives <span class="arithmatex">\(v_2 - v_3 = 0\)</span> and a middle current of <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(10^{-12}\)</span>; changing <span class="arithmatex">\(R_4\)</span> to
+<span class="arithmatex">\(120\ \Omega\)</span> gives <span class="arithmatex">\(v_2 - v_3 = -3.839\)</span> V and <span class="arithmatex">\(-3.839\)</span> mA through the middle branch.</p>
+<div class="highlight"><span class="filename">wheatstone.py: bridge</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">bridge_currents</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">i_src</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">"""Node voltages and branch currents (R1, R2, R3, R4, R5 order) of the bridge fed by ``i_src`` at node 1."""</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">g</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">return</span> <span class="n">nodal_solve</span><span class="p">(</span><span class="n">BRIDGE_FR</span><span class="p">,</span> <span class="n">BRIDGE_TO</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="n">i_src</span><span class="p">,</span> <span class="n">i_src</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_balanced</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="sd">"""R1 R4 = R2 R3, the condition for zero current in the middle branch."""</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="n">r4</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">r</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r4</span><span class="p">,</span> <span class="n">r2</span> <span class="o">*</span> <span class="n">r3</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="exercise-2">Exercise 2<a class="headerlink" href="#exercise-2" title="Permanent link">&para;</a></h2>
+<p>Resistances <span class="arithmatex">\(R_a = 1\ \Omega\)</span> (node 1 to ground), <span class="arithmatex">\(R_b = 1/2\ \Omega\)</span> (nodes 1–2), <span class="arithmatex">\(R_c = 1/4\ \Omega\)</span>
+(node 2 to ground). Take mesh 1 as the loop of the current source and <span class="arithmatex">\(R_a\)</span>, and mesh 2 as the loop
+<span class="arithmatex">\(R_a\)</span>–<span class="arithmatex">\(R_b\)</span>–<span class="arithmatex">\(R_c\)</span>, both clockwise. The source fixes <span class="arithmatex">\(I_1 = 3\)</span> A; <abbr title="Kirchhoff's voltage law">KVL</abbr> around mesh 2,
+<span class="arithmatex">\(R_a (I_2 - I_1) + R_b I_2 + R_c I_2 = 0\)</span>, gives <span class="arithmatex">\(I_2 = R_a I_1 / (R_a + R_b + R_c) = 3 / 1.75 = 12/7 =
+1.7143\)</span> A. Then <span class="arithmatex">\(v_1 = R_a (I_1 - I_2) = 9/7 = 1.2857\)</span> V and <span class="arithmatex">\(v_2 = R_c I_2 = 3/7 = 0.4286\)</span> V, the voltages of
+the worked example (<span class="arithmatex">\(18/14\)</span> and <span class="arithmatex">\(6/14\)</span>). The mesh currents are the branch currents of step 1: <span class="arithmatex">\(I_1 - I_2 =
+1.2857\)</span> A in the 1 S branch and <span class="arithmatex">\(I_2 = 1.7143\)</span> A in the series pair. In Octave <code>mesh_nodal</code> solves
+<span class="arithmatex">\(G v = i\)</span> and the mesh system <span class="arithmatex">\(R\, I = (I_s, 0)\)</span> and returns both; the Octave test block checks that they
+agree to <span class="arithmatex">\(10^{-12}\)</span>. Nodal analysis needs one equation per ungrounded node (2), mesh analysis one per
+independent loop (2 here, with one trivial because of the current source); for grids with thousands of buses
+and a current-source model of injections the nodal form wins, which is why power flow is nodal.</p>
+<div class="highlight"><span class="filename">mesh_nodal.m</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>v_nodal, v_mesh, i_mesh<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">mesh_nodal</span><span class="p">()</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  <span class="c">% The worked example of Chapter 8 solved twice: by nodal analysis (G v = i) and by mesh analysis.</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="c">% Conductances 1 S (node 1 to ground), 2 S (nodes 1-2), 4 S (node 2 to ground); a 3 A source feeds node 1.</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  <span class="c">% Mesh 1 holds the source and the 1 ohm resistor, so I1 = 3 A; mesh 2 runs through the 1, 1/2 and 1/4 ohm</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  <span class="c">% resistors: KVL gives Ra (I2 - I1) + (Rb + Rc) I2 = 0.</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  <span class="n">G</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="p">];</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  <span class="n">v_nodal</span> <span class="p">=</span> <span class="n">G</span> <span class="o">\</span> <span class="p">[</span><span class="mi">3</span><span class="p">;</span> <span class="mi">0</span><span class="p">];</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  <span class="n">Ra</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">Rb</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="n">Rc</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span> <span class="n">Is</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  <span class="n">R</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span> <span class="o">-</span><span class="n">Ra</span><span class="p">,</span> <span class="n">Ra</span> <span class="o">+</span> <span class="n">Rb</span> <span class="o">+</span> <span class="n">Rc</span><span class="p">];</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  <span class="n">i_mesh</span> <span class="p">=</span> <span class="n">R</span> <span class="o">\</span> <span class="p">[</span><span class="n">Is</span><span class="p">;</span> <span class="mi">0</span><span class="p">];</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>  <span class="n">v_mesh</span> <span class="p">=</span> <span class="p">[</span><span class="n">Ra</span> <span class="o">*</span> <span class="p">(</span><span class="n">i_mesh</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">i_mesh</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span> <span class="n">Rc</span> <span class="o">*</span> <span class="n">i_mesh</span><span class="p">(</span><span class="mi">2</span><span class="p">)];</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="k">end</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c">%!test</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c">%! [v_nodal, v_mesh, i_mesh] = mesh_nodal();</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="c">%! assert(v_nodal, [18 / 14; 6 / 14], 1e-12)</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c">%! assert(v_mesh, v_nodal, 1e-12)</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c">%! assert(i_mesh, [3; 12 / 7], 1e-12)      % 3 A in the source mesh, 1.7143 A through the 2 S and 4 S branches</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="c">%! assert(i_mesh(1) - i_mesh(2), v_nodal(1) * 1, 1e-12)   % current in the 1 S branch</span>
+</code></pre></div>
+<h2 id="exercise-3">Exercise 3<a class="headerlink" href="#exercise-3" title="Permanent link">&para;</a></h2>
+<p><span class="arithmatex">\(u^\top j = (Av)^\top j = v^\top (A^\top j) = v^\top i\)</span>: two lines, using only <span class="arithmatex">\(u = Av\)</span> (<abbr title="Kirchhoff's voltage law">KVL</abbr>, the branch
+voltages are differences of node potentials) and <span class="arithmatex">\(A^\top j = i\)</span> (<abbr title="Kirchhoff's current law">KCL</abbr>). Nothing relates <span class="arithmatex">\(u\)</span> to <span class="arithmatex">\(j\)</span>: they may
+come from different circuits on the same graph, and the theorem still holds. For the power balance take
+<span class="arithmatex">\(j = i_\text{branch} = \operatorname{diag}(g)\, Av\)</span> of the same network: <span class="arithmatex">\(u^\top j = (Av)^\top
+\operatorname{diag}(g)\, (Av) = \sum_k g_k (Av)_k^2\)</span>, the Joule power, while <span class="arithmatex">\(v^\top i\)</span> is the power delivered
+by the sources (ground included, at potential 0). So <span class="arithmatex">\(\sum_k g_k (Av)_k^2 = v^\top i\)</span>, which is lab step 2.
+<code>tellegen_check</code> runs the stronger statement: the voltages of the lab network (<span class="arithmatex">\(g = 10, 5, 8, 4, 6, 3, 2\)</span> S)
+and the currents of a unit-conductance network with the same injections give <span class="arithmatex">\(u^\top j = 0.647271\)</span> W <span class="arithmatex">\(=
+v^\top i\)</span>; with random conductances for the second network the two sides still agree to <span class="arithmatex">\(10^{-12}\)</span>.</p>
+<div class="highlight"><span class="filename">wheatstone.py: tellegen_check</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tellegen_check</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">inj</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">g_other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">"""uᵀ j against vᵀ i, with u = A v from the network ``g`` and j the branch currents of a network ``g_other``.</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="sd">    Both networks share the graph and the injections, so j satisfies Aᵀ j = i although it belongs to another</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sd">    circuit; Tellegen's theorem says the two numbers agree anyway.</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="sd">    """</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">v</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">nodal_solve</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">inj</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">_</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">nodal_solve</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">g_other</span><span class="p">,</span> <span class="n">inj</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">u</span> <span class="o">=</span> <span class="n">incidence</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">@</span> <span class="n">v</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">u</span> <span class="o">@</span> <span class="n">j</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">inj</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="exercise-4">Exercise 4<a class="headerlink" href="#exercise-4" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(L = A^\top \operatorname{diag}(g) A\)</span> be the full Laplacian and <span class="arithmatex">\(i\)</span> a balanced injection vector
+(<span class="arithmatex">\(\mathbf 1^\top i = 0\)</span>, the ground node's share included). Grounding node <span class="arithmatex">\(r\)</span> means solving <span class="arithmatex">\(Lv = i\)</span> with
+<span class="arithmatex">\(v_r = 0\)</span>; grounding node <span class="arithmatex">\(s\)</span> means solving the same <span class="arithmatex">\(Lv' = i\)</span> with <span class="arithmatex">\(v'_s = 0\)</span>. The null space of <span class="arithmatex">\(L\)</span> of a
+connected network is spanned by <span class="arithmatex">\(\mathbf 1\)</span> (<a href="../../../part-1-math/ch02-linear-algebra/">Chapter 2</a>), so
+every solution of <span class="arithmatex">\(Lv = i\)</span> is <span class="arithmatex">\(v + c\mathbf 1\)</span> for one constant <span class="arithmatex">\(c\)</span>: <span class="arithmatex">\(v' = v - v_s \mathbf 1\)</span>. All voltages
+shift by the same constant and <span class="arithmatex">\(u = Av' = Av - v_s A\mathbf 1 = Av\)</span> because each row of <span class="arithmatex">\(A\)</span> sums to zero, so
+every branch current <span class="arithmatex">\(g \odot u\)</span> is unchanged. Check with <code>nodal_solve</code> (ground 0, then 3): the voltages
+become <span class="arithmatex">\((0.08889, 0.05848, 0.04971, 0, -0.07797, -0.57797)\)</span> V, each exactly <span class="arithmatex">\(0.08889\)</span> V <span class="arithmatex">\(= -v_3\)</span> above the
+ground-0 solution, and the branch currents agree to <span class="arithmatex">\(2\cdot10^{-16}\)</span>. The condition "balanced" matters: the
+solver ignores the injection at the ground node, so if the injections of the other nodes do not sum to the
+negative of the ground's, grounding another node changes the problem (a different node then supplies the
+balance) and the currents do change. That is why <code>INJ</code> in <code>nodal.py</code> lists the <span class="arithmatex">\(+0.5\)</span> A of node 0.</p>
+<h2 id="exercise-5">Exercise 5<a class="headerlink" href="#exercise-5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Coupler conductance</th>
+<th>Coupler current</th>
+<th>Voltage across the coupler</th>
+<th>Departure from <span class="arithmatex">\(0.76608\)</span> A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(10^6\)</span> S</td>
+<td><span class="arithmatex">\(0.76608\)</span> A</td>
+<td><span class="arithmatex">\(7.7\cdot10^{-7}\)</span> V</td>
+<td><span class="arithmatex">\(&lt; 10^{-6}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^3\)</span> S</td>
+<td><span class="arithmatex">\(0.76517\)</span> A</td>
+<td><span class="arithmatex">\(7.7\cdot10^{-4}\)</span> V</td>
+<td><span class="arithmatex">\(-0.12\ \%\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span> S</td>
+<td><span class="arithmatex">\(0.68443\)</span> A</td>
+<td><span class="arithmatex">\(0.068\)</span> V</td>
+<td><span class="arithmatex">\(-10.7\ \%\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The <abbr title="Kirchhoff's current law">KCL</abbr> argument of lab step 5 assumes that A and B are at the same potential, so that the split network has
+the unsplit voltages and only the hidden internal current of node 2 becomes visible. A coupler of finite
+conductance <span class="arithmatex">\(g_c\)</span> is a resistor in series with branch <span class="arithmatex">\((2, 4)\)</span>: the path from A to node 4 now has resistance
+<span class="arithmatex">\(1/6 + 1/g_c\)</span> instead of <span class="arithmatex">\(1/6\ \Omega\)</span>, so less current takes it (<span class="arithmatex">\(0.684\)</span> A at <span class="arithmatex">\(10\)</span> S, where the coupler adds
+<span class="arithmatex">\(0.1\ \Omega\)</span> to <span class="arithmatex">\(0.167\ \Omega\)</span>) and more leaves A through <span class="arithmatex">\((0, 2)\)</span> and <span class="arithmatex">\((1, 2)\)</span>; the potentials of every
+node move, and the "imbalance at A" of the unsplit solution no longer describes the coupler. At <span class="arithmatex">\(10^3\)</span> S
+the extra <span class="arithmatex">\(1\)</span> m<span class="arithmatex">\(\Omega\)</span> is <span class="arithmatex">\(0.6\ \%\)</span> of the path and the error is <span class="arithmatex">\(0.12\ \%\)</span>; at <span class="arithmatex">\(10^6\)</span> S it is invisible.
+ToOp's update after a split (<a href="../../../part-3-power-systems/ch18-sensitivity-factors-2/">Chapter 18</a>) uses
+the unsplit flows and the imbalance formula, which is exact only for a <strong>closed, ideal</strong> coupler: a closed
+coupler in a real substation is a busbar section with a negligible impedance, so the assumption holds; an
+open coupler is the opposite case (the two busbars become two buses with no flow between them), handled as
+a different topology, not as a weak coupler. <code>split_node_2(coupler_g)</code> prints the table.</p>
+<h2 id="exercise-6">Exercise 6<a class="headerlink" href="#exercise-6" title="Permanent link">&para;</a></h2>
+<p><code>_compute_bus_a_imbalance</code> in <code>toop_engine_dc_solver/jax/cross_coupler_flow.py</code> (ToOp commit <code>ba1874e</code>)
+computes, per timestep,</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>imbalance_a = sum(flows[branch_to_a]) - sum(flows[branch_from_a]) + bus_a_injection
+</code></pre></div>
+<p>and returns it as the cross-coupler flow, zeroing it when the substation index is out of range or when the
+configuration mask puts no branch on busbar A (<code>jnp.all(~substation_configuration)</code>). Term by term against lab
+step 5:</p>
+<table>
+<thead>
+<tr>
+<th>ToOp</th>
+<th>Lab step 5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flows</code> (timesteps × branches, "potentially already updated by previous splits")</td>
+<td>the branch currents <span class="arithmatex">\(i = g \odot (Av)\)</span> of the <strong>unsplit</strong> solution</td>
+</tr>
+<tr>
+<td><code>branch_to_a</code>: branches whose flow direction is towards bus A</td>
+<td>branches <span class="arithmatex">\((0, 2)\)</span> and <span class="arithmatex">\((1, 2)\)</span>, whose <code>to</code> end is node 2: <span class="arithmatex">\(0.19591 + 0.07018\)</span> A</td>
+</tr>
+<tr>
+<td><code>branch_from_a</code>: branches whose flow direction is away from bus A</td>
+<td>none here (branch <span class="arithmatex">\((2, 4)\)</span> leaves from node 2 but is assigned to busbar B)</td>
+</tr>
+<tr>
+<td><code>bus_a_injection</code>: net power injection assigned to bus A</td>
+<td>the <span class="arithmatex">\(0.5\)</span> A kept on busbar A</td>
+</tr>
+<tr>
+<td><code>substation_configuration</code> (<code>True</code> = branch on bus A)</td>
+<td>the choice <span class="arithmatex">\(\{(0, 2), (1, 2)\} \to\)</span> A, <span class="arithmatex">\(\{(2, 4)\} \to\)</span> B</td>
+</tr>
+<tr>
+<td><code>imbalance_a</code></td>
+<td>the coupler current <span class="arithmatex">\(0.76608\)</span> A from A to B</td>
+</tr>
+<tr>
+<td><code>.get(mode='fill', fill_value=0.0)</code> on padded indices</td>
+<td>substations have different numbers of branches; the padding entries contribute 0</td>
+</tr>
+</tbody>
+</table>
+<p>"Towards A" and "away from A" refer to the orientation of each branch (its <code>fr</code>/<code>to</code> convention), not to the
+sign of the flow, exactly as the lab sums signed currents <span class="arithmatex">\(i_k\)</span> with the sign of <span class="arithmatex">\(A\)</span>. The function works in
+power (MW) where the lab works in amperes, and over many timesteps at once (the <code>axis=1</code> sums), but the
+formula is the <abbr title="Kirchhoff's current law">KCL</abbr> of lab step 5 and nothing more: with the flows of the unsplit grid it is exact for a closed
+ideal coupler (<a href="#exercise-5">Exercise 5</a>), and <a href="../../../part-3-power-systems/ch18-sensitivity-factors-2/">Chapter 18</a>
+shows how this one number then updates every other flow.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

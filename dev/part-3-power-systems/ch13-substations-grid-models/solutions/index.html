@@ -1,0 +1,2857 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/dev/part-3-power-systems/ch13-substations-grid-models/solutions/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Chapter 13 – Solutions - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-13-solutions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 13 – Solutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-13-solutions">Chapter 13 – Solutions<a class="headerlink" href="#chapter-13-solutions" title="Permanent link">&para;</a></h1>
+<p>Solutions of the Lab and the Exercises of <a href="../">Chapter 13</a>. Try each task before reading its solution. The
+code is in the chapter's <code>src</code> folder: <a href="../src/coupler_splits.py"><code>coupler_splits.py</code></a> (the worked example),
+<a href="../src/reassignment_distance.py"><code>reassignment_distance.py</code></a> (Exercise 4 and the station used in the Lab),
+<a href="../src/ring_splits.py"><code>ring_splits.py</code></a> (Exercise 3), <a href="../src/four_substations.py"><code>four_substations.py</code></a> (Exercise 5)
+and <a href="../src/station_toop.py"><code>station_toop.py</code></a>, which runs ToOp's own <code>prepare_for_separation_set</code>,
+<code>make_optimal_separation_set</code> and <code>per_station_switching_distance</code> (Lab steps 1–4; ToOp's interpreter only). The
+ToOp numbers were produced with ToOp <code>ba1874e</code> on CPU; each module's <code>main()</code> prints every number quoted below.</p>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<p>The lab names the interactive ToOp notebook <code>notebooks/example_asset_topology_analysis.ipynb</code>. Its widgets and
+single-line diagrams need a browser session and are <em>not run here</em>; the same materialization of a node-breaker
+network into ToOp's bus groups, without widgets, is what <code>station_toop.four_substations_bus_groups</code> does, with
+the functions the notebook itself imports (<code>get_node_breaker_master_asset_topology</code>,
+<code>materialize_runtime_bus_groups_from_network_state</code>). The network is pypowsybl's four-substations node-breaker
+example, the one Exercise 5 also uses.</p>
+<ol>
+<li>
+<p><strong>Node-breaker graph of a voltage level.</strong> The five voltage levels of the example become five bus groups. Four
+   of them (S1VL1, S2VL1, S3VL1, S4VL1) have a single busbar section and no coupler: ToOp logs "No couplers found
+   in the substation" and they cannot be split. S1VL2, the 400 kV level of substation S1, is a double busbar:</p>
+<table>
+<thead>
+<tr>
+<th>busbar</th>
+<th>int_id</th>
+<th>bays closed onto it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>S1VL2_BBS1</code></td>
+<td>0</td>
+<td><code>TWT</code> (branch), <code>GH1</code>, <code>GH2</code>, <code>GH3</code>, <code>SHUNT</code></td>
+</tr>
+<tr>
+<td><code>S1VL2_BBS2</code></td>
+<td>1</td>
+<td><code>LCC1</code>, <code>LD2</code>, <code>LD3</code>, <code>LD4</code>, <code>VSC1</code></td>
+</tr>
+</tbody>
+</table>
+<p>joined by the coupler <code>S1VL2_COUPLER</code> (a breaker, closed, between int_ids 0 and 1, with a disconnector on each
+side). Every bay is a breaker plus one busbar disconnector per busbar section (the 33 switches of Exercise 5).
+In the single-line diagram the two horizontal busbar sections, the coupler between them and the ten bays
+hanging from them are exactly these objects; the bus-branch model sees one bus (the coupler is closed) with
+one branch and nine injections.</p>
+</li>
+<li>
+<p><strong>Coupler states by hand.</strong> S1VL2 has one coupler and two busbars, so <span class="arithmatex">\(2^1 = 2\)</span> states: coupler closed, one
+   electrical busbar (the current state, skipped); coupler open, two electrical busbars <span class="arithmatex">\(\{\text{BBS1}\} \mid
+   \{\text{BBS2}\}\)</span>. One candidate. For the worked example's chain of four busbars and three closed couplers,
+   <code>coupler_splits.two_node_configurations</code> lists the three states with exactly one coupler open: open <span class="arithmatex">\(c_{01}\)</span>
+   gives <span class="arithmatex">\(\{b_0\} \mid \{b_1 b_2 b_3\}\)</span>, open <span class="arithmatex">\(c_{12}\)</span> gives <span class="arithmatex">\(\{b_0 b_1\} \mid \{b_2 b_3\}\)</span>, open <span class="arithmatex">\(c_{23}\)</span> gives
+   <span class="arithmatex">\(\{b_0 b_1 b_2\} \mid \{b_3\}\)</span>. With six line bays L0, L1 on <span class="arithmatex">\(b_0\)</span>, L2 on <span class="arithmatex">\(b_1\)</span>, L3 on <span class="arithmatex">\(b_2\)</span> and L4, L5 on <span class="arithmatex">\(b_3\)</span>
+   (<code>reassignment_distance.ASSET_BUSBAR</code>), the candidates are A = {L0 L1} | B = {L2 L3 L4 L5}, A = {L0 L1 L2} |
+   B = {L3 L4 L5} and A = {L0 L1 L2 L3} | B = {L4 L5}.</p>
+</li>
+<li>
+<p><strong>ToOp's separation set.</strong> <code>station_toop.separation</code> runs <code>prepare_for_separation_set</code> (nothing to fix:
+   <code>StationProblems</code> is empty for both stations) and <code>make_optimal_separation_set</code>. For S1VL2 the separation set
+   has shape (1, 2, 1): one configuration, two busbars, one <em>branch</em> asset (the table covers the branches, <code>TWT</code>
+   on bus A, so <code>[[1], [0]]</code>), with <code>coupler_states = [[True]]</code> (the coupler must be open), <code>busbar_a = [{0}]</code> and
+   <code>coupler_distance = [1]</code>, since the coupler is closed today. For the chain station the set has three
+   configurations, in ToOp's order the same three splits as the hand enumeration (the script checks every row
+   against <code>coupler_splits</code>, mirror images allowed, and prints <code>same candidates as coupler_splits: True</code>):</p>
+<table>
+<thead>
+<tr>
+<th>coupler state (True = open)</th>
+<th>busbars in A</th>
+<th>bus A</th>
+<th>bus B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(c_{01}\)</span> open</td>
+<td>{0}</td>
+<td>L0 L1</td>
+<td>L2 L3 L4 L5</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c_{12}\)</span> open</td>
+<td>{0, 1}</td>
+<td>L0 L1 L2</td>
+<td>L3 L4 L5</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c_{23}\)</span> open</td>
+<td>{0, 1, 2}</td>
+<td>L0 L1 L2 L3</td>
+<td>L4 L5</td>
+</tr>
+</tbody>
+</table>
+<p><code>make_optimal_separation_set</code> removes nothing: the three rows are distinct even up to the A/B mirror, and
+with fewer than <code>clip_at_size = 100</code> rows no Hamming clipping applies.</p>
+</li>
+<li>
+<p><strong>Switching distance of a target.</strong> All couplers are closed today (<code>current_coupler_state = [F, F, F]</code>).
+   <code>station_toop.switching_distance</code> calls <code>per_station_switching_distance</code>; the pure NumPy
+   <code>reassignment_distance.reassignment_distance</code> gives the same reassignment count in every case:</p>
+<table>
+<thead>
+<tr>
+<th>target (True = on bus B)</th>
+<th>best configuration</th>
+<th>inverted</th>
+<th>reassignment</th>
+<th>coupler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L3 L4 L5 on B</td>
+<td>1 (<span class="arithmatex">\(c_{12}\)</span> open)</td>
+<td>no</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>L3 L4 on B, L5 on A</td>
+<td>1 (<span class="arithmatex">\(c_{12}\)</span> open)</td>
+<td>no</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>L0 L1 L2 on B (the mirror of the first)</td>
+<td>1 (<span class="arithmatex">\(c_{12}\)</span> open)</td>
+<td>yes</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>By hand: the first target <em>is</em> the second candidate, so no bay changes busbar, and the only physical
+operation is opening <span class="arithmatex">\(c_{12}\)</span>, one coupler switching. In the second target L5 must leave the group of
+<span class="arithmatex">\(b_3\)</span> for the other side: its connection to a bus-B busbar is opened and a connection to a bus-A busbar is
+closed, two reassignment operations, plus the coupler. The third target is the first one with the names A
+and B exchanged; without the swap it would cost 12 (every one of the six bays on both rows), with it ToOp
+reports <code>invert = True</code> and distance 0, which is the reason the minimum over both labelings exists.</p>
+<div class="highlight"><span class="filename">station_toop.py</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="sd">"""ToOp's separation set and switching distance for two stations (Chapter 13, Lab steps 1–4).</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sd">Runs with ToOp's interpreter only. The first station is the worked example's chain of four busbars and three</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">couplers with six line bays (the same station as ``reassignment_distance.py``), built here as a ``RuntimeBusGroup``</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">by hand. The second is voltage level S1VL2 of pypowsybl's four-substations node-breaker network, the double-busbar</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">level with one coupler, materialized with the same ToOp functions as ``notebooks/example_asset_topology_analysis``.</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">"""</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">replace</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pypowsybl</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pp</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="kn">from</span><span class="w"> </span><span class="nn">reassignment_distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASSET_BUSBAR</span><span class="p">,</span> <span class="n">ASSET_NAMES</span><span class="p">,</span> <span class="n">N_BUSBARS</span><span class="p">,</span> <span class="n">asset_table</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">reassignment_distance</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_dc_solver.preprocess.helpers.switching_distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">per_station_switching_distance</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_dc_solver.preprocess.preprocess_switching</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">OptimalSeparationSetInfo</span><span class="p">,</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">make_optimal_separation_set</span><span class="p">,</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">prepare_for_separation_set</span><span class="p">,</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">)</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_grid_helpers.powsybl.example_grids</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_default_network_masks</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_grid_helpers.powsybl.powsybl_asset_topo</span><span class="w"> </span><span class="kn">import</span> <span class="n">materialize_runtime_bus_groups_from_network_state</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_grid_helpers.powsybl.powsybl_station_to_graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_node_breaker_master_asset_topology</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_interfaces.asset_topology.assets_runtime</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">RuntimeBranchAsset</span><span class="p">,</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">RuntimeBusbar</span><span class="p">,</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="n">RuntimeBusbarCoupler</span><span class="p">,</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="p">)</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_interfaces.asset_topology.runtime_topology</span><span class="w"> </span><span class="kn">import</span> <span class="n">RuntimeAssetConnection</span><span class="p">,</span> <span class="n">RuntimeBusGroup</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="kn">from</span><span class="w"> </span><span class="nn">toop_engine_interfaces.messages.preprocess.preprocess_commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">AreaSettings</span><span class="p">,</span> <span class="n">CgmesImporterParameters</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="n">CHAIN_COUPLERS</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="k">def</span><span class="w"> </span><span class="nf">chain_station</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RuntimeBusGroup</span><span class="p">:</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">    </span><span class="sd">"""The worked example as a ToOp bus group: busbars b0..b3, closed breakers c01, c12, c23, six line bays."""</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="n">busbars</span> <span class="o">=</span> <span class="p">[</span><span class="n">RuntimeBusbar</span><span class="p">(</span><span class="n">grid_model_id</span><span class="o">=</span><span class="sa">f</span><span class="s1">'b</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">int_id</span><span class="o">=</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_BUSBARS</span><span class="p">)]</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="n">couplers</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="n">RuntimeBusbarCoupler</span><span class="p">(</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>            <span class="n">grid_model_id</span><span class="o">=</span><span class="sa">f</span><span class="s1">'c</span><span class="si">{</span><span class="n">a</span><span class="si">}{</span><span class="n">b</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">coupler_type</span><span class="o">=</span><span class="s1">'BREAKER'</span><span class="p">,</span> <span class="n">busbar_from_id</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">busbar_to_id</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="nb">open</span><span class="o">=</span><span class="kc">False</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="p">)</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">CHAIN_COUPLERS</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    <span class="p">]</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="n">branches</span> <span class="o">=</span> <span class="p">[</span><span class="n">RuntimeAssetConnection</span><span class="p">(</span><span class="n">asset</span><span class="o">=</span><span class="n">RuntimeBranchAsset</span><span class="p">(</span><span class="n">grid_model_id</span><span class="o">=</span><span class="n">name</span><span class="p">))</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">ASSET_NAMES</span><span class="p">]</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="k">return</span> <span class="n">RuntimeBusGroup</span><span class="p">(</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="n">bus_group_id</span><span class="o">=</span><span class="s1">'chain'</span><span class="p">,</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>        <span class="n">busbars</span><span class="o">=</span><span class="n">busbars</span><span class="p">,</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="n">couplers</span><span class="o">=</span><span class="n">couplers</span><span class="p">,</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>        <span class="n">branch_connections</span><span class="o">=</span><span class="n">branches</span><span class="p">,</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>        <span class="n">injection_connections</span><span class="o">=</span><span class="p">[],</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>        <span class="n">branch_switching_table</span><span class="o">=</span><span class="n">asset_table</span><span class="p">(</span><span class="n">ASSET_BUSBAR</span><span class="p">,</span> <span class="n">N_BUSBARS</span><span class="p">),</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>        <span class="n">injection_switching_table</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N_BUSBARS</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="p">)</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="k">def</span><span class="w"> </span><span class="nf">four_substations_bus_groups</span><span class="p">(</span><span class="n">folder</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RuntimeBusGroup</span><span class="p">]:</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="w">    </span><span class="sd">"""The runtime bus groups of pypowsybl's four-substations network, one per voltage level.</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="sd">    The network is saved as XIIDM into ``folder`` because ToOp's importer parameters name a grid file; every</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="sd">    substation is marked relevant so that each voltage level becomes a bus group.</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a><span class="sd">    """</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>    <span class="n">net</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">create_four_substations_node_breaker_network</span><span class="p">()</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>    <span class="n">grid</span> <span class="o">=</span> <span class="n">folder</span> <span class="o">/</span> <span class="s1">'four_substations.xiidm'</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    <span class="n">net</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">grid</span><span class="p">))</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    <span class="n">masks</span> <span class="o">=</span> <span class="n">create_default_network_masks</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>    <span class="n">masks</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>        <span class="n">masks</span><span class="p">,</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>        <span class="n">relevant_subs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">get_buses</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>        <span class="n">busbar_for_nminus1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">get_busbar_sections</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>    <span class="p">)</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    <span class="n">parameters</span> <span class="o">=</span> <span class="n">CgmesImporterParameters</span><span class="p">(</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>        <span class="n">area_settings</span><span class="o">=</span><span class="n">AreaSettings</span><span class="p">(</span><span class="n">control_area</span><span class="o">=</span><span class="p">[</span><span class="s1">''</span><span class="p">],</span> <span class="n">view_area</span><span class="o">=</span><span class="p">[</span><span class="s1">''</span><span class="p">],</span> <span class="n">nminus1_area</span><span class="o">=</span><span class="p">[</span><span class="s1">''</span><span class="p">],</span> <span class="n">cutoff_voltage</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>        <span class="n">data_folder</span><span class="o">=</span><span class="n">folder</span><span class="p">,</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>        <span class="n">grid_model_file</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>    <span class="p">)</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>    <span class="n">master</span> <span class="o">=</span> <span class="n">get_node_breaker_master_asset_topology</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">net</span><span class="p">,</span> <span class="n">network_masks</span><span class="o">=</span><span class="n">masks</span><span class="p">,</span> <span class="n">importer_parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>    <span class="k">return</span> <span class="n">materialize_runtime_bus_groups_from_network_state</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">net</span><span class="p">,</span> <span class="n">master_data</span><span class="o">=</span><span class="n">master</span><span class="p">)</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>
+<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a><span class="k">def</span><span class="w"> </span><span class="nf">separation</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">RuntimeBusGroup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OptimalSeparationSetInfo</span><span class="p">:</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a><span class="w">    </span><span class="sd">"""Prepare a bus group and build its optimal separation set, as ToOp's preprocessing does."""</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>    <span class="n">branch_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">asset</span><span class="o">.</span><span class="n">grid_model_id</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">branch_connections</span><span class="p">]</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>    <span class="n">injection_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">asset</span><span class="o">.</span><span class="n">grid_model_id</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">injection_connections</span><span class="p">]</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>    <span class="n">simplified</span><span class="p">,</span> <span class="n">_problems</span> <span class="o">=</span> <span class="n">prepare_for_separation_set</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">branch_ids</span><span class="p">,</span> <span class="n">injection_ids</span><span class="p">)</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>    <span class="k">return</span> <span class="n">make_optimal_separation_set</span><span class="p">(</span><span class="n">simplified</span><span class="p">)</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>
+<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a><span class="k">def</span><span class="w"> </span><span class="nf">switching_distance</span><span class="p">(</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>    <span class="n">info</span><span class="p">:</span> <span class="n">OptimalSeparationSetInfo</span><span class="p">,</span> <span class="n">current_coupler_state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a><span class="w">    </span><span class="sd">"""Best configuration, whether A and B were swapped, reassignment distance and coupler distance of a target."""</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a>    <span class="n">best</span><span class="p">,</span> <span class="n">invert</span><span class="p">,</span> <span class="n">reassignment</span><span class="p">,</span> <span class="n">coupler</span> <span class="o">=</span> <span class="n">per_station_switching_distance</span><span class="p">(</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a>        <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a>        <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">current_coupler_state</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a>        <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">separation_set</span><span class="p">),</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>        <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">coupler_states</span><span class="p">),</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>    <span class="p">)</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">best</span><span class="p">),</span> <span class="nb">bool</span><span class="p">(</span><span class="n">invert</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">reassignment</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coupler</span><span class="p">)</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a>
+<a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a>
+<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a><span class="k">def</span><span class="w"> </span><span class="nf">describe_group</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">RuntimeBusGroup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a><span class="w">    </span><span class="sd">"""One line per busbar, coupler and asset of a bus group."""</span>
+<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a>    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'bus group </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">bus_group_id</span><span class="si">}</span><span class="s1"> (voltage level </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">voltage_level_id</span><span class="si">}</span><span class="s1">)'</span><span class="p">]</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a>    <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'  busbar </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">grid_model_id</span><span class="si">}</span><span class="s1"> (int_id </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">int_id</span><span class="si">}</span><span class="s1">)'</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">busbars</span><span class="p">]</span>
+<a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a>    <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span>
+<a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a>        <span class="sa">f</span><span class="s1">'  coupler </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">grid_model_id</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">coupler_type</span><span class="si">}</span><span class="s1"> b</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">busbar_from_id</span><span class="si">}</span><span class="s1">-b</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">busbar_to_id</span><span class="si">}</span><span class="s1"> open=</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">open</span><span class="si">}</span><span class="s1">'</span>
+<a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">couplers</span>
+<a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a>    <span class="p">]</span>
+<a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a>    <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">busbar</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">asset_switching_table</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">busbars</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a>        <span class="n">assets</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">grid_model_id</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">on</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">assets</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">on</span><span class="p">]</span>
+<a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a>        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">'  on </span><span class="si">{</span><span class="n">busbar</span><span class="o">.</span><span class="n">grid_model_id</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">assets</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a>    <span class="k">return</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a>
+<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a>
+<a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">folder</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a><span class="w">    </span><span class="sd">"""Print the bus groups of the four-substations network, the separation sets and the switching distances."""</span>
+<a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a>    <span class="n">groups</span> <span class="o">=</span> <span class="n">four_substations_bus_groups</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+<a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a>    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+<a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">describe_group</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+<a id="__codelineno-0-123" name="__codelineno-0-123" href="#__codelineno-0-123"></a>    <span class="n">s1vl2</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span> <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">voltage_level_id</span> <span class="o">==</span> <span class="s1">'S1VL2'</span><span class="p">)</span>
+<a id="__codelineno-0-124" name="__codelineno-0-124" href="#__codelineno-0-124"></a>    <span class="n">info</span> <span class="o">=</span> <span class="n">separation</span><span class="p">(</span><span class="n">s1vl2</span><span class="p">)</span>
+<a id="__codelineno-0-125" name="__codelineno-0-125" href="#__codelineno-0-125"></a>    <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-0-126" name="__codelineno-0-126" href="#__codelineno-0-126"></a>        <span class="s1">'S1VL2 separation set'</span><span class="p">,</span>
+<a id="__codelineno-0-127" name="__codelineno-0-127" href="#__codelineno-0-127"></a>        <span class="n">info</span><span class="o">.</span><span class="n">separation_set</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+<a id="__codelineno-0-128" name="__codelineno-0-128" href="#__codelineno-0-128"></a>        <span class="s1">'coupler states'</span><span class="p">,</span>
+<a id="__codelineno-0-129" name="__codelineno-0-129" href="#__codelineno-0-129"></a>        <span class="n">info</span><span class="o">.</span><span class="n">coupler_states</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130" href="#__codelineno-0-130"></a>    <span class="p">)</span>
+<a id="__codelineno-0-131" name="__codelineno-0-131" href="#__codelineno-0-131"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'S1VL2 busbar A'</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">busbar_a</span><span class="p">,</span> <span class="s1">'coupler distance'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">coupler_distance</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<a id="__codelineno-0-132" name="__codelineno-0-132" href="#__codelineno-0-132"></a>
+<a id="__codelineno-0-133" name="__codelineno-0-133" href="#__codelineno-0-133"></a>    <span class="n">chain</span> <span class="o">=</span> <span class="n">chain_station</span><span class="p">()</span>
+<a id="__codelineno-0-134" name="__codelineno-0-134" href="#__codelineno-0-134"></a>    <span class="n">info</span> <span class="o">=</span> <span class="n">separation</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+<a id="__codelineno-0-135" name="__codelineno-0-135" href="#__codelineno-0-135"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'chain: configurations'</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">separation_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'coupler states (True = open):'</span><span class="p">)</span>
+<a id="__codelineno-0-136" name="__codelineno-0-136" href="#__codelineno-0-136"></a>    <span class="k">for</span> <span class="n">state</span><span class="p">,</span> <span class="n">group_a</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">coupler_states</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">busbar_a</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">separation_set</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<a id="__codelineno-0-137" name="__codelineno-0-137" href="#__codelineno-0-137"></a>        <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">on</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ASSET_NAMES</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">on</span><span class="p">]</span>
+<a id="__codelineno-0-138" name="__codelineno-0-138" href="#__codelineno-0-138"></a>        <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">on</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ASSET_NAMES</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">on</span><span class="p">]</span>
+<a id="__codelineno-0-139" name="__codelineno-0-139" href="#__codelineno-0-139"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'  open </span><span class="si">{</span><span class="n">state</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s1"> busbars A </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">group_a</span><span class="p">)</span><span class="si">}</span><span class="s1">: A = </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">, B = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-0-140" name="__codelineno-0-140" href="#__codelineno-0-140"></a>    <span class="n">mine</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">(</span><span class="n">CHAIN_COUPLERS</span><span class="p">,</span> <span class="n">ASSET_BUSBAR</span><span class="p">)</span>
+<a id="__codelineno-0-141" name="__codelineno-0-141" href="#__codelineno-0-141"></a>    <span class="n">same</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">any</span><span class="p">((</span><span class="n">row</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">or</span> <span class="p">(</span><span class="n">row</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mine</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">info</span><span class="o">.</span><span class="n">separation_set</span><span class="p">)</span>
+<a id="__codelineno-0-142" name="__codelineno-0-142" href="#__codelineno-0-142"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'chain: same candidates as coupler_splits:'</span><span class="p">,</span> <span class="n">same</span><span class="p">)</span>
+<a id="__codelineno-0-143" name="__codelineno-0-143" href="#__codelineno-0-143"></a>    <span class="n">closed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">CHAIN_COUPLERS</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<a id="__codelineno-0-144" name="__codelineno-0-144" href="#__codelineno-0-144"></a>    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="p">(</span>
+<a id="__codelineno-0-145" name="__codelineno-0-145" href="#__codelineno-0-145"></a>        <span class="p">(</span><span class="s1">'L3 L4 L5 on B'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)),</span>
+<a id="__codelineno-0-146" name="__codelineno-0-146" href="#__codelineno-0-146"></a>        <span class="p">(</span><span class="s1">'L3 L4 on B (L5 moves)'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)),</span>
+<a id="__codelineno-0-147" name="__codelineno-0-147" href="#__codelineno-0-147"></a>        <span class="p">(</span><span class="s1">'L0 L1 L2 on B (mirror)'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)),</span>
+<a id="__codelineno-0-148" name="__codelineno-0-148" href="#__codelineno-0-148"></a>    <span class="p">):</span>
+<a id="__codelineno-0-149" name="__codelineno-0-149" href="#__codelineno-0-149"></a>        <span class="n">best</span><span class="p">,</span> <span class="n">invert</span><span class="p">,</span> <span class="n">reassignment</span><span class="p">,</span> <span class="n">coupler</span> <span class="o">=</span> <span class="n">switching_distance</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">closed</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<a id="__codelineno-0-150" name="__codelineno-0-150" href="#__codelineno-0-150"></a>        <span class="n">numpy_best</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">reassignment_distance</span><span class="p">(</span><span class="n">mine</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<a id="__codelineno-0-151" name="__codelineno-0-151" href="#__codelineno-0-151"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'target </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s1">: best </span><span class="si">{</span><span class="n">best</span><span class="si">}</span><span class="s1">, invert </span><span class="si">{</span><span class="n">invert</span><span class="si">}</span><span class="s1">, reassignment </span><span class="si">{</span><span class="n">reassignment</span><span class="si">}</span><span class="s1">, coupler </span><span class="si">{</span><span class="n">coupler</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-0-152" name="__codelineno-0-152" href="#__codelineno-0-152"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'  numpy reassignment_distance: </span><span class="si">{</span><span class="n">numpy_best</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-0-153" name="__codelineno-0-153" href="#__codelineno-0-153"></a>
+<a id="__codelineno-0-154" name="__codelineno-0-154" href="#__codelineno-0-154"></a>
+<a id="__codelineno-0-155" name="__codelineno-0-155" href="#__codelineno-0-155"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a id="__codelineno-0-156" name="__codelineno-0-156" href="#__codelineno-0-156"></a>    <span class="n">main</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()))</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch13-substations-grid-models/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+</li>
+</ol>
+<h2 id="exercise-1">Exercise 1<a class="headerlink" href="#exercise-1" title="Permanent link">&para;</a></h2>
+<p>The station: two busbars BB1 and BB2, four line bays L1–L4 and one coupler bay. In a double-busbar,
+single-breaker arrangement each line bay has one circuit breaker CB and two busbar disconnectors, DS-1 towards
+BB1 and DS-2 towards BB2 (plus a line disconnector on the line side, which plays no part here); the coupler bay
+has a breaker CB-C with a disconnector on each side. Take L1, L2 on BB1 and L3, L4 on BB2 with the coupler
+closed.</p>
+<p><strong>Node-breaker.</strong> Every conductor segment is a node and every switch is an edge between two nodes. Per line bay:
+node <span class="arithmatex">\(n_\text{line}\)</span> (the line end), edge CB to node <span class="arithmatex">\(n_\text{bay}\)</span> (the busbar-side segment), edge DS-1 from
+<span class="arithmatex">\(n_\text{bay}\)</span> to BB1 and edge DS-2 from <span class="arithmatex">\(n_\text{bay}\)</span> to BB2, one of them closed. The coupler bay is the path
+BB1 – DS – <span class="arithmatex">\(n_c\)</span> – CB-C – <span class="arithmatex">\(n_c'\)</span> – DS – BB2. In total 2 busbar nodes, 4 × 2 bay nodes, 2 coupler nodes and 4 × 3 +
+3 = 15 switches (plus the four line disconnectors if drawn), exactly the pattern of S1VL2 in Exercise 5.</p>
+<pre class="mermaid"><code>flowchart LR
+    BB1((BB1)) ---|DS-1 closed| n1["bay 1"] ---|CB| L1
+    BB2((BB2)) -.-|DS-2 open| n1
+    BB1 ---|DS-1 closed| n2["bay 2"] ---|CB| L2
+    BB2 -.-|DS-2 open| n2
+    BB1 -.-|DS-1 open| n3["bay 3"] ---|CB| L3
+    BB2 ---|DS-2 closed| n3
+    BB1 -.-|DS-1 open| n4["bay 4"] ---|CB| L4
+    BB2 ---|DS-2 closed| n4
+    BB1 ---|DS| c1["coupler"] ---|CB-C closed| c2["bay"] ---|DS| BB2</code></pre>
+<p><strong>Bus-breaker.</strong> Disconnectors are resolved: each bay is attached to the busbar whose disconnector is closed, and
+only the breakers remain as switches. Two buses, BB1 with L1 and L2 and BB2 with L3 and L4, each line behind its
+breaker, and the coupler breaker between the two buses. This is the view pypowsybl's bus-breaker voltage levels
+keep and the one ToOp's <code>RuntimeBusGroup</code> encodes: a <code>branch_switching_table</code> with a row per busbar (here
+<code>[[1, 1, 0, 0], [0, 0, 1, 1]]</code>) and the list of couplers with their open/closed state.</p>
+<p><strong>Bus-branch.</strong> Closed breakers disappear too, and busbars joined by a closed coupler merge: one bus with the
+four lines (the unsplit station). With the coupler open there are two buses, {L1, L2} and {L3, L4}, which is
+what a power flow or ToOp's DC solver sees, and nothing else: the bus-branch model cannot tell which physical
+busbar a line is on, only which electrical node.</p>
+<p><strong>Moving L3 from BB2 to BB1.</strong> With the coupler closed (BB1 and BB2 at the same potential), close DS-1 of bay 3,
+then open DS-2 of bay 3: two switch operations in the node-breaker model, none in the bus-branch model (the
+electrical topology is unchanged while the coupler is closed). ToOp counts exactly these two, one connection
+closed and one opened, as a reassignment distance of 2 (Exercise 4); if the coupler were open it would first
+have to be closed, and that operation counts in the coupler distance. If the goal is a split with L3 on the BB1
+side, the coupler is opened afterwards (one more operation, the coupler distance of Lab step 4).</p>
+<h2 id="exercise-2">Exercise 2<a class="headerlink" href="#exercise-2" title="Permanent link">&para;</a></h2>
+<p>A disconnector (isolator) is a slow, air-insulated knife switch without an arc-quenching chamber. Opening a
+circuit that carries load current draws an arc; a circuit breaker extinguishes it with SF₆, vacuum or oil and a
+fast mechanism, a disconnector cannot, so the arc would persist, re-strike and flash over to earth or to the other
+phases. Disconnectors are therefore rated to open and close only <em>de-energized</em> circuits or circuits that carry
+no current to interrupt, and their task is isolation (a visible gap for maintenance) and selection (which busbar a
+bay uses), not switching. Interlocks in the substation enforce this: a busbar disconnector cannot be operated
+unless either its bay breaker is open or a parallel path at the same potential exists.</p>
+<p>For a busbar reassignment under load the parallel path is the coupler. The sequence is "make before break":</p>
+<ol>
+<li>Close the coupler breaker (if it was open): BB1 and BB2 are now one electrical node at the same voltage.</li>
+<li>Close the disconnector of the bay towards the new busbar: it closes between two points at the same potential,
+   so no current flows through it at the moment of closing and nothing has to be interrupted.</li>
+<li>Open the disconnector towards the old busbar: the bay current it carried diverts through the new disconnector,
+   the new busbar and the coupler, so again it interrupts no load current (only a small circulating current,
+   within the rating of the disconnector).</li>
+<li>Repeat for every bay that moves; then, if the intention is to split the station, open the coupler <em>breaker</em>,
+   the one device in the sequence that interrupts a real current.</li>
+</ol>
+<p>Consequences for the switching distance: a bay reassignment always costs two disconnector operations (ToOp's
+reassignment distance of 2 per moved asset), the coupler must be closed during the move, and a split is only
+completed by a breaker, so the coupler distance is counted separately. It also fixes the order in time: the
+reassignments come first and the coupler opens last, which is why a target split cannot be reached with fewer
+operations than ToOp's reassignment plus coupler count.</p>
+<h2 id="exercise-3">Exercise 3<a class="headerlink" href="#exercise-3" title="Permanent link">&para;</a></h2>
+<p>A ring of <span class="arithmatex">\(n\)</span> busbars with <span class="arithmatex">\(n\)</span> couplers (busbar <span class="arithmatex">\(i\)</span> joined to busbar <span class="arithmatex">\(i + 1 \bmod n\)</span>) stays connected with one
+coupler open (a chain) and falls into exactly two groups when exactly two couplers are open; a third open coupler
+makes three groups. Hence the two-component states are the ways of choosing the two open couplers,
+<span class="arithmatex">\(\binom{n}{2}\)</span>. <code>ring_splits.count_two_component_states</code> runs the brute force of the worked example
+(<code>coupler_splits.two_node_configurations</code> over all <span class="arithmatex">\(2^n\)</span> states) and <code>closed_form</code> gives <span class="arithmatex">\(\binom{n}{2}\)</span>; they
+agree for every <span class="arithmatex">\(n\)</span> from 3 to 16 (the test checks 3–10):</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n\)</span></th>
+<th>states <span class="arithmatex">\(2^n\)</span></th>
+<th>two-component states</th>
+<th><span class="arithmatex">\(\binom{n}{2}\)</span></th>
+<th>seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>8</td>
+<td>3</td>
+<td>3</td>
+<td>0.000</td>
+</tr>
+<tr>
+<td>4</td>
+<td>16</td>
+<td>6</td>
+<td>6</td>
+<td>0.000</td>
+</tr>
+<tr>
+<td>6</td>
+<td>64</td>
+<td>15</td>
+<td>15</td>
+<td>0.001</td>
+</tr>
+<tr>
+<td>8</td>
+<td>256</td>
+<td>28</td>
+<td>28</td>
+<td>0.003</td>
+</tr>
+<tr>
+<td>10</td>
+<td>1,024</td>
+<td>45</td>
+<td>45</td>
+<td>0.015</td>
+</tr>
+<tr>
+<td>12</td>
+<td>4,096</td>
+<td>66</td>
+<td>66</td>
+<td>0.073</td>
+</tr>
+<tr>
+<td>14</td>
+<td>16,384</td>
+<td>91</td>
+<td>91</td>
+<td>0.307</td>
+</tr>
+<tr>
+<td>16</td>
+<td>65,536</td>
+<td>120</td>
+<td>120</td>
+<td>1.333</td>
+</tr>
+</tbody>
+</table>
+<p>The times are from one run on the maintainer's laptop and vary by machine, but the growth does not: each extra
+coupler doubles the number of states and the time, while the number of useful states grows only quadratically.
+Extrapolating the last row, <span class="arithmatex">\(n = 20\)</span> takes about <span class="arithmatex">\(1.33 \times 2^4 \approx 21\)</span> s and <span class="arithmatex">\(n = 30\)</span> about six hours.
+That is why <code>make_separation_set</code> refuses stations with more than 20 couplers: a brute force over coupler states
+is affordable for the handful of couplers a real station has, and the limit guards against a mis-modelled station
+(for example, every bay disconnector counted as a coupler) rather than against a real design.</p>
+<div class="highlight"><span class="filename">ring_splits.py</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="sd">"""Two-component coupler states of a ring of busbars, by brute force and in closed form (Chapter 13, Exercise 3).</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="sd">A ring of n busbars joined by n couplers falls into exactly two connected groups when exactly two couplers are</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="sd">open, so the count is n choose 2. The brute force of ``coupler_splits.two_node_configurations`` visits all 2**n</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">coupler states, which is what bounds ToOp's enumeration to 20 couplers.</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="sd">"""</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">comb</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="kn">from</span><span class="w"> </span><span class="nn">coupler_splits</span><span class="w"> </span><span class="kn">import</span> <span class="n">two_node_configurations</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">ring_couplers</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="sd">"""The n couplers of a ring of n busbars: busbar i joined to busbar (i + 1) mod n."""</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="k">return</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_two_component_states</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="sd">"""Brute-force count of the coupler states of a ring of n busbars that leave exactly two components."""</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">two_node_configurations</span><span class="p">(</span><span class="n">ring_couplers</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="p">))</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">closed_form</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="sd">"""The binomial coefficient n choose 2: the two-component states open exactly two of the n couplers of the ring."""</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="k">return</span> <span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="k">def</span><span class="w"> </span><span class="nf">timed_count</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">    </span><span class="sd">"""The brute-force count for a ring of n busbars and the wall-clock seconds it took."""</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="n">count</span> <span class="o">=</span> <span class="n">count_two_component_states</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="k">return</span> <span class="n">count</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">n_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">    </span><span class="sd">"""Print count, closed form and time for n = 3 .. n_max, then extrapolate the time to ToOp's limit of 20."""</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">' n  states  count  C(n,2)  seconds'</span><span class="p">)</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="n">last</span> <span class="o">=</span> <span class="mf">0.0</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>        <span class="n">count</span><span class="p">,</span> <span class="n">seconds</span> <span class="o">=</span> <span class="n">timed_count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s1">2d</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="si">:</span><span class="s1">6d</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s1">5d</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">closed_form</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">:</span><span class="s1">6d</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">seconds</span><span class="si">:</span><span class="s1">7.3f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>        <span class="n">last</span> <span class="o">=</span> <span class="n">seconds</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'doubling per coupler: about </span><span class="si">{</span><span class="n">last</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="p">(</span><span class="mi">20</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">n_max</span><span class="p">)</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> s for n = 20 on this machine'</span><span class="p">)</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch13-substations-grid-models/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+<h2 id="exercise-4">Exercise 4<a class="headerlink" href="#exercise-4" title="Permanent link">&para;</a></h2>
+<p>With the candidates as a Boolean array <code>cands</code> of shape (candidates, 2, assets) and the target <code>t</code> (True = on
+bus B), the distance of every candidate, with and without the swap, is one expression each:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">direct</span>  <span class="o">=</span> <span class="p">(</span><span class="n">cands</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">^</span> <span class="o">~</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cands</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">swapped</span> <span class="o">=</span> <span class="p">(</span><span class="n">cands</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">^</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cands</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="o">~</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">direct</span><span class="p">,</span> <span class="n">swapped</span><span class="p">)</span>
+</code></pre></div>
+<p>Bus A is compared with the complement of the target (the assets that should <em>not</em> be on B) and bus B with the
+target; broadcasting does it for all candidates at once. For the worked example's station (six bays, candidates
+A = {L0 L1} | B = {L2 L3 L4 L5}, A = {L0 L1 L2} | B = {L3 L4 L5}, A = {L0 L1 L2 L3} | B = {L4 L5}) and the
+target "L3 L4 L5 on bus B" the distances are <code>[2, 0, 2]</code> with or without the swap: the second candidate is the
+target, and the neighbours differ by one bay, which counts twice (one connection to open, one to close).</p>
+<p><strong>Where ignoring the swap overstates.</strong> Take the mirror target "L0 L1 L2 on bus B", the same split with the
+names of the two buses exchanged. Without the swap the distances are <code>[10, 12, 10]</code>: bus A of the second
+candidate disagrees with <span class="arithmatex">\(\bar t\)</span> on all six assets and bus B disagrees with <span class="arithmatex">\(t\)</span> on all six, although not a single
+bay has to move. With the swap they are <code>[2, 0, 2]</code> again. The names A and B are arbitrary labels of the two
+electrical nodes, so a distance that depends on them would make the engine pay twelve switching operations for
+renaming; this is what the <code>invert</code> flag of <code>per_station_switching_distance</code> records (Lab step 4). In general,
+without the swap the distance of a candidate to its own mirror is <span class="arithmatex">\(2m\)</span> for <span class="arithmatex">\(m\)</span> assets, the maximum possible,
+instead of 0.</p>
+<div class="highlight"><span class="filename">reassignment_distance.py</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="sd">"""Vectorized reassignment distance of the worked example's station, with and without the A/B swap (Chapter 13).</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="sd">The station is the chain of four busbars and three couplers of the worked example, with six line bays: lines 0</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sd">and 1 on busbar 0, line 2 on busbar 1, line 3 on busbar 2, lines 4 and 5 on busbar 3. A candidate is a pair of</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">Boolean rows (bus A, bus B) over the assets; a target is one Boolean row, True meaning "on bus B". The distance of</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">a candidate is the number of asset-busbar connections that differ, counted on bus A against the complement of the</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="sd">target and on bus B against the target; ToOp also tries the target with A and B swapped and keeps the smaller sum.</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="sd">"""</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="kn">from</span><span class="w"> </span><span class="nn">coupler_splits</span><span class="w"> </span><span class="kn">import</span> <span class="n">COUPLERS</span><span class="p">,</span> <span class="n">two_node_configurations</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">N_BUSBARS</span> <span class="o">=</span> <span class="mi">4</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="n">ASSET_BUSBAR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># busbar of each of the six line bays</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">ASSET_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'L</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ASSET_BUSBAR</span><span class="p">))]</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">asset_table</span><span class="p">(</span><span class="n">asset_busbar</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">ASSET_BUSBAR</span><span class="p">,</span> <span class="n">n_busbars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">N_BUSBARS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="sd">"""Boolean table of shape (busbars, assets): True where the asset's bay is closed onto that busbar."""</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_busbars</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">==</span> <span class="n">asset_busbar</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">candidates</span><span class="p">(</span><span class="n">couplers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="n">COUPLERS</span><span class="p">,</span> <span class="n">asset_busbar</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">ASSET_BUSBAR</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="sd">"""All two-component coupler states as a Boolean array of shape (candidates, 2, assets).</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="sd">    Row 0 of each candidate marks the assets whose busbar lies in the first component, row 1 those in the second.</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="sd">    """</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="n">n_busbars</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">asset_busbar</span><span class="o">.</span><span class="n">max</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    <span class="n">table</span> <span class="o">=</span> <span class="n">asset_table</span><span class="p">(</span><span class="n">asset_busbar</span><span class="p">,</span> <span class="n">n_busbars</span><span class="p">)</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">parts</span> <span class="ow">in</span> <span class="n">two_node_configurations</span><span class="p">(</span><span class="n">couplers</span><span class="p">,</span> <span class="n">n_busbars</span><span class="p">):</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">table</span><span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">part</span><span class="p">)]</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">]))</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="k">def</span><span class="w"> </span><span class="nf">reassignment_distance</span><span class="p">(</span><span class="n">cands</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">allow_swap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">    </span><span class="sd">"""Reassignment distance of every candidate to a target, one vectorized expression.</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="sd">    Args:</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="sd">        cands: Boolean array (candidates, 2, assets), bus A first, bus B second.</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="sd">        target: Boolean array (assets,), True for the assets that should end on bus B.</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="sd">        allow_swap: Also compare with the roles of A and B exchanged and keep the smaller distance, as ToOp does.</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="sd">    """</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>    <span class="n">direct</span> <span class="o">=</span> <span class="p">(</span><span class="n">cands</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">^</span> <span class="o">~</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cands</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_swap</span><span class="p">:</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>        <span class="k">return</span> <span class="n">direct</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>    <span class="n">swapped</span> <span class="o">=</span> <span class="p">(</span><span class="n">cands</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">^</span> <span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cands</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="o">~</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">direct</span><span class="p">,</span> <span class="n">swapped</span><span class="p">)</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">cand</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="sd">"""The two busbar groups of a candidate as asset names, for printing."""</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>    <span class="n">a</span> <span class="o">=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">on</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ASSET_NAMES</span><span class="p">,</span> <span class="n">cand</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">on</span><span class="p">)</span>
+<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>    <span class="n">b</span> <span class="o">=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">on</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ASSET_NAMES</span><span class="p">,</span> <span class="n">cand</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">on</span><span class="p">)</span>
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s1">'A = </span><span class="se">{{</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="se">}}</span><span class="s1">, B = </span><span class="se">{{</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="se">}}</span><span class="s1">'</span>
+<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>
+<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a><span class="w">    </span><span class="sd">"""Print the candidates, the distances to two targets, and the example where ignoring the swap overstates."""</span>
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>    <span class="n">cands</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">()</span>
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'candidates (bus A | bus B):'</span><span class="p">)</span>
+<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">cand</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cands</span><span class="p">):</span>
+<a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'  </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">describe</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>    <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>  <span class="c1"># L3, L4, L5 on bus B</span>
+<a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'target: L3 L4 L5 on bus B'</span><span class="p">)</span>
+<a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'  with swap   '</span><span class="p">,</span> <span class="n">reassignment_distance</span><span class="p">(</span><span class="n">cands</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+<a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'  without swap'</span><span class="p">,</span> <span class="n">reassignment_distance</span><span class="p">(</span><span class="n">cands</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">allow_swap</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>    <span class="n">mirror</span> <span class="o">=</span> <span class="o">~</span><span class="n">target</span>  <span class="c1"># the same split, with the names of the two buses exchanged</span>
+<a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'mirror target: L0 L1 L2 on bus B'</span><span class="p">)</span>
+<a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'  with swap   '</span><span class="p">,</span> <span class="n">reassignment_distance</span><span class="p">(</span><span class="n">cands</span><span class="p">,</span> <span class="n">mirror</span><span class="p">))</span>
+<a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'  without swap'</span><span class="p">,</span> <span class="n">reassignment_distance</span><span class="p">(</span><span class="n">cands</span><span class="p">,</span> <span class="n">mirror</span><span class="p">,</span> <span class="n">allow_swap</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>
+<a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>
+<a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch13-substations-grid-models/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+<h2 id="exercise-5">Exercise 5<a class="headerlink" href="#exercise-5" title="Permanent link">&para;</a></h2>
+<p><code>pypowsybl.network.create_four_substations_node_breaker_network()</code> has four substations and five voltage levels,
+all node-breaker: S1VL1 (225 kV) and S1VL2 (400 kV) in S1, and S2VL1, S3VL1, S4VL1 (400 kV). <code>net.get_switches()</code>
+lists 59 switches with their <code>kind</code>, <code>open</code> and <code>retained</code> flags; <code>net.get_node_breaker_topology(vl)</code> adds the
+two nodes of each switch and which nodes are busbar sections:</p>
+<table>
+<thead>
+<tr>
+<th>voltage level</th>
+<th>breakers</th>
+<th>disconnectors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1VL1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>S1VL2</td>
+<td>11</td>
+<td>22</td>
+</tr>
+<tr>
+<td>S2VL1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>S3VL1</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr>
+<td>S4VL1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>The single-busbar levels have one breaker and one disconnector per bay. S1VL2 is the double busbar of the Lab:
+<code>four_substations.classify_switches</code> separates its 33 switches by kind and by the node they touch (a disconnector
+that touches a busbar-section node is a busbar selector):</p>
+<table>
+<thead>
+<tr>
+<th>kind</th>
+<th>role</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BREAKER</td>
+<td>bay breaker (<code>S1VL2_&lt;asset&gt;_BREAKER</code>)</td>
+<td>10</td>
+</tr>
+<tr>
+<td>BREAKER</td>
+<td>coupler (<code>S1VL2_COUPLER</code>)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>DISCONNECTOR</td>
+<td>busbar disconnector (<code>S1VL2_BBS1_&lt;asset&gt;_DISCONNECTOR</code>, <code>S1VL2_BBS2_&lt;asset&gt;_DISCONNECTOR</code>)</td>
+<td>20</td>
+</tr>
+<tr>
+<td>DISCONNECTOR</td>
+<td>coupler disconnector (<code>S1VL2_BBS1_COUPLER_DISCONNECTOR</code>, <code>S1VL2_BBS2_COUPLER_DISCONNECTOR</code>)</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Ten bays (TWT, GH1–GH3, LD2–LD4, SHUNT, LCC1, VSC1), each with a breaker and two busbar disconnectors, one per
+busbar section, and the coupler bay with its breaker and two disconnectors: the textbook double-busbar,
+single-breaker arrangement of Exercise 1, and the only level of the example that ToOp can split (Lab step 3). All
+eleven breakers are <code>retained</code>, so pypowsybl keeps them as switches in its bus-breaker view, while the
+disconnectors are resolved into the bus a bay belongs to.</p>
+<div class="highlight"><span class="filename">four_substations.py</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="sd">"""Voltage levels and switches of pypowsybl's four-substations node-breaker network (Chapter 13, Exercise 5).</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="sd">Every voltage level of this example is modelled node-breaker, so each one has a list of switches with a kind</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="sd">(``BREAKER`` or ``DISCONNECTOR``), an open flag and the two nodes it joins. In the bay of an asset, the breaker</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="sd">interrupts current and the busbar disconnectors select the busbar; in a double-busbar level the coupler is a breaker</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="sd">between the two busbar sections, with a disconnector on each side.</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="sd">"""</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pypowsybl</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pp</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">VOLTAGE_LEVEL</span> <span class="o">=</span> <span class="s1">'S1VL2'</span>  <span class="c1"># the only double-busbar level of the example: two busbar sections and a coupler</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">def</span><span class="w"> </span><span class="nf">network</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pp</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">Network</span><span class="p">:</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="sd">"""The four-substations node-breaker example shipped with pypowsybl."""</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    <span class="k">return</span> <span class="n">pp</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">create_four_substations_node_breaker_network</span><span class="p">()</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">voltage_levels</span><span class="p">(</span><span class="n">net</span><span class="p">:</span> <span class="n">pp</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">Network</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="sd">"""Id, substation, nominal voltage and topology kind of every voltage level."""</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="k">return</span> <span class="n">net</span><span class="o">.</span><span class="n">get_voltage_levels</span><span class="p">(</span><span class="n">attributes</span><span class="o">=</span><span class="p">[</span><span class="s1">'substation_id'</span><span class="p">,</span> <span class="s1">'nominal_v'</span><span class="p">,</span> <span class="s1">'topology_kind'</span><span class="p">])</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="k">def</span><span class="w"> </span><span class="nf">switch_counts</span><span class="p">(</span><span class="n">net</span><span class="p">:</span> <span class="n">pp</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">Network</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">    </span><span class="sd">"""Number of switches per voltage level and kind."""</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>    <span class="k">return</span> <span class="n">net</span><span class="o">.</span><span class="n">get_switches</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'voltage_level_id'</span><span class="p">,</span> <span class="s1">'kind'</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="k">def</span><span class="w"> </span><span class="nf">classify_switches</span><span class="p">(</span><span class="n">net</span><span class="p">:</span> <span class="n">pp</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">Network</span><span class="p">,</span> <span class="n">voltage_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">VOLTAGE_LEVEL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w">    </span><span class="sd">"""The switches of one voltage level with a ``role`` column.</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="sd">    Roles: ``coupler`` (the breaker between the two busbar sections), ``coupler disconnector`` (its busbar</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="sd">    selectors), ``bay breaker`` (the breaker of an asset bay) and ``busbar disconnector`` (the selector of an asset</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="sd">    bay onto one busbar section). The role follows from the kind and from the node the switch touches: a switch</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="sd">    touching a busbar-section node is a selector.</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="sd">    """</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>    <span class="n">topo</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">get_node_breaker_topology</span><span class="p">(</span><span class="n">voltage_level</span><span class="p">)</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>    <span class="n">busbar_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">topo</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">topo</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">'connectable_type'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'BUSBAR_SECTION'</span><span class="p">])</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>    <span class="n">switches</span> <span class="o">=</span> <span class="n">topo</span><span class="o">.</span><span class="n">switches</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>    <span class="n">on_busbar</span> <span class="o">=</span> <span class="n">switches</span><span class="p">[</span><span class="s1">'node1'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">busbar_nodes</span><span class="p">)</span> <span class="o">|</span> <span class="n">switches</span><span class="p">[</span><span class="s1">'node2'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">busbar_nodes</span><span class="p">)</span>
+<a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>    <span class="n">is_coupler</span> <span class="o">=</span> <span class="n">switches</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'COUPLER'</span><span class="p">)</span>
+<a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>    <span class="n">role</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="s1">'bay breaker'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">switches</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>    <span class="n">role</span><span class="p">[(</span><span class="n">switches</span><span class="p">[</span><span class="s1">'kind'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'DISCONNECTOR'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">on_busbar</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">is_coupler</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'busbar disconnector'</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>    <span class="n">role</span><span class="p">[(</span><span class="n">switches</span><span class="p">[</span><span class="s1">'kind'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'DISCONNECTOR'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">is_coupler</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'coupler disconnector'</span>
+<a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>    <span class="n">role</span><span class="p">[(</span><span class="n">switches</span><span class="p">[</span><span class="s1">'kind'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'BREAKER'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">is_coupler</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'coupler'</span>
+<a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>    <span class="k">return</span> <span class="n">switches</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="n">role</span><span class="p">)</span>
+<a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>
+<a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>
+<a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a><span class="w">    </span><span class="sd">"""Print the voltage levels, the switch counts and the classification of the switches of S1VL2."""</span>
+<a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span> <span class="mi">119</span><span class="p">)</span>
+<a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>    <span class="n">net</span> <span class="o">=</span> <span class="n">network</span><span class="p">()</span>
+<a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">voltage_levels</span><span class="p">(</span><span class="n">net</span><span class="p">))</span>
+<a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>    <span class="nb">print</span><span class="p">()</span>
+<a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">switch_counts</span><span class="p">(</span><span class="n">net</span><span class="p">))</span>
+<a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>    <span class="nb">print</span><span class="p">()</span>
+<a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a>    <span class="n">classified</span> <span class="o">=</span> <span class="n">classify_switches</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+<a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">classified</span><span class="p">[[</span><span class="s1">'kind'</span><span class="p">,</span> <span class="s1">'open'</span><span class="p">,</span> <span class="s1">'retained'</span><span class="p">,</span> <span class="s1">'node1'</span><span class="p">,</span> <span class="s1">'node2'</span><span class="p">,</span> <span class="s1">'role'</span><span class="p">]])</span>
+<a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>    <span class="nb">print</span><span class="p">()</span>
+<a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">classified</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'kind'</span><span class="p">,</span> <span class="s1">'role'</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+<a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a>
+<a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a>
+<a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch13-substations-grid-models/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

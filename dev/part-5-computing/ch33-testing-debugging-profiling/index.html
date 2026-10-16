@@ -2200,7 +2200,10 @@ its holes:</p>
   flag. Why ToOp's three thresholds differ: the <abbr title="Line outage distribution factor">LODF</abbr> denominator
   <span class="arithmatex">\(1-(\mathrm{PTDF}_{b,f_b}-\mathrm{PTDF}_{b,t_b})\)</span> is dimensionless and lies in <span class="arithmatex">\([0,1]\)</span> for a meshed grid, the
   <abbr title="Bus split distribution factor">BSDF</abbr> denominator is a sum of susceptances (grid units and size enter), and a determinant scales with the entries
-  of the matrix to the power of its size; none of the three is scale-invariant (revisits
+  of the matrix to the power of its size. Under a uniform rescaling of every reactance by <span class="arithmatex">\(s\)</span> the <abbr title="Line outage distribution factor">LODF</abbr>
+  denominator and the <abbr title="Multi-outage distribution factor">MODF</abbr> determinant are exactly invariant (both are built from <abbr title="Power transfer distribution factor">PTDF</abbr> entries, which are
+  ratios of susceptances), while the <abbr title="Bus split distribution factor">BSDF</abbr> denominator scales as <span class="arithmatex">\(1/s\)</span>: only the <abbr title="Bus split distribution factor">BSDF</abbr> threshold depends on the
+  unit system, and the determinant threshold depends on the number of outages instead (revisits
   <a href="../../part-1-math/ch04-numerical-linear-algebra/">Chapter 4</a>). ToOp does not document its choice.</li>
 <li><strong>Debugging JAX.</strong> <code>ConcretizationTypeError</code> and <code>TracerBoolConversionError</code>; recompilation traps and stale
   compiled results (<a href="../ch32-jax-in-toop/">Chapter 32</a>); jaxtyping and beartype shape and dtype errors (the hook
@@ -2361,32 +2364,53 @@ builds a new aggregation <code>lambda</code> on every call to <code>run_solver_s
 <li><strong>Fix and report.</strong> Fix the bug, show the new test passing and the coverage of the changed lines, and write a
    one-page report: symptom, root cause, why it escaped, test added.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li><em>(Jupyter: NumPy)</em> Scale all branch reactances of IEEE 118 by 10 and by 0.1. Which of ToOp's three singularity
+<li>
+<p><em>(Jupyter: NumPy)</em> Scale all branch reactances of IEEE 118 by 10 and by 0.1. Which of ToOp's three singularity
    thresholds (<abbr title="Line outage distribution factor">LODF</abbr>, <abbr title="Bus split distribution factor">BSDF</abbr>, determinant) can change its decision for the same topology, and which cannot? Support
-   the answer with the dimensions of each denominator and a numerical experiment.</li>
-<li><em>(Jupyter: JAX)</em> Compute N-1 flows under <code>jit</code> for a grid with a radial branch (a bridge). Run once normally,
+   the answer with the dimensions of each denominator and a numerical experiment.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: JAX)</em> Compute N-1 flows under <code>jit</code> for a grid with a radial branch (a bridge). Run once normally,
    once with <code>jax.config.update("jax_debug_nans", True)</code>, and once with <code>jax.debug.print</code> of the denominator. Then
    call <code>calc_lodf</code> from <code>numpy_reference.py</code> on the same case. Compare the three behaviors and argue which one a
-   batched solver should have.</li>
-<li><em>(Jupyter: Pydantic)</em> Construct <code>PreprocessParameters(enable_bb_outage=True)</code> and inspect <code>model_dump()</code>. Write a
+   batched solver should have.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: Pydantic)</em> Construct <code>PreprocessParameters(enable_bb_outage=True)</code> and inspect <code>model_dump()</code>. Write a
    pytest helper that fails when a model silently drops a keyword, and use it to list which parameter models in
-   <code>interfaces/messages/</code> and <code>optimizer/interfaces/messages/</code> accept unknown keywords.</li>
-<li><em>(pytest + Hypothesis)</em> Using your <abbr title="Bus split distribution factor">BSDF</abbr> code from <a href="../../part-3-power-systems/ch18-sensitivity-factors-2/">Chapter 18</a>,
+   <code>interfaces/messages/</code> and <code>optimizer/interfaces/messages/</code> accept unknown keywords.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(pytest + Hypothesis)</em> Using your <abbr title="Bus split distribution factor">BSDF</abbr> code from <a href="../../part-3-power-systems/ch18-sensitivity-factors-2/">Chapter 18</a>,
    write two properties on random meshed grids with one split substation: the <abbr title="Bus split distribution factor">BSDF</abbr>-updated <abbr title="Power transfer distribution factor">PTDF</abbr> equals the <abbr title="Power transfer distribution factor">PTDF</abbr>
    rebuilt from the split network, and the flows satisfy Kirchhoff's current law at both busbars. Report the
-   smallest counterexample Hypothesis finds when you introduce an off-by-one in the busbar assignment.</li>
-<li><em>(Octave)</em> With MATPOWER, compute the <abbr title="Power transfer distribution factor">PTDF</abbr> of <code>case118</code> with <code>makePTDF</code> and the <abbr title="Line outage distribution factor">LODF</abbr> with <code>makeLODF</code>, once from
+   smallest counterexample Hypothesis finds when you introduce an off-by-one in the busbar assignment.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(Octave)</em> With MATPOWER, compute the <abbr title="Power transfer distribution factor">PTDF</abbr> of <code>case118</code> with <code>makePTDF</code> and the <abbr title="Line outage distribution factor">LODF</abbr> with <code>makeLODF</code>, once from
    the double-precision <abbr title="Power transfer distribution factor">PTDF</abbr> and once from <code>single(full(PTDF))</code>. Plot the largest <abbr title="Line outage distribution factor">LODF</abbr> error per outage against the
-   <abbr title="Line outage distribution factor">LODF</abbr> denominator, and discuss whether a threshold of <code>1e-11</code> makes sense for float32 data.</li>
-<li><em>(ToOp container: JAX profiler + py-spy)</em> Write a script that repeats
+   <abbr title="Line outage distribution factor">LODF</abbr> denominator, and discuss whether a threshold of <code>1e-11</code> makes sense for float32 data.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p><em>(ToOp container: JAX profiler + py-spy)</em> Write a script that repeats
    <code>notebooks/example1_dc_loadflow_example.ipynb</code> and then calls
    <code>run_solver(default_topology(sc, batch_size=4), None, None, di, sc)</code> twice (<code>sc</code> and <code>di</code> are the two halves of
    <code>static_information</code>). Wrap the second <code>run_solver</code> call in <code>jax.profiler.trace</code> and open the trace in
    Perfetto; then run the same script under <code>py-spy record -o profile.svg</code> (the container needs <code>SYS_PTRACE</code>).
-   Estimate the share of compilation, device computation and Python overhead in the first and the second call.</li>
+   Estimate the share of compilation, device computation and Python overhead in the first and the second call.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

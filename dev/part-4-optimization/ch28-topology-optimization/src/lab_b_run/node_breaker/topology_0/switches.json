@@ -1,0 +1,20 @@
+{
+  "VL2_BREAKER": {
+    "kind": "BREAKER",
+    "voltage_level_id": "VL2",
+    "open_before": false,
+    "open_after": true
+  },
+  "L12_DISCONNECTOR_4_0": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL2",
+    "open_before": false,
+    "open_after": true
+  },
+  "L12_DISCONNECTOR_4_2": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL2",
+    "open_before": true,
+    "open_after": false
+  }
+}

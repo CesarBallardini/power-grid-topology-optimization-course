@@ -2326,25 +2326,42 @@ yet; <a href="../../part-5-computing/ch30-scientific-python/">Chapter 30</a> sta
    (inductive, capacitive, purely resistive). For each, verify <code>S = V * conj(I)</code> and compare <code>abs(S)</code> with
    <code>sqrt(P**2 + Q**2)</code>. State the sign of Q for each load.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>By hand, compute <span class="arithmatex">\(\dfrac{(3 + 4j)(1 - j)}{2j}\)</span> in rectangular and polar form. <em>Answer:</em> <span class="arithmatex">\(0.5 - j3.5 =
-   3.536\angle -81.87^\circ\)</span>.</li>
-<li>For <span class="arithmatex">\(z = -1 - j\)</span>, compare <span class="arithmatex">\(\arctan(y/x)\)</span> with <code>atan2(y, x)</code>. Which one gives the argument of <span class="arithmatex">\(z\)</span>, and why?
-   <em>(Jupyter: <code>math.atan</code>, <code>math.atan2</code>)</em> <em>Hint:</em> one returns <span class="arithmatex">\(45^\circ\)</span>, the other <span class="arithmatex">\(-135^\circ\)</span>.</li>
-<li>Show that <span class="arithmatex">\(1 + a + a^2 = 0\)</span> for <span class="arithmatex">\(a = e^{j2\pi/3}\)</span>, first geometrically in GeoGebra (vector sum of the three
-   arrows), then algebraically. <em>(GeoGebra)</em></li>
-<li>A transformer adds a voltage <span class="arithmatex">\(\Delta u = V_n \cdot n \cdot s/100\)</span> at step angle <span class="arithmatex">\(\varphi\)</span> to its nominal
+<li>
+<p>By hand, compute <span class="arithmatex">\(\dfrac{(3 + 4j)(1 - j)}{2j}\)</span> in rectangular and polar form. <em>Answer:</em> <span class="arithmatex">\(0.5 - j3.5 =
+   3.536\angle -81.87^\circ\)</span>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>For <span class="arithmatex">\(z = -1 - j\)</span>, compare <span class="arithmatex">\(\arctan(y/x)\)</span> with <code>atan2(y, x)</code>. Which one gives the argument of <span class="arithmatex">\(z\)</span>, and why?
+   <em>(Jupyter: <code>math.atan</code>, <code>math.atan2</code>)</em> <em>Hint:</em> one returns <span class="arithmatex">\(45^\circ\)</span>, the other <span class="arithmatex">\(-135^\circ\)</span>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>Show that <span class="arithmatex">\(1 + a + a^2 = 0\)</span> for <span class="arithmatex">\(a = e^{j2\pi/3}\)</span>, first geometrically in GeoGebra (vector sum of the three
+   arrows), then algebraically. <em>(GeoGebra)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>A transformer adds a voltage <span class="arithmatex">\(\Delta u = V_n \cdot n \cdot s/100\)</span> at step angle <span class="arithmatex">\(\varphi\)</span> to its nominal
    voltage <span class="arithmatex">\(V_n\)</span>, where <span class="arithmatex">\(n\)</span> is the number of tap steps from neutral and <span class="arithmatex">\(s\)</span> the step in percent. Show that the
    resulting phase shift is <span class="arithmatex">\(\arg\left(1 + \frac{\Delta u}{V_n} e^{j\varphi}\right) = \operatorname{atan2}(\Delta u
    \sin\varphi,\ V_n + \Delta u \cos\varphi)\)</span>, the formula in ToOp's
    <code>contingency/pandapower/pandapower_helpers/results/va_diff_results.py</code>. Evaluate it for <span class="arithmatex">\(V_n = 400\)</span> kV,
    <span class="arithmatex">\(n = 5\)</span>, <span class="arithmatex">\(s = 1\%\)</span> and <span class="arithmatex">\(\varphi = 90^\circ\)</span> and <span class="arithmatex">\(60^\circ\)</span>. <em>(Pen and paper, check in Octave or Python)</em>
-   <em>Answer:</em> <span class="arithmatex">\(2.86^\circ\)</span> and <span class="arithmatex">\(2.42^\circ\)</span>.</li>
-<li>Draw a rotating phasor in GeoGebra: sliders <code>t</code> and <code>ω</code>, point <code>u = cos(ω t) + i sin(ω t)</code>, and the point
+   <em>Answer:</em> <span class="arithmatex">\(2.86^\circ\)</span> and <span class="arithmatex">\(2.42^\circ\)</span>.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Draw a rotating phasor in GeoGebra: sliders <code>t</code> and <code>ω</code>, point <code>u = cos(ω t) + i sin(ω t)</code>, and the point
    <code>(t, x(u))</code> with trace on. Which familiar function do you get, and what is the role of <span class="arithmatex">\(\omega\)</span>?
-   <em>(GeoGebra)</em></li>
+   <em>(GeoGebra)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

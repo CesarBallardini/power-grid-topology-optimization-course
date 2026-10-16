@@ -2220,7 +2220,7 @@ depends on the compiled program seeing the data you think it sees. Both are gove
 <ul>
 <li>Given a change to a ToOp input (a <code>SolverConfig</code> field, a <code>DynamicInformation</code> array, the batch size, the
   aggregation function), predict whether the solver recompiles, reuses the compiled program correctly, or reuses
-  it incorrectly, and prove it with timings and <code>jax.no_tracing()</code>.</li>
+  it incorrectly, and prove it with timings and the compile cache of the jitted core.</li>
 <li>Measure compile time, steady-state throughput and peak memory of <code>run_solver</code> as a function of the batch sizes,
   and choose settings for a given device.</li>
 <li>Explain how padding sentinels, traced loop bounds and buffer donation keep ToOp's shapes fixed and its memory
@@ -2269,11 +2269,20 @@ matplotlib; <code>notebooks/example1_dc_loadflow_example.ipynb</code>.</p>
   <code>dc_solver/jax/compute_batch.py</code> which field the N-0 flows are updated from, and scale that one too);</li>
 <li>a new <code>DynamicInformation</code> whose <code>branch_limits.max_mw_flow</code> is halved, passed with the <em>same</em> <code>sc</code>,
   and then with <code>replace(sc)</code>;</li>
-<li>a batch of 8 topologies instead of 4.</li>
+<li>a batch of 8 topologies instead of 4. The naive prediction is "recompiles" (a new array shape); it
+  does not, because <code>run_solver_symmetric</code> pads every batch to a multiple of <code>batch_size_bsdf</code> (16 by
+  default), so 4 and 8 topologies reach the jitted core with identical shapes. Confirm it, and say
+  what batch size would make it recompile.</li>
 </ul>
-<p>Wrap the calls you expect to hit the cache in <code>with jax.no_tracing():</code> to turn a silent recompile into an
-error. Explain every result from <code>static_argnames</code>, <code>SolverConfig.__hash__</code> and the attributes of
-<code>DefaultAggregateOutputFn</code>. On ToOp commit <code>ba1874e</code> (CPU, JAX 0.5.3), halving the limits with the same
+<p>To tell a cached call from a recompile, count the compiled programs of the jitted core before and after
+each call, <code>iterate_symmetric_sequential._cache_size()</code> (<code>dc_solver/jax/topology_looper.py</code>): a cache
+hit leaves it unchanged. Do not wrap <code>run_solver</code> in <code>with jax.no_tracing():</code> under ToOp's JAX 0.5.3:
+the eager Python glue around the core (padding, result storage, the final slicing) dispatches
+primitives that this version reports as "re-tracing", so the context manager raises on a cache hit as
+well; it is only usable around the jitted core itself, as
+<code>packages/topology_optimizer_pkg/tests/test_jax_compilation.py</code> does. Explain every result from
+<code>static_argnames</code>, <code>SolverConfig.__hash__</code> and the attributes of <code>DefaultAggregateOutputFn</code>. On ToOp
+commit <code>ba1874e</code> (CPU, JAX 0.5.3), halving the limits with the same
 <code>sc</code> returned the <em>old</em> relative loadings with no recompile, while <code>replace(sc)</code> recompiled and doubled
 them: write this up as a bug report with a minimal reproduction.</p>
 </li>
@@ -2286,31 +2295,51 @@ them: write this up as a bug report with a minimal reproduction.</p>
    repeat one point with <code>JAX_ENABLE_X64</code> off to measure the float64 penalty on your device.</p>
 </li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab_toop.ipynb">lab_toop.ipynb</a> (runs in the ToOp
+container).</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Explain why <code>SolverConfig</code> hashes by <code>id(self)</code> instead of by value. Name one benefit (cost of hashing large
+<li>
+<p>Explain why <code>SolverConfig</code> hashes by <code>id(self)</code> instead of by value. Name one benefit (cost of hashing large
    <code>HashableArrayWrapper</code> fields) and two risks, and propose a safer design (for example a frozen dataclass with
-   a value hash computed once).</li>
-<li><em>(Jupyter: JAX)</em> Reproduce the stale-result trap without ToOp: a jitted function with a static argument whose
+   a value hash computed once).</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.
+2. <em>(Jupyter: JAX)</em> Reproduce the stale-result trap without ToOp: a jitted function with a static argument whose
    class defines <code>__hash__</code> as <code>id(self)</code> and <code>__eq__</code> as identity. Show that mutating a field in place returns
-   the old result, and that <code>dataclasses.replace</code> recompiles. Then write a <code>pytest</code> test that would have caught it.</li>
-<li><em>(Jupyter: JAX + NumPy)</em> In <code>mutate.py</code> the loop bound <code>n_subs_mutated</code> is a traced Poisson draw. Write a toy
+   the old result, and that <code>dataclasses.replace</code> recompiles. Then write a <code>pytest</code> test that would have caught it.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: JAX + NumPy)</em> In <code>mutate.py</code> the loop bound <code>n_subs_mutated</code> is a traced Poisson draw. Write a toy
    version with <code>lax.fori_loop</code> and a traced bound, and a second one with a Python <code>for</code> over the same draw. Which
-   one compiles once, and what does <code>jax.make_jaxpr</code> show for each?</li>
-<li><em>(Jupyter: NumPy)</em> Check on your machine what <code>np.dtype(int)</code>, <code>np.dtype("long")</code> and <code>np.random.randint(2**32)</code>
+   one compiles once, and what does <code>jax.make_jaxpr</code> show for each?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> Check on your machine what <code>np.dtype(int)</code>, <code>np.dtype("long")</code> and <code>np.random.randint(2**32)</code>
    do, and what <code>jnp.full(3, 7, dtype=int).dtype</code> is with and without <code>jax_enable_x64</code>. The <code>int_dtype()</code> docstring
    on the course fork's <code>feat/add-docker-compose</code> branch attributes two Windows-only failures to platform integer
    widths (a padding sentinel stored as <code>-1</code>, a <code>jax.lax.scan</code> carry type mismatch); which can you reproduce with
-   ToOp's pinned NumPy 2.x, and why does NumPy's version matter?</li>
-<li><em>(Jupyter: JAX)</em> Set <code>XLA_FLAGS=--xla_force_host_platform_device_count=4</code> before importing JAX, <code>pmap</code> a
+   ToOp's pinned NumPy 2.x, and why does NumPy's version matter?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: JAX)</em> Set <code>XLA_FLAGS=--xla_force_host_platform_device_count=4</code> before importing JAX, <code>pmap</code> a
    function over a leading axis of size 4 with <code>donate_argnums=(0,)</code>, and try to read the donated input afterwards.
-   Why does ToOp donate the result storage in <code>topology_looper.py</code>?</li>
-<li><em>(Jupyter: pandas + matplotlib)</em> Run the DC stage of <code>notebooks/example3_e2e_pipeline.ipynb</code>
+   Why does ToOp donate the result storage in <code>topology_looper.py</code>?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: pandas + matplotlib)</em> Run the DC stage of <code>notebooks/example3_e2e_pipeline.ipynb</code>
    (<code>run_dc_optimization_stage</code>) for a fixed number of iterations with
    <code>lf_config.max_num_splits</code> set to 1, 2, 4 and 8 (keep <code>split_subs</code> descriptor cells at most 2, so every value
    is valid) and plot seconds per iteration against <code>max_num_splits</code>. Compare with the cost statement in
-   <code>packages/dc_solver_pkg/README.md</code>: are the extra split slots paid for even when most topologies use one?</li>
+   <code>packages/dc_solver_pkg/README.md</code>: are the extra split slots paid for even when most topologies use one?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

@@ -2347,23 +2347,40 @@ strategy evaluated with the methodology of <a href="../ch26-experimental-methodo
    solution for a reference point such as "at most 3 switching actions and 1 split"; discuss a posteriori
    selection vs ToOp's a priori weights.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a> · Lab 5 with QDax in the labs container (<code>docker/labs</code>): <a href="src/lab_labs.ipynb">lab_labs.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>. Exercises 3 and 4 with pymoo and moocore run in the labs container (<code>docker/labs</code>): <a href="src/exercises_labs.ipynb">exercises_labs.ipynb</a>.</p>
 <ol>
-<li>For the points <span class="arithmatex">\((1, 9), (3, 4), (4, 3.5), (6, 2), (9, 1)\)</span> (both minimized), find the non-dominated set, the
+<li>
+<p>For the points <span class="arithmatex">\((1, 9), (3, 4), (4, 3.5), (6, 2), (9, 1)\)</span> (both minimized), find the non-dominated set, the
    supported points and the unsupported ones. Show with a GeoGebra slider on the weight that the weighted sum
-   never selects the unsupported ones. <em>(GeoGebra)</em></li>
-<li>Prove that every optimum of a weighted sum with strictly positive weights is Pareto optimal, and give an
-   example with a zero weight whose optimum is only weakly Pareto optimal. <em>(pen and paper)</em></li>
-<li>Implement fast non-dominated sorting and crowding distance in NumPy and test them against pymoo's
-   <code>NonDominatedSorting</code> on 1,000 random points in 3 objectives. <em>(Jupyter: NumPy + pymoo)</em></li>
-<li>Compute the two-objective hypervolume of a front by sorting and summing rectangles, compare with moocore, and
+   never selects the unsupported ones. <em>(GeoGebra)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>Prove that every optimum of a weighted sum with strictly positive weights is Pareto optimal, and give an
+   example with a zero weight whose optimum is only weakly Pareto optimal. <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>Implement fast non-dominated sorting and crowding distance in NumPy and test them against pymoo's
+   <code>NonDominatedSorting</code> on 1,000 random points in 3 objectives. <em>(Jupyter: NumPy + pymoo)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>Compute the two-objective hypervolume of a front by sorting and summing rectangles, compare with moocore, and
    plot how the value changes when the reference point moves from the nadir point to 1.1 and 2 times the
-   nadir. <em>(Jupyter: NumPy + matplotlib)</em></li>
-<li>With <code>n_cells_per_dim = (5, 45)</code>, give two topologies in different cells where one dominates the other in
+   nadir. <em>(Jupyter: NumPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>With <code>n_cells_per_dim = (5, 45)</code>, give two topologies in different cells where one dominates the other in
    (<code>split_subs</code>, <code>switching_distance</code>, <code>overload_energy_n_1</code>), and two in the same edge cell that would be in
    different cells without clipping. What does each case mean for an operator reading the repertoire?
-   <em>(pen and paper)</em></li>
+   <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

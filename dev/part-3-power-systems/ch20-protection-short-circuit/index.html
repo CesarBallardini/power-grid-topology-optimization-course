@@ -2373,29 +2373,50 @@ GeoGebra (<a href="https://www.geogebra.org/calculator">https://www.geogebra.org
 <li>Move <span class="arithmatex">\(\theta\)</span> to 80° and observe the self-intersection noted above; derive the validity condition
    <span class="arithmatex">\(r_v \tan\theta \le x_v\)</span>.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Pen and paper: using symmetrical components, derive the single line-to-ground fault current
+<li>
+<p>Pen and paper: using symmetrical components, derive the single line-to-ground fault current
    <span class="arithmatex">\(I_f = 3E/(Z_1 + Z_2 + Z_0)\)</span> and explain why solidly grounded transmission grids can have higher single-phase
-   than three-phase fault currents near transformers with low zero-sequence impedance.</li>
-<li><em>(Jupyter: NumPy)</em> For a 5-bus grid given by its <span class="arithmatex">\(Y_\text{bus}\)</span>, compute <span class="arithmatex">\(Z_\text{bus}\)</span> and every bus's
+   than three-phase fault currents near transformers with low zero-sequence impedance.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> For a 5-bus grid given by its <span class="arithmatex">\(Y_\text{bus}\)</span>, compute <span class="arithmatex">\(Z_\text{bus}\)</span> and every bus's
    <span class="arithmatex">\(I''_k\)</span>. Then model a busbar split as in <a href="../ch18-sensitivity-factors-2/">Chapter 18</a> (add a node, move two
-   branches) and recompute. Which buses changed by more than 10 %, and why do remote buses barely change?</li>
-<li><em>(Jupyter: pandapower)</em> On <code>pandapower.networks.case9()</code>, add the short-circuit data <code>calc_sc</code> needs
+   branches) and recompute. Which buses changed by more than 10 %, and why do remote buses barely change?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: pandapower)</em> On <code>pandapower.networks.case9()</code>, add the short-circuit data <code>calc_sc</code> needs
    (external grid <code>s_sc_max_mva</code>, <code>s_sc_min_mva</code>, <code>rx_max</code>, <code>rx_min</code>; generator <code>vn_kv</code>, <code>sn_mva</code>, <code>xdss_pu</code>,
    <code>rdss_ohm</code>, <code>cos_phi</code>; line <code>endtemp_degree</code> for the minimum case), compare <code>case="max"</code> and <code>case="min"</code> for
-   all buses and explain the role of <span class="arithmatex">\(c_\text{max}\)</span> and <span class="arithmatex">\(c_\text{min}\)</span> and of the line end temperature.</li>
-<li>Pen and paper: write the full switching sequence to move one line bay from busbar 1 to busbar 2 in a
+   all buses and explain the role of <span class="arithmatex">\(c_\text{max}\)</span> and <span class="arithmatex">\(c_\text{min}\)</span> and of the line end temperature.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>Pen and paper: write the full switching sequence to move one line bay from busbar 1 to busbar 2 in a
    double-busbar, single-breaker station and then split the station, marking which devices are breakers and
-   which are disconnectors, and the moments at which the line is in parallel across both busbars.</li>
-<li><em>(GeoGebra)</em> Draw a quadrilateral zone 1 (80 % of the line impedance) and zone 2 (120 %) for a 100 km line
+   which are disconnectors, and the moments at which the line is in parallel across both busbars.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(GeoGebra)</em> Draw a quadrilateral zone 1 (80 % of the line impedance) and zone 2 (120 %) for a 100 km line
    with <span class="arithmatex">\(z = 0.03 + j0.3\ \Omega/\text{km}\)</span>. Add an infeed from a busbar that ToOp split so that half the fault
    current comes from the remote end; show how the apparent impedance for a fault at 90 % of the line moves
-   and whether zone 1 under- or over-reaches.</li>
-<li><em>(Jupyter: pandas)</em> In the AC results of the <a href="../ch19-operational-security/">Chapter 19</a> lab, list the
+   and whether zone 1 under- or over-reaches.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: pandas)</em> In the AC results of the <a href="../ch19-operational-security/">Chapter 19</a> lab, list the
    <code>va_diff_results</code> rows above 20° and 10°. For the worst one, name the switch or outaged branch and describe
-   what an operator would have to do before reclosing it.</li>
+   what an operator would have to do before reclosing it.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

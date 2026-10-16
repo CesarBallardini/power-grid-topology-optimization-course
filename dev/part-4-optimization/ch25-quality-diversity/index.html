@@ -2267,20 +2267,42 @@ matters when you read the repertoire as a trade-off curve (<a href="../ch27-pare
 <p class="admonition-title">Lab: ToOp's repertoire as a heatmap</p>
 <p><strong>Tools:</strong> Jupyter with ToOp (container from <a href="../../part-0-orientation/ch00-orientation-and-setup/">Chapter 0</a>),
 NumPy, pandas and matplotlib.</p>
+<p>The small example grid is tiny: one relevant substation and ten actions, so the whole search space is ten
+topologies, <code>split_subs</code> is 0 or 1, and the first epoch already evaluates every topology. It is the right
+size to learn the mechanics (where the archive is written, what a cell holds, how a heatmap is drawn) and
+the wrong size to see the archive change: with an exhaustive repertoire after epoch 0, neither the
+descriptor weights nor the cell counts of step 4 can alter the proposed set. Run steps 1–3 on the small
+grid and step 4 on a grid with several relevant substations, such as the complex example grid of
+<code>notebooks/example3_e2e_pipeline.ipynb</code> or <code>data/case57_data_powsybl</code>
+(<a href="../../part-3-power-systems/ch22-import-preprocessing/">Chapter 22</a>).</p>
 <ol>
-<li>Run <code>notebooks/example2_small_grid_toop.ipynb</code> unchanged and open <code>res.json</code> in the run directory.</li>
+<li>Run <code>notebooks/example2_small_grid_toop.ipynb</code> unchanged and open <code>res.json</code> in the run directory. Note
+   the epoch at which <code>max_fitness</code> is reached and how many epochs follow it without any change.</li>
 <li>The notebook overrides the default descriptors with a single <code>split_subs</code> descriptor of 4 cells and runs
    for 30 seconds. Change <code>ga_config</code> to use two descriptors, for example
    <code>[{"metric": "split_subs", "num_cells": 4}, {"metric": "switching_distance", "num_cells": 20}]</code>, set
    <code>"plot": True</code> and rerun. The heatmap is written by <code>plot_repertoire</code> to <code>plots/</code> inside the results
    <code>stats_dir</code>. Note that empty cells (fitness <span class="arithmatex">\(-\infty\)</span>) are drawn with a value slightly below the worst
-   finite fitness, so they look like bad cells.</li>
+   finite fitness, so they look like bad cells. <code>"plot": True</code> also saves one PNG after <em>every</em> epoch, and
+   on this grid drawing costs more than optimizing: the same 30 s give about 125 epochs with the plot
+   against about 1 140 without. Switch it off again before any run whose epoch count matters.</li>
 <li>Build your own heatmap from <code>res.json</code> with pandas and matplotlib: one cell per
    (<code>split_subs</code>, <code>switching_distance</code>) pair from <code>best_topos[*].metrics.extra_scores</code>, colored by fitness,
    empty cells left blank. Compute coverage and <abbr title="Quality-diversity">QD</abbr>-score (shift fitness by the unsplit <code>initial_fitness</code>).</li>
-<li>Change the <code>target_metrics</code> weights (for example add <code>("critical_branch_count_n_1", w)</code> for two values of
-   <code>w</code>) and, separately, the number of cells. Explain how the set of proposed topologies changes.</li>
+<li>On the larger grid, change the <code>target_metrics</code> weights (for example add
+   <code>("critical_branch_count_n_1", w)</code> for two values of <code>w</code>) and, separately, the number of cells. Explain
+   how the set of proposed topologies changes. If you try this on the small grid first, explain why the
+   three elites and their order stay the same whatever you do: the archive is exhaustive and the same
+   action is best on both metrics, so a weight only rescales the fitness.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Known discrepancy: the DC stage cannot start on Windows</p>
+<p><code>optimizer/dc/main.py</code> names the TensorBoard folder <code>str(datetime.now())</code>, whose colons are illegal in a
+Windows path, so a run outside the Linux container dies with <code>WinError 123</code> before the first epoch. Inside
+the container nothing is needed; on Windows, patch the timestamp format before the run (the lab's
+<code>small_grid_toop.py</code> shows how).</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">The notebook's busbar-outage settings are silently ignored</p>
@@ -2294,23 +2316,31 @@ appear in <code>toop-engine-benchmark/benchmark_toop.py</code>. Check any config
 <code>print(model.model_dump())</code>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Implement MAP-Elites in NumPy for the line-switching problem of the <a href="../ch24-evolutionary-algorithms/">Chapter 24</a>
+<li>
+<p>Implement MAP-Elites in NumPy for the line-switching problem of the <a href="../ch24-evolutionary-algorithms/">Chapter 24</a>
    lab with descriptors "number of switched lines" (0–3) and "maximum N-0 loading after switching" binned into
    5 cells. Plot coverage and <abbr title="Quality-diversity">QD</abbr>-score against evaluations and compare the best cell with your <abbr title="Genetic algorithm">GA</abbr>.
-   <em>(Jupyter: NumPy + matplotlib)</em></li>
-<li>For <code>me_descriptors = (split_subs: 5 cells, switching_distance: 45 cells)</code>, list the cell indices that can
+   <em>(Jupyter: NumPy + matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.
+2. For <code>me_descriptors = (split_subs: 5 cells, switching_distance: 45 cells)</code>, list the cell indices that can
    hold a topology with exactly 2 split substations. Which cells can hold topologies that are not represented
-   exactly by their descriptor values? <em>(pen and paper)</em></li>
-<li>Construct a one-dimensional deceptive fitness landscape where a <abbr title="Genetic algorithm">GA</abbr> with elitism converges to a local optimum
+   exactly by their descriptor values? <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.
+3. Construct a one-dimensional deceptive fitness landscape where a <abbr title="Genetic algorithm">GA</abbr> with elitism converges to a local optimum
    but MAP-Elites with a suitable descriptor finds the global one. Explain the stepping-stone argument.
-   <em>(Jupyter: NumPy)</em></li>
-<li>In the ToOp output, <code>summarize</code> drops every cell elite whose fitness does not beat the unsplit grid. What
+   <em>(Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.
+4. In the ToOp output, <code>summarize</code> drops every cell elite whose fitness does not beat the unsplit grid. What
    does this do to coverage computed from <code>res.json</code>, and how would you compute the true coverage?
-   <em>(pen and paper)</em></li>
-<li>The default repertoire has 225 cells. Add <code>disconnected_branches</code> with 3 cells as a third descriptor: how many
+   <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.
+5. The default repertoire has 225 cells. Add <code>disconnected_branches</code> with 3 cells as a third descriptor: how many
    cells result, how many bytes do the fitness values alone need as float64, and why does
-   <code>plot_repertoire</code> refuse to draw it? <em>(pen and paper)</em></li>
+   <code>plot_repertoire</code> refuse to draw it? <em>(pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

@@ -2326,25 +2326,43 @@ timestep.</p>
    the worked example into account.</li>
 <li>Optional: repeat step 2 with MATPOWER's <code>rundcpf</code> on <code>case57</code> in Octave.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Starting from <span class="arithmatex">\(p_f = \frac{|V_f||V_t|}{x}\sin(\theta_f - \theta_t)\)</span>, bound the relative error of the DC flow
-   for <span class="arithmatex">\(|\theta_f - \theta_t| \le 10^\circ\)</span> and <span class="arithmatex">\(|V| \in [0.95, 1.05]\)</span> p.u.</li>
-<li>Show that the flows of a DC power flow do not depend on which bus is the slack when the injections sum to
-   zero, and that the voltage angles do.</li>
-<li><em>(Jupyter: NumPy)</em> Build <span class="arithmatex">\(B_\text{bus}\)</span> and <span class="arithmatex">\(B_f\)</span> for IEEE 14 from the branch table, solve the DC power flow
+<li>
+<p>Starting from <span class="arithmatex">\(p_f = \frac{|V_f||V_t|}{x}\sin(\theta_f - \theta_t)\)</span>, bound the relative error of the DC flow
+   for <span class="arithmatex">\(|\theta_f - \theta_t| \le 10^\circ\)</span> and <span class="arithmatex">\(|V| \in [0.95, 1.05]\)</span> p.u.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>Show that the flows of a DC power flow do not depend on which bus is the slack when the injections sum to
+   zero, and that the voltage angles do.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> Build <span class="arithmatex">\(B_\text{bus}\)</span> and <span class="arithmatex">\(B_f\)</span> for IEEE 14 from the branch table, solve the DC power flow
    with a sparse factorization (<code>scipy.sparse.linalg.splu</code>), and reuse the factorization for 1,000 random
    balanced injection vectors stacked as a <code>(n_timesteps, n_bus)</code> array. Compare the time with 1,000 separate
-   solves.</li>
-<li><em>(Octave + MATPOWER)</em> For <code>case14</code>, verify that <code>Bbus</code> from <code>makeBdc</code> equals <span class="arithmatex">\(A^\top \operatorname{diag}(b) A\)</span>
+   solves.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p><em>(Octave + MATPOWER)</em> For <code>case14</code>, verify that <code>Bbus</code> from <code>makeBdc</code> equals <span class="arithmatex">\(A^\top \operatorname{diag}(b) A\)</span>
    with <span class="arithmatex">\(b = 1/(x\tau)\)</span>, and that <code>Pfinj</code> is zero unless a branch has a nonzero <code>SHIFT</code>. Add a 3° shift to one
-   transformer and check the equivalent-injection formula.</li>
-<li><em>(Jupyter: NumPy)</em> Implement ToOp's <abbr title="Phase shift distribution factor">PSDF</abbr> column
+   transformer and check the equivalent-injection formula.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> Implement ToOp's <abbr title="Phase shift distribution factor">PSDF</abbr> column
    <span class="arithmatex">\(\text{PSDF}_{\ell k} = b_k(\delta_{\ell k} - \text{PTDF}_{\ell f_k} + \text{PTDF}_{\ell t_k})\)</span>
    (in radians, before ToOp's conversion to MW per degree) and confirm it against a
    DC power flow with a phase shift <span class="arithmatex">\(\varphi_k\)</span> modeled as equivalent injections. Then state which sign convention
-   for the grid model's angle would make the minus in <code>get_shift_angles</code> necessary.</li>
+   for the grid model's angle would make the minus in <code>get_shift_angles</code> necessary.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

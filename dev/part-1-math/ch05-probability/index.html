@@ -2208,28 +2208,46 @@ split before use. Results are summarized with maxima, medians and the top-k wors
    child generators with <code>rng.spawn(4)</code>. Compare with how <code>mutate.py</code> splits a JAX key into
    <code>substation_key</code> and <code>disconnection_key</code> before sampling.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>Let <span class="arithmatex">\(N \sim \text{Poisson}(\lambda)\)</span> and <span class="arithmatex">\(K = \min(\max(N, 1), m)\)</span>. Show that <span class="arithmatex">\(P(K = 1) = e^{-\lambda}(1 + \lambda)\)</span>,
+<li>
+<p>Let <span class="arithmatex">\(N \sim \text{Poisson}(\lambda)\)</span> and <span class="arithmatex">\(K = \min(\max(N, 1), m)\)</span>. Show that <span class="arithmatex">\(P(K = 1) = e^{-\lambda}(1 + \lambda)\)</span>,
    <span class="arithmatex">\(P(K = k) = e^{-\lambda}\lambda^k / k!\)</span> for <span class="arithmatex">\(1 &lt; k &lt; m\)</span> and <span class="arithmatex">\(P(K = m) = P(N \ge m)\)</span>. For <span class="arithmatex">\(\lambda = 2\)</span>, <span class="arithmatex">\(m = 3\)</span>
    compute the three probabilities and <span class="arithmatex">\(E[K]\)</span>. <em>(Pen and paper)</em> <em>Answer:</em> <span class="arithmatex">\(0.406\)</span>, <span class="arithmatex">\(0.271\)</span>, <span class="arithmatex">\(0.323\)</span>;
-   <span class="arithmatex">\(E[K] \approx 1.917\)</span>, below the unclipped mean 2.</li>
-<li>Show that <span class="arithmatex">\(E[\max(N, 1)] = \lambda + e^{-\lambda}\)</span> and explain why clipping at 1 alone raises the mean while
-   clipping at <span class="arithmatex">\(m\)</span> lowers it. <em>(Pen and paper)</em></li>
-<li>ToOp samples <abbr title="Phase-shifting transformer">PST</abbr> tap steps from integers <span class="arithmatex">\(k \in [-\lceil 4\sigma \rceil, \lceil 4\sigma \rceil]\)</span> with weights
+   <span class="arithmatex">\(E[K] \approx 1.917\)</span>, below the unclipped mean 2.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>Show that <span class="arithmatex">\(E[\max(N, 1)] = \lambda + e^{-\lambda}\)</span> and explain why clipping at 1 alone raises the mean while
+   clipping at <span class="arithmatex">\(m\)</span> lowers it. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>ToOp samples <abbr title="Phase-shifting transformer">PST</abbr> tap steps from integers <span class="arithmatex">\(k \in [-\lceil 4\sigma \rceil, \lceil 4\sigma \rceil]\)</span> with weights
    <span class="arithmatex">\(\propto e^{-k^2 / (2\sigma^2)}\)</span> (<code>_build_discrete_pst_step_distribution</code> in
    <code>optimizer/dc/genetic_functions/mutation/mutate_nodal_inj.py</code>). For <span class="arithmatex">\(\sigma = 1\)</span> tabulate the probabilities,
    and compute the probability that a <abbr title="Phase-shifting transformer">PST</abbr> selected for mutation does not move. With a selection probability
    of 0.2 per <abbr title="Phase-shifting transformer">PST</abbr> (the default), what fraction of PSTs actually change tap in one mutation, ignoring reset
-   and clipping? <em>(Jupyter: NumPy + pandas)</em> <em>Answer:</em> <span class="arithmatex">\(P(k = 0) \approx 0.399\)</span>; about 12%.</li>
-<li>For <span class="arithmatex">\(n\)</span> independent Uniform(0, 1) values, show that <span class="arithmatex">\(E[\max] = n/(n+1)\)</span> and check it by simulation for
+   and clipping? <em>(Jupyter: NumPy + pandas)</em> <em>Answer:</em> <span class="arithmatex">\(P(k = 0) \approx 0.399\)</span>; about 12%.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>For <span class="arithmatex">\(n\)</span> independent Uniform(0, 1) values, show that <span class="arithmatex">\(E[\max] = n/(n+1)\)</span> and check it by simulation for
    <span class="arithmatex">\(n = 1, 10, 100\)</span>. Relate it to "the worst of many contingencies is almost always high". <em>(Pen and paper,
-   then Jupyter: NumPy)</em></li>
-<li>A stochastic optimizer returns a best cost <span class="arithmatex">\(C = 100 + 10\,Z\)</span> with <span class="arithmatex">\(Z \sim \mathcal{N}(0, 1)\)</span> per run. Simulate
+   then Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>A stochastic optimizer returns a best cost <span class="arithmatex">\(C = 100 + 10\,Z\)</span> with <span class="arithmatex">\(Z \sim \mathcal{N}(0, 1)\)</span> per run. Simulate
    30 runs for two variants whose means differ by 3. Plot both empirical CDFs and report mean, median and
    the 10% and 90% quantiles. Would one run per variant have told them apart? <em>(Jupyter: NumPy + pandas +
-   matplotlib)</em></li>
+   matplotlib)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
 </ol>
 
 

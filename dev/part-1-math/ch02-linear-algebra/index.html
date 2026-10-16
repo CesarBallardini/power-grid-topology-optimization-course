@@ -2362,23 +2362,43 @@ used; the comparison with a power-flow tool is done in
 <li>Add a new branch <code>(0, 5)</code> with <span class="arithmatex">\(g = 1\)</span> S. Show that the new matrix is <span class="arithmatex">\(G + g\, a a^\top\)</span>, where <span class="arithmatex">\(a\)</span> is the
    new row of <span class="arithmatex">\(A\)</span>, and compare the new currents with the old ones.</li>
 </ol>
+<p>Solutions: <a href="solutions/#lab">Lab</a> · Notebook: <a href="src/lab.ipynb">lab.ipynb</a>.</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="src/examples.ipynb">examples.ipynb</a>.</p>
 <ol>
-<li>By hand, write the incidence matrix of a triangle (3 nodes, 3 branches), compute <span class="arithmatex">\(A^\top A\)</span> and find its
-   null space. What changes if one branch is removed? <em>(Pen and paper)</em></li>
-<li>Show that <span class="arithmatex">\(x^\top G x = \sum_k g_k (x_{f_k} - x_{t_k})^2\)</span>, and deduce that <span class="arithmatex">\(G\)</span> is positive semidefinite when
-   all <span class="arithmatex">\(g_k &gt; 0\)</span> and that <span class="arithmatex">\(Gx = 0\)</span> forces <span class="arithmatex">\(x\)</span> to be constant on each connected component. <em>(Pen and paper)</em></li>
-<li>Build two disjoint triangles as one network (6 nodes, 6 branches). Compute <code>eig</code>, <code>rank</code> and <code>null</code> of <span class="arithmatex">\(G\)</span>.
-   How many zero eigenvalues are there, and what is the rank? <em>(Octave)</em></li>
-<li>Implement <span class="arithmatex">\(A^\top \operatorname{diag}(g) A\)</span> three ways: explicit <code>np.diag</code>, <code>A.T @ (g[:, None] * A)</code> and
+<li>
+<p>By hand, write the incidence matrix of a triangle (3 nodes, 3 branches), compute <span class="arithmatex">\(A^\top A\)</span> and find its
+   null space. What changes if one branch is removed? <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p>Show that <span class="arithmatex">\(x^\top G x = \sum_k g_k (x_{f_k} - x_{t_k})^2\)</span>, and deduce that <span class="arithmatex">\(G\)</span> is positive semidefinite when
+   all <span class="arithmatex">\(g_k &gt; 0\)</span> and that <span class="arithmatex">\(Gx = 0\)</span> forces <span class="arithmatex">\(x\)</span> to be constant on each connected component. <em>(Pen and paper)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p>Build two disjoint triangles as one network (6 nodes, 6 branches). Compute <code>eig</code>, <code>rank</code> and <code>null</code> of <span class="arithmatex">\(G\)</span>.
+   How many zero eigenvalues are there, and what is the rank? <em>(Octave)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>Implement <span class="arithmatex">\(A^\top \operatorname{diag}(g) A\)</span> three ways: explicit <code>np.diag</code>, <code>A.T @ (g[:, None] * A)</code> and
    <code>np.einsum("ki,k,kj-&gt;ij", A, g, A)</code>. Check that they agree and time them for a network with 2 000 nodes.
-   <em>(Jupyter: NumPy)</em></li>
-<li>Let <span class="arithmatex">\(G' = G + g\, a a^\top\)</span>. Show that <span class="arithmatex">\(G' x = G x + g\,(a^\top x)\, a\)</span> and verify it numerically for a random
-   <span class="arithmatex">\(x\)</span>; explain why this costs <span class="arithmatex">\(O(n)\)</span> instead of <span class="arithmatex">\(O(n^2)\)</span>. <em>(Jupyter: NumPy)</em></li>
-<li>Store the branch list of the lab in a pandas <code>DataFrame</code> with columns <code>from</code>, <code>to</code>, <code>g</code>, write it to CSV and
+   <em>(Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p>Let <span class="arithmatex">\(G' = G + g\, a a^\top\)</span>. Show that <span class="arithmatex">\(G' x = G x + g\,(a^\top x)\, a\)</span> and verify it numerically for a random
+   <span class="arithmatex">\(x\)</span>; explain why this costs <span class="arithmatex">\(O(n)\)</span> instead of <span class="arithmatex">\(O(n^2)\)</span>. <em>(Jupyter: NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p>Store the branch list of the lab in a pandas <code>DataFrame</code> with columns <code>from</code>, <code>to</code>, <code>g</code>, write it to CSV and
    rebuild <span class="arithmatex">\(A\)</span> from the file. Add a column with the branch currents of lab step 3 and sort by absolute current.
-   <em>(Jupyter: pandas + NumPy)</em></li>
+   <em>(Jupyter: pandas + NumPy)</em></p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
 </ol>
 
 

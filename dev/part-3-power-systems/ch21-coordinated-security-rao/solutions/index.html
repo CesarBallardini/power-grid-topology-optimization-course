@@ -1,0 +1,2681 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/dev/part-3-power-systems/ch21-coordinated-security-rao/solutions/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Chapter 21 – Solutions - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-21-solutions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 21 – Solutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-1-math/ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-21-solutions">Chapter 21 – Solutions<a class="headerlink" href="#chapter-21-solutions" title="Permanent link">&para;</a></h1>
+<p>Solutions of the Lab and the Exercises of <a href="../">Chapter 21</a>. Try each task before reading its solution. The
+code is in the chapter's <code>src</code> folder: <a href="../src/ieee14_flow_based.py"><code>ieee14_flow_based.py</code></a> (the Lab, NumPy and
+pypowsybl), <a href="../src/curative_timing.py"><code>curative_timing.py</code></a>, <a href="../src/domain_2d.py"><code>domain_2d.py</code></a>,
+<a href="../src/glsk_sensitivity.py"><code>glsk_sensitivity.py</code></a> and <a href="../src/time_coupling.py"><code>time_coupling.py</code></a> (Exercises 1, 2,
+3 and 6) and <a href="../src/orao_switches_toop.py"><code>orao_switches_toop.py</code></a> (Exercise 5, ToOp). Each module's <code>main()</code> prints
+every number quoted below; the ToOp numbers were produced with ToOp <code>ba1874e</code> on CPU.</p>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<p><code>python ieee14_flow_based.py</code> runs the six steps on the base topology and on two topology actions. The functions
+named below are in that module.</p>
+<ol>
+<li><strong>IEEE 14 and its nodal <abbr title="Power transfer distribution factor">PTDF</abbr>.</strong> <code>load_ieee14()</code> reads buses, lines, transformers, generators and loads from
+   <code>pypowsybl.network.create_ieee14()</code> and <code>ptdf_matrix()</code> builds <span class="arithmatex">\(H\)</span> as in Chapter 17 with bus 1 as slack. Two
+   details decide whether <code>H @ p</code> matches pypowsybl's DC flows: the per-unit base of the reactances, which pypowsybl
+   gives in ohms (a line between two nominal voltages <span class="arithmatex">\(V_1\)</span>, <span class="arithmatex">\(V_2\)</span> uses <span class="arithmatex">\(V_1 V_2 / S_\text{base}\)</span>; a transformer
+   uses the square of its side-2 voltage, where its ohms are expressed), and the transformer ratio. pypowsybl's
+   default DC load flow keeps the off-nominal ratios <span class="arithmatex">\(\rho = (U_{1,\text{rated}}/V_1)/(U_{2,\text{rated}}/V_2)\)</span>
+   (0.978, 0.969 and 0.932 for the three transformers), which multiplies their reactance by <span class="arithmatex">\(\rho\)</span> in the DC
+   equations; with <code>Parameters(distributed_slack=False, dc_use_transformer_ratio=False)</code> the textbook model applies
+   and <code>H @ p</code> reproduces every pypowsybl flow to <span class="arithmatex">\(2.6 \times 10^{-13}\)</span> MW. The injection vector must be balanced:
+   the data have 272.4 MW of generation set points against 259 MW of load, and in a lossless DC model the slack
+   generator at bus 1 produces 219.0 MW, not its 232.4 MW set point. The net positions at the reference point are
+   then <span class="arithmatex">\(NP_A = 87.7\)</span>, <span class="arithmatex">\(NP_B = -34.3\)</span>, <span class="arithmatex">\(NP_C = -53.4\)</span> MW (zones A = {1–5}, B = {6, 11, 12, 13},
+   C = {7, 8, 9, 10, 14}), summing to zero.</li>
+<li><strong>Zones and GLSKs.</strong> <code>glsk(grid, 'generation')</code> spreads a zone's net position over its generators in proportion
+   to <code>target_p</code>: zone A gets (0.853, 0.147, 0, 0, 0) over buses 1–5 (232.4 and 40 MW at buses 1 and 2; the 0 MW
+   generators at buses 3, 6 and 8 get no weight). Zones B and C have no generation in the base case, so the
+   generation <abbr title="Generation and load shift key">GLSK</abbr> falls back to flat there: 0.25 on each of buses 6, 11, 12, 13 and 0.2 on each of buses 7, 8, 9,
+   10, 14. <code>glsk(grid, 'flat')</code> is flat in all three zones. Every column sums to one.</li>
+<li>
+<p><strong>Zonal <abbr title="Power transfer distribution factor">PTDF</abbr> and the pypowsybl cross-check.</strong> <span class="arithmatex">\(\text{PTDF}_z = H\,G\)</span>. For zone A with the generation <abbr title="Generation and load shift key">GLSK</abbr>,
+   <code>pypowsybl_zone_factors()</code> builds the same zone with
+   <code>create_zone_from_injections_and_shift_keys('A', ['B1-G', 'B2-G'], [0.853, 0.147])</code>, runs the DC sensitivity
+   analysis with the parameters of step 1 and reads <code>get_sensitivity_matrix()</code>: the 20 factors agree with the NumPy
+   column to <span class="arithmatex">\(5.6 \times 10^{-17}\)</span> (the zone factor is the shift-key-weighted sum of the injection factors, and the
+   injection factors are the <abbr title="Power transfer distribution factor">PTDF</abbr> columns). A few rows, zones (A, B, C):</p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Generation <abbr title="Generation and load shift key">GLSK</abbr></th>
+<th>Flat <abbr title="Generation and load shift key">GLSK</abbr></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1-2-1</td>
+<td>(−0.123, −0.633, −0.652)</td>
+<td>(−0.573, −0.633, −0.652)</td>
+</tr>
+<tr>
+<td>L1-5-1</td>
+<td>(−0.024, −0.367, −0.348)</td>
+<td>(−0.227, −0.367, −0.348)</td>
+</tr>
+<tr>
+<td>L2-3-1</td>
+<td>(0.004, −0.122, −0.138)</td>
+<td>(−0.152, −0.122, −0.138)</td>
+</tr>
+<tr>
+<td>T5-6-1</td>
+<td>(−0.001, −0.600, −0.294)</td>
+<td>(−0.007, −0.600, −0.294)</td>
+</tr>
+</tbody>
+</table>
+<p>The B and C columns are identical because both GLSKs are flat there. The A column changes a lot: with 85 % of
+zone A's shift key on the slack bus, whose <abbr title="Power transfer distribution factor">PTDF</abbr> column is zero, the generation <abbr title="Generation and load shift key">GLSK</abbr> makes zone A almost
+invisible to the 135 kV lines, while the flat <abbr title="Generation and load shift key">GLSK</abbr> puts 60 % of every MW on buses 2–5 and loads L1-2 and L1-5.
+The slack choice does not matter for zone-to-zone PTDFs (differences of columns) but it does for a single
+zone's column, which is why only zone-to-zone values have a physical meaning.
+4. <strong>CNECs, <span class="arithmatex">\(F_0\)</span> and RAM.</strong> <code>cnec_table()</code> makes 40 CNECs (20 branches, both directions) with
+   <span class="arithmatex">\(F_\max = \max(1.3\,|F_\text{ref}|,\ 20)\)</span> MW (16 of them sit on the 20 MW floor), FRM <span class="arithmatex">\(= 0.05\,F_\max\)</span>,
+   <span class="arithmatex">\(F_0 = F_\text{ref} - \text{PTDF}_z\,NP_\text{ref}\)</span> and <span class="arithmatex">\(\text{RAM}^\pm = F_\max - \text{FRM} \mp F_0\)</span>. The four
+   smallest margins:</p>
+<table>
+<thead>
+<tr>
+<th><abbr title="Critical network element and contingency">CNEC</abbr></th>
+<th><span class="arithmatex">\(F_\text{ref}\)</span></th>
+<th><span class="arithmatex">\(F_\max\)</span></th>
+<th><span class="arithmatex">\(F_0\)</span></th>
+<th>RAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L3-4-1−</td>
+<td>−24.2</td>
+<td>31.4</td>
+<td>−36.1</td>
+<td><strong>−6.2</strong></td>
+</tr>
+<tr>
+<td>L7-8-1−</td>
+<td>0.0</td>
+<td>20.0</td>
+<td>−10.7</td>
+<td>8.3</td>
+</tr>
+<tr>
+<td>L9-10-1−</td>
+<td>6.2</td>
+<td>20.0</td>
+<td>−5.3</td>
+<td>13.7</td>
+</tr>
+<tr>
+<td>L10-11-1−</td>
+<td>−2.8</td>
+<td>20.0</td>
+<td>−3.6</td>
+<td>15.4</td>
+</tr>
+</tbody>
+</table>
+<p>The negative RAM of L3-4-1 in the negative direction means that the point of zero net positions is outside the
+domain: with no exchange at all the line would carry 36 MW from bus 4 to bus 3, above its 31.4 MW stand-in
+limit. The market must trade (zone A exporting, as it does at the reference point) to keep this line within
+its limit. Every RAM is positive <em>at the reference point</em> by construction, since <span class="arithmatex">\(|F_\text{ref}| \le F_\max/1.3\)</span>
+and <span class="arithmatex">\(F_\max - \text{FRM} = 0.95\,F_\max\)</span>.
+5. <strong>The domain.</strong> With <span class="arithmatex">\(NP_C = -NP_A - NP_B\)</span> each <abbr title="Critical network element and contingency">CNEC</abbr> is a half-plane
+   <span class="arithmatex">\((\text{PTDF}_A - \text{PTDF}_C)\,NP_A + (\text{PTDF}_B - \text{PTDF}_C)\,NP_B \le \text{RAM}\)</span> (<code>half_planes()</code>).
+   <code>domain_vertices()</code> intersects the boundary lines pairwise and keeps the points that satisfy all 40
+   constraints: a pentagon with vertices (52.3, −76.3), (70.7, −83.1), (107.8, −47.4), (79.9, 9.5), (41.4, 23.7),
+   whose edges belong to L10-11-1 (both directions), T4-7-1+, T5-6-1+ and L3-4-1− (<code>binding_cnecs()</code>). The reference
+   point (87.7, −34.3) is inside. The domain is small and thin because the 12 kV branches have 20 MW limits and
+   sensitivities to zones B and C of 0.25 to 0.6: ten to twenty MW of exchange fill them. <code>exchanges()</code> measures
+   how far the reference point can move in each zone-to-zone direction before a <abbr title="Critical network element and contingency">CNEC</abbr> binds, the flow-based
+   counterpart of an available transfer capacity:</p>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Extra exchange</th>
+<th>Binding <abbr title="Critical network element and contingency">CNEC</abbr></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A→B</td>
+<td>16.5 MW</td>
+<td>T5-6-1+</td>
+</tr>
+<tr>
+<td>B→A</td>
+<td>44.9 MW</td>
+<td>L3-4-1−</td>
+</tr>
+<tr>
+<td>A→C</td>
+<td>13.7 MW</td>
+<td>T4-7-1+</td>
+</tr>
+<tr>
+<td>C→A</td>
+<td>40.0 MW</td>
+<td>L3-4-1−</td>
+</tr>
+<tr>
+<td>B→C</td>
+<td>27.9 MW</td>
+<td>T4-7-1+</td>
+</tr>
+<tr>
+<td>C→B</td>
+<td>32.4 MW</td>
+<td>T5-6-1+</td>
+</tr>
+</tbody>
+</table>
+<p>Exports from zone A are limited by the two transformers that feed zones B and C; imports into A are limited
+by L3-4 in its negative direction. The plot is a matplotlib polygon through the vertices with the reference
+point marked and the five binding CNECs as edge labels (not saved by the module; <code>lab.ipynb</code> leaves the figure
+to you).
+6. <strong>A topology action.</strong> <code>topology_action(grid, f_max, 'L13-14-1')</code> opens line 13–14, keeps the limits of the
+   surviving branches (limits are properties of the lines, not of the topology), and rebuilds <abbr title="Power transfer distribution factor">PTDF</abbr>, CNECs and
+   domain. The new pentagon is bounded by L6-13-1+, T4-7-1+, T5-6-1+, L3-4-1− and L10-11-1−. Overlaying the two
+   polygons and comparing the exchanges:</p>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Base</th>
+<th>L13-14 open</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A→B</td>
+<td>16.5</td>
+<td>18.3</td>
+<td>+1.8</td>
+</tr>
+<tr>
+<td>B→A</td>
+<td>44.9</td>
+<td>41.8</td>
+<td>−3.0</td>
+</tr>
+<tr>
+<td>A→C</td>
+<td>13.7</td>
+<td>9.6</td>
+<td>−4.0</td>
+</tr>
+<tr>
+<td>C→A</td>
+<td>40.0</td>
+<td>39.8</td>
+<td>−0.2</td>
+</tr>
+<tr>
+<td>B→C</td>
+<td>27.9</td>
+<td>15.6</td>
+<td>−12.3</td>
+</tr>
+<tr>
+<td>C→B</td>
+<td>32.4</td>
+<td>25.9</td>
+<td>−6.5</td>
+</tr>
+</tbody>
+</table>
+<p>Only A→B gains: the line 13–14 was the parallel path between zones B and C, so every exchange that used it
+loses capacity, B→C most of all. The N-1 check of Chapter 19 (<code>security_metrics()</code>, <abbr title="Line outage distribution factor">LODF</abbr> over every
+non-bridge outage, loading against the same <span class="arithmatex">\(F_\max\)</span>) says: base topology worst N-0 loading 76.9 % (that is
+<span class="arithmatex">\(1/1.3\)</span>, by construction), worst N-1 loading 300 % on L3-4-1 after the outage of L2-3-1, N-1 overload energy
+382.8 MW; with L13-14 open the N-0 worst rises to 81.1 %, the worst N-1 case is the same 300 % and the overload
+energy grows to 414.7 MW. The stand-in limits of step 4 make the base topology itself N-1 insecure, so the
+check is a comparison: the action makes N-1 security worse and would not pass. The module also tries line 3–4,
+the action that enlarges four of the six margins: it leaves no domain at all. Bus 3 becomes radial, so L2-3-1
+carries the whole 94.2 MW load of bus 3 whatever the net positions (zonal PTDFs exactly zero), above its
+91.1 MW limit: <span class="arithmatex">\(\text{RAM} = -7.7\)</span> MW with zero sensitivity is a constraint no exchange can satisfy. In N-0
+the line is at 103.4 %, so this action fails before any N-1 case is run (its N-1 energy, 285.4 MW, would be
+better). A remedial action is only a candidate when the base case stays within limits; the flow-based domain
+then tells the market how much room the action leaves.</p>
+</li>
+</ol>
+<h2 id="exercise-1">Exercise 1<a class="headerlink" href="#exercise-1" title="Permanent link">&para;</a></h2>
+<p>The <abbr title="Temporary admissible transmission loading">TATL</abbr> is a <em>temporary</em> admissible loading: the line may carry up to 1 250 A for 15 minutes after the
+contingency, provided the flow is brought back under the <abbr title="Permanent admissible transmission loading">PATL</abbr> (1 000 A) within that time. <code>verdict()</code> in
+<code>curative_timing.py</code> encodes the three conditions.</p>
+<ul>
+<li>1 180 A after the contingency, split active after 10 minutes, 940 A afterwards: the flow is under the <abbr title="Temporary admissible transmission loading">TATL</abbr>,
+  the action arrives before the 15 minutes run out and leaves 940 A &lt; 1 000 A. The curative action is
+  sufficient; no preventive action is needed, and the market keeps the capacity.</li>
+<li>Activation takes 20 minutes: the line would stay at 1 180 A for 20 minutes, 5 minutes beyond the <abbr title="Temporary admissible transmission loading">TATL</abbr>
+  duration. A preventive action (or a faster curative one) is needed to bring the post-contingency flow under
+  the <abbr title="Permanent admissible transmission loading">PATL</abbr>, or at least to a level the <abbr title="Temporary admissible transmission loading">TATL</abbr> duration covers.</li>
+<li>Post-contingency flow 1 300 A: above the <abbr title="Temporary admissible transmission loading">TATL</abbr>, so the line is not allowed to carry it even for a second; the
+  protection would trip it. Only a preventive action helps, since there is no time window in which to act.</li>
+</ul>
+<p>A boundary case: 1 250 A and exactly 15 minutes pass (the <abbr title="Temporary admissible transmission loading">TATL</abbr> is inclusive in <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr> conventions); a curative
+action that leaves 1 020 A does not pass, because the end state must respect the <abbr title="Permanent admissible transmission loading">PATL</abbr>.</p>
+<h2 id="exercise-2">Exercise 2<a class="headerlink" href="#exercise-2" title="Permanent link">&para;</a></h2>
+<p>The GeoGebra construction (not run here): five lines <span class="arithmatex">\(a_k\,NP_A + b_k\,NP_B = \text{RAM}_k\)</span>, the inequality
+side of each shaded, the intersection filled, a slider on one RAM. <code>domain_2d.py</code> holds one such set, with the
+zonal PTDFs given relative to the balancing zone C (so <span class="arithmatex">\(a_k = \text{PTDF}_{A,k}\)</span>, <span class="arithmatex">\(b_k = \text{PTDF}_{B,k}\)</span>):</p>
+<table>
+<thead>
+<tr>
+<th><abbr title="Critical network element and contingency">CNEC</abbr></th>
+<th><span class="arithmatex">\(\text{PTDF}_A\)</span></th>
+<th><span class="arithmatex">\(\text{PTDF}_B\)</span></th>
+<th>RAM (MW)</th>
+<th><span class="arithmatex">\(s = \text{PTDF}_A - \text{PTDF}_B\)</span></th>
+<th>RAM / <span class="arithmatex">\(s\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.5</td>
+<td>0.1</td>
+<td>200</td>
+<td>0.4</td>
+<td>500</td>
+</tr>
+<tr>
+<td>2</td>
+<td>−0.3</td>
+<td>0.4</td>
+<td>180</td>
+<td>−0.7</td>
+<td>relieved</td>
+</tr>
+<tr>
+<td>3</td>
+<td>−0.4</td>
+<td>−0.5</td>
+<td>250</td>
+<td>0.1</td>
+<td>2 500</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.2</td>
+<td>−0.6</td>
+<td>220</td>
+<td>0.8</td>
+<td>275</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.6</td>
+<td>−0.4</td>
+<td>150</td>
+<td>1.0</td>
+<td><strong>150</strong></td>
+</tr>
+</tbody>
+</table>
+<p>An A→B exchange of <span class="arithmatex">\(e\)</span> MW is the point <span class="arithmatex">\(NP = (e, -e, 0)\)</span>; <abbr title="Critical network element and contingency">CNEC</abbr> <span class="arithmatex">\(k\)</span> sees <span class="arithmatex">\(s_k e\)</span> with <span class="arithmatex">\(s_k = a_k - b_k\)</span> and allows
+<span class="arithmatex">\(e \le \text{RAM}_k / s_k\)</span> when <span class="arithmatex">\(s_k &gt; 0\)</span> (a <abbr title="Critical network element and contingency">CNEC</abbr> with <span class="arithmatex">\(s_k &lt; 0\)</span> is relieved). The largest exchange is 150 MW,
+bound by <abbr title="Critical network element and contingency">CNEC</abbr> 5. The domain itself is the pentagon with vertices (−612.9, −9.7), (−117.6, −405.9), (7.1, −364.3),
+(365.4, 173.1) and (269.6, 652.2); it contains the origin. Moving the slider: with RAM<span class="arithmatex">\(_5\)</span> = 200 MW the exchange
+is 200 MW, still bound by <abbr title="Critical network element and contingency">CNEC</abbr> 5; from RAM<span class="arithmatex">\(_5\)</span> = 275 MW on, <abbr title="Critical network element and contingency">CNEC</abbr> 4 takes over at 275 MW and raising RAM<span class="arithmatex">\(_5\)</span>
+further (300, 400 MW) changes nothing. That is the general picture: enlarging the margin of the binding <abbr title="Critical network element and contingency">CNEC</abbr> moves
+the boundary until the next <abbr title="Critical network element and contingency">CNEC</abbr> binds, and a remedial action that only relieves one element has a bounded payoff.</p>
+<h2 id="exercise-3">Exercise 3<a class="headerlink" href="#exercise-3" title="Permanent link">&para;</a></h2>
+<p><code>glsk_sensitivity.compare()</code> rebuilds the worked example with the zone A shift keys (0.6, 0.4), (1.0, 0.0) and
+(0.0, 1.0):</p>
+<table>
+<thead>
+<tr>
+<th><abbr title="Generation and load shift key">GLSK</abbr> A</th>
+<th>Branch</th>
+<th><span class="arithmatex">\(F_\text{ref}\)</span></th>
+<th><span class="arithmatex">\(\text{PTDF}_{A-B}\)</span></th>
+<th><span class="arithmatex">\(F_0\)</span></th>
+<th>RAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0.6, 0.4)</td>
+<td>0–1 / 0–2 / 1–3 / 2–3 / 1–2</td>
+<td>137.5 / 162.5 / 62.5 / 37.5 / 25.0</td>
+<td>0.188 / 0.412 / 0.362 / 0.138 / 0.225</td>
+<td>90.6 / 59.4 / −28.1 / 3.1 / −31.2</td>
+<td>99.4 / 130.6 / 218.1 / 186.9 / 221.2</td>
+</tr>
+<tr>
+<td>(1.0, 0.0)</td>
+<td>same</td>
+<td>same</td>
+<td>0.438 / 0.562 / 0.312 / 0.188 / 0.125</td>
+<td>28.1 / 21.9 / −15.6 / −9.4 / −6.2</td>
+<td>161.9 / 168.1 / 205.6 / 199.4 / 196.2</td>
+</tr>
+<tr>
+<td>(0.0, 1.0)</td>
+<td>same</td>
+<td>same</td>
+<td>−0.188 / 0.188 / 0.438 / 0.062 / 0.375</td>
+<td>184.4 / 115.6 / −46.9 / 21.9 / −68.8</td>
+<td>5.6 / 74.4 / 236.9 / 168.1 / 258.8</td>
+</tr>
+</tbody>
+</table>
+<p>The reference flows are the same column three times: they come from the nodal injections, <span class="arithmatex">\(F_\text{ref} = H\,p\)</span>,
+and the <abbr title="Generation and load shift key">GLSK</abbr> plays no part in them. The zonal PTDFs, <span class="arithmatex">\(F_0 = F_\text{ref} - \text{PTDF}_z\,NP_\text{ref}\)</span> and the
+margins all change, and so does the capacity the market sees: 317 MW of extra A→B exchange (branch 0–2 binding)
+with (0.6, 0.4), 299 MW with (1.0, 0.0), 396 MW with (0.0, 1.0). Note the change of sign of the zone-to-zone <abbr title="Power transfer distribution factor">PTDF</abbr> of
+branch 0–1 when zone A's export is assumed to come from bus 1: the same exchange then relieves the branch that the
+other GLSKs load. The <abbr title="Generation and load shift key">GLSK</abbr> is a forecast of <em>where</em> in the zone the generators will react to the market; if the
+real dispatch differs, the flow on each <abbr title="Critical network element and contingency">CNEC</abbr> differs from the forecast by
+<span class="arithmatex">\((\text{PTDF}_{\text{true}} - \text{PTDF}_{\text{GLSK}})\,\Delta NP\)</span>. This forecast error, together with load,
+renewable and topology forecast errors between D-2 and real time, is what the flow reliability margin covers
+(<abbr title="Capacity Allocation and Congestion Management">CACM</abbr> Art. 22); the FRM is estimated statistically from the observed differences between forecast and realized
+flows on each <abbr title="Critical network element and contingency">CNEC</abbr>.</p>
+<h2 id="exercise-4">Exercise 4<a class="headerlink" href="#exercise-4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ToOp artifact</th>
+<th><abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr> element</th>
+<th>What ToOp lacks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nminus1_definition.json</code>, <code>contingencies</code> (<code>Contingency(id, elements=[GridElement])</code>, plus <code>BASECASE</code>)</td>
+<td>Contingencies: a named list of network elements that trip together</td>
+<td>Nothing structural; <code>BASECASE</code> is the preventive state. The <code>line_for_nminus1</code> mask (and <code>trafo_*</code>, <code>generator_for_nminus1</code> etc.) is the list of elements turned into single contingencies</td>
+</tr>
+<tr>
+<td><code>monitored_elements</code> and the <code>line_for_reward</code> mask</td>
+<td>The network elements of the CNECs</td>
+<td>A <abbr title="Critical network element and contingency">CNEC</abbr> in a <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr> is one element <em>in one state</em> (after one contingency, at one instant); ToOp monitors every reward element after every contingency, the full product</td>
+</tr>
+<tr>
+<td><code>branch_limits.max_mw_flow</code> (N-0) and <code>max_mw_flow_n_1</code></td>
+<td>Thresholds of the CNECs: <abbr title="Permanent admissible transmission loading">PATL</abbr> for the preventive instant, <abbr title="Temporary admissible transmission loading">TATL</abbr> for the outage instant</td>
+<td>Only MW thresholds (a <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr> also takes A and % of <span class="arithmatex">\(I_\max\)</span>), only two instants: preventive (N-0 flows against <code>max_mw_flow</code>) and outage (N-1 flows against <code>max_mw_flow_n_1</code>). No auto and curative instants, no <abbr title="Temporary admissible transmission loading">TATL</abbr> durations</td>
+</tr>
+<tr>
+<td><code>action_set.json</code> <code>local_actions</code> (busbar assignments) and <code>disconnectable_branches</code></td>
+<td>Network actions: switch pairs (open/close) and terminal connections</td>
+<td>All are preventive; the ORAO summary writes them under <code>preventive-actions-list</code></td>
+</tr>
+<tr>
+<td>the fact that every action may be applied</td>
+<td>Usage rules</td>
+<td>Only "available everywhere, preventive". No <code>onContingencyState</code>, <code>onFlowConstraint</code>, <code>onInstant</code> rules, so no action can be reserved for one contingency or triggered by one <abbr title="Critical network element and contingency">CNEC</abbr></td>
+</tr>
+</tbody>
+</table>
+<p>Three <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr> features with no representation in ToOp: (1) curative and automatic remedial actions, with their
+instants, <abbr title="Temporary admissible transmission loading">TATL</abbr> durations and the flow-based idea that a curative action restores the <abbr title="Permanent admissible transmission loading">PATL</abbr> after the <abbr title="Temporary admissible transmission loading">TATL</abbr> window
+(Exercise 1); (2) range actions, <abbr title="Phase-shifting transformer">PST</abbr> tap and <abbr title="High-voltage direct current">HVDC</abbr> set-point optimization as part of the remedial action search
+(ToOp's <code>pst_ranges</code> are only read by the DC solver as fixed data, and it has no redispatching or
+countertrading, hence no costs); (3) <abbr title="Critical network element and contingency">CNEC</abbr>-specific usage rules and thresholds (per-instant, per-contingency
+limits in A or %, voltage and angle CNECs, loop-flow and RAM-based objectives). Smaller gaps: a <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr> names
+contingencies with several elements and busbar outages explicitly, while ToOp's multi-outages and busbar outages
+are preprocessing options.</p>
+<h2 id="exercise-5">Exercise 5<a class="headerlink" href="#exercise-5" title="Permanent link">&para;</a></h2>
+<p><code>orao_switches_toop.py</code> imports and preprocesses <code>data/grid_node_breaker/grid.xiidm</code> exactly as the Chapter 22
+Lab does (cutoff voltage 10 kV; one relevant substation, VL2, survives preprocessing with ten actions, the unsplit
+one included). Two findings change the exercise as stated:</p>
+<ul>
+<li><code>run_pipeline</code> (the cell of <code>example2_small_grid_toop.ipynb</code>) fails on Windows outside the container: the DC
+  optimizer names its TensorBoard folder after <code>datetime.now()</code>, and the colons of the time are not valid in a
+  Windows path (<code>WinError 123</code>). So the DC optimization stage was <strong>not run here</strong>. Instead the module writes a
+  <code>res.json</code> that lists every single action as a candidate and calls <code>perform_ac_analysis</code>, the same function the
+  notebook runs after the DC stage, so that the <code>orao_summary.json</code> files come from ToOp's own writer.</li>
+<li>No topology of this grid is accepted. ToOp's <code>evaluate_acceptance</code> requires at most as many non-converging
+  load flows as the unsplit grid and at least 5 % less AC <code>overload_energy_n_1</code>. The unsplit grid has an AC
+  overload energy of 16.34 MW with 3 non-converging cases; the best split (action 5, 25.38 MW) is worse, the
+  unsplit action 0 is rejected for lack of improvement, and a scan of the 80 split-plus-one-disconnection and 8
+  disconnection-only candidates (run once, not kept as a test) finds every one rejected on convergence or
+  overload energy. The exercise's "accepted topology" does not exist for this grid; <code>perform_ac_analysis</code> writes
+  the ORAO summary of every assessed topology anyway, so the table below is that of the best split.</li>
+</ul>
+<p>The ORAO summary is a dictionary <code>forced-actions → preventive-actions-list → actions</code>, each action
+<code>{"type": "SWITCH", "id": "Open VL2_BREAKER", "switchId": "VL2_BREAKER", "open": true}</code>. Joined with
+<code>net.get_switches()</code> (<code>switch_table()</code>) and with the bays of the action set (<code>bay_breakers()</code>,
+<code>flag_disconnectors()</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Switch</th>
+<th>Operation</th>
+<th>Kind</th>
+<th>Voltage level</th>
+<th>Bay breaker</th>
+<th>Needs breaker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VL2_BREAKER</td>
+<td>open</td>
+<td>BREAKER (coupler)</td>
+<td>VL2</td>
+<td>–</td>
+<td>no</td>
+</tr>
+<tr>
+<td>L12_DISCONNECTOR_4_0</td>
+<td>open</td>
+<td>DISCONNECTOR</td>
+<td>VL2</td>
+<td>L12_BREAKER</td>
+<td><strong>yes</strong></td>
+</tr>
+<tr>
+<td>L12_DISCONNECTOR_4_2</td>
+<td>close</td>
+<td>DISCONNECTOR</td>
+<td>VL2</td>
+<td>L12_BREAKER</td>
+<td><strong>yes</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Action 5 moves line L1's bay from busbar BBS2_1 to BBS2_3 and opens the coupler between them. The list contains
+the two disconnector operations of the bay but not its breaker: a disconnector cannot make or break load current
+(Chapter 20), so the switching sequence must open <code>L12_BREAKER</code> first, then open the busbar disconnector 4_0,
+close 4_2 and close the breaker again; the coupler <code>VL2_BREAKER</code>, a breaker, can be opened under load as the last
+step. The ORAO list is a target state, not a sequence: the ordering and the bay breakers are what the operator or
+OpenRAO's switch sequence has to add. (ToOp's logs call the result "Accepted Topology" while printing the
+rejection reason; the verdict is the return value of <code>evaluate_acceptance</code>, <code>None</code> when accepted.)</p>
+<h2 id="exercise-6">Exercise 6<a class="headerlink" href="#exercise-6" title="Permanent link">&para;</a></h2>
+<p><code>time_coupling.py</code> builds a 24 × 4 table of hourly overload energies (a daily load shape with topology 0 the
+unsplit grid, topology 1 best in the morning, 2 best in the evening, 3 mediocre everywhere; <code>overload_table()</code>
+prints it). (a) The single topology with the smallest total, the way ToOp scores one topology on all timesteps of a
+run, is topology 1 with 262.5 MW. (b) The dynamic program <code>best_sequence(table, c)</code> minimizes
+<span class="arithmatex">\(\sum_h E[h, t_h] + c \cdot \#\{h : t_h \ne t_{h-1}\}\)</span> over sequences: for each hour and topology, the best cost of
+ending there is its own overload plus the cheaper of staying in the same topology or coming from the best previous
+one plus <span class="arithmatex">\(c\)</span>; a back-pointer array recovers the sequence (<code>test_time_coupling.py</code> checks it against brute force on
+a six-hour day).</p>
+<table>
+<thead>
+<tr>
+<th>Switching cost <span class="arithmatex">\(c\)</span></th>
+<th>Sequence</th>
+<th>Overload</th>
+<th>Switches</th>
+<th>Total cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>2 at hour 0, then 1 for hours 1–12, then 2</td>
+<td>196.5</td>
+<td>2</td>
+<td>196.5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1 for hours 0–12, 2 for hours 13–23</td>
+<td>199.2</td>
+<td>1</td>
+<td>204.2</td>
+</tr>
+<tr>
+<td>10</td>
+<td>same</td>
+<td>199.2</td>
+<td>1</td>
+<td>209.2</td>
+</tr>
+<tr>
+<td>20</td>
+<td>same</td>
+<td>199.2</td>
+<td>1</td>
+<td>219.2</td>
+</tr>
+<tr>
+<td>63.5</td>
+<td>topology 1 all day</td>
+<td>262.5</td>
+<td>0</td>
+<td>262.5</td>
+</tr>
+</tbody>
+</table>
+<p>The one-switch plan costs <span class="arithmatex">\(199.2 + c\)</span> and the fixed plan 262.5, so they coincide at <span class="arithmatex">\(c^\star = 63.3\)</span> MW per
+change (63.5 on the 0.5 MW grid of <code>break_even()</code>): a switching cost of about a quarter of the day's overload
+energy makes the single topology optimal. Below it, a planner who may switch once a day saves 63 MW of overload
+energy. ToOp's choice of one topology per run is the <span class="arithmatex">\(c \to \infty\)</span> end of this trade-off; it is the right
+choice when switching between hours is operationally expensive or unverified, and it is why a time-coupled <abbr title="Remedial action optimization">RAO</abbr>
+(OpenRAO's MARMOT) needs a switching cost or a limit on the number of changes to be meaningful.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
