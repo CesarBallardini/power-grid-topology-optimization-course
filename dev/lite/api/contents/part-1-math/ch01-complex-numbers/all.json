@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.661032Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.661032Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-1-math/ch01-complex-numbers/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.659198Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.659198Z",
+  "mimetype": null,
+  "name": "ch01-complex-numbers",
+  "path": "part-1-math/ch01-complex-numbers",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.694793Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.694793Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-5-computing/ch30-scientific-python/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.693769Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.693769Z",
+  "mimetype": null,
+  "name": "ch30-scientific-python",
+  "path": "part-5-computing/ch30-scientific-python",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.673928Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.673928Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-3-power-systems/ch12-power-grid-operation/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.672166Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.672166Z",
+  "mimetype": null,
+  "name": "ch12-power-grid-operation",
+  "path": "part-3-power-systems/ch12-power-grid-operation",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

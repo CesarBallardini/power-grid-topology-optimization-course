@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.683913Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.683913Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-3-power-systems/ch21-coordinated-security-rao/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.682902Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.682902Z",
+  "mimetype": null,
+  "name": "ch21-coordinated-security-rao",
+  "path": "part-3-power-systems/ch21-coordinated-security-rao",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

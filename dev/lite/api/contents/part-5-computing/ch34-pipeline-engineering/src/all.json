@@ -1,0 +1,71 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.696259Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:52.694400Z",
+      "mimetype": null,
+      "name": "examples.ipynb",
+      "path": "part-5-computing/ch34-pipeline-engineering/src/examples.ipynb",
+      "size": 4495,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.696539Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:25.417365Z",
+      "mimetype": "text/x-python",
+      "name": "mini_pipeline.py",
+      "path": "part-5-computing/ch34-pipeline-engineering/src/mini_pipeline.py",
+      "size": 6778,
+      "type": "file",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.696687Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:25.417365Z",
+      "mimetype": "text/x-python",
+      "name": "shm_fill.py",
+      "path": "part-5-computing/ch34-pipeline-engineering/src/shm_fill.py",
+      "size": 2629,
+      "type": "file",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.696400Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:52.696518Z",
+      "mimetype": null,
+      "name": "exercises.ipynb",
+      "path": "part-5-computing/ch34-pipeline-engineering/src/exercises.ipynb",
+      "size": 5086,
+      "type": "notebook",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.696687Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.696687Z",
+  "mimetype": null,
+  "name": "src",
+  "path": "part-5-computing/ch34-pipeline-engineering/src",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

@@ -3623,6 +3623,14 @@ chapters 12, 13, 15, 17, 19, 20, 21 and 23. <a href="#part-3-power-systems-ch19-
 reproduces the idea of its <abbr title="Security-constrained optimal power flow">SCOPF</abbr> example in Python, so no lab depends on the commercial tool.</p>
 <p><a href="#part-0-orientation-ch00-orientation-and-setup">Chapter 0</a> sets up ToOp in a container (the supported
 path on Windows). A <abbr title="Graphics processing unit">GPU</abbr> is optional: every lab runs on CPU, with smaller grids.</p>
+<h3 id="course-guide-notebooks-in-the-browser">Notebooks in the browser<a class="headerlink" href="#course-guide-notebooks-in-the-browser" title="Permanent link">&para;</a></h3>
+<p>Each chapter's notebooks (examples, lab and exercises) are pages of this book, with a <strong>Download the notebook</strong>
+button. The notebooks that need only NumPy, SciPy, pandas, matplotlib, NetworkX, pandapower or pydantic, about
+two thirds of them, also have a <strong>Run in your browser</strong> button. It opens the notebook in JupyterLite, where Python runs inside the
+browser tab (Pyodide): nothing to install and no account. The first run downloads the Python packages, tens of
+megabytes, and your edits stay in that browser only, so download the notebook to keep your work. Notebooks that
+need JAX, pypowsybl, PuLP, ToOp or the labs container have no Run button: run them in the local setup of
+Chapter 0.</p>
 <h2 id="course-guide-printable-version">Printable version<a class="headerlink" href="#course-guide-printable-version" title="Permanent link">&para;</a></h2>
 <p>The whole book is also available as a single page, with a table of contents, for printing or saving as PDF
 from the browser: <a href="#print_page">print version</a>.</p>
@@ -3878,10 +3886,10 @@ and a toy grid has too little work to fill the card. Every lab in this book runs
    a generator writes an already-imported folder.)</li>
 <li>Write down every term you do not understand yet; revisit the list at the end of Parts III and IV.</li>
 </ol>
-<p>Solutions: <a href="#part-0-orientation-ch00-orientation-and-setup-solutions-lab">Lab</a> · Notebook: <a href="../part-0-orientation/ch00-orientation-and-setup/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-0-orientation-ch00-orientation-and-setup-solutions-lab">Lab</a> · Notebook: <a href="#part-0-orientation-ch00-orientation-and-setup-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-0-orientation-ch00-orientation-and-setup-exercises">Exercises<a class="headerlink" href="#part-0-orientation-ch00-orientation-and-setup-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-0-orientation/ch00-orientation-and-setup/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-0-orientation/ch00-orientation-and-setup/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-0-orientation-ch00-orientation-and-setup-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-0-orientation-ch00-orientation-and-setup-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>In one paragraph for a non-engineer, explain why switching a line <em>out</em> of service can reduce congestion on
@@ -4078,10 +4086,10 @@ yet; <a href="#part-5-computing-ch30-scientific-python">Chapter 30</a> starts in
    (inductive, capacitive, purely resistive). For each, verify <code>S = V * conj(I)</code> and compare <code>abs(S)</code> with
    <code>sqrt(P**2 + Q**2)</code>. State the sign of Q for each load.</li>
 </ol>
-<p>Solutions: <a href="#part-1-math-ch01-complex-numbers-solutions-lab">Lab</a> · Notebook: <a href="../part-1-math/ch01-complex-numbers/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-1-math-ch01-complex-numbers-solutions-lab">Lab</a> · Notebook: <a href="#part-1-math-ch01-complex-numbers-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-1-math-ch01-complex-numbers-exercises">Exercises<a class="headerlink" href="#part-1-math-ch01-complex-numbers-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-1-math/ch01-complex-numbers/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-1-math/ch01-complex-numbers/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-1-math-ch01-complex-numbers-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-1-math-ch01-complex-numbers-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>By hand, compute <span class="arithmatex">\(\dfrac{(3 + 4j)(1 - j)}{2j}\)</span> in rectangular and polar form. <em>Answer:</em> <span class="arithmatex">\(0.5 - j3.5 =
@@ -4311,10 +4319,10 @@ used; the comparison with a power-flow tool is done in
 <li>Add a new branch <code>(0, 5)</code> with <span class="arithmatex">\(g = 1\)</span> S. Show that the new matrix is <span class="arithmatex">\(G + g\, a a^\top\)</span>, where <span class="arithmatex">\(a\)</span> is the
    new row of <span class="arithmatex">\(A\)</span>, and compare the new currents with the old ones.</li>
 </ol>
-<p>Solutions: <a href="#part-1-math-ch02-linear-algebra-solutions-lab">Lab</a> · Notebook: <a href="../part-1-math/ch02-linear-algebra/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-1-math-ch02-linear-algebra-solutions-lab">Lab</a> · Notebook: <a href="#part-1-math-ch02-linear-algebra-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-1-math-ch02-linear-algebra-exercises">Exercises<a class="headerlink" href="#part-1-math-ch02-linear-algebra-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-1-math/ch02-linear-algebra/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-1-math/ch02-linear-algebra/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-1-math-ch02-linear-algebra-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-1-math-ch02-linear-algebra-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>By hand, write the incidence matrix of a triangle (3 nodes, 3 branches), compute <span class="arithmatex">\(A^\top A\)</span> and find its
@@ -4490,11 +4498,11 @@ power system package is needed.</p>
 <li>Stretch: repeat steps 2–3 on a larger edge list, such as the IEEE 118-bus branch table exported to CSV
    once the pandapower basics of <a href="#part-5-computing-ch30-scientific-python">Chapter 30</a> are covered.</li>
 </ol>
-<p>Solutions: <a href="#part-1-math-ch03-graph-theory-solutions-lab">Lab</a> · Notebook: <a href="../part-1-math/ch03-graph-theory/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-1-math-ch03-graph-theory-solutions-lab">Lab</a> · Notebook: <a href="#part-1-math-ch03-graph-theory-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-1-math-ch03-graph-theory-exercises">Exercises<a class="headerlink" href="#part-1-math-ch03-graph-theory-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-1-math/ch03-graph-theory/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-1-math/ch03-graph-theory/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-1-math-ch03-graph-theory-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-1-math-ch03-graph-theory-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>By hand, find the bridges and articulation points of a graph made of two triangles joined by a single
@@ -4731,11 +4739,11 @@ withdrawn at node 0).</p>
    percent while <code>float64</code> stays below <span class="arithmatex">\(10^{-9}\)</span>. Relate this to ToOp's <code>float64</code> policy and its <code>1e-11</code>
    denominator threshold.</li>
 </ol>
-<p>Solutions: <a href="#part-1-math-ch04-numerical-linear-algebra-solutions-lab">Lab</a> · Notebook: <a href="../part-1-math/ch04-numerical-linear-algebra/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-1-math-ch04-numerical-linear-algebra-solutions-lab">Lab</a> · Notebook: <a href="#part-1-math-ch04-numerical-linear-algebra-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-1-math-ch04-numerical-linear-algebra-exercises">Exercises<a class="headerlink" href="#part-1-math-ch04-numerical-linear-algebra-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-1-math/ch04-numerical-linear-algebra/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-1-math/ch04-numerical-linear-algebra/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-1-math-ch04-numerical-linear-algebra-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-1-math-ch04-numerical-linear-algebra-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Verify the Sherman–Morrison identity by multiplying <span class="arithmatex">\((M + uv^\top)\)</span> by the right-hand side. What happens when
@@ -4840,11 +4848,11 @@ split before use. Results are summarized with maxima, medians and the top-k wors
    child generators with <code>rng.spawn(4)</code>. Compare with how <code>mutate.py</code> splits a JAX key into
    <code>substation_key</code> and <code>disconnection_key</code> before sampling.</li>
 </ol>
-<p>Solutions: <a href="#part-1-math-ch05-probability-solutions-lab">Lab</a> · Notebook: <a href="../part-1-math/ch05-probability/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-1-math-ch05-probability-solutions-lab">Lab</a> · Notebook: <a href="#part-1-math-ch05-probability-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-1-math-ch05-probability-exercises">Exercises<a class="headerlink" href="#part-1-math-ch05-probability-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-1-math/ch05-probability/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-1-math/ch05-probability/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-1-math-ch05-probability-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-1-math-ch05-probability-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Let <span class="arithmatex">\(N \sim \text{Poisson}(\lambda)\)</span> and <span class="arithmatex">\(K = \min(\max(N, 1), m)\)</span>. Show that <span class="arithmatex">\(P(K = 1) = e^{-\lambda}(1 + \lambda)\)</span>,
@@ -5012,10 +5020,10 @@ fails. In Octave, <code>fsolve(@(v) [v(1)^2 + v(2)^2 - 4; exp(v(1)) + v(2) - 1],
 <li>Keep the function: after <a href="#part-3-power-systems-ch15-ac-power-flow">Chapter 15</a> you reuse it for a
    3-bus AC power flow.</li>
 </ol>
-<p>Solutions: <a href="#part-1-math-ch06-newton-raphson-solutions-lab">Lab</a> · Notebook: <a href="../part-1-math/ch06-newton-raphson/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-1-math-ch06-newton-raphson-solutions-lab">Lab</a> · Notebook: <a href="#part-1-math-ch06-newton-raphson-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-1-math-ch06-newton-raphson-exercises">Exercises<a class="headerlink" href="#part-1-math-ch06-newton-raphson-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-1-math/ch06-newton-raphson/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-1-math/ch06-newton-raphson/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-1-math-ch06-newton-raphson-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-1-math-ch06-newton-raphson-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>By hand, apply Newton to <span class="arithmatex">\(f(x) = x^2 - 2\)</span> from <span class="arithmatex">\(x_0 = 1\)</span> for three steps and show that the error is roughly
@@ -5120,10 +5128,10 @@ over current, Ohm's law in its complex form
 <li>Plot the instantaneous power <span class="arithmatex">\(p(t) = e(t)^2 / R\)</span> into a resistor and show that its mean equals
    <span class="arithmatex">\(E_{\text{RMS}}^2/R\)</span>: this is why RMS values are used for AC power.</li>
 </ol>
-<p>Solutions: <a href="#part-2-circuits-ch07-electromagnetism-solutions-lab">Lab</a> · Notebook: <a href="../part-2-circuits/ch07-electromagnetism/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-2-circuits-ch07-electromagnetism-solutions-lab">Lab</a> · Notebook: <a href="#part-2-circuits-ch07-electromagnetism-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-2-circuits-ch07-electromagnetism-exercises">Exercises<a class="headerlink" href="#part-2-circuits-ch07-electromagnetism-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-2-circuits/ch07-electromagnetism/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-2-circuits/ch07-electromagnetism/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-2-circuits-ch07-electromagnetism-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-2-circuits-ch07-electromagnetism-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>An aluminium conductor (<span class="arithmatex">\(\rho \approx 2.82\cdot10^{-8}\ \Omega\,\text{m}\)</span>) is 100 km long with a
@@ -5265,10 +5273,10 @@ incidence matrix of the three branches over the nodes <span class="arithmatex">\
 <li>Keep <code>nodal_solve</code>: it becomes the DC power flow in
    <a href="#part-3-power-systems-ch16-dc-power-flow">Chapter 16</a> by replacing conductances with susceptances.</li>
 </ol>
-<p>Solutions: <a href="#part-2-circuits-ch08-dc-circuits-solutions-lab">Lab</a> · Notebook: <a href="../part-2-circuits/ch08-dc-circuits/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-2-circuits-ch08-dc-circuits-solutions-lab">Lab</a> · Notebook: <a href="#part-2-circuits-ch08-dc-circuits-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-2-circuits-ch08-dc-circuits-exercises">Exercises<a class="headerlink" href="#part-2-circuits-ch08-dc-circuits-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-2-circuits/ch08-dc-circuits/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-2-circuits/ch08-dc-circuits/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-2-circuits-ch08-dc-circuits-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-2-circuits-ch08-dc-circuits-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>By hand, write the nodal equations of a Wheatstone bridge (4 nodes, 5 resistors, one current source) and
@@ -5369,11 +5377,11 @@ P_{12} \approx \frac{\delta}{X}.
 <li>Repeat with <span class="arithmatex">\(V_1 = 1.05\)</span> and <span class="arithmatex">\(V_2 = 0.95\)</span> pu and separate the error caused by the angle linearization from
    the error caused by assuming flat voltage magnitudes.</li>
 </ol>
-<p>Solutions: <a href="#part-2-circuits-ch09-ac-steady-state-solutions-lab">Lab</a> · Notebook: <a href="../part-2-circuits/ch09-ac-steady-state/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-2-circuits-ch09-ac-steady-state-solutions-lab">Lab</a> · Notebook: <a href="#part-2-circuits-ch09-ac-steady-state-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-2-circuits-ch09-ac-steady-state-exercises">Exercises<a class="headerlink" href="#part-2-circuits-ch09-ac-steady-state-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-2-circuits/ch09-ac-steady-state/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-2-circuits/ch09-ac-steady-state/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-2-circuits-ch09-ac-steady-state-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-2-circuits-ch09-ac-steady-state-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>A series <abbr title="Reinforcement learning">RL</abbr> load, <span class="arithmatex">\(R = 10\ \Omega\)</span> and <span class="arithmatex">\(L = 50\)</span> mH, is fed by 230 V at 50 Hz. Compute <span class="arithmatex">\(Z\)</span>, <span class="arithmatex">\(I\)</span>, <span class="arithmatex">\(S\)</span> and the power
@@ -5497,11 +5505,11 @@ z_{\text{pu,new}} = z_{\text{pu,old}} \left(\frac{V_{\text{base,old}}}{V_{\text{
 <li>Compare your MW column with the formula used in ToOp's <code>powsybl_helpers.py</code> (<code>value * limit_voltage *
    1e-3 * math.sqrt(3)</code>) and state the units each factor assumes.</li>
 </ol>
-<p>Solutions: <a href="#part-2-circuits-ch10-three-phase-per-unit-solutions-lab">Lab</a> · Notebook: <a href="../part-2-circuits/ch10-three-phase-per-unit/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-2-circuits-ch10-three-phase-per-unit-solutions-lab">Lab</a> · Notebook: <a href="#part-2-circuits-ch10-three-phase-per-unit-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-2-circuits-ch10-three-phase-per-unit-exercises">Exercises<a class="headerlink" href="#part-2-circuits-ch10-three-phase-per-unit-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-2-circuits/ch10-three-phase-per-unit/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-2-circuits/ch10-three-phase-per-unit/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-2-circuits-ch10-three-phase-per-unit-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-2-circuits-ch10-three-phase-per-unit-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>A balanced wye load has <span class="arithmatex">\(Z_Y = 30 + j40\ \Omega\)</span> per phase on a 400 V (line-to-line) supply. Compute the line
@@ -5654,11 +5662,11 @@ The sign of <span class="arithmatex">\(\alpha\)</span> here is a modeling choice
    susceptances instead of conductances) and compute the change of every branch flow per degree by
    finite differences. This column of sensitivities is what ToOp's <abbr title="Phase shift distribution factor">PSDF</abbr> stores.</li>
 </ol>
-<p>Solutions: <a href="#part-2-circuits-ch11-transformers-psts-hvdc-solutions-lab">Lab</a> · Notebook: <a href="../part-2-circuits/ch11-transformers-psts-hvdc/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-2-circuits-ch11-transformers-psts-hvdc-solutions-lab">Lab</a> · Notebook: <a href="#part-2-circuits-ch11-transformers-psts-hvdc-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-2-circuits-ch11-transformers-psts-hvdc-exercises">Exercises<a class="headerlink" href="#part-2-circuits-ch11-transformers-psts-hvdc-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-2-circuits/ch11-transformers-psts-hvdc/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-2-circuits/ch11-transformers-psts-hvdc/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-2-circuits-ch11-transformers-psts-hvdc-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-2-circuits-ch11-transformers-psts-hvdc-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>An ideal 380/110 kV transformer feeds a 10 Ω impedance on its 110 kV side. What impedance is seen from the
@@ -5796,10 +5804,10 @@ topology can still be changed, explains why ToOp optimizes what it optimizes.</p
 <li>Optional: on the ENTSO-E Transparency Platform, look up the cross-border physical flows of Belgium or
    Germany for the same week and relate them to your plot.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch12-power-grid-operation-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch12-power-grid-operation/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-3-power-systems-ch12-power-grid-operation-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch12-power-grid-operation-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-3-power-systems-ch12-power-grid-operation-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch12-power-grid-operation-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch12-power-grid-operation/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-3-power-systems/ch12-power-grid-operation/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch12-power-grid-operation-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-3-power-systems-ch12-power-grid-operation-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Two-node market, pen and paper. Node A has a generator with marginal cost 20 €/MWh and 1,000 MW capacity;
@@ -5989,10 +5997,10 @@ NetworkX (<a href="#part-1-math-ch03-graph-theory">Chapter 3</a>).</p>
    <code>per_station_switching_distance</code> (<code>dc_solver/preprocess/helpers/switching_distance.py</code>). Verify the
    reassignment and coupler distances by hand.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch13-substations-grid-models-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch13-substations-grid-models/src/lab_toop.ipynb">lab_toop.ipynb</a> (needs ToOp).</p>
+<p>Solutions: <a href="#part-3-power-systems-ch13-substations-grid-models-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch13-substations-grid-models-src-lab_toop">lab_toop.ipynb</a> (needs ToOp).</p>
 </div>
 <h2 id="part-3-power-systems-ch13-substations-grid-models-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch13-substations-grid-models-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch13-substations-grid-models/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-3-power-systems/ch13-substations-grid-models/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch13-substations-grid-models-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-3-power-systems-ch13-substations-grid-models-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Draw a double-busbar, single-breaker substation with four line bays and one coupler. Give its node-breaker,
@@ -6169,10 +6177,10 @@ imaginary part (up to sign) is the DC matrix <span class="arithmatex">\(B_\text{
    transformer branches from their off-nominal taps and check the symmetry of <span class="arithmatex">\(Y_\text{bus}\)</span> numerically.</li>
 <li>Set a 5° phase shift on one transformer, rebuild, and measure <span class="arithmatex">\(\lVert Y_\text{bus} - Y_\text{bus}^\top \rVert\)</span>.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch14-component-models-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch14-component-models/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-3-power-systems-ch14-component-models-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch14-component-models-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-3-power-systems-ch14-component-models-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch14-component-models-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch14-component-models/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-3-power-systems/ch14-component-models/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch14-component-models-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-3-power-systems-ch14-component-models-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Build <span class="arithmatex">\(Y_\text{bus}\)</span> by inspection for a three-bus ring with series impedances <span class="arithmatex">\(j0.1\)</span>, <span class="arithmatex">\(j0.2\)</span>, <span class="arithmatex">\(j0.25\)</span> p.u.
@@ -6414,10 +6422,10 @@ Simulator.</p>
    13 buses, so IEEE 14 does not fit. Then repeat one failure of step 3 and compare how Simulator reports it
    with your iteration history.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch15-ac-power-flow-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch15-ac-power-flow/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-3-power-systems-ch15-ac-power-flow-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch15-ac-power-flow-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-3-power-systems-ch15-ac-power-flow-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch15-ac-power-flow-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch15-ac-power-flow/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-3-power-systems/ch15-ac-power-flow/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch15-ac-power-flow-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-3-power-systems-ch15-ac-power-flow-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>For a two-bus system (slack bus 1 at <span class="arithmatex">\(1\angle 0\)</span>, <abbr title="Load bus (active and reactive power specified)">PQ</abbr> bus 2 with load <span class="arithmatex">\(P + jQ\)</span>, line reactance <span class="arithmatex">\(X\)</span>), write the
@@ -6612,11 +6620,11 @@ timestep.</p>
    the worked example into account.</li>
 <li>Optional: repeat step 2 with MATPOWER's <code>rundcpf</code> on <code>case57</code> in Octave.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch16-dc-power-flow-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch16-dc-power-flow/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-3-power-systems-ch16-dc-power-flow-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch16-dc-power-flow-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-3-power-systems-ch16-dc-power-flow-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch16-dc-power-flow-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch16-dc-power-flow/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-3-power-systems/ch16-dc-power-flow/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch16-dc-power-flow-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-3-power-systems-ch16-dc-power-flow-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Starting from <span class="arithmatex">\(p_f = \frac{|V_f||V_t|}{x}\sin(\theta_f - \theta_t)\)</span>, bound the relative error of the DC flow
@@ -6889,7 +6897,7 @@ new topology: after an outage of branch <span class="arithmatex">\(k\)</span> th
 <li>Apply the <abbr title="Power transfer distribution factor">PTDF</abbr> update after a disconnection and check it against the <abbr title="Power transfer distribution factor">PTDF</abbr> of the network without the
    branch.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch17-sensitivity-factors-1-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch17-sensitivity-factors-1/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-3-power-systems-ch17-sensitivity-factors-1-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch17-sensitivity-factors-1-src-lab">lab.ipynb</a>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Known discrepancy: MATPOWER's bridge masking fails on case118</p>
@@ -6901,8 +6909,8 @@ bridges as non-finite columns. Find the bridges yourself (the graph method of
 before the comparison.</p>
 </div>
 <h2 id="part-3-power-systems-ch17-sensitivity-factors-1-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch17-sensitivity-factors-1-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch17-sensitivity-factors-1/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-3-power-systems/ch17-sensitivity-factors-1/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch17-sensitivity-factors-1-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-3-power-systems-ch17-sensitivity-factors-1-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>For a three-bus triangle with equal reactances and slack at bus 3, derive the <abbr title="Power transfer distribution factor">PTDF</abbr> by hand, then the <abbr title="Line outage distribution factor">LODF</abbr>
@@ -7255,11 +7263,11 @@ checks that the result equals <span class="arithmatex">\(H' P'\)</span>.</p>
 <li>Apply the same steps in a different order (disconnection before split). Which final quantities are
    invariant, and which intermediate objects (the stored <span class="arithmatex">\(\beta\)</span> vectors, the cross-coupler flows) change?</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch18-sensitivity-factors-2-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch18-sensitivity-factors-2/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-3-power-systems-ch18-sensitivity-factors-2-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch18-sensitivity-factors-2-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-3-power-systems-ch18-sensitivity-factors-2-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch18-sensitivity-factors-2-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch18-sensitivity-factors-2/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-3-power-systems/ch18-sensitivity-factors-2/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch18-sensitivity-factors-2-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-3-power-systems-ch18-sensitivity-factors-2-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Write the <abbr title="Multi-outage distribution factor">MODF</abbr> for two outaged branches with the closed-form <span class="arithmatex">\(2 \times 2\)</span> inverse. Show that
@@ -7645,7 +7653,7 @@ time (110 kV lines with <span class="arithmatex">\(r = 0.1\,x\)</span>, loads wi
 <a id="__codelineno-3-43" name="__codelineno-3-43" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-43"></a>        <span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">'in_service'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 <a id="__codelineno-3-44" name="__codelineno-3-44" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-44"></a>        <span class="k">if</span> <span class="n">ac</span><span class="p">:</span>
 <a id="__codelineno-3-45" name="__codelineno-3-45" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-45"></a>            <span class="n">pp</span><span class="o">.</span><span class="n">runpp</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-46"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">res_line</span><span class="o">.</span><span class="n">loading_percent</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-46"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">res_line</span><span class="o">.</span><span class="n">loading_percent</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># writable under pandas 3 copy-on-write too</span>
 <a id="__codelineno-3-47" name="__codelineno-3-47" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-47"></a>        <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-3-48" name="__codelineno-3-48" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-48"></a>            <span class="n">pp</span><span class="o">.</span><span class="n">rundcpp</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
 <a id="__codelineno-3-49" name="__codelineno-3-49" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-49"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">res_line</span><span class="o">.</span><span class="n">p_from_mw</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
@@ -7754,11 +7762,11 @@ steps 1–3. The answers to all five steps are in <a href="#part-3-power-systems
    <a href="../part-3-power-systems/ch19-operational-security/src/case7_toop.py"><code>case7_toop.py</code></a>.</li>
 </ol>
 <p>Solutions: <a href="#part-3-power-systems-ch19-operational-security-solutions-lab-part-a-dc-metrics-from-the-full-n-1-matrix">Lab</a> · Notebooks:
-<a href="../part-3-power-systems/ch19-operational-security/src/lab_toop.ipynb">lab_toop.ipynb</a> (Parts A and B, ToOp) and <a href="../part-3-power-systems/ch19-operational-security/src/lab.ipynb">lab.ipynb</a> (Part C).</p>
+<a href="#part-3-power-systems-ch19-operational-security-src-lab_toop">lab_toop.ipynb</a> (Parts A and B, ToOp) and <a href="#part-3-power-systems-ch19-operational-security-src-lab">lab.ipynb</a> (Part C).</p>
 </div>
 <h2 id="part-3-power-systems-ch19-operational-security-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch19-operational-security-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch19-operational-security/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-3-power-systems/ch19-operational-security/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch19-operational-security-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-3-power-systems-ch19-operational-security-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Pen and paper: for the worked example, find a flow change on one branch in one contingency that raises the
@@ -8034,11 +8042,11 @@ GeoGebra (<a href="https://www.geogebra.org/calculator">https://www.geogebra.org
 <li>Move <span class="arithmatex">\(\theta\)</span> to 80° and observe the self-intersection noted above; derive the validity condition
    <span class="arithmatex">\(r_v \tan\theta \le x_v\)</span>.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch20-protection-short-circuit-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch20-protection-short-circuit/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-3-power-systems-ch20-protection-short-circuit-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch20-protection-short-circuit-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-3-power-systems-ch20-protection-short-circuit-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch20-protection-short-circuit-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch20-protection-short-circuit/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-3-power-systems/ch20-protection-short-circuit/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch20-protection-short-circuit-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-3-power-systems-ch20-protection-short-circuit-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Pen and paper: using symmetrical components, derive the single line-to-ground fault current
@@ -8268,11 +8276,11 @@ pypowsybl.</p>
    exchanges gained or lost capacity, and whether the change would pass an N-1 check from
    <a href="#part-3-power-systems-ch19-operational-security">Chapter 19</a>.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch21-coordinated-security-rao-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch21-coordinated-security-rao/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-3-power-systems-ch21-coordinated-security-rao-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch21-coordinated-security-rao-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-3-power-systems-ch21-coordinated-security-rao-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch21-coordinated-security-rao-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch21-coordinated-security-rao/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-3-power-systems/ch21-coordinated-security-rao/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch21-coordinated-security-rao-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-3-power-systems-ch21-coordinated-security-rao-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Pen and paper: a line has <abbr title="Permanent admissible transmission loading">PATL</abbr> 1 000 A and <abbr title="Temporary admissible transmission loading">TATL</abbr> 1 250 A for 15 minutes. After a contingency it carries 1 180 A.
@@ -8564,11 +8572,11 @@ with NumPy, pandas and matplotlib (<a href="#part-5-computing-ch30-scientific-py
    expect ToOp's usual 220 kV cutoff to do it, but this grid's switchable stations are at 380 kV: with
    220 kV the importer still keeps 6 relevant substations and preprocessing 5 with 100 actions.</li>
 </ol>
-<p>Solutions: <a href="#part-3-power-systems-ch22-import-preprocessing-solutions-lab">Lab</a> · Notebook: <a href="../part-3-power-systems/ch22-import-preprocessing/src/lab_toop.ipynb">lab_toop.ipynb</a> (needs ToOp).</p>
+<p>Solutions: <a href="#part-3-power-systems-ch22-import-preprocessing-solutions-lab">Lab</a> · Notebook: <a href="#part-3-power-systems-ch22-import-preprocessing-src-lab_toop">lab_toop.ipynb</a> (needs ToOp).</p>
 </div>
 <h2 id="part-3-power-systems-ch22-import-preprocessing-exercises">Exercises<a class="headerlink" href="#part-3-power-systems-ch22-import-preprocessing-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-3-power-systems/ch22-import-preprocessing/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-3-power-systems/ch22-import-preprocessing/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-3-power-systems-ch22-import-preprocessing-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-3-power-systems-ch22-import-preprocessing-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Pen and paper: a station has six branches, one of which is a bridge. List how many actions survive
@@ -8820,11 +8828,11 @@ and bound has to close, and on larger instances it is the difference between sec
    it, the number of branch-and-bound nodes. Plot time against instance size with matplotlib on a log scale
    and write three sentences on what the plot says about exact methods for combinatorial problems.</li>
 </ol>
-<p>Solutions: <a href="#part-4-optimization-ch23-optimization-modeling-solutions-lab">Lab</a> · Notebook: <a href="../part-4-optimization/ch23-optimization-modeling/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-4-optimization-ch23-optimization-modeling-solutions-lab">Lab</a> · Notebook: <a href="#part-4-optimization-ch23-optimization-modeling-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-4-optimization-ch23-optimization-modeling-exercises">Exercises<a class="headerlink" href="#part-4-optimization-ch23-optimization-modeling-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-4-optimization/ch23-optimization-modeling/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-4-optimization/ch23-optimization-modeling/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-4-optimization-ch23-optimization-modeling-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-4-optimization-ch23-optimization-modeling-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Convert <span class="arithmatex">\(\max\, 2x_1 - x_2\)</span> s.t. <span class="arithmatex">\(x_1 + x_2 \le 4\)</span>, <span class="arithmatex">\(x_1 - x_2 \le 1\)</span>, <span class="arithmatex">\(x_1 \ge 0\)</span>, <span class="arithmatex">\(x_2\)</span> free, into
@@ -8995,10 +9003,10 @@ islands the grid. Validate a few values with a full DC power flow.</p>
    fitness against evaluations for all seeds in one matplotlib figure. Explain the spread between seeds; you
    will analyze it statistically in Chapter 26.</li>
 </ol>
-<p>Solutions: <a href="#part-4-optimization-ch24-evolutionary-algorithms-solutions-lab">Lab</a> · Notebook: <a href="../part-4-optimization/ch24-evolutionary-algorithms/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-4-optimization-ch24-evolutionary-algorithms-solutions-lab">Lab</a> · Notebook: <a href="#part-4-optimization-ch24-evolutionary-algorithms-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-4-optimization-ch24-evolutionary-algorithms-exercises">Exercises<a class="headerlink" href="#part-4-optimization-ch24-evolutionary-algorithms-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-4-optimization/ch24-evolutionary-algorithms/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-4-optimization/ch24-evolutionary-algorithms/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-4-optimization-ch24-evolutionary-algorithms-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-4-optimization-ch24-evolutionary-algorithms-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>For hill climbing with the "change one slot" neighborhood on the <span class="arithmatex">\(k\)</span>-subset problem, how many neighbors does
@@ -9149,7 +9157,7 @@ grid and step 4 on a grid with several relevant substations, such as the complex
    three elites and their order stay the same whatever you do: the archive is exhaustive and the same
    action is best on both metrics, so a weight only rescales the fitness.</li>
 </ol>
-<p>Solutions: <a href="#part-4-optimization-ch25-quality-diversity-solutions-lab">Lab</a> · Notebook: <a href="../part-4-optimization/ch25-quality-diversity/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-4-optimization-ch25-quality-diversity-solutions-lab">Lab</a> · Notebook: <a href="#part-4-optimization-ch25-quality-diversity-src-lab">lab.ipynb</a>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Known discrepancy: the DC stage cannot start on Windows</p>
@@ -9170,7 +9178,7 @@ appear in <code>toop-engine-benchmark/benchmark_toop.py</code>. Check any config
 <code>print(model.model_dump())</code>.</p>
 </div>
 <h2 id="part-4-optimization-ch25-quality-diversity-exercises">Exercises<a class="headerlink" href="#part-4-optimization-ch25-quality-diversity-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-4-optimization/ch25-quality-diversity/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-4-optimization/ch25-quality-diversity/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-4-optimization-ch25-quality-diversity-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-4-optimization-ch25-quality-diversity-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Implement MAP-Elites in NumPy for the line-switching problem of the <a href="#part-4-optimization-ch24-evolutionary-algorithms">Chapter 24</a>
@@ -9388,10 +9396,10 @@ walks through the check.</p>
    <code>total_branch_combis</code>, and truncate all runs to the smallest common epoch to compare them under an equal
    budget.</li>
 </ol>
-<p>Solutions: <a href="#part-4-optimization-ch26-experimental-methodology-solutions-lab">Lab</a> · Notebook: <a href="../part-4-optimization/ch26-experimental-methodology/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-4-optimization-ch26-experimental-methodology-solutions-lab">Lab</a> · Notebook: <a href="#part-4-optimization-ch26-experimental-methodology-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-4-optimization-ch26-experimental-methodology-exercises">Exercises<a class="headerlink" href="#part-4-optimization-ch26-experimental-methodology-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-4-optimization/ch26-experimental-methodology/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-4-optimization/ch26-experimental-methodology/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-4-optimization-ch26-experimental-methodology-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-4-optimization-ch26-experimental-methodology-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>A paper reports "our method found the best topology in 1 of 20 runs; the baseline never did" and compares only
@@ -9598,10 +9606,10 @@ strategy evaluated with the methodology of <a href="#part-4-optimization-ch26-ex
    solution for a reference point such as "at most 3 switching actions and 1 split"; discuss a posteriori
    selection vs ToOp's a priori weights.</li>
 </ol>
-<p>Solutions: <a href="#part-4-optimization-ch27-pareto-multi-objective-solutions-lab">Lab</a> · Notebook: <a href="../part-4-optimization/ch27-pareto-multi-objective/src/lab.ipynb">lab.ipynb</a> · Lab 5 with QDax in the labs container (<code>docker/labs</code>): <a href="../part-4-optimization/ch27-pareto-multi-objective/src/lab_labs.ipynb">lab_labs.ipynb</a>.</p>
+<p>Solutions: <a href="#part-4-optimization-ch27-pareto-multi-objective-solutions-lab">Lab</a> · Notebook: <a href="#part-4-optimization-ch27-pareto-multi-objective-src-lab">lab.ipynb</a> · Lab 5 with QDax in the labs container (<code>docker/labs</code>): <a href="#part-4-optimization-ch27-pareto-multi-objective-src-lab_labs">lab_labs.ipynb</a>.</p>
 </div>
 <h2 id="part-4-optimization-ch27-pareto-multi-objective-exercises">Exercises<a class="headerlink" href="#part-4-optimization-ch27-pareto-multi-objective-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-4-optimization/ch27-pareto-multi-objective/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-4-optimization/ch27-pareto-multi-objective/src/examples.ipynb">examples.ipynb</a>. Exercises 3 and 4 with pymoo and moocore run in the labs container (<code>docker/labs</code>): <a href="../part-4-optimization/ch27-pareto-multi-objective/src/exercises_labs.ipynb">exercises_labs.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-4-optimization-ch27-pareto-multi-objective-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-4-optimization-ch27-pareto-multi-objective-src-examples">examples.ipynb</a>. Exercises 3 and 4 with pymoo and moocore run in the labs container (<code>docker/labs</code>): <a href="#part-4-optimization-ch27-pareto-multi-objective-src-exercises_labs">exercises_labs.ipynb</a>.</p>
 <ol>
 <li>
 <p>For the points <span class="arithmatex">\((1, 9), (3, 4), (4, 3.5), (6, 2), (9, 1)\)</span> (both minimized), find the non-dominated set, the
@@ -9839,7 +9847,7 @@ non-trivial.</p>
 <li>Compare the switching decisions and the time with the brute-force and <abbr title="Genetic algorithm">GA</abbr> results of Chapter 24 and with the
    number of topologies per second ToOp reports in <code>res.json</code> (<code>total_branch_combis</code> and the run time).</li>
 </ol>
-<p>Solutions: <a href="#part-4-optimization-ch28-topology-optimization-solutions-lab-a">Lab A</a> · Notebook: <a href="../part-4-optimization/ch28-topology-optimization/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-4-optimization-ch28-topology-optimization-solutions-lab-a">Lab A</a> · Notebook: <a href="#part-4-optimization-ch28-topology-optimization-src-lab">lab.ipynb</a>.</p>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Lab B: the AC stage in practice</p>
@@ -9863,10 +9871,10 @@ run of that notebook's <code>run_pipeline</code> call.</p>
    instruction an operator could read. Compare the number of switch operations with <code>switching_distance</code> in
    <code>ac_metrics.json</code> and in <code>dc_info</code>.</li>
 </ol>
-<p>Solutions: <a href="#part-4-optimization-ch28-topology-optimization-solutions-lab-b">Lab B</a> · Notebook: <a href="../part-4-optimization/ch28-topology-optimization/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-4-optimization-ch28-topology-optimization-solutions-lab-b">Lab B</a> · Notebook: <a href="#part-4-optimization-ch28-topology-optimization-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-4-optimization-ch28-topology-optimization-exercises">Exercises<a class="headerlink" href="#part-4-optimization-ch28-topology-optimization-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-4-optimization/ch28-topology-optimization/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-4-optimization/ch28-topology-optimization/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-4-optimization-ch28-topology-optimization-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-4-optimization-ch28-topology-optimization-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Derive a valid big-M for a switchable line in a network where the line lies on a cycle of <span class="arithmatex">\(m\)</span> other lines with
@@ -10082,10 +10090,10 @@ Alternative track: NumPy and JAX only.</p>
 your Chapter 16–17 code, train a two-layer MLP in JAX to predict all flows, and report the relative error
 per line and the speed-up. Then switch off one line not seen in training and measure how the error grows:
 this is the generalization problem that graph neural solvers address.</p>
-<p>Solutions: <a href="#part-4-optimization-ch29-learning-based-control-solutions-lab">Lab</a> · Notebook: <a href="../part-4-optimization/ch29-learning-based-control/src/lab.ipynb">lab.ipynb</a> · Steps 1–4 with Grid2Op in the labs container (<code>docker/labs</code>): <a href="../part-4-optimization/ch29-learning-based-control/src/lab_labs.ipynb">lab_labs.ipynb</a>.</p>
+<p>Solutions: <a href="#part-4-optimization-ch29-learning-based-control-solutions-lab">Lab</a> · Notebook: <a href="#part-4-optimization-ch29-learning-based-control-src-lab">lab.ipynb</a> · Steps 1–4 with Grid2Op in the labs container (<code>docker/labs</code>): <a href="#part-4-optimization-ch29-learning-based-control-src-lab_labs">lab_labs.ipynb</a>.</p>
 </div>
 <h2 id="part-4-optimization-ch29-learning-based-control-exercises">Exercises<a class="headerlink" href="#part-4-optimization-ch29-learning-based-control-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-4-optimization/ch29-learning-based-control/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in <a href="../part-4-optimization/ch29-learning-based-control/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-4-optimization-ch29-learning-based-control-src-exercises">exercises.ipynb</a>; the worked examples run in <a href="#part-4-optimization-ch29-learning-based-control-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Write the Bellman optimality equation for a two-state, two-action <abbr title="Markov decision process">MDP</abbr> with given transition probabilities and
@@ -10289,7 +10297,7 @@ matplotlib; pandapower and pypowsybl.</p>
    with matplotlib. Save the notebook with outputs cleared, and commit it on a branch of your own course
    repository with a Conventional Commits message.</li>
 </ol>
-<p>Solutions: <a href="#part-5-computing-ch30-scientific-python-solutions-lab">Lab</a> · Notebook: <a href="../part-5-computing/ch30-scientific-python/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-5-computing-ch30-scientific-python-solutions-lab">Lab</a> · Notebook: <a href="#part-5-computing-ch30-scientific-python-src-lab">lab.ipynb</a>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Known discrepancy: the reference implementation's docstrings have drifted</p>
@@ -10299,8 +10307,8 @@ the comments of <code>calc_lodf</code> describe shapes <code>(M,)</code> and <co
 trace of an earlier vectorized version. Read the code, not the docstrings, when the two disagree.</p>
 </div>
 <h2 id="part-5-computing-ch30-scientific-python-exercises">Exercises<a class="headerlink" href="#part-5-computing-ch30-scientific-python-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-5-computing/ch30-scientific-python/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-5-computing/ch30-scientific-python/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-5-computing-ch30-scientific-python-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-5-computing-ch30-scientific-python-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p><em>(Jupyter: NumPy + pytest)</em> Write <code>incidence_matrix(from_bus, to_bus, n_bus) -&gt; np.ndarray</code> with type hints,
@@ -10511,11 +10519,11 @@ jaxtyping and beartype; the <code>toop-gpu</code> service if an NVIDIA <abbr tit
    pass a fresh <code>lambda</code> post-processing function on every call. Fix both, and prove the fix with
    <code>jax.no_tracing()</code>.</li>
 </ol>
-<p>Solutions: <a href="#part-5-computing-ch31-jax-gpu-fundamentals-solutions-lab">Lab</a> · Notebook: <a href="../part-5-computing/ch31-jax-gpu-fundamentals/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-5-computing-ch31-jax-gpu-fundamentals-solutions-lab">Lab</a> · Notebook: <a href="#part-5-computing-ch31-jax-gpu-fundamentals-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-5-computing-ch31-jax-gpu-fundamentals-exercises">Exercises<a class="headerlink" href="#part-5-computing-ch31-jax-gpu-fundamentals-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-5-computing/ch31-jax-gpu-fundamentals/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-5-computing/ch31-jax-gpu-fundamentals/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-5-computing-ch31-jax-gpu-fundamentals-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-5-computing-ch31-jax-gpu-fundamentals-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>For <code>g = jax.jit(f, static_argnums=1)</code>, predict how many times <code>f</code> is traced for the calls
@@ -10713,12 +10721,12 @@ them: write this up as a bug report with a minimal reproduction.</p>
    on when it is imported, so <code>JAX_ENABLE_X64=0</code> alone is not enough: convert the inputs to 32 bits first).</p>
 </li>
 </ol>
-<p>Solutions: <a href="#part-5-computing-ch32-jax-in-toop-solutions-lab">Lab</a> · Notebook: <a href="../part-5-computing/ch32-jax-in-toop/src/lab_toop.ipynb">lab_toop.ipynb</a> (runs in the ToOp
+<p>Solutions: <a href="#part-5-computing-ch32-jax-in-toop-solutions-lab">Lab</a> · Notebook: <a href="#part-5-computing-ch32-jax-in-toop-src-lab_toop">lab_toop.ipynb</a> (runs in the ToOp
 container).</p>
 </div>
 <h2 id="part-5-computing-ch32-jax-in-toop-exercises">Exercises<a class="headerlink" href="#part-5-computing-ch32-jax-in-toop-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-5-computing/ch32-jax-in-toop/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-5-computing/ch32-jax-in-toop/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-5-computing-ch32-jax-in-toop-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-5-computing-ch32-jax-in-toop-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Explain why <code>SolverConfig</code> hashes by <code>id(self)</code> instead of by value. Name one benefit (cost of hashing large
@@ -10957,11 +10965,11 @@ builds a new aggregation <code>lambda</code> on every call to <code>run_solver_s
 <li><strong>Fix and report.</strong> Fix the bug, show the new test passing and the coverage of the changed lines, and write a
    one-page report: symptom, root cause, why it escaped, test added.</li>
 </ol>
-<p>Solutions: <a href="#part-5-computing-ch33-testing-debugging-profiling-solutions-lab">Lab</a> · Notebook: <a href="../part-5-computing/ch33-testing-debugging-profiling/src/lab.ipynb">lab.ipynb</a>.</p>
+<p>Solutions: <a href="#part-5-computing-ch33-testing-debugging-profiling-solutions-lab">Lab</a> · Notebook: <a href="#part-5-computing-ch33-testing-debugging-profiling-src-lab">lab.ipynb</a>.</p>
 </div>
 <h2 id="part-5-computing-ch33-testing-debugging-profiling-exercises">Exercises<a class="headerlink" href="#part-5-computing-ch33-testing-debugging-profiling-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-5-computing/ch33-testing-debugging-profiling/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-5-computing/ch33-testing-debugging-profiling/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-5-computing-ch33-testing-debugging-profiling-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-5-computing-ch33-testing-debugging-profiling-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p><em>(Jupyter: NumPy)</em> Scale all branch reactances of IEEE 118 by 10 and by 0.1. Which of ToOp's three singularity
@@ -11129,7 +11137,7 @@ Kafka; pandapower N-1 runs in parallel with Ray (<code>docs/architecture/</code>
    for writing logs but not the TensorBoard viewer), open port 6006 and decide whether the fitness had plateaued
    when the run stopped.</li>
 </ol>
-<p>Solutions: <a href="#part-5-computing-ch34-pipeline-engineering-solutions-lab">Lab</a> · Notebook: <a href="../part-5-computing/ch34-pipeline-engineering/src/lab_toop.ipynb">lab_toop.ipynb</a> (needs ToOp).</p>
+<p>Solutions: <a href="#part-5-computing-ch34-pipeline-engineering-solutions-lab">Lab</a> · Notebook: <a href="#part-5-computing-ch34-pipeline-engineering-src-lab_toop">lab_toop.ipynb</a> (needs ToOp).</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Known discrepancy: the DC stage cannot start on Windows</p>
@@ -11140,8 +11148,8 @@ before the run (the course fork does this, and the lab's <code>tensorboard_log_t
 time).</p>
 </div>
 <h2 id="part-5-computing-ch34-pipeline-engineering-exercises">Exercises<a class="headerlink" href="#part-5-computing-ch34-pipeline-engineering-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-5-computing/ch34-pipeline-engineering/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-5-computing/ch34-pipeline-engineering/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-5-computing-ch34-pipeline-engineering-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-5-computing-ch34-pipeline-engineering-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p><em>(Jupyter: pandas)</em> In the lab's step 3, <code>poll_results_topic</code> returned an empty "added" dictionary although rows
@@ -11498,11 +11506,11 @@ control-room engineer rather than for a programmer:</p>
 <li><strong>Pick your discrepancy.</strong> Verify one item of the discrepancy list with a minimal reproduction and file it as
    the first issue of your project.</li>
 </ol>
-<p>Solutions: <a href="#part-6-capstone-ch35-capstone-solutions-lab">Lab</a> · Notebook: <a href="../part-6-capstone/ch35-capstone/src/lab_toop.ipynb">lab_toop.ipynb</a> (needs ToOp).</p>
+<p>Solutions: <a href="#part-6-capstone-ch35-capstone-solutions-lab">Lab</a> · Notebook: <a href="#part-6-capstone-ch35-capstone-src-lab_toop">lab_toop.ipynb</a> (needs ToOp).</p>
 </div>
 <h2 id="part-6-capstone-ch35-capstone-exercises">Exercises<a class="headerlink" href="#part-6-capstone-ch35-capstone-exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="../part-6-capstone/ch35-capstone/src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="../part-6-capstone/ch35-capstone/src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="#part-6-capstone-ch35-capstone-src-exercises">exercises.ipynb</a>; the worked examples run in
+<a href="#part-6-capstone-ch35-capstone-src-examples">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p><em>(Jupyter: pandas)</em> From a <code>res.json</code>, rebuild the table of <code>best_topos</code> with fitness and every <code>extra_scores</code>

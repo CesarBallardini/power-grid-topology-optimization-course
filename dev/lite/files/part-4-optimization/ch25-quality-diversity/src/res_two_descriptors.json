@@ -1,0 +1,83 @@
+{
+ "initial_fitness": -61.44458010685736,
+ "initial_metrics": {
+  "overload_energy_n_1": 61.44458010685736,
+  "split_subs": 0.0,
+  "switching_distance": 0.0
+ },
+ "max_fitness": -42.3453259854399,
+ "iteration": 125,
+ "total_branch_combis": 100008,
+ "args": {
+  "ga_config": {
+   "me_descriptors": [
+    {
+     "metric": "split_subs",
+     "num_cells": 4,
+     "range": null
+    },
+    {
+     "metric": "switching_distance",
+     "num_cells": 20,
+     "range": null
+    }
+   ],
+   "target_metrics": [
+    [
+     "overload_energy_n_1",
+     1.0
+    ]
+   ],
+   "runtime_seconds": 30.0,
+   "random_seed": 42,
+   "plot": true
+  }
+ },
+ "best_topos": [
+  {
+   "actions": [
+    3
+   ],
+   "disconnections": [],
+   "metrics": {
+    "fitness": -57.057824646401635,
+    "extra_scores": {
+     "overload_energy_n_1": 57.057824646401635,
+     "split_subs": 1.0,
+     "switching_distance": 0.0,
+     "top_k_overloads_n_1": 83.74850167548482
+    }
+   }
+  },
+  {
+   "actions": [
+    4
+   ],
+   "disconnections": [],
+   "metrics": {
+    "fitness": -57.057824646401635,
+    "extra_scores": {
+     "overload_energy_n_1": 57.057824646401635,
+     "split_subs": 1.0,
+     "switching_distance": 4.0,
+     "top_k_overloads_n_1": 83.74850167548482
+    }
+   }
+  },
+  {
+   "actions": [
+    5
+   ],
+   "disconnections": [],
+   "metrics": {
+    "fitness": -42.3453259854399,
+    "extra_scores": {
+     "overload_energy_n_1": 42.3453259854399,
+     "split_subs": 1.0,
+     "switching_distance": 2.0,
+     "top_k_overloads_n_1": 67.2712971321701
+    }
+   }
+  }
+ ]
+}

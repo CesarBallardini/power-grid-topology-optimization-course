@@ -2843,7 +2843,7 @@ which is why Chapter 26 asks for budgets in evaluations.</p>
 <li>
 <p><strong>Swap in <abbr title="Multi-Objective MAP-Elites">MOME</abbr>.</strong> Run in the labs container (<code>docker/labs</code>, QDax 0.5.0 on JAX 0.10.2, CPU only, limited to
    one core with <code>--cpus=1</code>) with <a href="../src/mome_labs.py"><code>mome_labs.py</code></a> and the notebook
-   <a href="../src/lab_labs.ipynb">lab_labs.ipynb</a>. A ToOp run was not available, so the problem is the IEEE 30 line
+   <a href="../src/lab_labs/">lab_labs.ipynb</a>. A ToOp run was not available, so the problem is the IEEE 30 line
    switching of step 6: at most three of the 41 lines switched off. The objectives are the two the lab names, the
    N-1 overload energy and the critical branch count (lines overloaded in at least one N-1 case), divided by their
    intact-network values (267.0 MW, 11 branches) and negated, because <abbr title="Multi-Objective MAP-Elites">MOME</abbr> maximizes. The descriptors stand in for
@@ -3502,7 +3502,7 @@ dominance pairwise, on 300 random points in three objectives (identical), and ch
 1,000 uniform random points in three objectives (seed 27) there are 20 fronts, 36 points in the first, 5 of them
 with infinite crowding distance (two per objective, one point being extreme in two objectives).</p>
 <p>The pymoo comparison runs in the labs container (<code>docker/labs</code>, pymoo 0.6.2) with
-<a href="../src/pymoo_sorting_labs.py"><code>pymoo_sorting_labs.py</code></a> and <a href="../src/exercises_labs.ipynb">exercises_labs.ipynb</a>.
+<a href="../src/pymoo_sorting_labs.py"><code>pymoo_sorting_labs.py</code></a> and <a href="../src/exercises_labs/">exercises_labs.ipynb</a>.
 <code>NonDominatedSorting(method='fast_non_dominated_sort').do(points)</code> returns the fronts as lists of indices; turned
 into ranks they are identical to <code>fast_non_dominated_sort</code> on the same 1,000 points (20 fronts, 36 in the first).
 pymoo's <code>calc_crowding_distance</code> takes one front at a time and divides the sum of the normalized gaps by the number
@@ -3603,7 +3603,7 @@ rectangle grow linearly with the factor, so <span class="arithmatex">\(HV\)</spa
 contribute most of the growth. The property test in <code>test_pareto.py</code> checks monotonicity in the reference point
 on random fronts.</p>
 <p>The moocore comparison runs in the labs container (<code>docker/labs</code>, moocore 0.3.2) with
-<a href="../src/moocore_hypervolume_labs.py"><code>moocore_hypervolume_labs.py</code></a> and <a href="../src/exercises_labs.ipynb">exercises_labs.ipynb</a>:
+<a href="../src/moocore_hypervolume_labs.py"><code>moocore_hypervolume_labs.py</code></a> and <a href="../src/exercises_labs/">exercises_labs.ipynb</a>:
 <code>moocore.hypervolume(points, ref=...)</code> gives 37.0, 52.21 and 262.0 for the three reference points, the same as the
 rectangles. Over the factors 1.0, 1.1, ..., 2.0 the hypervolume is 37.0, 52.21, 69.04, 87.49, 107.56, 129.25,
 152.56, 177.49, 204.04, 232.21 and 262.0, the quadratic curve to plot. On 200 random sets of 1 to 39 points the

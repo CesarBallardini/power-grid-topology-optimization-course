@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.669896Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.669896Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-2-circuits/ch09-ac-steady-state/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.668596Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.668596Z",
+  "mimetype": null,
+  "name": "ch09-ac-steady-state",
+  "path": "part-2-circuits/ch09-ac-steady-state",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

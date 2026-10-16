@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.686092Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.686092Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-4-optimization/ch24-evolutionary-algorithms/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.685032Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.685032Z",
+  "mimetype": null,
+  "name": "ch24-evolutionary-algorithms",
+  "path": "part-4-optimization/ch24-evolutionary-algorithms",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

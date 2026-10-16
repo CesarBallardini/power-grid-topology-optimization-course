@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.685032Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.685032Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-3-power-systems/ch22-import-preprocessing/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.683913Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.683913Z",
+  "mimetype": null,
+  "name": "ch22-import-preprocessing",
+  "path": "part-3-power-systems/ch22-import-preprocessing",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

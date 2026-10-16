@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.662328Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.662328Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-1-math/ch02-linear-algebra/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.661032Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.661032Z",
+  "mimetype": null,
+  "name": "ch02-linear-algebra",
+  "path": "part-1-math/ch02-linear-algebra",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

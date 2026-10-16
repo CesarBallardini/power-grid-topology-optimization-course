@@ -1,0 +1,43 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.696687Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.696687Z",
+      "mimetype": null,
+      "name": "complex_grid",
+      "path": "part-6-capstone/ch35-capstone/src/baseline/complex_grid",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.700493Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.700493Z",
+      "mimetype": null,
+      "name": "node_breaker",
+      "path": "part-6-capstone/ch35-capstone/src/baseline/node_breaker",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.698672Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.698672Z",
+  "mimetype": null,
+  "name": "baseline",
+  "path": "part-6-capstone/ch35-capstone/src/baseline",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

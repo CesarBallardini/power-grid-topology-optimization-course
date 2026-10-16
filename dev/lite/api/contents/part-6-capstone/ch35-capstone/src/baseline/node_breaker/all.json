@@ -1,0 +1,57 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.699449Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.699449Z",
+      "mimetype": null,
+      "name": "run_0",
+      "path": "part-6-capstone/ch35-capstone/src/baseline/node_breaker/run_0",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.701249Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.701249Z",
+      "mimetype": null,
+      "name": "run_2",
+      "path": "part-6-capstone/ch35-capstone/src/baseline/node_breaker/run_2",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.700352Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.700352Z",
+      "mimetype": null,
+      "name": "run_1",
+      "path": "part-6-capstone/ch35-capstone/src/baseline/node_breaker/run_1",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.700493Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.700493Z",
+  "mimetype": null,
+  "name": "node_breaker",
+  "path": "part-6-capstone/ch35-capstone/src/baseline/node_breaker",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

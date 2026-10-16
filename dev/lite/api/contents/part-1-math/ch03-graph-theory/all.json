@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.663607Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.663607Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-1-math/ch03-graph-theory/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.662328Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.662328Z",
+  "mimetype": null,
+  "name": "ch03-graph-theory",
+  "path": "part-1-math/ch03-graph-theory",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

@@ -1,0 +1,43 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.697751Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:25.418539Z",
+      "mimetype": "application/json",
+      "name": "ac_metrics.json",
+      "path": "part-6-capstone/ch35-capstone/src/baseline/complex_grid/run_0/topology_1/ac_metrics.json",
+      "size": 1319,
+      "type": "file",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.697896Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:25.418605Z",
+      "mimetype": "application/json",
+      "name": "orao_summary.json",
+      "path": "part-6-capstone/ch35-capstone/src/baseline/complex_grid/run_0/topology_1/orao_summary.json",
+      "size": 848,
+      "type": "file",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.697896Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.697896Z",
+  "mimetype": null,
+  "name": "topology_1",
+  "path": "part-6-capstone/ch35-capstone/src/baseline/complex_grid/run_0/topology_1",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

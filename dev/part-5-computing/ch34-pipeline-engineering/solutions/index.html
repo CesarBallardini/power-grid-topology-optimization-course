@@ -2069,7 +2069,7 @@ below was printed by one of them (<code>python &lt;name&gt;.py</code>), with ToO
 Windows machine, not in the container, except in Exercise 5, which was run in the ToOp container and quotes
 <code>docker run</code> output there; the ToOp programs read ToOp's tracked <code>data/</code> folders and write only to temporary
 folders. The worked examples run in
-<a href="../src/examples.ipynb">examples.ipynb</a>; the lab's notebook, <a href="../src/lab_toop.ipynb">lab_toop.ipynb</a>, needs ToOp.</p>
+<a href="../src/examples/">examples.ipynb</a>; the lab's notebook, <a href="../src/lab_toop/">lab_toop.ipynb</a>, needs ToOp.</p>
 <p>Three things about ToOp <code>ba1874e</code> on Windows had to be worked around in the code, and are findings in their own
 right: <code>dc/main.py</code> names the TensorBoard folder <code>str(datetime.datetime.now())</code>, whose colons Windows rejects
 (<code>WinError 123</code>; <code>tensorboard_log_toop.windows_safe_log_dir</code> swaps that module's <code>datetime</code> for one that prints

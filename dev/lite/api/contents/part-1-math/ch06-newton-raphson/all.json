@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:14:53.666998Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:14:53.666998Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-1-math/ch06-newton-raphson/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:14:53.666006Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:14:53.666006Z",
+  "mimetype": null,
+  "name": "ch06-newton-raphson",
+  "path": "part-1-math/ch06-newton-raphson",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

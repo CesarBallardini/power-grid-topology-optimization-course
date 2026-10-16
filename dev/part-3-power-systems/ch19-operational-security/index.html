@@ -2572,7 +2572,7 @@ time (110 kV lines with <span class="arithmatex">\(r = 0.1\,x\)</span>, loads wi
 <a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>        <span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">'in_service'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 <a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>        <span class="k">if</span> <span class="n">ac</span><span class="p">:</span>
 <a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>            <span class="n">pp</span><span class="o">.</span><span class="n">runpp</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">res_line</span><span class="o">.</span><span class="n">loading_percent</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">res_line</span><span class="o">.</span><span class="n">loading_percent</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># writable under pandas 3 copy-on-write too</span>
 <a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>        <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>            <span class="n">pp</span><span class="o">.</span><span class="n">rundcpp</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
 <a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">res_line</span><span class="o">.</span><span class="n">p_from_mw</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
@@ -2681,11 +2681,11 @@ steps 1–3. The answers to all five steps are in <a href="solutions/#lab-part-c
    <a href="src/case7_toop.py"><code>case7_toop.py</code></a>.</li>
 </ol>
 <p>Solutions: <a href="solutions/#lab-part-a-dc-metrics-from-the-full-n-1-matrix">Lab</a> · Notebooks:
-<a href="src/lab_toop.ipynb">lab_toop.ipynb</a> (Parts A and B, ToOp) and <a href="src/lab.ipynb">lab.ipynb</a> (Part C).</p>
+<a href="src/lab_toop/">lab_toop.ipynb</a> (Parts A and B, ToOp) and <a href="src/lab/">lab.ipynb</a> (Part C).</p>
 </div>
 <h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
-<p>All statements are also in <a href="src/exercises.ipynb">exercises.ipynb</a>; the worked examples run in
-<a href="src/examples.ipynb">examples.ipynb</a>.</p>
+<p>All statements are also in <a href="src/exercises/">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples/">examples.ipynb</a>.</p>
 <ol>
 <li>
 <p>Pen and paper: for the worked example, find a flow change on one branch in one contingency that raises the
