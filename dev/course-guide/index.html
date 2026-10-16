@@ -476,6 +476,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chapter-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#toop-source-paths" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2273,6 +2284,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chapter-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#toop-source-paths" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2573,6 +2595,14 @@ have.</p>
 <h3 id="syllabus-counts">Syllabus counts<a class="headerlink" href="#syllabus-counts" title="Permanent link">&para;</a></h3>
 <p>Counts such as "(12 syllabi)" give the number of distinct universities whose course bibliography cites the
 book, from the survey in <a href="../appendices/a-syllabi/">Appendix A</a>.</p>
+<h3 id="chapter-code">Chapter code<a class="headerlink" href="#chapter-code" title="Permanent link">&para;</a></h3>
+<p>Every program shown in a chapter is a file in that chapter's <code>src</code> folder (for example
+<code>part-3-power-systems/ch19-operational-security/src/case7.py</code>), included in the page from the file, not copied
+into it, with the file name in the title bar of the code block. Each file has unit tests next to it
+(<code>test_*.py</code>; Octave files carry <code>%!test</code> blocks), run by <code>make test</code> from the repository; tests that need ToOp
+run only where ToOp is importable. Where a chapter has solutions, they are in <code>solutions.md</code> in the chapter's
+folder and every program behind a solution lives in <code>src</code> too. Whenever a MATLAB solution exists, the chapter
+also gives the Octave one: free software first, proprietary tools allowed.</p>
 <h3 id="toop-source-paths">ToOp source paths<a class="headerlink" href="#toop-source-paths" title="Permanent link">&para;</a></h3>
 <p>ToOp source paths are abbreviated:</p>
 <table>
