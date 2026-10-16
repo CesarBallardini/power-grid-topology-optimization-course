@@ -154,26 +154,43 @@ enlarges the domain for the market; this is the capacity-calculation view of a r
        exchanges gained or lost capacity, and whether the change would pass an N-1 check from
        [Chapter 19](../ch19-operational-security/index.md).
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. Pen and paper: a line has PATL 1 000 A and TATL 1 250 A for 15 minutes. After a contingency it carries 1 180 A.
    A curative busbar split reduces the flow to 940 A and takes 10 minutes to activate. Is a preventive action
    needed? What if activation takes 20 minutes, or the post-contingency flow is 1 300 A?
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. *(GeoGebra)* For two zones plus a third balancing zone, draw the half-planes of five CNECs with given zonal
    PTDFs and RAMs, shade the flow-based domain, and move a slider that increases the RAM of the binding CNEC.
    Find the largest A→B exchange before and after.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. *(Jupyter: NumPy)* In the worked example, change the zone A GLSK from (0.6, 0.4) to (1.0, 0.0) and to
    (0.0, 1.0). Show that $\text{PTDF}_z$, $F_0$ and RAM change while the physical flows at the reference point do
    not, and explain why GLSK errors are a source of the reliability margin.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. Pen and paper: map ToOp's `nminus1_definition.json`, the `line_for_reward` and `line_for_nminus1` masks,
    `branch_limits.max_mw_flow_n_1` and `action_set.json` to CRAC elements (contingencies, CNECs, instants, limits,
    remedial actions, usage rules). List three CRAC features that ToOp has no representation for.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
 5. *(Jupyter: pandas)* Run `notebooks/example2_small_grid_toop.ipynb` (`perform_ac_analysis` writes its output), load
    one `orao_summary` JSON of an accepted topology, build a table of switch actions (switch id, open or close),
    join it with the switches of the grid from pypowsybl (`get_switches`, including `kind` and `voltage_level_id`),
    and flag every disconnector operation that would need a breaker in the sequence
    ([Chapter 20](../ch20-protection-short-circuit/index.md)).
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
 6. *(Jupyter: NumPy)* Time coupling: for 24 hours and four candidate topologies with given hourly overload
    energies, compare (a) the best single topology for all hours, as ToOp does, with (b) the best hourly
    sequence under a switching cost per change, solved by dynamic programming. At what switching cost do the two
    coincide?
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

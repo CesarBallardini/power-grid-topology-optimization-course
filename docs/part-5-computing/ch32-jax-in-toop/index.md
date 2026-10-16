@@ -76,7 +76,7 @@
 
 - Given a change to a ToOp input (a `SolverConfig` field, a `DynamicInformation` array, the batch size, the
   aggregation function), predict whether the solver recompiles, reuses the compiled program correctly, or reuses
-  it incorrectly, and prove it with timings and `jax.no_tracing()`.
+  it incorrectly, and prove it with timings and the compile cache of the jitted core.
 - Measure compile time, steady-state throughput and peak memory of `run_solver` as a function of the batch sizes,
   and choose settings for a given device.
 - Explain how padding sentinels, traced loop bounds and buffer donation keep ToOp's shapes fixed and its memory
@@ -125,11 +125,20 @@
           `dc_solver/jax/compute_batch.py` which field the N-0 flows are updated from, and scale that one too);
         - a new `DynamicInformation` whose `branch_limits.max_mw_flow` is halved, passed with the *same* `sc`,
           and then with `replace(sc)`;
-        - a batch of 8 topologies instead of 4.
+        - a batch of 8 topologies instead of 4. The naive prediction is "recompiles" (a new array shape); it
+          does not, because `run_solver_symmetric` pads every batch to a multiple of `batch_size_bsdf` (16 by
+          default), so 4 and 8 topologies reach the jitted core with identical shapes. Confirm it, and say
+          what batch size would make it recompile.
 
-        Wrap the calls you expect to hit the cache in `with jax.no_tracing():` to turn a silent recompile into an
-        error. Explain every result from `static_argnames`, `SolverConfig.__hash__` and the attributes of
-        `DefaultAggregateOutputFn`. On ToOp commit `ba1874e` (CPU, JAX 0.5.3), halving the limits with the same
+        To tell a cached call from a recompile, count the compiled programs of the jitted core before and after
+        each call, `iterate_symmetric_sequential._cache_size()` (`dc_solver/jax/topology_looper.py`): a cache
+        hit leaves it unchanged. Do not wrap `run_solver` in `with jax.no_tracing():` under ToOp's JAX 0.5.3:
+        the eager Python glue around the core (padding, result storage, the final slicing) dispatches
+        primitives that this version reports as "re-tracing", so the context manager raises on a cache hit as
+        well; it is only usable around the jitted core itself, as
+        `packages/topology_optimizer_pkg/tests/test_jax_compilation.py` does. Explain every result from
+        `static_argnames`, `SolverConfig.__hash__` and the attributes of `DefaultAggregateOutputFn`. On ToOp
+        commit `ba1874e` (CPU, JAX 0.5.3), halving the limits with the same
         `sc` returned the *old* relative loadings with no recompile, while `replace(sc)` recompiled and doubled
         them: write this up as a bug report with a minimal reproduction.
     4. **Batch size and memory.** On `case300_powsybl` (from `toop_engine_dc_solver.example_grids`), sweep
@@ -139,27 +148,49 @@
        heat map as in `dc_solver/jax/parse_batch_size_finder.ipynb`, find the out-of-memory boundary on GPU, and
        repeat one point with `JAX_ENABLE_X64` off to measure the float64 penalty on your device.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab_toop.ipynb](src/lab_toop.ipynb) (runs in the ToOp
+    container).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. Explain why `SolverConfig` hashes by `id(self)` instead of by value. Name one benefit (cost of hashing large
    `HashableArrayWrapper` fields) and two risks, and propose a safer design (for example a frozen dataclass with
    a value hash computed once).
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. *(Jupyter: JAX)* Reproduce the stale-result trap without ToOp: a jitted function with a static argument whose
    class defines `__hash__` as `id(self)` and `__eq__` as identity. Show that mutating a field in place returns
    the old result, and that `dataclasses.replace` recompiles. Then write a `pytest` test that would have caught it.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: JAX + NumPy)* In `mutate.py` the loop bound `n_subs_mutated` is a traced Poisson draw. Write a toy
    version with `lax.fori_loop` and a traced bound, and a second one with a Python `for` over the same draw. Which
    one compiles once, and what does `jax.make_jaxpr` show for each?
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Jupyter: NumPy)* Check on your machine what `np.dtype(int)`, `np.dtype("long")` and `np.random.randint(2**32)`
    do, and what `jnp.full(3, 7, dtype=int).dtype` is with and without `jax_enable_x64`. The `int_dtype()` docstring
    on the course fork's `feat/add-docker-compose` branch attributes two Windows-only failures to platform integer
    widths (a padding sentinel stored as `-1`, a `jax.lax.scan` carry type mismatch); which can you reproduce with
    ToOp's pinned NumPy 2.x, and why does NumPy's version matter?
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Jupyter: JAX)* Set `XLA_FLAGS=--xla_force_host_platform_device_count=4` before importing JAX, `pmap` a
    function over a leading axis of size 4 with `donate_argnums=(0,)`, and try to read the donated input afterwards.
    Why does ToOp donate the result storage in `topology_looper.py`?
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. *(Jupyter: pandas + matplotlib)* Run the DC stage of `notebooks/example3_e2e_pipeline.ipynb`
    (`run_dc_optimization_stage`) for a fixed number of iterations with
    `lf_config.max_num_splits` set to 1, 2, 4 and 8 (keep `split_subs` descriptor cells at most 2, so every value
    is valid) and plot seconds per iteration against `max_num_splits`. Compare with the cost statement in
    `packages/dc_solver_pkg/README.md`: are the extra split slots paid for even when most topologies use one?
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

@@ -1,0 +1,74 @@
+{
+  "VL_3W_HV_BREAKER": {
+    "kind": "BREAKER",
+    "voltage_level_id": "VL_3W_HV",
+    "open_before": false,
+    "open_after": true
+  },
+  "L171_DISCONNECTOR_13_0": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_3W_HV",
+    "open_before": true,
+    "open_after": false
+  },
+  "L171_DISCONNECTOR_13_1": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_3W_HV",
+    "open_before": false,
+    "open_after": true
+  },
+  "DISCONNECTOR_3W_HV_1": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_3W_HV",
+    "open_before": false,
+    "open_after": true
+  },
+  "DISCONNECTOR_3W_HV_2": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_3W_HV",
+    "open_before": true,
+    "open_after": false
+  },
+  "VL_MV_BREAKER": {
+    "kind": "BREAKER",
+    "voltage_level_id": "VL_MV",
+    "open_before": false,
+    "open_after": true
+  },
+  "VL_MV_BREAKER#0": {
+    "kind": "BREAKER",
+    "voltage_level_id": "VL_MV",
+    "open_before": false,
+    "open_after": true
+  },
+  "L62_DISCONNECTOR_11_2": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_MV",
+    "open_before": true,
+    "open_after": false
+  },
+  "L62_DISCONNECTOR_11_3": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_MV",
+    "open_before": false,
+    "open_after": true
+  },
+  "VL_2W_MV_HV_MV_BREAKER": {
+    "kind": "BREAKER",
+    "voltage_level_id": "VL_2W_MV_HV_MV",
+    "open_before": false,
+    "open_after": true
+  },
+  "2W_MV_HV_PST1_DISCONNECTOR_53_0": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_2W_MV_HV_MV",
+    "open_before": false,
+    "open_after": true
+  },
+  "2W_MV_HV_PST1_DISCONNECTOR_53_1": {
+    "kind": "DISCONNECTOR",
+    "voltage_level_id": "VL_2W_MV_HV_MV",
+    "open_before": true,
+    "open_after": false
+  }
+}

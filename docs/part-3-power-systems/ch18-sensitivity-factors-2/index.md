@@ -281,20 +281,42 @@ Flow side:
     5. Apply the same steps in a different order (disconnection before split). Which final quantities are
        invariant, and which intermediate objects (the stored $\beta$ vectors, the cross-coupler flows) change?
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. Write the MODF for two outaged branches with the closed-form $2 \times 2$ inverse. Show that
    $\det(I - \mathcal H_{OO}) = 0$ when the two branches form a cut set, even if neither is a bridge alone.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(Jupyter: NumPy)* Verify the Woodbury update on IEEE 118 for 1, 2 and 3 simultaneous susceptance changes,
    and time it against recomputing the PTDF. At what $k$ does recomputation win?
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Derive $\beta = H'_{:,i} - H'_{:,b}$ from the "inject the coupler flow" argument, and use it to show that the
    bus-A branches' $\beta$ entries, oriented out of bus A, sum to one.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Jupyter: NumPy + matplotlib)* For every admissible two-way split of one IEEE 14 station, plot the
    cross-coupler flow $|c|$ against the maximum post-split loading. Relate the plot to ToOp's `cross_coupler_flow`
    penalty (`docs/topology_optimizer/metrics.md`).
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Count floating-point operations for: one BSDF update, one $k$-outage MODF, the LODF matrix for $n_f$ N-1
    cases, and the N-1 flow matrix for $T$ timesteps. Explain which of them are embarrassingly parallel over a
    batch of topologies.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. *(Jupyter: NumPy)* Generate random meshed grids with one radial branch, compute $1 - h_{kk}$ for the radial
    branch, and report how often it is exactly zero. Discuss which of ToOp's tolerances would catch the bridge
    ([Chapter 4](../../part-1-math/ch04-numerical-linear-algebra/index.md)).
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

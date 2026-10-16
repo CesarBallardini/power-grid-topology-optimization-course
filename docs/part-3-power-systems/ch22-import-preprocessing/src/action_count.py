@@ -3,15 +3,19 @@
 import numpy as np
 
 
-def n_actions(d: int) -> int:
-    """Count the assignments of d branches to two busbars, up to swapping the busbars, with no branch alone."""
+def assignments(d: int) -> np.ndarray:
+    """Assignments of d branches to two busbars (one row each, True = busbar B), up to a swap, no branch alone."""
     r = np.arange(2 ** (d - 1))
     repo = ((r[:, None] >> np.arange(d)) & 1).astype(bool)
     flip = repo.sum(axis=1) > d / 2
     repo[flip] = ~repo[flip]
     on_b = repo.sum(axis=1)
-    repo = repo[(on_b != 1) & (on_b != d - 1)]
-    return len(np.unique(repo, axis=0))
+    return repo[(on_b != 1) & (on_b != d - 1)]
+
+
+def n_actions(d: int) -> int:
+    """Count the distinct assignments, the unsplit configuration included."""
+    return len(np.unique(assignments(d), axis=0))
 
 
 def main() -> None:

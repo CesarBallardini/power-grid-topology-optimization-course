@@ -173,23 +173,38 @@ and bound has to close, and on larger instances it is the difference between sec
        it, the number of branch-and-bound nodes. Plot time against instance size with matplotlib on a log scale
        and write three sentences on what the plot says about exact methods for combinatorial problems.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. Convert $\max\, 2x_1 - x_2$ s.t. $x_1 + x_2 \le 4$, $x_1 - x_2 \le 1$, $x_1 \ge 0$, $x_2$ free, into
    standard form and write its dual. Solve both graphically and check that the optimal values agree.
    *(GeoGebra)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. Model "either $x_1 + x_2 \le 4$ or $3x_1 + x_2 \le 6$, with $0 \le x \le 10$" with one binary variable and a
    big-M. Derive the smallest valid $M$ for each constraint and show with a plot of the LP relaxation why a
    larger $M$ is worse. *(GeoGebra)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. Run branch and bound by hand on the knapsack problem $\max\, 5a + 4b + 3c$ s.t. $2a + 3b + c \le 5$,
    $a, b, c \in \{0,1\}$: draw the tree, the LP bound at each node and the pruning reason. Check with PuLP.
    *(Jupyter: PuLP + HiGHS)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. A grid has 40 relevant substations whose numbers of valid split actions you draw with
    `np.random.default_rng(0).integers(3, 61, size=40)`. At most 2 substations may be split simultaneously and
    up to 3 of 200 disconnectable branches may be switched off. Compute the number of candidate topologies with
    `itertools` and `math.comb` in the same way as `count_workset_size` (`optimizer/dc_bruteforce/generator.py`),
    and the time to enumerate them at $10^5$ evaluations per second. Repeat for 4 simultaneous splits.
    *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
 5. Show that the decision version of 0-1 knapsack is in NP by describing a certificate and its check. Then write
    the $O(nW)$ dynamic program and explain why it does not contradict NP-completeness (pseudo-polynomial
    time). *(pen and paper)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

@@ -150,21 +150,47 @@ The same update in Octave, as a function of the inverse before the removal:
        percent while `float64` stays below $10^{-9}$. Relate this to ToOp's `float64` policy and its `1e-11`
        denominator threshold.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. Verify the Sherman–Morrison identity by multiplying $(M + uv^\top)$ by the right-hand side. What happens when
    $1 + v^\top M^{-1} u = 0$? *(Pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Show that for a connected network with a grounded node, $g_k\, a_k^\top G_r^{-1} a_k \le 1$, with equality if
    and only if branch $k$ is a bridge. *Hint:* series and parallel resistances. *(Pen and paper)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Remove two branches at once with the Woodbury identity ($U$ has two columns, so you solve a 2×2 system).
    Implement the 2×2 solve in closed form with a determinant check, then compare with `solve2x2` in ToOp's
    `dc_solver/jax/unrolled_linalg.py`. *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. Floating point: print `np.finfo(np.float32)` and `np.finfo(np.float64)`; evaluate `0.1 + 0.2 == 0.3`,
    `1e16 + 1 - 1e16` and `np.sum([1.0, np.nan])`. Explain why ToOp's `compute_ptdf` ends with an assertion
    that the result has no NaNs (`dc_solver/preprocess/helpers/ptdf.py`). *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Sparse storage and fill-in: for the 40×40 grid network, store $G_r$ as CSC, factor it with
    `scipy.sparse.linalg.splu` using `permc_spec="NATURAL"` and `"COLAMD"`, and compare `nnz` of the factors
    with `nnz` of $G_r$. In Octave, use `spy`, `nnz` and `symamd` for the same comparison.
    *(Jupyter: SciPy, or Octave)*
-6. Plot `np.linalg.cond(G_r)` against the weak conductance of lab step 4 on log–log axes and relate the slope
-   to the observed `float32` error. *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
+6. For the weak conductances of lab step 4, plot `np.linalg.cond` of $G_r'$, the reduced conductance matrix
+   *after* removing `(4, 5)`, against $g_w$ on log–log axes and relate the slope to the observed `float32`
+   error. Plot $\kappa_2(G_r)$ of the matrix before the removal on the same axes and explain why it stays flat
+   at about 26 whatever $g_w$ is: while `(4, 5)` is present, node 5 is well connected and the tiny extra branch
+   changes nothing; only after the removal does node 5 hang on the weak branch, so the smallest eigenvalue of
+   $G_r'$ is about $g_w$ and the condition number grows as $1/g_w$. *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

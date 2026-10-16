@@ -291,28 +291,56 @@ and the power flow equations; ToOp does the same in two stages, a fast DC search
        cost. Exercises 7–10 do this step by step, with [solutions](solutions.md); their script is
        [`case7_toop.py`](src/case7_toop.py).
 
+    Solutions: [Lab](solutions.md#lab-part-a-dc-metrics-from-the-full-n-1-matrix) · Notebooks:
+    [lab_toop.ipynb](src/lab_toop.ipynb) (Parts A and B, ToOp) and [lab.ipynb](src/lab.ipynb) (Part C).
+
 ## Exercises
 
-1. Pen and paper: for the worked example, find a flow change on one branch in one contingency that leaves
-   overload energy unchanged but increases the critical branch count, and one that does the opposite. What does
-   the optimizer prefer under each objective?
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
+
+1. Pen and paper: for the worked example, find a flow change on one branch in one contingency that raises the
+   critical branch count by one while adding only a tiny amount $\varepsilon$ to the overload energy (start
+   from a state where branch 3 is below its limit, for example its two flows scaled by 0.9), and one that adds
+   a lot of energy without changing the count. Then find a change that moves neither metric. One would hope
+   for a change that moves the count while the energy stays exactly put, but there is none: both metrics are
+   functions of the same per-branch worst-case overload $\max_c (|F_{cb}| - \bar F_b)^+$, so the count can
+   only move when that quantity leaves or reaches zero, which moves the energy too. What does the optimizer
+   prefer under each objective?
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(Jupyter: NumPy + matplotlib)* Plot the per-branch penalty of overload energy, the $\alpha = 1.5$ power law
    and cumulative overload as a function of loading from 0 to 200 % for limits of 100 MW and 1 000 MW. Which
    metric makes a 10 % overload on a 110 kV line as costly as on a 380 kV line?
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: NumPy)* Show with a two-branch example that the double-limit dead zone can make the unsplit grid
    have zero `overload_energy_limited_n_0` while a topology that only redistributes flow between the two
    branches gets a positive value. Relate this to why the rule exists.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. Pen and paper: an unsplit grid has AC `overload_energy_n_1` = 0, `critical_branch_count_n_1` = 0 and 2
    non-converging cases. A candidate has 0 MW, 1 critical branch and 2 non-converging cases after disconnecting
    one branch. Apply `evaluate_acceptance` with default thresholds and state the rejection criterion, if any.
    Would a relative tolerance or an absolute slack be the better design?
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Octave + MATPOWER)* For `case30`, compute the DC N-1 flow matrix with `makePTDF` and `makeLODF`
    (<https://matpower.org/docs/ref/matpower7.1/lib/makeLODF.html>), skipping bridges, set every limit to 1.2 times
    the base-case flow, and compute overload energy and critical branch count. Repeat after doubling one load
    and explain which contingencies became worst for which branches.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. *(Jupyter: pandas)* The DC optimizer's fitness for a run is `-713` and the AC fitness of the same topology is
    `12.4`. Write down the weighted objective that could have produced the DC value and explain why the two
    numbers cannot be compared directly.
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).
 
 Exercises 7–10 continue the 7-bus case of the worked example inside ToOp. Their scripts are in the chapter's
 `src` folder: [`case7.py`](src/case7.py) (SciPy and pandapower, runs anywhere) and

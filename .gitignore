@@ -10,3 +10,7 @@ site/
 # Local working folder for books: large PDFs and OCR text of in-copyright books that must not be redistributed.
 # Its README.md (the source index) stays local too.
 books/
+# Progress logs of background agents working on chapters (see .claude/CLAUDE.md); local only.
+.progress/
+# Hypothesis example database (tests/ and docs/**/src tests)
+.hypothesis/

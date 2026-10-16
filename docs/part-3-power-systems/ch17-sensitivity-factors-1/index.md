@@ -200,18 +200,49 @@ $\alpha(m_\ell + \text{LODF}_{\ell k} m_k)$. The correction is exact only for th
     5. Apply the PTDF update after a disconnection and check it against the PTDF of the network without the
        branch.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
+!!! note "Known discrepancy: MATPOWER's bridge masking fails on case118"
+
+    MATPOWER 8.1's `makeLODF(mpc, H, true)` (the `mask_bridge` option of lab step 3) works on `case14` but
+    stops on `case118` with `br(197): out of bound 186` inside `find_bridges`: the bridge finder trips over the
+    parallel branches of that case. Without the option `makeLODF(mpc, H)` runs, but flags only 2 of the 9
+    bridges as non-finite columns. Find the bridges yourself (the graph method of
+    [Chapter 3](../../part-1-math/ch03-graph-theory/index.md), or your own LODF denominators) and mask them
+    before the comparison.
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. For a three-bus triangle with equal reactances and slack at bus 3, derive the PTDF by hand, then the LODF
    matrix, and check $\text{LODF}_{\ell k}$ against the two-path current divider.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Prove that $h_{kk} = 1$ if and only if branch $k$ is a bridge, using the fact that $\tilde B$ is a grounded
    Laplacian.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: NumPy)* Screen all N-1 branch outages of IEEE 118 with one broadcasted expression of shape
    `(n_outages, n_branches)`, and time it against 186 separate DC power flows.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Octave + MATPOWER)* For `case30`, compute `makePTDF` for a single slack and for a slack distributed in
    proportion to generator outputs. Which columns change most, and why do the flows of the base case not change?
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Jupyter: NumPy + matplotlib)* Model a generator outage at bus $n$ with a single slack and with a
    distributed slack. Plot the difference in post-outage flows per branch, and relate it to the AC–DC mismatch
    that ToOp would see for injection outages.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. Using the worked example, write the corrected flow on branch $\ell$ after a double outage $\{k_1, k_2\}$ when
    $\alpha = 1$, and explain in one paragraph when the constant-offset assumption is acceptable.
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

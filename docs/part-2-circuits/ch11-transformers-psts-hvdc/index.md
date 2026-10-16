@@ -127,26 +127,48 @@ The sign of $\alpha$ here is a modeling choice; ToOp's sign conventions are cove
        susceptances instead of conductances) and compute the change of every branch flow per degree by
        finite differences. This column of sensitivities is what ToOp's PSDF stores.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. An ideal 380/110 kV transformer feeds a 10 Ω impedance on its 110 kV side. What impedance is seen from the
    380 kV side? *(Pen and paper)* *Answer:* $10 \cdot (380/110)^2 \approx 119.3\ \Omega$.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. ToOp replaces a transformer's reactance $x$ by $x/\rho$ in the DC model (`get_trafos` in
    `dc_solver/preprocess/powsybl/powsybl_helpers.py`, commented as equivalent to PowSyBl's
    `dc_use_transformer_ratio = True`). For $\rho = 1.05$, by what percentage does the branch susceptance change,
    and does the transformer attract more or less flow in a meshed network? *(Pen and paper)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. A three-winding transformer has pairwise short-circuit reactances $x_{12} = 0.10$, $x_{13} = 0.25$ and
    $x_{23} = 0.20$ pu on a common base. Compute the star equivalent $x_1 = (x_{12} + x_{13} - x_{23})/2$ and its
    cyclic permutations, and explain why an outage of this transformer removes three branches at once.
    *(Pen and paper)* *Answer:* $x_1 = 0.075$, $x_2 = 0.025$, $x_3 = 0.175$ pu.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. Build two tap tables with pandas for a PST with taps $-16 \dots 16$: one with constant $x$ and $\alpha$ from
    the atan2 formula of [Chapter 1](../../part-1-math/ch01-complex-numbers/index.md) (1% per step at $90^\circ$), one where
    $x$ grows by 1% per tap away from neutral. Apply the same test as `get_linear_pst` in DC mode (`np.allclose`
    on `x`) to each. Is $\alpha$ exactly proportional to the tap number in the first table? *(Jupyter: pandas +
    NumPy)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Draw the phasor diagram of a symmetric PST and a quadrature booster with the same phase shift in
    GeoGebra, and measure the output magnitude of each. *(GeoGebra)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. An HVDC link between buses 1 and 3 of a three-bus AC ring is a pair of injections $-P_{dc}$ at bus 1 and
    $+P_{dc}$ at bus 3. With `nodal_solve`, show that every AC branch flow is affine in $P_{dc}$ and find the
    setpoint that unloads the most loaded AC line. Why would optimizing $P_{dc}$ be a continuous action,
    unlike a busbar split? *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

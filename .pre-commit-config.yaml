@@ -76,6 +76,15 @@ repos:
         language: system
         types: [python]
 
+      # Chapter notebooks (docs/part-*/*/src/*.ipynb) are committed without
+      # outputs or execution counts: diffs stay readable and the test suite
+      # executes them anyway (tests/test_notebooks.py).
+      - id: nbstripout
+        name: nbstripout (strip notebook outputs)
+        entry: uv run --frozen nbstripout
+        language: system
+        types: [jupyter]
+
       - id: uv-lock-check
         name: uv lock --check
         description: fail if uv.lock is out of sync with pyproject.toml

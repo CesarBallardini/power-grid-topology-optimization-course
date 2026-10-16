@@ -90,20 +90,39 @@ $$
     4. Compare your MW column with the formula used in ToOp's `powsybl_helpers.py` (`value * limit_voltage *
        1e-3 * math.sqrt(3)`) and state the units each factor assumes.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. A balanced wye load has $Z_Y = 30 + j40\ \Omega$ per phase on a 400 V (line-to-line) supply. Compute the line
    current, total $P$ and $Q$, and the equivalent delta impedance $Z_\Delta = 3 Z_Y$. *(Pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Verify numerically that the instantaneous total power of a balanced three-phase set is constant in time,
    unlike single-phase power. *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. The cascade relay model computes a phase voltage $V_{LL}/\sqrt{3}$, an impedance magnitude $|Z| = V_{\text{ph}}/I$
    and an angle $\operatorname{atan2}(Q, P)$ (`get_complex_impedance` in
    `contingency/pandapower/cascade/detection/switch_preparation.py`). Compute $R$ and $X$ seen by a relay at
    380 kV with $I = 1\,000$ A, $P = 600$ MW and $Q = 200$ Mvar. *(Pen and paper)* *Answer:* $|Z| \approx 219.4\ \Omega$,
    $R \approx 208.1\ \Omega$, $X \approx 69.4\ \Omega$.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. A 1 600 MVA transformer has $x = 0.15$ pu on its own rating. Express it on a 100 MVA base, and explain why
    the per-unit value does not depend on which side's voltage base is used when bases are chosen through the
    turns ratio. *(Pen and paper)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Symmetrical components (awareness): with $A = \begin{bmatrix} 1 & 1 & 1 \\ 1 & a^2 & a \\ 1 & a & a^2 \end{bmatrix}$,
    compute $V_{012} = A^{-1} V_{abc}$ for a set where phase b has dropped to 0.9 pu. *(Octave)* *Answer:*
    $|V_1| \approx 0.967$, $|V_0| = |V_2| \approx 0.033$ pu.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

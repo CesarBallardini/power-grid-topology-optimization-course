@@ -161,18 +161,36 @@ searches discrete topologies directly.
     per line and the speed-up. Then switch off one line not seen in training and measure how the error grows:
     this is the generalization problem that graph neural solvers address.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb) · Steps 1–4 with Grid2Op in the labs container (`docker/labs`): [lab_labs.ipynb](src/lab_labs.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. Write the Bellman optimality equation for a two-state, two-action MDP with given transition probabilities and
    rewards, and solve it by value iteration by hand for $\gamma = 0.9$. *(pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. A substation has 6 elements and 2 busbars. Count the bus assignments (with and without the symmetry of
    swapping the busbars), then the joint actions for 14 such substations. Relate the count to ToOp's per-station
    action sets and to the reduction techniques of this chapter. *(pen and paper)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Extend the worked example to differentiate the flows with respect to the susceptances $b$, and verify one
    column with finite differences. What does this gradient tell an operator? *(Jupyter: JAX + NumPy)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. Implement surrogate-assisted pre-screening in your Chapter 24 GA: evaluate every offspring with a cheap
    linear surrogate fitted to the evaluated population, and compute the exact fitness only for the best 20%.
    Compare evaluations-to-target with the plain GA over 10 seeds. *(Jupyter: NumPy + SciPy)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Write a one-page brief for a TSO on whether to deploy an RL topology agent, covering distribution shift, rare
    contingencies, guarantees, the role of simulation checks and how ToOp could validate the agent's proposals.
    *(pen and paper)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

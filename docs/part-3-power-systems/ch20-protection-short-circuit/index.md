@@ -191,25 +191,47 @@ sees neither constraint.
     4. Move $\theta$ to 80° and observe the self-intersection noted above; derive the validity condition
        $r_v \tan\theta \le x_v$.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. Pen and paper: using symmetrical components, derive the single line-to-ground fault current
    $I_f = 3E/(Z_1 + Z_2 + Z_0)$ and explain why solidly grounded transmission grids can have higher single-phase
    than three-phase fault currents near transformers with low zero-sequence impedance.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(Jupyter: NumPy)* For a 5-bus grid given by its $Y_\text{bus}$, compute $Z_\text{bus}$ and every bus's
    $I''_k$. Then model a busbar split as in [Chapter 18](../ch18-sensitivity-factors-2/index.md) (add a node, move two
    branches) and recompute. Which buses changed by more than 10 %, and why do remote buses barely change?
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: pandapower)* On `pandapower.networks.case9()`, add the short-circuit data `calc_sc` needs
    (external grid `s_sc_max_mva`, `s_sc_min_mva`, `rx_max`, `rx_min`; generator `vn_kv`, `sn_mva`, `xdss_pu`,
    `rdss_ohm`, `cos_phi`; line `endtemp_degree` for the minimum case), compare `case="max"` and `case="min"` for
    all buses and explain the role of $c_\text{max}$ and $c_\text{min}$ and of the line end temperature.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. Pen and paper: write the full switching sequence to move one line bay from busbar 1 to busbar 2 in a
    double-busbar, single-breaker station and then split the station, marking which devices are breakers and
    which are disconnectors, and the moments at which the line is in parallel across both busbars.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(GeoGebra)* Draw a quadrilateral zone 1 (80 % of the line impedance) and zone 2 (120 %) for a 100 km line
    with $z = 0.03 + j0.3\ \Omega/\text{km}$. Add an infeed from a busbar that ToOp split so that half the fault
    current comes from the remote end; show how the apparent impedance for a fault at 90 % of the line moves
    and whether zone 1 under- or over-reaches.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. *(Jupyter: pandas)* In the AC results of the [Chapter 19](../ch19-operational-security/index.md) lab, list the
    `va_diff_results` rows above 20° and 10°. For the worst one, name the switch or outaged branch and describe
    what an operator would have to do before reclosing it.
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

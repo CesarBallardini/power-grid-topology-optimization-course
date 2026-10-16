@@ -123,20 +123,42 @@
     6. Stretch: repeat steps 2–3 on a larger edge list, such as the IEEE 118-bus branch table exported to CSV
        once the pandapower basics of [Chapter 30](../../part-5-computing/ch30-scientific-python/index.md) are covered.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. By hand, find the bridges and articulation points of a graph made of two triangles joined by a single
    edge. Run Tarjan's DFS on it and write down the discovery times and low-link values. *(Pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Show that an edge is a bridge if and only if it lies on no cycle, and that removing a bridge from a
    connected graph leaves exactly two components. *(Pen and paper)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. For the IEEE 14-bus edge list, compute the algebraic connectivity (second-smallest Laplacian eigenvalue)
    and see how it changes when each branch is removed in turn. Plot the values as a bar chart and compare the
    worst branches with the bridge. *(Jupyter: NetworkX + NumPy + matplotlib)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. A station has $n$ busbars that can each be assigned to side A or B. Explain why there are $2^{n-1}$
    assignments up to swapping A and B, and $2^{n-1} - 1$ non-trivial ones. In the ring station of the lab, which
    non-trivial bipartition cannot be reached by opening couplers, and why? *(Pen and paper)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Two topologies are encoded as Boolean vectors of busbar assignments. Write a Hamming distance function in
    NumPy and explain why ToOp also computes the distance to the inverted vector
    (`dc_solver/preprocess/helpers/switching_distance.py`). *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. Weighted shortest paths with a cutoff: on the IEEE 14-bus graph with unit weights, list all buses within
    2 hops of bus 5 with `nx.single_source_dijkstra_path_length(G, 5, cutoff=2)`. *(Jupyter: NetworkX)*
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

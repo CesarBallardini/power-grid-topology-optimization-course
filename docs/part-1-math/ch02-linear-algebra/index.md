@@ -150,19 +150,40 @@ The same in Octave (indices start at 1):
     5. Add a new branch `(0, 5)` with $g = 1$ S. Show that the new matrix is $G + g\, a a^\top$, where $a$ is the
        new row of $A$, and compare the new currents with the old ones.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. By hand, write the incidence matrix of a triangle (3 nodes, 3 branches), compute $A^\top A$ and find its
    null space. What changes if one branch is removed? *(Pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. Show that $x^\top G x = \sum_k g_k (x_{f_k} - x_{t_k})^2$, and deduce that $G$ is positive semidefinite when
    all $g_k > 0$ and that $Gx = 0$ forces $x$ to be constant on each connected component. *(Pen and paper)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Build two disjoint triangles as one network (6 nodes, 6 branches). Compute `eig`, `rank` and `null` of $G$.
    How many zero eigenvalues are there, and what is the rank? *(Octave)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. Implement $A^\top \operatorname{diag}(g) A$ three ways: explicit `np.diag`, `A.T @ (g[:, None] * A)` and
    `np.einsum("ki,k,kj->ij", A, g, A)`. Check that they agree and time them for a network with 2 000 nodes.
    *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Let $G' = G + g\, a a^\top$. Show that $G' x = G x + g\,(a^\top x)\, a$ and verify it numerically for a random
    $x$; explain why this costs $O(n)$ instead of $O(n^2)$. *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. Store the branch list of the lab in a pandas `DataFrame` with columns `from`, `to`, `g`, write it to CSV and
    rebuild $A$ from the file. Add a column with the branch currents of lab step 3 and sort by absolute current.
    *(Jupyter: pandas + NumPy)*
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

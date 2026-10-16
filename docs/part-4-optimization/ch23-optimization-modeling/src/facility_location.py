@@ -19,8 +19,8 @@ ASSIGN = {  # (facility, customer): assignment cost
 }
 
 
-def solve(strong: bool, relax: bool, f: dict = FIXED, c: dict = ASSIGN) -> tuple[float, dict]:
-    """Minimum cost and the opening decisions; ``strong`` picks x_ij <= y_i over the big-M sum constraint."""
+def build(strong: bool, relax: bool, f: dict = FIXED, c: dict = ASSIGN) -> tuple[pulp.LpProblem, dict]:
+    """The PuLP model and its opening variables; ``strong`` picks x_ij <= y_i over the big-M sum constraint."""
     facilities, customers = list(f), sorted({j for _, j in c})
     m = pulp.LpProblem('ufl', pulp.LpMinimize)
     y = m.add_variable_dicts('open', facilities, 0, 1, cat='Continuous' if relax else 'Binary')
@@ -34,8 +34,14 @@ def solve(strong: bool, relax: bool, f: dict = FIXED, c: dict = ASSIGN) -> tuple
     else:  # big-M with M = |J|
         for i in facilities:
             m += pulp.lpSum(x[i, j] for j in customers) <= len(customers) * y[i]
+    return m, y
+
+
+def solve(strong: bool, relax: bool, f: dict = FIXED, c: dict = ASSIGN) -> tuple[float, dict]:
+    """Minimum cost and the opening decisions of the chosen formulation, solved with HiGHS."""
+    m, y = build(strong, relax, f, c)
     m.solve(pulp.HiGHS(msg=False))
-    return pulp.value(m.objective), {i: y[i].value() for i in facilities}
+    return pulp.value(m.objective), {i: y[i].value() for i in f}
 
 
 def main() -> None:

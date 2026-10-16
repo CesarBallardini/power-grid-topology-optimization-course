@@ -95,7 +95,11 @@
     4. Optional: on the ENTSO-E Transparency Platform, look up the cross-border physical flows of Belgium or
        Germany for the same week and relate them to your plot.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. Two-node market, pen and paper. Node A has a generator with marginal cost 20 €/MWh and 1,000 MW capacity;
    node B has a generator with 60 €/MWh and 1,000 MW capacity and a load of 800 MW. The line A–B is limited to
@@ -103,13 +107,27 @@
    ignores the line limit: find its dispatch and price, then the redispatch needed to respect the limit and its
    cost. *Hint:* (a) 500 MW from A, 300 MW from B, prices 20 and 60 €/MWh, rent 20,000 €/h; (b) 800 MW from A,
    redispatch 300 MW at a cost of 12,000 €/h.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(GeoGebra)* Build the two-node market of Exercise 1 with sliders for the line limit and the load at B.
    Plot the redispatch cost and the congestion rent as functions of the line limit, and explain the kink.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. Draw the operational planning timeline from two days ahead to real time. Place the day-ahead congestion
    forecast, intraday updates and real-time operation, and mark where a ToOp run fits and how much time it
    has.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Jupyter: pandas + matplotlib)* With the week of SMARD data from the lab, compute the daily share of wind
    and solar in consumption and the maximum hourly ramp of residual load. Which day would you expect to be the
    hardest for the grid operator, and why?
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. Rank busbar splitting, phase-shifter tap changes, redispatch, countertrading and renewable curtailment by
    cost and by speed of activation. For each, say whether a market participant is involved.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

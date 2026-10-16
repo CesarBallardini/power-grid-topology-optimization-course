@@ -1,0 +1,182 @@
+{
+  "total_branch_combis": 159208,
+  "total_inj_combis": 159208,
+  "total_num_splits": 45,
+  "max_fitness": -1160.365749996548,
+  "best_topos": [
+    {
+      "actions": [
+        54,
+        68
+      ],
+      "disconnections": [],
+      "pst_setpoints": [
+        -25,
+        2,
+        -9
+      ],
+      "metrics": {
+        "fitness": -1169.1179130141709,
+        "extra_scores": {
+          "overload_energy_n_1": 1169.1179130141709,
+          "split_subs": 2.0,
+          "switching_distance": 4.0,
+          "top_k_overloads_n_1": 665.0216396784149
+        },
+        "worst_k_contingency_cases": [
+          "3W-Leg1",
+          "L20"
+        ]
+      },
+      "loadflow_results": null
+    },
+    {
+      "actions": [
+        69
+      ],
+      "disconnections": [],
+      "pst_setpoints": [
+        -25,
+        -5,
+        -9
+      ],
+      "metrics": {
+        "fitness": -1184.1192967057939,
+        "extra_scores": {
+          "overload_energy_n_1": 1184.1192967057939,
+          "split_subs": 1.0,
+          "switching_distance": 4.0,
+          "top_k_overloads_n_1": 721.5981705857034
+        },
+        "worst_k_contingency_cases": [
+          "L20",
+          "L21"
+        ]
+      },
+      "loadflow_results": null
+    },
+    {
+      "actions": [
+        1,
+        54,
+        68
+      ],
+      "disconnections": [],
+      "pst_setpoints": [
+        -25,
+        2,
+        -9
+      ],
+      "metrics": {
+        "fitness": -1160.365749996548,
+        "extra_scores": {
+          "overload_energy_n_1": 1160.365749996548,
+          "split_subs": 3.0,
+          "switching_distance": 8.0,
+          "top_k_overloads_n_1": 1104.2560659213418
+        },
+        "worst_k_contingency_cases": [
+          "L21",
+          "3W-Leg1"
+        ]
+      },
+      "loadflow_results": null
+    },
+    {
+      "actions": [],
+      "disconnections": [],
+      "pst_setpoints": [
+        -24,
+        -6,
+        -9
+      ],
+      "metrics": {
+        "fitness": -1243.8193058313805,
+        "extra_scores": {
+          "overload_energy_n_1": 1243.8193058313805,
+          "split_subs": 0.0,
+          "switching_distance": 0.0,
+          "top_k_overloads_n_1": 698.4615134060948
+        },
+        "worst_k_contingency_cases": [
+          "L20",
+          "L21"
+        ]
+      },
+      "loadflow_results": null
+    }
+  ],
+  "initial_fitness": -1310.8602421982762,
+  "initial_metrics": {
+    "overload_energy_n_1": 1310.8602421982762,
+    "split_subs": 0.0,
+    "switching_distance": 0.0
+  },
+  "args": {
+    "ga_config": {
+      "runtime_seconds": 30.0,
+      "iterations_per_epoch": 100,
+      "random_seed": 42,
+      "enable_nodal_inj_optim": false,
+      "enable_parallel_pst_group_optim": false,
+      "plot": false,
+      "n_worst_contingencies": 2,
+      "enable_bb_outage": false,
+      "bb_outage_as_nminus1": true,
+      "clip_bb_outage_penalty": false,
+      "bb_outage_more_islands_penalty": 0.0,
+      "mutation_repetition": 1,
+      "random_topo_prob": 0.1,
+      "n_subs_mutated_lambda": 2.0,
+      "add_split_prob": 0.25,
+      "change_split_prob": 0.3,
+      "remove_split_prob": 0.25,
+      "add_disconnection_prob": 0.2,
+      "change_disconnection_prob": 0.2,
+      "remove_disconnection_prob": 0.2,
+      "pst_mutation_sigma": 1.0,
+      "pst_mutation_probability": 0.2,
+      "pst_reset_probability": 0.0,
+      "proportion_crossover": 0.1,
+      "crossover_mutation_ratio": 0.5,
+      "target_metrics": [
+        [
+          "overload_energy_n_1",
+          1.0
+        ]
+      ],
+      "observed_metrics": [
+        "overload_energy_n_1",
+        "split_subs",
+        "switching_distance"
+      ],
+      "me_descriptors": [
+        {
+          "metric": "split_subs",
+          "num_cells": 4,
+          "range": null
+        }
+      ],
+      "cell_depth": 1
+    },
+    "lf_config": {
+      "max_num_splits": 4,
+      "max_num_disconnections": 0,
+      "batch_size": 8,
+      "distributed": false,
+      "cross_coupler_flow": false
+    },
+    "fixed_files": [
+      "/runs/pipeline/ch28/complex/grid/static_information.hdf5"
+    ],
+    "tensorboard_dir": "/runs/pipeline/ch28/complex/results/test",
+    "stats_dir": "/runs/pipeline/ch28/complex/results/test",
+    "summary_frequency": 10,
+    "checkpoint_frequency": 100,
+    "double_limits": [
+      1.0,
+      1.0
+    ]
+  },
+  "iteration": 199
+}

@@ -34,7 +34,10 @@
   flag. Why ToOp's three thresholds differ: the LODF denominator
   $1-(\mathrm{PTDF}_{b,f_b}-\mathrm{PTDF}_{b,t_b})$ is dimensionless and lies in $[0,1]$ for a meshed grid, the
   BSDF denominator is a sum of susceptances (grid units and size enter), and a determinant scales with the entries
-  of the matrix to the power of its size; none of the three is scale-invariant (revisits
+  of the matrix to the power of its size. Under a uniform rescaling of every reactance by $s$ the LODF
+  denominator and the MODF determinant are exactly invariant (both are built from PTDF entries, which are
+  ratios of susceptances), while the BSDF denominator scales as $1/s$: only the BSDF threshold depends on the
+  unit system, and the determinant threshold depends on the number of outages instead (revisits
   [Chapter 4](../../part-1-math/ch04-numerical-linear-algebra/index.md)). ToOp does not document its choice.
 - **Debugging JAX.** `ConcretizationTypeError` and `TracerBoolConversionError`; recompilation traps and stale
   compiled results ([Chapter 32](../ch32-jax-in-toop/index.md)); jaxtyping and beartype shape and dtype errors (the hook
@@ -154,28 +157,50 @@ overwrite the diagonal explicitly. Run it in the ToOp container with `uv run --w
     4. **Fix and report.** Fix the bug, show the new test passing and the coverage of the changed lines, and write a
        one-page report: symptom, root cause, why it escaped, test added.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. *(Jupyter: NumPy)* Scale all branch reactances of IEEE 118 by 10 and by 0.1. Which of ToOp's three singularity
    thresholds (LODF, BSDF, determinant) can change its decision for the same topology, and which cannot? Support
    the answer with the dimensions of each denominator and a numerical experiment.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(Jupyter: JAX)* Compute N-1 flows under `jit` for a grid with a radial branch (a bridge). Run once normally,
    once with `jax.config.update("jax_debug_nans", True)`, and once with `jax.debug.print` of the denominator. Then
    call `calc_lodf` from `numpy_reference.py` on the same case. Compare the three behaviors and argue which one a
    batched solver should have.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: Pydantic)* Construct `PreprocessParameters(enable_bb_outage=True)` and inspect `model_dump()`. Write a
    pytest helper that fails when a model silently drops a keyword, and use it to list which parameter models in
    `interfaces/messages/` and `optimizer/interfaces/messages/` accept unknown keywords.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(pytest + Hypothesis)* Using your BSDF code from [Chapter 18](../../part-3-power-systems/ch18-sensitivity-factors-2/index.md),
    write two properties on random meshed grids with one split substation: the BSDF-updated PTDF equals the PTDF
    rebuilt from the split network, and the flows satisfy Kirchhoff's current law at both busbars. Report the
    smallest counterexample Hypothesis finds when you introduce an off-by-one in the busbar assignment.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Octave)* With MATPOWER, compute the PTDF of `case118` with `makePTDF` and the LODF with `makeLODF`, once from
    the double-precision PTDF and once from `single(full(PTDF))`. Plot the largest LODF error per outage against the
    LODF denominator, and discuss whether a threshold of `1e-11` makes sense for float32 data.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. *(ToOp container: JAX profiler + py-spy)* Write a script that repeats
    `notebooks/example1_dc_loadflow_example.ipynb` and then calls
    `run_solver(default_topology(sc, batch_size=4), None, None, di, sc)` twice (`sc` and `di` are the two halves of
    `static_information`). Wrap the second `run_solver` call in `jax.profiler.trace` and open the trace in
    Perfetto; then run the same script under `py-spy record -o profile.svg` (the container needs `SYS_PTRACE`).
    Estimate the share of compilation, device computation and Python overhead in the first and the second call.
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

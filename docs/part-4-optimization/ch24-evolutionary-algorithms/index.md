@@ -121,17 +121,31 @@ negated N-1 overload energy, or $-\infty$ when the switched network is disconnec
        fitness against evaluations for all seeds in one matplotlib figure. Explain the spread between seeds; you
        will analyze it statistically in Chapter 26.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. For hill climbing with the "change one slot" neighborhood on the $k$-subset problem, how many neighbors does
    a solution have? Give a two-line toy example where hill climbing gets stuck in a local optimum that simulated
    annealing can leave. *(pen and paper)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
 2. Implement simulated annealing for the lab problem with a geometric cooling schedule and compare the final
    value after the same evaluation budget as the GA, for 10 seeds. *(Jupyter: NumPy + matplotlib)*
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
 3. Show that switching benefits are not additive: find two lines $a, b$ in IEEE 30 with
    $E(\{a,b\}) - E(\emptyset) \ne \bigl(E(\{a\}) - E(\emptyset)\bigr) + \bigl(E(\{b\}) - E(\emptyset)\bigr)$ and
    explain with LODFs why. Why does this make greedy selection unreliable? *(Jupyter: NumPy)*
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
 4. Compare "penalty" ($-\infty$ fitness) with "repair" (drop lines from $D$ until the grid is connected) for
    islanding candidates: which one wastes fewer evaluations in your runs? *(Jupyter: NumPy + pandas)*
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
 5. The No Free Lunch theorem says all algorithms perform equally on average over all problems. Explain in one
    paragraph why this does not make the choice of operators for line switching irrelevant. *(pen and paper)*
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).

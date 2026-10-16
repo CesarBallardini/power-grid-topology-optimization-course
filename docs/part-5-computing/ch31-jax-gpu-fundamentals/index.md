@@ -139,23 +139,52 @@ compilation.
        pass a fresh `lambda` post-processing function on every call. Fix both, and prove the fix with
        `jax.no_tracing()`.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. For `g = jax.jit(f, static_argnums=1)`, predict how many times `f` is traced for the calls
    `g(x3, 2)`, `g(y3, 2)`, `g(x4, 2)`, `g(x3, 3)`, `g(x3.astype(jnp.float32), 2)`, where `x3`, `y3` are float64
    arrays of length 3 and `x4` of length 4. Then check your answer in a notebook. *(Jupyter: JAX)*
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(Jupyter: JAX)* Write `clip_negative(x)` with `if x.sum() > 0:` and call it under `jit`. Read the error, then
    fix it twice, with `jnp.where` and with `lax.cond`. Which version evaluates both branches, and when does that
    matter?
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Jupyter: JAX + NumPy)* Pad a list of variable-length index arrays to a fixed length with a sentinel equal to
    the array length, and gather with `x.at[idx].get(mode="fill", fill_value=0.0)`. What happens if the sentinel is
    `-1` instead? Relate the answer to why production code chooses a large out-of-bounds sentinel.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Jupyter: JAX + matplotlib)* Compute the LODF matrix of IEEE 118 in float32 and float64, and plot the absolute
    difference against $|1-(\mathrm{PTDF}_{b,f_b}-\mathrm{PTDF}_{b,t_b})|$. Which outages lose the most accuracy in
    float32, and what does that say about near-bridges ([Chapter 4](../../part-1-math/ch04-numerical-linear-algebra/index.md))?
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Octave)* Implement N-1 screening of IEEE 118 twice in Octave: a `for` loop over outages, and one vectorized
    matrix expression. Compare run times. Which JAX transformation plays the role of your vectorized rewrite, and
    what does `jit` add on top?
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
+    !!! note "Known discrepancy: MATPOWER's bridge masking fails on case118"
+
+        If you take the LODF from MATPOWER 8.1, `makeLODF(mpc, H, true)` (bridge masking) stops on `case118`
+        with `br(197): out of bound 186` inside `find_bridges`, which trips over the parallel branches of that
+        case; it works on `case14`. Call `makeLODF(mpc, H)` without the option and mask the bridges yourself,
+        as in [Chapter 17](../../part-3-power-systems/ch17-sensitivity-factors-1/index.md).
+
 6. *(Jupyter: JAX + jaxtyping)* Annotate `n1_flows` with `Float[Array, " n_branch n_bus"]`-style shapes, decorate
    it with `@jaxtyped(typechecker=beartype)`, and call it with a PTDF whose number of columns does not match the
    injection vector. What error do you get, and at which moment (tracing or execution)?
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

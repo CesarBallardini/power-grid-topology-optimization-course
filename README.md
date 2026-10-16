@@ -30,6 +30,7 @@ make docs-serve   # live preview at http://127.0.0.1:8000
 make docs         # strict build: any warning (broken link, missing page) fails
 make test         # tests of the maintenance tools and of the chapters' code (docs/part-*/*/src)
 make test-toop    # the chapter tests that need ToOp, run with ../ToOp/.venv
+make test-labs    # the chapter tests and notebooks that need Grid2Op, Stable-Baselines3, QDax, pymoo or moocore, run in the labs container (docker/labs)
 make check-toop   # every ToOp source path cited in the book exists (needs ../ToOp)
 make check-books  # every archive.org access label still matches archive.org (network)
 make              # list all targets

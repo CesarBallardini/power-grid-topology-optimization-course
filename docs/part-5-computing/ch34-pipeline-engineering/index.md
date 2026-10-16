@@ -49,9 +49,10 @@
   (`optimizer/dc/main.py`); TensorBoard to see whether a run had plateaued (port 6006 is published by the course
   container). At ToOp commit `ba1874e` the log directory name is built from `str(datetime.datetime.now())`, whose
   colons are illegal in Windows paths (fixed on the course fork's `feat/add-docker-compose` branch).
-- Parallel CPU work with Ray (`contingency/pandapower/contingency_analysis_pandapower.py`); in containers Ray and
-  JAX allocate through `/dev/shm`, whose 64 MB Docker default crashes opaquely (`--shm-size=2gb`); Ray's memory
-  monitor kills workers near the memory limit; `CLEANUP_RAY_AFTER_TESTS=true` in tests.
+- Parallel CPU work with Ray (`contingency/pandapower/contingency_analysis_pandapower.py`); in containers shared
+  memory lives in `/dev/shm`, whose 64 MB Docker default fails opaquely: Ray quietly moves its object store to
+  disk, and a larger shared-memory write dies with `SIGBUS` (`--shm-size=2gb`); Ray's memory monitor kills workers
+  near the memory limit; `CLEANUP_RAY_AFTER_TESTS=true` in tests.
 - Containers with Docker; documentation with MkDocs; C4 architecture diagrams (`docs/architecture/`).
 
 ## Learning outcomes
@@ -125,27 +126,64 @@
        for writing logs but not the TensorBoard viewer), open port 6006 and decide whether the fitness had plateaued
        when the run stopped.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab_toop.ipynb](src/lab_toop.ipynb) (needs ToOp).
+
+!!! note "Known discrepancy: the DC stage cannot start on Windows"
+
+    `optimizer/dc/main.py` names the TensorBoard folder `str(datetime.now())`, whose colons are illegal in a
+    Windows path, so lab step 4 run outside the Linux container dies with `WinError 123` before the first
+    epoch. Inside the container nothing is needed; on Windows, swap the timestamp format for one with dashes
+    before the run (the course fork does this, and the lab's `tensorboard_log_toop.py` patches it at run
+    time).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in
+[examples.ipynb](src/examples.ipynb).
 
 1. *(Jupyter: pandas)* In the lab's step 3, `poll_results_topic` returned an empty "added" dictionary although rows
    were stored. Read `optimizer/ac/listener.py` and explain why. What would change if the DC run had not finished?
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. *(Jupyter: h5py + NumPy)* Load `static_information.hdf5` twice: with h5py directly and with
    `load_static_information` from `dc_solver/jax/inputs.py`. List which datasets map to which `DynamicInformation`
    fields, and which `SolverConfig` values are stored as HDF5 attributes (`file.attrs`) instead.
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Hydra)* Following `docs/benchmark.md`, run a multirun on `grid=config_grid_node_breaker` over two values of
    `ga_config.runtime_seconds` and two values of a parameter that really exists in `BatchedMEParameters` (the page's
    `ga_config.split_subs=2,5` is not a field; its config folder is `toop-engine-benchmark/configs/` and the script
    is `assess_benchmarks.py`), then aggregate the results with `assess_benchmarks`. Draw the directory tree Hydra
    creates and explain how you would make the sweep reproducible
-   ([Chapter 26](../../part-4-optimization/ch26-experimental-methodology/index.md)).
+   ([Chapter 26](../../part-4-optimization/ch26-experimental-methodology/index.md)). At ToOp commit `ba1874e`
+   the DC results arrive (each job's `stats/res.json`) but the aggregation does not: every job dies in the AC
+   stage with `omegaconf.errors.ConfigKeyError: Missing key critical_va_diff_degree`, because
+   `benchmark_toop.py` builds an `ac_validation_cfg` with `n_processes` and `k_best_topos` only while
+   `save_ac_metrics_summary` also reads `critical_va_diff_degree` and `critical_voltage_jump_percent`; no
+   `benchmark_summary.json` is written and `assess_benchmarks` reports "No benchmark_summary.json files
+   found". Read the DC results from `stats/res.json` and the per-job `.hydra/overrides.yaml` instead, and note
+   what the benchmark would have to pass for the summary to appear.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(tyro)* Run `uv run python -m toop_engine_topology_optimizer.dc.main --help` and map five command-line flags to
    fields of `CLIArgs` in `optimizer/dc/main.py` (for example inside `ga_config` and `lf_config`). How does tyro turn
    a nested Pydantic model into flags?
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Docker)* Using the `docker run` form from ToOp's `docker/README.md` (course fork), start the CPU image once with
    `--shm-size=64m` and once with `--shm-size=2gb`, and in each run
    `uv run pytest packages/contingency_analysis_pkg/tests/pandapower/test_contingency_analysis_pandapower.py -q`
    (these tests start Ray). Compare the outcomes and failure signatures, and explain why a small `/dev/shm` is not
    reported as "out of shared memory".
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
+
 6. Draw a C4 container diagram of a deployment where the DC worker runs on a GPU node and three AC workers run on
    CPU nodes. Mark which state is in Kafka, which on the shared file system, and which only in a worker's SQLite
    memory, and propose what must change so that an AC worker can be restarted without losing work.
+
+    **Solution:** [Exercise 6](solutions.md#exercise-6).

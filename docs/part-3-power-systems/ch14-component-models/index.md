@@ -136,17 +136,35 @@ The same construction in NumPy against `pandapower.pypower.makeYbus.makeYbus(bas
        transformer branches from their off-nominal taps and check the symmetry of $Y_\text{bus}$ numerically.
     4. Set a 5° phase shift on one transformer, rebuild, and measure $\lVert Y_\text{bus} - Y_\text{bus}^\top \rVert$.
 
+    Solutions: [Lab](solutions.md#lab) · Notebook: [lab.ipynb](src/lab.ipynb).
+
 ## Exercises
+
+All statements are also in [exercises.ipynb](src/exercises.ipynb); the worked examples run in [examples.ipynb](src/examples.ipynb).
 
 1. Build $Y_\text{bus}$ by inspection for a three-bus ring with series impedances $j0.1$, $j0.2$, $j0.25$ p.u.
    and charging $b_c = 0.02$ p.u. on each line. Check that every row sums to the bus's total shunt admittance.
+
+    **Solution:** [Exercise 1](solutions.md#exercise-1).
+
 2. A transformer with ratio $\tau = 1.05$ and no phase shift connects buses 1 and 2 with $x = 0.1$ p.u. Write its
    $Y_\text{br}$ and draw the equivalent $\pi$ circuit implied by it. Why is the $\pi$ circuit asymmetric?
+
+    **Solution:** [Exercise 2](solutions.md#exercise-2).
+
 3. *(Octave + MATPOWER)* For `case14`, compute $B_\text{bus} = A^\top \operatorname{diag}(1/x)\, A$ ignoring taps and
    compare it with the first output of `makeBdc(mpc)`. Explain every entry that differs.
+
+    **Solution:** [Exercise 3](solutions.md#exercise-3).
+
 4. *(Jupyter: NumPy)* Kron reduction: partition the buses of IEEE 14 into kept and eliminated sets, compute the
    Ward-type equivalent $Y_{kk} - Y_{ke} Y_{ee}^{-1} Y_{ek}$, and show that it reproduces the kept-bus voltages
    for a current injection pattern with zero injection at the eliminated buses.
+
+    **Solution:** [Exercise 4](solutions.md#exercise-4).
+
 5. *(Jupyter: NumPy + matplotlib)* For a 300 km line with given per-km parameters, compare the exact long-line
    ABCD parameters with the nominal $\pi$ model as a function of length, and plot the relative error of the
    series admittance.
+
+    **Solution:** [Exercise 5](solutions.md#exercise-5).
