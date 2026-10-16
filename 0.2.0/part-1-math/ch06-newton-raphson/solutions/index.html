@@ -1,0 +1,2488 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/0.2.0/part-1-math/ch06-newton-raphson/solutions/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Chapter 6 – Solutions - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-6-solutions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 6 – Solutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-6-solutions">Chapter 6 – Solutions<a class="headerlink" href="#chapter-6-solutions" title="Permanent link">&para;</a></h1>
+<p>Solutions of the Lab and the Exercises of <a href="../">Chapter 6</a>. Try each task before reading its solution.
+The code is in the chapter's <code>src</code> folder: <a href="../src/newton.py"><code>newton.py</code></a> (the worked example),
+<a href="../src/newton_lab.py"><code>newton_lab.py</code></a> (the reusable solver, basins and the SciPy comparison; <code>python newton_lab.py</code>
+prints every number of the Lab answers), <a href="../src/newton_exercises.py"><code>newton_exercises.py</code></a> (<code>python
+newton_exercises.py</code> prints those of Exercises 1–5) and <a href="../src/fsolve_example.m"><code>fsolve_example.m</code></a> (Exercise 6,
+Octave). The notebooks <a href="../src/examples/"><code>examples.ipynb</code></a>, <a href="../src/lab/"><code>lab.ipynb</code></a> and
+<a href="../src/exercises/"><code>exercises.ipynb</code></a> import these modules.</p>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>A reusable Newton solver.</strong> <code>newton_solve</code> below returns the solution, a success flag and the list of
+   residual norms <span class="arithmatex">\(\|F(\mathbf{x}_k)\|\)</span> (the starting point included). Each step is one linear solve
+   <span class="arithmatex">\(J\,\Delta = -F\)</span>; <code>np.linalg.LinAlgError</code> (singular Jacobian) and a non-finite iterate end the run with
+   <code>success = False</code>, and so does reaching <code>max_iter</code> above <code>tol</code>. The <code>damping</code> argument scales every step by
+   a fixed fraction; <code>backtrack=True</code> halves that fraction until the residual decreases (step 5).</p>
+<div class="highlight"><span class="filename">newton_lab.py: newton_solve</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">newton_solve</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">damping</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">backtrack</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">"""Newton's method for F(x) = 0; returns (x, success, residual norms).</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    Each step solves J(x) Δ = −F(x) and sets x ← x + damping · Δ. With ``backtrack`` the fraction starts at</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    ``damping`` and is halved (at most ten times) until ‖F‖ decreases. The history holds ‖F(x_k)‖ for</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    k = 0, 1, ... including the starting point. A singular Jacobian (``np.linalg.LinAlgError``) or a non-finite</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    iterate ends the run with ``success = False`` instead of an exception; so does reaching ``max_iter``</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    above ``tol``.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    """</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)))]</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="k">if</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">history</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            <span class="n">step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">jac</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">history</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">alpha</span> <span class="o">=</span> <span class="n">damping</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAX_HALVINGS</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">over</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">):</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>                <span class="n">xn</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">step</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                <span class="n">r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xn</span><span class="p">)))</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">backtrack</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                <span class="k">break</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            <span class="n">alpha</span> <span class="o">/=</span> <span class="mi">2</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            <span class="k">return</span> <span class="n">xn</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">history</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">xn</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">history</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch06-newton-raphson/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+</li>
+<li>
+<p><strong>Residual histories and convergence order.</strong> From <span class="arithmatex">\((1, -1)\)</span> the norms are <span class="arithmatex">\(2.1\)</span>, <span class="arithmatex">\(8.6\cdot10^{-1}\)</span>,
+   <span class="arithmatex">\(4.0\cdot10^{-2}\)</span>, <span class="arithmatex">\(1.0\cdot10^{-4}\)</span>, <span class="arithmatex">\(8.4\cdot10^{-10}\)</span>, <span class="arithmatex">\(0\)</span>: five steps to root
+   A <span class="arithmatex">\(= (1.004169, -1.729637)\)</span>. From <span class="arithmatex">\((-1, 1)\)</span>: <span class="arithmatex">\(2.0\)</span>, <span class="arithmatex">\(1.0\)</span>, <span class="arithmatex">\(5.4\cdot10^{-2}\)</span>, <span class="arithmatex">\(1.8\cdot10^{-4}\)</span>,
+   <span class="arithmatex">\(2.1\cdot10^{-9}\)</span>, <span class="arithmatex">\(0\)</span>, five steps to root B <span class="arithmatex">\(= (-1.816264, 0.837368)\)</span>. From <span class="arithmatex">\((2, 2)\)</span> the residual first
+   grows (<span class="arithmatex">\(9.3\)</span>, <span class="arithmatex">\(3.7\)</span>, <span class="arithmatex">\(3.4\)</span>, <span class="arithmatex">\(4.5\)</span>) and then collapses (<span class="arithmatex">\(0.60\)</span>, <span class="arithmatex">\(2.0\cdot10^{-2}\)</span>, <span class="arithmatex">\(2.5\cdot10^{-5}\)</span>,
+   <span class="arithmatex">\(4.0\cdot10^{-11}\)</span>): seven steps, to root B, far from where it started. From <span class="arithmatex">\((0, 0)\)</span> the Jacobian
+   <span class="arithmatex">\(\begin{bmatrix} 0 &amp; 0 \\ 1 &amp; 1\end{bmatrix}\)</span> is singular and the solver returns failure at once. On
+   <code>semilogy</code> the three convergent histories bend downwards, the picture of quadratic convergence. The ratio
+   <span class="arithmatex">\(\log r_{k+1} / \log r_k\)</span> is <span class="arithmatex">\(2.85\)</span> then <span class="arithmatex">\(2.27\)</span> from <span class="arithmatex">\((1, -1)\)</span>, <span class="arithmatex">\(2.95\)</span> then <span class="arithmatex">\(2.32\)</span> from <span class="arithmatex">\((-1, 1)\)</span>, <span class="arithmatex">\(2.71\)</span>
+   then <span class="arithmatex">\(2.26\)</span> from <span class="arithmatex">\((2, 2)\)</span>: it approaches 2 from above, because
+   <span class="arithmatex">\(\log r_{k+1} / \log r_k = p + \log C / \log r_k\)</span> for <span class="arithmatex">\(r_{k+1} \approx C r_k^p\)</span>, and the second term only
+   vanishes as <span class="arithmatex">\(r_k \to 0\)</span>. The ratio for the first pair from <span class="arithmatex">\((1, -1)\)</span> is <span class="arithmatex">\(21.4\)</span> and means nothing: <span class="arithmatex">\(r_0 = 0.86\)</span>
+   is so close to 1 that its logarithm is nearly zero. Estimate the order from the tail of the history only.</p>
+</li>
+<li>
+<p><strong>Basins of attraction.</strong> <code>basins()</code> iterates the <span class="arithmatex">\(200 \times 200\)</span> starting points together (the <span class="arithmatex">\(2 \times 2\)</span>
+   Jacobian is inverted by Cramer's rule) and labels each point by the root within <span class="arithmatex">\(10^{-6}\)</span> of its last
+   iterate: 12 117 points reach root A, 27 673 reach root B and 210 fail (overflow or an exactly singular
+   Jacobian). The map shows two broad regions, but the boundary between them is not a line: along the curve
+   <span class="arithmatex">\(\det J = 2x - 2y e^x = 0\)</span>, that is <span class="arithmatex">\(y = x e^{-x}\)</span>, the picture is a ragged mixture of both colours, and
+   139 of the 210 failures lie within <span class="arithmatex">\(0.1\)</span> of that curve. On the curve the Newton step is undefined; next to it
+   the step is huge, so the iterate lands far away and in whichever basin that landing point belongs to. The
+   boundary also follows the images of that curve under the Newton map (the points that reach the curve after
+   one or more steps), which is why it looks fractal. Away from the curve the step is bounded and nearby
+   starting points move together.</p>
+<div class="highlight"><span class="filename">newton_lab.py: basins</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">basins</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">damping</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">backtrack</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">"""Which root Newton reaches from each point of an n × n grid over [−3, 3]²: 0 or 1 for ``ROOTS``, −1 for failure.</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="sd">    All grid points are iterated together, with the same step rule as ``newton_solve`` (fixed fraction</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">    ``damping``, or backtracking from it). A point whose Jacobian is singular or whose iterate leaves the</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="sd">    floating-point range is marked as failed and frozen. Returns the label matrix indexed as</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="sd">    ``label[row = y index, column = x index]`` for ``plt.imshow``.</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="sd">    """</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="n">alive</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">r_old</span> <span class="o">=</span> <span class="n">_residual_grid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">_newton_step_grid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">damping</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dx</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dy</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="n">r_new</span> <span class="o">=</span> <span class="n">_residual_grid</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">yn</span><span class="p">)</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="k">if</span> <span class="n">backtrack</span><span class="p">:</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAX_HALVINGS</span><span class="p">):</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>                <span class="n">retry</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">r_new</span> <span class="o">&lt;</span> <span class="n">r_old</span><span class="p">))</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>                <span class="k">if</span> <span class="ow">not</span> <span class="n">retry</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>                    <span class="k">break</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>                <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">retry</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>                <span class="n">xn</span><span class="p">,</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dx</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dy</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>                <span class="n">r_new</span> <span class="o">=</span> <span class="n">_residual_grid</span><span class="p">(</span><span class="n">xn</span><span class="p">,</span> <span class="n">yn</span><span class="p">)</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="n">ok</span> <span class="o">=</span> <span class="n">alive</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e6</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yn</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e6</span><span class="p">)</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="n">alive</span> <span class="o">&amp;=</span> <span class="n">ok</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ok</span><span class="p">,</span> <span class="n">xn</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ok</span><span class="p">,</span> <span class="n">yn</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="n">r_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ok</span><span class="p">,</span> <span class="n">r_new</span><span class="p">,</span> <span class="n">r_old</span><span class="p">)</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="n">pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">pts</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">ROOTS</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="n">label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="n">label</span><span class="p">[</span><span class="o">~</span><span class="n">alive</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    <span class="k">return</span> <span class="n">label</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>SciPy and Octave.</strong> From <span class="arithmatex">\((1, -1)\)</span> to a residual of <span class="arithmatex">\(10^{-10}\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th>Solver</th>
+<th>Iterations</th>
+<th>Function evaluations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>newton_solve</code> (analytic Jacobian)</td>
+<td>5</td>
+<td>6 (plus 5 Jacobians)</td>
+</tr>
+<tr>
+<td><code>optimize.root(..., method='hybr')</code></td>
+<td>not reported</td>
+<td>13</td>
+</tr>
+<tr>
+<td><code>optimize.root(..., method='broyden1')</code></td>
+<td>16</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Octave <code>fsolve</code> (Exercise 6)</td>
+<td>6</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p><code>hybr</code> is MINPACK's hybrid Powell method: a trust-region step with a Jacobian built by finite differences
+and then updated by Broyden's formula, so its <code>nfev</code> includes the two extra evaluations of each Jacobian
+rebuild and it reports no iteration count. <code>broyden1</code> starts from the identity scaled by its <code>alpha</code>
+parameter, which is why it needs three times the iterations of Newton. Newton with an analytic Jacobian is
+hard to beat on a 2-variable problem; the comparison turns in favour of quasi-Newton methods when the
+Jacobian is expensive and the dimension large (Exercise 5).</p>
+<div class="highlight"><span class="filename">newton_lab.py: scipy_comparison</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">scipy_comparison</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">"""(iterations, function evaluations) of Newton, SciPy ``hybr`` and SciPy ``broyden1`` from ``x0``.</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Newton evaluates F once per iteration plus once at the start. ``hybr`` (MINPACK) reports only ``nfev``,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    which includes the finite-difference Jacobian (two evaluations per rebuild), so its iteration count is</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="sd">    ``None``; ``broyden1`` reports ``nit`` and ``nfev``.</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="sd">    """</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">newton_solve</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">jacobian</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">out</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'newton'</span><span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hist</span><span class="p">))}</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'hybr'</span><span class="p">,</span> <span class="s1">'broyden1'</span><span class="p">):</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="n">sol</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">root</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="n">out</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">nit</span><span class="p">)</span> <span class="k">if</span> <span class="s1">'nit'</span> <span class="ow">in</span> <span class="n">sol</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">nfev</span><span class="p">))</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="k">return</span> <span class="n">out</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Damping.</strong> A fixed <code>damping=0.5</code> does not rescue the failures: 345 points fail instead of 210, because
+   half a step from a point near the singular curve still lands far away, and halving every step keeps later
+   iterates hovering near the curve for longer. Its cost near the solution is severe: the error is only halved
+   each step (the convergence is linear with ratio <span class="arithmatex">\(1/2\)</span>, a straight line on <code>semilogy</code>), and the run from
+   <span class="arithmatex">\((1, -1)\)</span> takes 34 steps instead of 5. Backtracking (start from the full step, halve it until the residual
+   decreases) removes every failure: 0 of the 40 000 points fail, 13 105 reach root A and 26 895 root B. Its
+   cost near the solution is nil, because the full Newton step always decreases the residual there and is
+   accepted at once: the run from <span class="arithmatex">\((1, -1)\)</span> still takes 5 steps. Backtracking only pays for the extra residual
+   evaluations of the rejected trial steps, far from the solution. In the basin map the ragged band along
+   <span class="arithmatex">\(\det J = 0\)</span> remains (the step is still huge there, only shortened until the residual improves), but every
+   point now ends at one of the two roots.</p>
+</li>
+<li>
+<p><strong>Keep the function.</strong> <code>newton_solve</code> in <code>newton_lab.py</code> takes any <code>f</code> and <code>jac</code>; in
+   <a href="../../../part-3-power-systems/ch15-ac-power-flow/">Chapter 15</a> the residual is the power mismatch and
+   the Jacobian the power-flow Jacobian. Nothing to compute here.</p>
+</li>
+</ol>
+<h2 id="exercise-1">Exercise 1<a class="headerlink" href="#exercise-1" title="Permanent link">&para;</a></h2>
+<p>For <span class="arithmatex">\(f(x) = x^2 - 2\)</span> the Newton step is <span class="arithmatex">\(x_{k+1} = x_k - (x_k^2 - 2)/(2x_k) = \tfrac12 (x_k + 2/x_k)\)</span>. From
+<span class="arithmatex">\(x_0 = 1\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th><span class="arithmatex">\(x_k\)</span></th>
+<th><span class="arithmatex">\(e_k = \lvert x_k - \sqrt2 \rvert\)</span></th>
+<th><span class="arithmatex">\(e_k / e_{k-1}^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(4.1\cdot10^{-1}\)</span></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(1.5\)</span></td>
+<td><span class="arithmatex">\(8.6\cdot10^{-2}\)</span></td>
+<td><span class="arithmatex">\(0.500\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(1.416667\)</span></td>
+<td><span class="arithmatex">\(2.5\cdot10^{-3}\)</span></td>
+<td><span class="arithmatex">\(0.333\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(1.414216\)</span></td>
+<td><span class="arithmatex">\(2.1\cdot10^{-6}\)</span></td>
+<td><span class="arithmatex">\(0.353\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Subtracting <span class="arithmatex">\(\sqrt2\)</span> from the step gives exactly <span class="arithmatex">\(x_{k+1} - \sqrt2 = (x_k - \sqrt2)^2 / (2x_k)\)</span>, so
+<span class="arithmatex">\(e_{k+1} = e_k^2 / (2x_k) \to e_k^2 / (2\sqrt2) = 0.354\, e_k^2\)</span>: the error is squared each step, with a
+constant that the last ratio already reproduces to three digits. <code>sqrt2_iterates()</code> prints the table.</p>
+<h2 id="exercise-2">Exercise 2<a class="headerlink" href="#exercise-2" title="Permanent link">&para;</a></h2>
+<p>The Newton step on <span class="arithmatex">\(f(x) = \arctan x\)</span>, <span class="arithmatex">\(f'(x) = 1/(1 + x^2)\)</span>, is <span class="arithmatex">\(x_1 = x_0 - (1 + x_0^2)\arctan x_0\)</span>, so
+<span class="arithmatex">\(x_1 = -x_0\)</span> exactly when <span class="arithmatex">\(2x_0 = (1 + x_0^2)\arctan x_0\)</span>. <code>brentq</code> on <span class="arithmatex">\([1, 2]\)</span> gives <span class="arithmatex">\(x_0^\ast = 1.3917\)</span>,
+and from it the iteration flips sign forever. Below the threshold the sequence shrinks: from <span class="arithmatex">\(1.3\)</span> the
+iterates are <span class="arithmatex">\(-1.16\)</span>, <span class="arithmatex">\(0.859\)</span>, <span class="arithmatex">\(-0.374\)</span>, <span class="arithmatex">\(0.034\)</span>, <span class="arithmatex">\(-2.6\cdot10^{-5}\)</span>, <span class="arithmatex">\(1.2\cdot10^{-14}\)</span>. Above it the sequence
+grows: from <span class="arithmatex">\(1.5\)</span> they are <span class="arithmatex">\(-1.69\)</span>, <span class="arithmatex">\(2.32\)</span>, <span class="arithmatex">\(-5.11\)</span>, <span class="arithmatex">\(32.3\)</span>, <span class="arithmatex">\(-1.6\cdot10^{3}\)</span>, <span class="arithmatex">\(3.9\cdot10^{6}\)</span>, because far
+from the origin <span class="arithmatex">\(f'\)</span> is tiny and each step <span class="arithmatex">\(\approx x^2 \arctan x\)</span> overshoots by more than the distance to
+the root. With <code>damping=0.5</code> from <span class="arithmatex">\(1.5\)</span> the first half-step lands at <span class="arithmatex">\(-0.097\)</span>, inside the convergent region,
+and from there the iterates halve each step (<span class="arithmatex">\(-0.048\)</span>, <span class="arithmatex">\(-0.024\)</span>, <span class="arithmatex">\(-0.012\)</span>, ...): the divergence is cured but
+the convergence is now linear with ratio <span class="arithmatex">\(1/2\)</span>, the price of a fixed damping. The backtracking rule of the
+lab's <code>newton_solve</code> (shorten the step only while the residual does not decrease) converges from <span class="arithmatex">\(1.5\)</span> in 4
+steps: it damps the first step and takes full Newton steps afterwards.</p>
+<div class="highlight"><span class="filename">newton_exercises.py: arctan</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">arctan_critical_point</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">"""Exercise 2: the x₀ &gt; 0 for which Newton on arctan x gives x₁ = −x₀, i.e. 2x = (1 + x²) arctan x."""</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">optimize</span><span class="o">.</span><span class="n">brentq</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">))</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">arctan_iterates</span><span class="p">(</span><span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">damping</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="sd">"""Newton (optionally damped) on f(x) = arctan x, f'(x) = 1/(1 + x²), from ``x0``."""</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">return</span> <span class="n">newton_scalar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">damping</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="exercise-3">Exercise 3<a class="headerlink" href="#exercise-3" title="Permanent link">&para;</a></h2>
+<p>With <span class="arithmatex">\(f(x) = (x - 1)^2\)</span> and <span class="arithmatex">\(f'(x) = 2(x - 1)\)</span> the step is <span class="arithmatex">\(x_{k+1} = x_k - (x_k - 1)/2 = (x_k + 1)/2\)</span>, so the
+error obeys <span class="arithmatex">\(e_{k+1} = e_k / 2\)</span> exactly. From <span class="arithmatex">\(x_0 = 0\)</span>: <span class="arithmatex">\(0.5\)</span>, <span class="arithmatex">\(0.75\)</span>, <span class="arithmatex">\(0.875\)</span>, <span class="arithmatex">\(0.9375\)</span>, <span class="arithmatex">\(0.96875\)</span>,
+<span class="arithmatex">\(0.984375\)</span>, with errors <span class="arithmatex">\(1/2\)</span>, <span class="arithmatex">\(1/4\)</span>, <span class="arithmatex">\(1/8\)</span>, ... (<code>double_root_iterates()</code>). The quadratic estimate
+<span class="arithmatex">\(e_{k+1} = f''(\xi)\, e_k^2 / (2 f'(x_k))\)</span> assumes <span class="arithmatex">\(f'(x_k) \to f'(r) \neq 0\)</span>; at a double root
+<span class="arithmatex">\(f'(x_k) = 2 e_k\)</span> itself vanishes with the error, and the estimate degrades to <span class="arithmatex">\(e_{k+1} = 2 e_k^2 / (4 e_k) =
+e_k / 2\)</span>. In general a root of multiplicity <span class="arithmatex">\(m\)</span> gives linear convergence with ratio <span class="arithmatex">\((m - 1)/m\)</span>. The practical
+sign is a residual that shrinks by a constant factor per step instead of squaring: in a power flow that is the
+signature of a case at its loadability limit, where the Jacobian becomes singular (Exercise 4).</p>
+<h2 id="exercise-4">Exercise 4<a class="headerlink" href="#exercise-4" title="Permanent link">&para;</a></h2>
+<p>Newton on <span class="arithmatex">\(g(\delta) = \sin\delta - PX\)</span>, <span class="arithmatex">\(g'(\delta) = \cos\delta\)</span>, from <span class="arithmatex">\(\delta_0 = 0\)</span> (<code>angle_iterates</code>):</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(PX\)</span></th>
+<th>Iterates (rad)</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span>, <span class="arithmatex">\(0.5234\)</span>, <span class="arithmatex">\(0.5236\)</span></td>
+<td><span class="arithmatex">\(\delta = 30.00^\circ\)</span> in 3 steps</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.99\)</span></td>
+<td><span class="arithmatex">\(0.99\)</span>, <span class="arithmatex">\(1.2706\)</span>, <span class="arithmatex">\(1.3880\)</span>, <span class="arithmatex">\(1.4246\)</span>, <span class="arithmatex">\(1.4292\)</span>, <span class="arithmatex">\(1.4293\)</span></td>
+<td><span class="arithmatex">\(\delta = 81.89^\circ\)</span> in 6 steps</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1.2\)</span></td>
+<td><span class="arithmatex">\(1.2\)</span>, <span class="arithmatex">\(1.9395\)</span>, <span class="arithmatex">\(1.1981\)</span>, <span class="arithmatex">\(1.9359\)</span>, <span class="arithmatex">\(1.1911\)</span>, <span class="arithmatex">\(1.9228\)</span>, <span class="arithmatex">\(1.1650\)</span>, <span class="arithmatex">\(1.8773\)</span>, ...</td>
+<td>no convergence</td>
+</tr>
+</tbody>
+</table>
+<p>For <span class="arithmatex">\(PX = 0.99\)</span> the convergence is slow at first because the root sits where <span class="arithmatex">\(\cos\delta = 0.141\)</span> is small:
+the constant <span class="arithmatex">\(g''/(2g') = \tan\delta / 2 \approx 3.5\)</span> is large, and the first full step from <span class="arithmatex">\(0\)</span> (slope 1)
+undershoots badly. For <span class="arithmatex">\(PX = 1.2\)</span> the equation has no real solution, since <span class="arithmatex">\(\sin\delta \le 1 &lt; 1.2\)</span>: the
+iterates bounce between about <span class="arithmatex">\(1.2\)</span> and <span class="arithmatex">\(1.9\)</span> on either side of the maximum of <span class="arithmatex">\(\sin\delta\)</span>, the residual never
+drops below <span class="arithmatex">\(0.2\)</span>, and after a dozen steps the sequence is still wandering (the last iterates computed are
+<span class="arithmatex">\(1.06\)</span>, <span class="arithmatex">\(1.73\)</span>, <span class="arithmatex">\(0.39\)</span>, <span class="arithmatex">\(1.28\)</span>). A power flow solver stops at its iteration cap and reports non-convergence. Physically <span class="arithmatex">\(P_{\max} = 1/X\)</span> is the steady-state stability limit of the line; a dispatch asking
+for more has no equilibrium. ToOp's AC validation runs Newton–Raphson power flows on each candidate topology;
+a topology that drives a load flow past such a limit does not produce a flow to check against the ratings, so
+the fact itself is counted in the <code>non_converging_loadflows</code> metric and the candidate is penalised.</p>
+<h2 id="exercise-5">Exercise 5<a class="headerlink" href="#exercise-5" title="Permanent link">&para;</a></h2>
+<p>Good Broyden with <span class="arithmatex">\(B_0 = J(\mathbf{x}_0)\)</span>: the step is <span class="arithmatex">\(\Delta = -H F(\mathbf{x})\)</span> with <span class="arithmatex">\(H = B^{-1}\)</span>, and
+after the step, with <span class="arithmatex">\(s = \Delta\)</span> and <span class="arithmatex">\(y = F(\mathbf{x} + \Delta) - F(\mathbf{x})\)</span>, the rank-1 update
+<span class="arithmatex">\(B^+ = B + (y - Bs)\, s^\top / (s^\top s)\)</span> keeps <span class="arithmatex">\(B^+ s = y\)</span> (the secant condition) while changing <span class="arithmatex">\(B\)</span> as
+little as possible. Sherman–Morrison (<a href="../../ch04-numerical-linear-algebra/">Chapter 4</a>) turns it into
+an update of the inverse without any linear solve:</p>
+<div class="arithmatex">\[
+H^+ = H + \frac{(s - Hy)\, s^\top H}{s^\top H y}.
+\]</div>
+<p>From <span class="arithmatex">\((1, -1)\)</span> Broyden takes 7 iterations against Newton's 5, with residual norms <span class="arithmatex">\(2.1\)</span>, <span class="arithmatex">\(8.6\cdot10^{-1}\)</span>,
+<span class="arithmatex">\(1.6\cdot10^{-1}\)</span>, <span class="arithmatex">\(8.5\cdot10^{-3}\)</span>, <span class="arithmatex">\(2.7\cdot10^{-5}\)</span>, <span class="arithmatex">\(2.2\cdot10^{-6}\)</span>, <span class="arithmatex">\(4.1\cdot10^{-8}\)</span>,
+<span class="arithmatex">\(9.6\cdot10^{-12}\)</span>: the first step is Newton's (same <span class="arithmatex">\(B_0\)</span>), and afterwards the decrease is superlinear but
+not quadratic. Started from <span class="arithmatex">\(B_0 = I\)</span> it needs 13 iterations. Each Broyden iteration costs one residual
+evaluation and an <span class="arithmatex">\(O(n^2)\)</span> update instead of a Jacobian evaluation and an <span class="arithmatex">\(O(n^3)\)</span> solve, so it wins when
+the Jacobian is expensive or unavailable, as in <code>hybr</code>, which uses the same update between rebuilds.</p>
+<div class="highlight"><span class="filename">newton_exercises.py: broyden_good</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">broyden_good</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="sd">"""Broyden's 'good' method with the inverse Jacobian kept by Sherman–Morrison; returns (x, residual norms).</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="sd">    From B₀ = J(x₀) the step is Δ = −H F(x), H = B⁻¹. With s = Δ and y = F(x + Δ) − F(x) the good update is</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="sd">    B⁺ = B + (y − B s) sᵀ / (sᵀ s), whose inverse (Sherman–Morrison) is H⁺ = H + (s − H y) sᵀ H / (sᵀ H y).</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="sd">    The history holds ‖F(x_k)‖ for k = 0, 1, ...</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="sd">    """</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">j0</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">fx</span><span class="p">))]</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">if</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>            <span class="k">break</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="n">s</span> <span class="o">=</span> <span class="o">-</span><span class="n">h</span> <span class="o">@</span> <span class="n">fx</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">s</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="n">fx_new</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="n">y</span> <span class="o">=</span> <span class="n">fx_new</span> <span class="o">-</span> <span class="n">fx</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="n">hy</span> <span class="o">=</span> <span class="n">h</span> <span class="o">@</span> <span class="n">y</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="n">h</span> <span class="o">=</span> <span class="n">h</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">hy</span><span class="p">,</span> <span class="n">s</span> <span class="o">@</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span> <span class="o">@</span> <span class="n">hy</span><span class="p">)</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="n">fx</span> <span class="o">=</span> <span class="n">fx_new</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">fx</span><span class="p">)))</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">history</span>
+</code></pre></div>
+<h2 id="exercise-6">Exercise 6<a class="headerlink" href="#exercise-6" title="Permanent link">&para;</a></h2>
+<p>Octave's <code>fsolve</code> (trust-region dogleg, Jacobian by finite differences unless supplied) from <span class="arithmatex">\([1; -1]\)</span> with
+<code>TolFun = TolX = 1e-12</code> returns <span class="arithmatex">\(x = (1.0042, -1.7296)\)</span>, <span class="arithmatex">\(\|f\| = 9\cdot10^{-16}\)</span>, <code>info = 1</code> (converged) and
+<code>output.iterations = 6</code>, <code>output.successful = 5</code>, <code>output.funcCount = 16</code>. The Newton code of the lab takes 5
+iterations with 6 residual and 5 Jacobian evaluations; <code>fsolve</code> spends one more iteration and 16 function
+evaluations, because each finite-difference Jacobian costs two extra evaluations and one of its trial steps was
+rejected (<code>successful</code> counts the accepted ones). From <span class="arithmatex">\([-1; 1]\)</span> it finds the other root in 6 iterations too.</p>
+<div class="highlight"><span class="filename">fsolve_example.m</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>x, fval, info, output<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">fsolve_example</span><span class="p">(</span>x0<span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="c">% Solve the worked example of Chapter 6 (x^2 + y^2 = 4, exp(x) + y = 1) with Octave's fsolve from x0</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  <span class="c">% and return its output structure, whose field 'iterations' is compared with the Newton code.</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  <span class="n">F</span> <span class="p">=</span> <span class="p">@(</span><span class="n">v</span><span class="p">)</span> <span class="p">[</span><span class="n">v</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">v</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="p">;</span> <span class="nb">exp</span><span class="p">(</span><span class="n">v</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">v</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  <span class="n">opts</span> <span class="p">=</span> <span class="nb">optimset</span><span class="p">(</span><span class="s">'TolFun'</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">,</span> <span class="s">'TolX'</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">);</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">fval</span><span class="p">,</span> <span class="nb">info</span><span class="p">,</span> <span class="n">output</span><span class="p">]</span> <span class="p">=</span> <span class="nb">fsolve</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">x0</span><span class="p">(:),</span> <span class="n">opts</span><span class="p">);</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">end</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c">%!test</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c">%! [x, fval, info, output] = fsolve_example([1; -1]);</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c">%! assert(x, [1.004169; -1.729637], 5e-6)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="c">%! assert(norm(fval) &lt; 1e-8)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c">%! assert(info, 1)</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c">%! assert(isfield(output, 'iterations') &amp;&amp; output.iterations &gt;= 3)</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c">%!test</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="c">%! x = fsolve_example([-1; 1]);</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c">%! assert(x, [-1.816264; 0.837368], 5e-6)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

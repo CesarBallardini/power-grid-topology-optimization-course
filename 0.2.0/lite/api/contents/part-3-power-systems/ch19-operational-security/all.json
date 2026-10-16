@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.155635Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.155635Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-3-power-systems/ch19-operational-security/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:19:03.153514Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:19:03.153514Z",
+  "mimetype": null,
+  "name": "ch19-operational-security",
+  "path": "part-3-power-systems/ch19-operational-security",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

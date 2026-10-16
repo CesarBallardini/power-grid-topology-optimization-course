@@ -1,0 +1,47 @@
+{
+ "coarse_s1": {
+  "wall_seconds": 69.6
+ },
+ "coarse_s2": {
+  "wall_seconds": 61.9
+ },
+ "coarse_s3": {
+  "wall_seconds": 61.6
+ },
+ "coarse_s4": {
+  "wall_seconds": 61.4
+ },
+ "coarse_s5": {
+  "wall_seconds": 61.4
+ },
+ "fine_s1": {
+  "wall_seconds": 65.7
+ },
+ "fine_s2": {
+  "wall_seconds": 69.8
+ },
+ "fine_s3": {
+  "wall_seconds": 62.0
+ },
+ "fine_s4": {
+  "wall_seconds": 61.6
+ },
+ "fine_s5": {
+  "wall_seconds": 61.4
+ },
+ "w1": {
+  "wall_seconds": 69.9
+ },
+ "w10": {
+  "wall_seconds": 61.5
+ },
+ "w100": {
+  "wall_seconds": 61.6
+ },
+ "w3": {
+  "wall_seconds": 61.3
+ },
+ "w30": {
+  "wall_seconds": 61.4
+ }
+}

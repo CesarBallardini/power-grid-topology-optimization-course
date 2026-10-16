@@ -1,0 +1,16 @@
+{
+  "ga_config": "{'runtime_seconds': 10.0, 'iterations_per_epoch': 500, 'random_seed': 1, 'enable_nodal_inj_optim': False, 'enable_parallel_pst_group_optim': False, 'plot': False, 'n_worst_contingencies': 2, 'enable_bb_outage': False, 'bb_outage_as_nminus1': True, 'clip_bb_outage_penalty': False, 'bb_outage_more_islands_penalty': 0.0, 'mutation_repetition': 1, 'random_topo_prob': 0.1, 'n_subs_mutated_lambda': 2.0, 'add_split_prob': 0.25, 'change_split_prob': 0.3, 'remove_split_prob': 0.25, 'add_disconnection_prob': 0.2, 'change_disconnection_prob': 0.2, 'remove_disconnection_prob': 0.2, 'pst_mutation_sigma': 1.0, 'pst_mutation_probability': 0.2, 'pst_reset_probability': 0.0, 'proportion_crossover': 0.1, 'crossover_mutation_ratio': 0.5, 'target_metrics': [['overload_energy_n_1', 1.0]], 'observed_metrics': ['overload_energy_n_1', 'split_subs', 'switching_distance', 'max_flow_n_1'], 'me_descriptors': [{'metric': 'split_subs', 'num_cells': 4, 'range': None}], 'cell_depth': 1}",
+  "lf_config": "{'max_num_splits': 3, 'max_num_disconnections': 0, 'batch_size': 8, 'distributed': False, 'cross_coupler_flow': False}",
+  "fixed_files": "['/runs/pipeline/ch35/node_breaker/grid/static_information.hdf5']",
+  "tensorboard_dir": "/runs/pipeline/ch35/node_breaker/run_0/tensorboard",
+  "stats_dir": "/runs/pipeline/ch35/node_breaker/run_0/stats",
+  "summary_frequency": 10,
+  "checkpoint_frequency": 100,
+  "double_limits": "[1.0, 1.0]",
+  "task_name": "run_0",
+  "output_json": "/runs/pipeline/ch35/node_breaker/run_0/output.json",
+  "num_cuda_devices": 0,
+  "omp_num_threads": 4,
+  "xla_force_host_platform_device_count": null,
+  "double_precision": true
+}

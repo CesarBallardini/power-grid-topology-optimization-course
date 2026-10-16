@@ -1,0 +1,2887 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/0.2.0/part-3-power-systems/ch19-operational-security/">
+      
+      
+        <link rel="prev" href="../ch18-sensitivity-factors-2/">
+      
+      
+        <link rel="next" href="../ch20-protection-short-circuit/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>19. Operational security and performance metrics - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-19-operational-security-and-performance-metrics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              19. Operational security and performance metrics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-math/ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-price-of-n-1-security-on-a-7-bus-case-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The price of N-1 security on a 7-bus case, in Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-vs-code-known-discrepancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation vs code: known discrepancies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-price-of-n-1-security-on-a-7-bus-case-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The price of N-1 security on a 7-bus case, in Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-vs-code-known-discrepancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation vs code: known discrepancies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-19-operational-security-and-performance-metrics">Chapter 19. Operational security and performance metrics<a class="headerlink" href="#chapter-19-operational-security-and-performance-metrics" title="Permanent link">&para;</a></h1>
+<p><strong>Weeks:</strong> 2.5 · <strong>Semester:</strong> 4 · <strong>Prerequisites:</strong> <a href="../ch15-ac-power-flow/">Chapter 15</a>, <a href="../ch17-sensitivity-factors-1/">Chapter 17</a></p>
+<div class="admonition info">
+<p class="admonition-title">Why it matters for ToOp</p>
+<p>ToOp's objective is built from security metrics, and every design choice in those metrics changes which
+topology wins:</p>
+<ul>
+<li><strong>DC metrics</strong> (<code>docs/topology_optimizer/metrics.md</code>, <code>dc_solver/jax/aggregate_results.py</code>): overload
+  energy over N-0 and N-1 cases, its power-law ("exponential") variant, critical branch count, the
+  <code>_limited</code> variants that use double limits, the N-0→N-1 flow-change penalty <code>n0_n1_delta</code>, the
+  cross-coupler flow penalty and the busbar outage penalty.</li>
+<li><strong>Contingencies and monitored elements</strong> are declared in <code>interfaces/nminus1_definition.py</code>.</li>
+<li><strong>Fitness signs differ between stages</strong>: the DC optimizer maximizes a negated weighted sum
+  (<code>optimizer/dc/genetic_functions/scoring_functions.py</code>), while the AC stage reports overload energy
+  directly and accepts or rejects a topology with multiplicative thresholds against the unsplit grid
+  (<code>optimizer/ac/scoring_functions.py</code>, <code>optimizer/interfaces/messages/ac_params.py</code>).</li>
+<li><strong>AC N-1 analysis</strong> runs in pandapower or PowSyBl (<code>contingency/ac_loadflow_service/</code>), with metrics
+  recomputed from result tables (<code>contingency/ac_loadflow_service/compute_metrics.py</code>).</li>
+</ul>
+<p>If you cannot recompute a metric by hand from an N-1 matrix, you cannot debug an optimizer that "improves"
+the wrong thing.</p>
+</div>
+<h2 id="topics">Topics<a class="headerlink" href="#topics" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Security criteria.</strong> N-0, N-1 and N-k; contingency lists, monitored elements, exceptional contingencies
+  (multi-outages, busbar outages). SO GL Articles 25 and 32–35 (operational security limits, power flow limits,
+  contingency lists, contingency analysis and handling) and Article 72 (operational security analysis in
+  operational planning). ToOp's <code>Nminus1Definition</code>: contingencies are lists of <code>GridElement</code>, monitored
+  elements are <code>MonitoredElement</code>, and a contingency with no elements is the base case.</li>
+<li><strong>Thermal limits.</strong> Permanent and temporary admissible transmission loading (<abbr title="Permanent admissible transmission loading">PATL</abbr>/<abbr title="Temporary admissible transmission loading">TATL</abbr>); transitory admissible
+  overloads (SO GL Art. 25). Current limits become MW limits through <span class="arithmatex">\(P = \sqrt{3}\,V_\text{nom} I\)</span>
+  (revisits <a href="../../part-2-circuits/ch10-three-phase-per-unit/">Chapter 10</a>): ToOp's <code>get_p_max</code> reads the
+  <code>permanent_limit</code> and <code>N-1</code> operational limits of each branch (<code>dc_solver/preprocess/powsybl/powsybl_helpers.py</code>).
+  In AC, overload in MW is derived from the current loading, <span class="arithmatex">\(|p| - |p|/\text{loading}\)</span>
+  (<code>compute_overload_column</code> in <code>contingency/ac_loadflow_service/compute_metrics.py</code>), so the effective MW limit
+  moves with voltage and power factor.</li>
+<li><strong>Metric semantics</strong> (DC, for a flow matrix <span class="arithmatex">\(F \in \mathbb{R}^{T \times C \times B}\)</span> over timesteps,
+  contingencies and monitored branches, limits <span class="arithmatex">\(\bar F_b\)</span> and optional weights <span class="arithmatex">\(w_b\)</span>):<ul>
+<li>Overload energy: <span class="arithmatex">\(\sum_{t}\sum_{b} w_b \max_{c}\,\big(|F_{tcb}| - \bar F_b\big)^+\)</span>. The maximum is taken
+  <strong>per branch</strong> over contingencies, so different branches may have different worst contingencies.</li>
+<li>"Exponential" overload energy is a <strong>power law</strong>, not an exponential:
+  <span class="arithmatex">\(\sum_{t}\sum_{b} w_b \max_c \big(\max(|F_{tcb}|/\bar F_b,\,1)^{\alpha} - 1\big)\bar F_b\)</span> with
+  <span class="arithmatex">\(\alpha = 1.5\)</span>.</li>
+<li>Critical branch count: branches overloaded in at least one contingency, counted in the <strong>worst timestep</strong>.</li>
+<li>Cumulative overload (relative, capacity-blind) and underload energy (debugging only).</li>
+<li><code>n0_n1_delta</code>: <span class="arithmatex">\(\sum_t\sum_b \big(\max_c (|F^{(1)}_{tcb}| - |F^{(0)}_{tb}|)^+ - D_b\big)^+\)</span>, where the allowed
+  delta <span class="arithmatex">\(D_b\)</span> is the <strong>unsplit</strong> grid's worst delta times a per-branch factor from the
+  <code>*_n0_n1_max_diff_factor.npy</code> masks; a negative factor disables the branch
+  (<code>compute_n0_n1_max_diff</code>, <code>get_n0_n1_delta_penalty</code>). It keeps contingencies from dumping flow into
+  distribution grids.</li>
+<li>Cross-coupler flow penalty: MW above the coupler limit of each split station
+  (<code>get_cross_coupler_flow_penalty</code>); it pushes the optimizer towards symmetric splits.</li>
+<li>Busbar outage penalty relative to the baseline: overload increase plus a penalty per lost successful
+  busbar outage case (<code>get_busbar_outage_penalty</code> in <code>dc_solver/jax/busbar_outage.py</code>); negative values
+  (improvements) are kept unless <code>clip_bb_outage_penalty=True</code>.</li>
+<li>The solver's sparse output keeps only the worst <code>number_most_affected</code> N-1 results
+  (<code>SolverConfig</code> in <code>dc_solver/jax/types.py</code>); the full matrix needs <code>run_solver_symmetric</code>.</li>
+</ul>
+</li>
+<li><strong>Double limits.</strong> From the unsplit grid's worst flows, <code>compute_double_limits</code> sets the <code>_limited</code> limit to
+  <span class="arithmatex">\(0.9\,\bar F\)</span> for branches loaded below 90 %, to the <strong>current flow</strong> for branches between 90 % and 100 %
+  (a dead zone: do not load further, but do not count as overloaded), and to <span class="arithmatex">\(\bar F\)</span> above 100 %. It is on by
+  default (<code>double_limit_n0</code>, <code>double_limit_n1</code> in <code>PreprocessParameters</code>) but only affects the <code>*_limited</code>
+  metrics.</li>
+<li><strong>Multi-timestep.</strong> The DC scoring function evaluates each timestep and combines metrics with the rule in
+  <code>METRICS</code> (<code>optimizer/dc/genetic_functions/scoring_functions.py</code>): energies and penalties add, counts and
+  maxima take the maximum.</li>
+<li><strong>Sign conventions.</strong> DC fitness is <span class="arithmatex">\(-\sum_m w_m\,\text{metric}_m\)</span> (higher is better); a topology that islands
+  the grid gets metric <span class="arithmatex">\(+\infty\)</span>, i.e. fitness <span class="arithmatex">\(-\infty\)</span>. AC fitness equals <code>overload_energy_n_1</code> (lower is
+  better). AC acceptance (<code>evaluate_acceptance</code>) requires, against the unsplit grid, at most as many
+  non-converging cases (after subtracting the number of disconnected branches), overload energy
+  <span class="arithmatex">\(\le 0.95\times\)</span> baseline and critical branches <span class="arithmatex">\(\le 1.1\times\)</span> baseline; voltage-jump (&gt; 5 %) and
+  angle-difference (&gt; 20°) counts are checked only when <code>enable_critical_voltage_rejection=True</code>. With a zero
+  baseline, <span class="arithmatex">\(1.1 \times 0 = 0\)</span> rejects any increase.</li>
+<li><strong>Contingency propagation</strong> (<code>docs/contingency_analysis/propagation.md</code>): ToOp expands a busbar contingency over
+  all busbar sections of the same bus-breaker bus; PowSyBl's own breaker-based propagation is currently not
+  enabled; pandapower groups outages by connected components.</li>
+<li><strong>Cross-tool validation.</strong> The same N-1 in two engines:
+  <code>packages/contingency_analysis_pkg/tests/ac_service/test_backend_comparison.py</code> exports IEEE 14 to MATPOWER,
+  loads it in pandapower and PowSyBl and requires branch P/Q and bus <span class="arithmatex">\(V\)</span>/<span class="arithmatex">\(\theta\)</span> to agree within <span class="arithmatex">\(10^{-3}\)</span>. The
+  DC oracle test <code>packages/dc_solver_pkg/tests/preprocessing/test_loadflows_match.py</code> compares the JAX solver's
+  N-0 flows with pandapower <code>rundcpp</code>; its N-1 comparison is currently skipped.</li>
+<li><strong>Remedial actions</strong> at overview level: preventive vs curative, costly (redispatch, countertrading) vs
+  non-costly (topology, PSTs). Coordinated remedial action optimization (OpenRAO, <abbr title="Contingency list, remedial actions and additional constraints">CRAC</abbr>, <abbr title="Generation and load shift key">GLSK</abbr>) is covered in
+  <a href="../ch21-coordinated-security-rao/">Chapter 21</a>; security-constrained <abbr title="Optimal power flow">OPF</abbr> and optimal transmission switching
+  are formulated in <a href="../../part-4-optimization/ch28-topology-optimization/">Chapter 28</a>.</li>
+</ul>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Compute overload energy, its power-law variant, critical branch count, double limits and <code>n0_n1_delta</code> by
+  hand and in NumPy from an N-0 vector and an N-1 matrix, and reproduce ToOp's values to numerical precision.</li>
+<li>Run a standalone AC N-1 analysis with ToOp's contingency package and recompute its metrics from the result
+  tables with pandas.</li>
+<li>Explain the DC and AC sign conventions and predict whether the AC stage accepts a topology, including the
+  zero-baseline edge case.</li>
+<li>Compare an N-1 result between two power flow engines and explain the remaining differences.</li>
+</ul>
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Regulation: SO GL, Regulation (EU) 2017/1485 <a href="https://eur-lex.europa.eu/eli/reg/2017/1485/oj/eng">https://eur-lex.europa.eu/eli/reg/2017/1485/oj/eng</a>:
+  Art. 25 (operational security limits), Art. 32–35 (power flow limits, contingency lists, contingency
+  analysis and handling), Art. 72 (operational security analysis in operational planning).</li>
+<li>Textbook: Wood, Wollenberg &amp; Sheblé 3rd ed., Ch. 7 (security, contingency analysis and selection) and §8.12
+  (security-constrained <abbr title="Optimal power flow">OPF</abbr> with DC power flow). (11 syllabi) <strong>NOT ON IA</strong> (3rd ed.), so use a library copy.</li>
+<li>Courses and videos:</li>
+<li>NPTEL <em>Economic Operations and Control of Power Systems</em> (IIT Kanpur, G. Mirle Vishwanath &amp; N. P. Padhy)
+    <a href="https://nptel.ac.in/courses/108104191">https://nptel.ac.in/courses/108104191</a>: Lectures 39–41 "Power System Security I–III" (the N-1 criterion,
+    the functions of security analysis, linear sensitivity factors, contingency ranking with a performance index).</li>
+<li>Overbye, TAMU ECEN 460 (contingency analysis, <abbr title="Security-constrained optimal power flow">SCOPF</abbr>, <abbr title="Locational marginal price">LMP</abbr>; slides, no videos)
+    <a href="https://overbye.engr.tamu.edu/course-2/ecen460sp25/">https://overbye.engr.tamu.edu/course-2/ecen460sp25/</a>.</li>
+<li>Free: PowerWorld training modules I9 "Limit Monitoring"
+  <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/limit-monitoring">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/limit-monitoring</a> and I10
+  "Contingency Analysis"
+  <a href="https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/contingency-analysis">https://www.powerworld.com/training/courses/introduction-to-powerworld-simulator/contingency-analysis</a>
+  (slides): how a commercial tool defines contingency lists, monitored elements and violations. The exercises
+  need Simulator (Windows only). Videos (vendor training, free) from the Training playlist
+  <a href="https://www.youtube.com/playlist?list=PL0B37D8DFCE4A53A4">https://www.youtube.com/playlist?list=PL0B37D8DFCE4A53A4</a>: "Limit Monitoring"
+  <a href="https://www.youtube.com/watch?v=BJvU7VJxoH4">https://www.youtube.com/watch?v=BJvU7VJxoH4</a>, "Contingency Analysis"
+  <a href="https://www.youtube.com/watch?v=wI6Elyq8jOY">https://www.youtube.com/watch?v=wI6Elyq8jOY</a>, "M4: Advanced Contingency Analysis"
+  <a href="https://www.youtube.com/watch?v=XDZkqojvfKo">https://www.youtube.com/watch?v=XDZkqojvfKo</a>, and "M5: Security-Constrained <abbr title="Optimal power flow">OPF</abbr>"
+  <a href="https://www.youtube.com/watch?v=awoJH5-VjdE">https://www.youtube.com/watch?v=awoJH5-VjdE</a>.</li>
+<li>Free: PowerWorld help, "<abbr title="Security-constrained optimal power flow">SCOPF</abbr> Example: Introduction"
+  <a href="https://www.powerworld.com/WebHelp/Content/MainDocumentation_HTML/SCOPF_Example_Introduction.htm">https://www.powerworld.com/WebHelp/Content/MainDocumentation_HTML/SCOPF_Example_Introduction.htm</a>, the 7-bus
+  case <code>B7SCOPF</code> that ships with Simulator. The <abbr title="Optimal power flow">OPF</abbr> solution costs $16,011/hr, and taking line 1–2 out of service
+  leaves a 32 % overload (the page words it as "line 1 to 2", which is the outaged line). With the 11
+  single-line contingencies the <abbr title="Security-constrained optimal power flow">SCOPF</abbr> costs $16,048/hr and no listed outage violates a limit. The worked
+  example below shows the same effect in Python, without Simulator, on a 7-bus case of our own (the
+  <code>B7SCOPF</code> data is not published on the page).</li>
+<li>Documentation:</li>
+<li>ToOp: <code>docs/topology_optimizer/metrics.md</code>, <code>docs/contingency_analysis/propagation.md</code>,
+    <code>docs/contingency_analysis/result_filtering.md</code>, <code>docs/dc_solver/busbar_outage.md</code>, <code>docs/wall_of_shame.md</code>
+    (known limitations), <code>packages/contingency_analysis_pkg/README.md</code> (standalone AC N-1 entry points).</li>
+<li>ToOp code: fitness signs in <code>optimizer/dc/genetic_functions/scoring_functions.py</code> (DC, negated weighted sum)
+    and <code>optimizer/ac/scoring_functions.py</code> (AC, <code>overload_energy_n_1</code>); double limits in <code>run_initial_loadflow</code>
+    (<code>dc_solver/preprocess/convert_to_jax.py</code>); full N-1 matrices from <code>run_solver_symmetric</code>
+    (<code>dc_solver/jax/topology_looper.py</code>).</li>
+<li>pandapower contingency analysis <a href="https://pandapower.readthedocs.io/en/latest/contingency.html">https://pandapower.readthedocs.io/en/latest/contingency.html</a>; pypowsybl
+    security analysis <a href="https://powsybl.readthedocs.io/projects/pypowsybl/en/stable/user_guide/security.html">https://powsybl.readthedocs.io/projects/pypowsybl/en/stable/user_guide/security.html</a>.</li>
+<li>Paper: Hedman, O'Neill, Fisher &amp; Oren, "Optimal Transmission Switching With Contingency Analysis", <em>IEEE
+  Trans. Power Systems</em> 24(3):1577–1586, 2009, doi:10.1109/TPWRS.2009.2020530.</li>
+<li>Optional: Billinton &amp; Allan, <em>Reliability Evaluation of Power Systems</em> (1984). <strong>BORROW</strong>
+  <a href="https://archive.org/details/reliabilityevalu0000bill_l0j3"><code>reliabilityevalu0000bill_l0j3</code></a>.</li>
+</ul>
+<h2 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h2>
+<p>Three monitored branches, one timestep, two contingencies. The worst contingency differs per branch, which is
+exactly what the per-branch maximum captures.</p>
+<div class="highlight"><span class="filename">metrics.py</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="sd">"""ToOp's DC security metrics recomputed in NumPy on a three-branch example (Chapter 19)."""</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">f_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">])</span>  <span class="c1"># MW</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">n_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">80.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">150.0</span><span class="p">,</span> <span class="mf">49.0</span><span class="p">]])</span>  <span class="c1"># (timesteps, branches)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">n_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mf">95.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">210.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">120.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">160.0</span><span class="p">,</span> <span class="mf">55.0</span><span class="p">]]])</span>  <span class="c1"># (timesteps, contingencies, branches)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">overload_energy_n1</span><span class="p">(</span><span class="n">n_1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">f_max</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="sd">"""Per branch the worst contingency's overload in MW (times its ``weight``), summed over branches and timesteps."""</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">over</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">n_1</span><span class="p">)</span> <span class="o">-</span> <span class="n">f_max</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">if</span> <span class="n">weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="n">over</span> <span class="o">=</span> <span class="n">over</span> <span class="o">*</span> <span class="n">weight</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">over</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">power_law_n1</span><span class="p">(</span><span class="n">n_1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">f_max</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="sd">"""Like ``overload_energy_n1`` but each overload is weighted as (relᵅ − 1) f_max."""</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">rel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">n_1</span><span class="p">)</span> <span class="o">/</span> <span class="n">f_max</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">over</span> <span class="o">=</span> <span class="p">(</span><span class="n">rel</span><span class="o">**</span><span class="n">alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">f_max</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">if</span> <span class="n">weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="n">over</span> <span class="o">=</span> <span class="n">over</span> <span class="o">*</span> <span class="n">weight</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">over</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">critical_branch_count_n1</span><span class="p">(</span><span class="n">n_1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">f_max</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="sd">"""Number of branches overloaded in at least one contingency, worst timestep."""</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">n_1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">double_limits</span><span class="p">(</span><span class="n">flows_tcb</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">f_max</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">    </span><span class="sd">"""Limited limits: 90 % of the rating below it, the rating above it, the flow itself in the dead zone."""</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="n">flows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">flows_tcb</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">flows</span> <span class="o">&lt;</span> <span class="n">lower</span> <span class="o">*</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">flows</span> <span class="o">&gt;</span> <span class="n">upper</span> <span class="o">*</span> <span class="n">f_max</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">lower</span> <span class="o">*</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">upper</span> <span class="o">*</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">flows</span><span class="p">))</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="k">def</span><span class="w"> </span><span class="nf">n0_n1_delta</span><span class="p">(</span><span class="n">n_0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">n_1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">    </span><span class="sd">"""Largest increase of a branch flow from the base case to any contingency, per timestep."""</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">n_1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">n_0</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="w">    </span><span class="sd">"""Print the metrics of the worked example."""</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">overload_energy_n1</span><span class="p">(</span><span class="n">n_1</span><span class="p">,</span> <span class="n">f_max</span><span class="p">))</span>  <span class="c1"># 20 + 10 + 5 = 35 MW</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">power_law_n1</span><span class="p">(</span><span class="n">n_1</span><span class="p">,</span> <span class="n">f_max</span><span class="p">))</span>  <span class="c1"># 31.45 + 15.19 + 7.68 = 54.32</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">critical_branch_count_n1</span><span class="p">(</span><span class="n">n_1</span><span class="p">,</span> <span class="n">f_max</span><span class="p">))</span>  <span class="c1"># 3</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">double_limits</span><span class="p">(</span><span class="n">n_0</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="n">f_max</span><span class="p">))</span>  <span class="c1"># [ 90. 180.  49.]  (49 MW is in the dead zone)</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">n0_n1_delta</span><span class="p">(</span><span class="n">n_0</span><span class="p">,</span> <span class="n">n_1</span><span class="p">))</span>  <span class="c1"># [[40. 60.  6.]]</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+<p>With weights <code>(("overload_energy_n_1", 1.0), ("critical_branch_count_n_1", 10.0))</code> the DC fitness of this state
+is <span class="arithmatex">\(-(35 + 10 \cdot 3) = -65\)</span>.</p>
+<h3 id="the-price-of-n-1-security-on-a-7-bus-case-in-python">The price of N-1 security on a 7-bus case, in Python<a class="headerlink" href="#the-price-of-n-1-security-on-a-7-bus-case-in-python" title="Permanent link">&para;</a></h3>
+<p>The question: how much more does it cost to run a grid so that every single line outage is survivable? Seven
+buses, 11 lines (reactances in per unit on 100 MVA, limits in MW), three generators with linear costs. The <abbr title="Linear programming">LP</abbr>
+minimizes cost; the base-case constraints use the <abbr title="Power transfer distribution factor">PTDF</abbr> of <a href="../ch17-sensitivity-factors-1/">Chapter 17</a>, and each
+contingency <span class="arithmatex">\(k\)</span> adds <span class="arithmatex">\(|f_\ell + \text{LODF}_{\ell k} f_k| \le f_\ell^\max\)</span> for every other line <span class="arithmatex">\(\ell\)</span>. Only
+NumPy and SciPy are needed (<code>scipy.optimize.linprog</code> uses the HiGHS solver):</p>
+<div class="highlight"><span class="filename">case7.py</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># (from bus, to bus, x p.u., limit MW)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">LINES</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mi">240</span><span class="p">),</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">240</span><span class="p">),</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mi">240</span><span class="p">),</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">0.14</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">]</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">N_BUS</span><span class="p">,</span> <span class="n">N_LINE</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">LINES</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="n">NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'L</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="ow">in</span> <span class="n">LINES</span><span class="p">]</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">LOAD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>  <span class="c1"># MW per bus</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">GENS</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="mi">7</span><span class="p">:</span> <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">200</span><span class="p">)}</span>  <span class="c1"># bus: ($/MWh, MW max)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">LIMIT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span> <span class="k">for</span> <span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">LINES</span><span class="p">],</span> <span class="nb">float</span><span class="p">)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">COST</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">GENS</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span> <span class="nb">float</span><span class="p">)</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">KV</span> <span class="o">=</span> <span class="mf">110.0</span>  <span class="c1"># for pandapower</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">_ptdf</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="sd">"""PTDF of the intact grid with bus 1 as slack (Chapter 17)."""</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N_LINE</span><span class="p">,</span> <span class="n">N_BUS</span><span class="p">))</span>  <span class="c1"># branch-bus incidence</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">LINES</span><span class="p">):</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">LINES</span><span class="p">])</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="n">bbus</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">@</span> <span class="n">a</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="n">ptdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N_LINE</span><span class="p">,</span> <span class="n">N_BUS</span><span class="p">))</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="n">ptdf</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">@</span> <span class="n">a</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">bbus</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:])</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="k">return</span> <span class="n">ptdf</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="n">PTDF</span> <span class="o">=</span> <span class="n">_ptdf</span><span class="p">()</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="n">GEN_TO_BUS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N_BUS</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">GENS</span><span class="p">)))</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="k">for</span> <span class="n">_g</span><span class="p">,</span> <span class="n">_bus</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">GENS</span><span class="p">):</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="n">GEN_TO_BUS</span><span class="p">[</span><span class="n">_bus</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">_g</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="k">def</span><span class="w"> </span><span class="nf">lodf</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">    </span><span class="sd">"""Flow change on every line per MW that line ``k`` carried before its outage."""</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>    <span class="n">h</span> <span class="o">=</span> <span class="n">PTDF</span><span class="p">[:,</span> <span class="n">LINES</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">PTDF</span><span class="p">[:,</span> <span class="n">LINES</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>    <span class="k">return</span> <span class="n">h</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="k">def</span><span class="w"> </span><span class="nf">flows</span><span class="p">(</span><span class="n">pg</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="w">    </span><span class="sd">"""DC line flows for the dispatch ``pg`` (one value per generator), optionally after the outage of line ``out``."""</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">PTDF</span> <span class="o">@</span> <span class="p">(</span><span class="n">GEN_TO_BUS</span> <span class="o">@</span> <span class="n">pg</span> <span class="o">-</span> <span class="n">LOAD</span><span class="p">)</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>    <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>        <span class="k">return</span> <span class="n">f</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span> <span class="o">+</span> <span class="n">lodf</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="n">out</span><span class="p">]</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>    <span class="n">f</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>    <span class="k">return</span> <span class="n">f</span>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="k">def</span><span class="w"> </span><span class="nf">dispatch</span><span class="p">(</span><span class="n">contingencies</span><span class="o">=</span><span class="p">(),</span> <span class="n">limit</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">LIMIT</span><span class="p">):</span>
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="w">    </span><span class="sd">"""Minimum-cost dispatch with base-case limits and, for each line in ``contingencies``, its post-outage limits.</span>
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="sd">    ``dispatch()`` is the OPF, ``dispatch(range(N_LINE))`` the N-1 SCOPF. Returns the ``linprog`` result; ``x`` is</span>
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a><span class="sd">    the dispatch and ``fun`` the cost in $/h.</span>
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="sd">    """</span>
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>    <span class="n">fmat</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">PTDF</span> <span class="o">@</span> <span class="n">GEN_TO_BUS</span><span class="p">,</span> <span class="n">PTDF</span> <span class="o">@</span> <span class="n">LOAD</span>  <span class="c1"># base flow = fmat @ pg - d</span>
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>    <span class="n">rows</span><span class="p">,</span> <span class="n">rhs</span> <span class="o">=</span> <span class="p">[</span><span class="n">fmat</span><span class="p">,</span> <span class="o">-</span><span class="n">fmat</span><span class="p">],</span> <span class="p">[</span><span class="n">limit</span> <span class="o">+</span> <span class="n">d</span><span class="p">,</span> <span class="n">limit</span> <span class="o">-</span> <span class="n">d</span><span class="p">]</span>
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">contingencies</span><span class="p">:</span>
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>        <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_LINE</span><span class="p">)</span> <span class="o">!=</span> <span class="n">k</span>
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>        <span class="n">fk</span><span class="p">,</span> <span class="n">dk</span> <span class="o">=</span> <span class="n">fmat</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">lodf</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">fmat</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="n">d</span> <span class="o">+</span> <span class="n">lodf</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>        <span class="n">rows</span> <span class="o">+=</span> <span class="p">[</span><span class="n">fk</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="o">-</span><span class="n">fk</span><span class="p">[</span><span class="n">keep</span><span class="p">]]</span>
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>        <span class="n">rhs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">limit</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span> <span class="o">+</span> <span class="n">dk</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">limit</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span> <span class="o">-</span> <span class="n">dk</span><span class="p">[</span><span class="n">keep</span><span class="p">]]</span>
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>    <span class="k">return</span> <span class="n">linprog</span><span class="p">(</span>
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>        <span class="n">COST</span><span class="p">,</span>
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>        <span class="n">A_ub</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">rows</span><span class="p">),</span>
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>        <span class="n">b_ub</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">rhs</span><span class="p">),</span>
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>        <span class="n">A_eq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">GENS</span><span class="p">))),</span>
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>        <span class="n">b_eq</span><span class="o">=</span><span class="p">[</span><span class="n">LOAD</span><span class="o">.</span><span class="n">sum</span><span class="p">()],</span>
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>        <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">GENS</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span>
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'highs'</span><span class="p">,</span>
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>    <span class="p">)</span>
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a><span class="k">def</span><span class="w"> </span><span class="nf">n1_loading</span><span class="p">(</span><span class="n">pg</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">LIMIT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a><span class="w">    </span><span class="sd">"""Post-contingency loading in percent, shape (outage, line); the outaged line itself reads 0."""</span>
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">flows</span><span class="p">(</span><span class="n">pg</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span> <span class="o">/</span> <span class="n">limit</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_LINE</span><span class="p">)])</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+<p><code>dispatch()</code> is the <abbr title="Optimal power flow">OPF</abbr> and <code>dispatch(range(N_LINE))</code> the <abbr title="Security-constrained optimal power flow">SCOPF</abbr>; <code>python case7.py</code> prints both:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>OPF   cost   4300 $/h  Pg [250.  90.   0.]  worst N-1 loading 104.2 % on L1-3 after L1-2 out
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>SCOPF cost   4400 $/h  Pg [240. 100.   0.]  worst N-1 loading 100.0 % on L1-3 after L1-2 out
+</code></pre></div>
+<p>The cheapest generator is capped at 250 MW, and the plain <abbr title="Optimal power flow">OPF</abbr> uses all of it. The outage of line 1–2 (or 1–3)
+then pushes the other one to 104 % of its limit. The <abbr title="Security-constrained optimal power flow">SCOPF</abbr> moves 10 MW from the cheap generator at bus 1 to the
+one at bus 2 and pays $100/h for it: the price of N-1 security. This is the redispatch cost that ToOp tries to
+avoid by switching instead of redispatching (<a href="../../part-4-optimization/ch28-topology-optimization/">Chapter 28</a>).</p>
+<p>DC security is not AC security. Check the same two dispatches with pandapower's AC power flow, one outage at a
+time (110 kV lines with <span class="arithmatex">\(r = 0.1\,x\)</span>, loads with <span class="arithmatex">\(Q = 0.3\,P\)</span>, bus 1 as the slack, which also covers the losses):</p>
+<div class="highlight"><span class="filename">case7.py</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">pandapower_net</span><span class="p">(</span><span class="n">pg</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">LIMIT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pp</span><span class="o">.</span><span class="n">pandapowerNet</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">"""The same grid for pandapower: 110 kV lines with r = 0.1 x, loads with Q = 0.3 P, bus 1 as ``ext_grid``."""</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">net</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">create_empty_network</span><span class="p">(</span><span class="n">sn_mva</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_BUS</span><span class="p">):</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">pp</span><span class="o">.</span><span class="n">create_bus</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">vn_kv</span><span class="o">=</span><span class="n">KV</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">'bus</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">pp</span><span class="o">.</span><span class="n">create_ext_grid</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vm_pu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">for</span> <span class="p">(</span><span class="n">bus</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">GENS</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">pg</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="k">if</span> <span class="n">bus</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># bus 1 is the slack and also covers the losses</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="n">pp</span><span class="o">.</span><span class="n">create_gen</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">bus</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p_mw</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">vm_pu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">'gen</span><span class="si">{</span><span class="n">bus</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="k">for</span> <span class="n">bus</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">LOAD</span><span class="p">):</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="k">if</span> <span class="n">p</span><span class="p">:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            <span class="n">pp</span><span class="o">.</span><span class="n">create_load</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">bus</span><span class="p">,</span> <span class="n">p_mw</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">q_mvar</span><span class="o">=</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">lim</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">LINES</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">NAMES</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">KV</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">100</span>  <span class="c1"># ohm</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="n">pp</span><span class="o">.</span><span class="n">create_line_from_parameters</span><span class="p">(</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>            <span class="n">net</span><span class="p">,</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>            <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>            <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>            <span class="n">length_km</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>            <span class="n">r_ohm_per_km</span><span class="o">=</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">z</span><span class="p">,</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>            <span class="n">x_ohm_per_km</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>            <span class="n">c_nf_per_km</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>            <span class="n">max_i_ka</span><span class="o">=</span><span class="n">lim</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">KV</span><span class="p">),</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>        <span class="p">)</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>    <span class="k">return</span> <span class="n">net</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="k">def</span><span class="w"> </span><span class="nf">split_bus</span><span class="p">(</span><span class="n">net</span><span class="p">:</span> <span class="n">pp</span><span class="o">.</span><span class="n">pandapowerNet</span><span class="p">,</span> <span class="n">bus</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pp</span><span class="o">.</span><span class="n">pandapowerNet</span><span class="p">:</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">    </span><span class="sd">"""Move the given lines from ``bus`` (1-based) to a new busbar; the load and any generator stay behind."""</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>    <span class="n">new</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">create_bus</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">vn_kv</span><span class="o">=</span><span class="n">KV</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">'bus</span><span class="si">{</span><span class="n">bus</span><span class="si">}</span><span class="s1">b'</span><span class="p">)</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>        <span class="n">k</span> <span class="o">=</span> <span class="n">NAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>        <span class="n">col</span> <span class="o">=</span> <span class="s1">'from_bus'</span> <span class="k">if</span> <span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">'from_bus'</span><span class="p">]</span> <span class="o">==</span> <span class="n">bus</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">'to_bus'</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>    <span class="k">return</span> <span class="n">net</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="k">def</span><span class="w"> </span><span class="nf">pandapower_n1</span><span class="p">(</span><span class="n">net</span><span class="p">:</span> <span class="n">pp</span><span class="o">.</span><span class="n">pandapowerNet</span><span class="p">,</span> <span class="n">ac</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="w">    </span><span class="sd">"""Worst value of every line over all single-line outages: DC flow in MW, or AC loading in percent."""</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="p">))</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="p">)):</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>        <span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">'in_service'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>        <span class="k">if</span> <span class="n">ac</span><span class="p">:</span>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>            <span class="n">pp</span><span class="o">.</span><span class="n">runpp</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">res_line</span><span class="o">.</span><span class="n">loading_percent</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># writable under pandas 3 copy-on-write too</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>            <span class="n">pp</span><span class="o">.</span><span class="n">rundcpp</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">res_line</span><span class="o">.</span><span class="n">p_from_mw</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>        <span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>        <span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">'in_service'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+<p><code>pandapower_n1(pandapower_net(pg), ac=True).max()</code> gives 114.7 % for the <abbr title="Optimal power flow">OPF</abbr> dispatch and 109.7 % for the <abbr title="Security-constrained optimal power flow">SCOPF</abbr>
+one. The <abbr title="Security-constrained optimal power flow">SCOPF</abbr> dispatch, secure in DC, still overloads a line by about 10 % in AC (line current includes the reactive
+flow and the losses, which the DC model drops). PowerWorld's <abbr title="Security-constrained optimal power flow">SCOPF</abbr> closes this gap by iterating between the <abbr title="Linear programming">LP</abbr>
+and the power flow equations; ToOp does the same in two stages, a fast DC search followed by AC validation
+(<a href="../ch16-dc-power-flow/">Chapter 16</a>).</p>
+<h2 id="documentation-vs-code-known-discrepancies">Documentation vs code: known discrepancies<a class="headerlink" href="#documentation-vs-code-known-discrepancies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>docs/topology_optimizer/metrics.md</code> calls <code>exponential_overload_energy</code> "exponentially weighted"; the code is
+  the power law above.</li>
+<li>The same page says N-1 overload energy "considers the worst contingency for each timestep"; the code takes the
+  worst contingency <strong>per branch</strong> and sums over branches and timesteps.</li>
+<li><code>choose_max_mw_flow</code> (<code>dc_solver/jax/aggregate_results.py</code>) lists <code>critical_branch_count_limited_n_1</code> in its
+  N-0 group: <code>critical_branch_count_limited_n_1</code> is evaluated against the N-0 limited limits, and
+  <code>critical_branch_count_limited_n_0</code> falls through to the unlimited <code>max_mw_flow</code>.</li>
+<li>The <code>double_limit_n0</code>/<code>double_limit_n1</code> docstrings in <code>PreprocessParameters</code>
+  (<code>interfaces/messages/preprocess/preprocess_commands.py</code>) describe only the 90 % rule; the
+  dead zone between 90 % and 100 % is documented only in <code>compute_double_limits</code>.</li>
+<li><code>metrics.md</code> says <code>bb_outage_penalty</code> is 0 when the topology is equal or better under busbar outages; that holds
+  only with <code>clip_bb_outage_penalty=True</code> (default <code>False</code>).</li>
+<li>DC <code>critical_branch_count_n_1</code> counts the worst timestep; the AC version (<code>count_critical_branches</code>) counts
+  distinct <code>(timestep, element)</code> pairs. They agree for one timestep.</li>
+</ul>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Lab: recompute ToOp's security metrics by hand, in DC and AC</p>
+<p>Tools: ToOp container (<a href="../../part-0-orientation/ch00-orientation-and-setup/">Chapter 0</a>), Jupyter with NumPy,
+pandas and matplotlib (<a href="../../part-5-computing/ch30-scientific-python/">Chapter 30</a>), pypowsybl.</p>
+<div class="admonition warning">
+<p class="admonition-title">Do not use <code>notebooks/run_ac_contingency_analysis.ipynb</code></p>
+<p>That notebook does not run: it passes <code>GridElement</code> where <code>Nminus1Definition.monitored_elements</code>
+requires <code>MonitoredElement</code> (Pydantic raises <code>ValidationError</code>), its pandapower cell has a syntax error
+(<code>method="ac" n_processes=15</code> is missing a comma) and calls <code>run_contingency_analysis_pandapower</code> with
+arguments it no longer accepts (it now takes <code>cfg</code>). CI never executes it because
+<code>notebooks/tests/test_notebooks.py</code> only collects <code>example*.ipynb</code>. Build the N-1 definition
+yourself instead, as in Part B below.</p>
+</div>
+<p><strong>Part A: DC metrics from the full N-1 matrix.</strong></p>
+<ol>
+<li>As in <code>notebooks/example1_dc_loadflow_example.ipynb</code>, call <code>case57_data_powsybl(folder)</code> and
+   <code>load_grid(...)</code>. Record <code>stats</code> and the unsplit <code>(overload_energy_n_0, overload_energy_n_1)</code> returned by
+   <code>run_initial_loadflow</code> (<code>dc_solver/preprocess/convert_to_jax.py</code>).</li>
+<li>Build a batch of unsplit topologies with <code>default_topology(solver_config, batch_size=4)</code>
+   (<code>dc_solver/jax/topology_computations.py</code>) and obtain the full matrices with
+   <code>run_solver_symmetric(topologies, None, None, dynamic_information, solver_config, fn)</code>
+   (<code>dc_solver/jax/topology_looper.py</code>), where <code>fn</code> is a pass-through aggregation function such as
+   <code>lambda lf: (lf.n_0_matrix, lf.n_1_matrix)</code> defined <strong>once</strong>, outside any loop.</li>
+<li>In NumPy, recompute both overload energies for the unsplit topology from <code>n_0</code>, <code>n_1</code> and
+   <code>dynamic_information.branch_limits</code> (<code>max_mw_flow</code>, <code>max_mw_flow_n_1</code> if not <code>None</code>, and
+   <code>overload_weight</code>: the case57 generator writes line weights of 2.0). Match ToOp to at least six digits.</li>
+<li>Recompute <code>max_mw_flow_limited</code> and <code>max_mw_flow_n_1_limited</code> with your own double-limit function and
+   compare them with the arrays stored in <code>branch_limits</code>. Plot, with matplotlib, relative loading against
+   the ratio limited/rating to show the three regimes.</li>
+<li>Put real action indices into the first slot of two topologies (<code>topologies.action.at[1, 0].set(...)</code>,
+   rebuilt as <code>ActionIndexComputations(action=..., pad_mask=topologies.pad_mask)</code>) and compute the power-law
+   overload energy, critical branch count and <code>n0_n1_delta</code> for all of them. Check each value by passing
+   <code>functools.partial(aggregate_to_metric, branch_limits=..., reassignment_distance=..., n_relevant_subs=...,
+   metric=...)</code> (<code>dc_solver/jax/aggregate_results.py</code>) as the aggregation function; build each partial once.</li>
+</ol>
+<p><strong>Part B: AC N-1 and metrics from result tables.</strong></p>
+<ol>
+<li>Load <code>data/grid_node_breaker/grid.xiidm</code> with <code>pypowsybl.network.load</code> and build an <code>Nminus1Definition</code>
+   (<code>interfaces/nminus1_definition.py</code>): <code>monitored_elements</code> holds one <code>MonitoredElement(id=..., type="LINE",
+   kind="branch")</code> per line (and per transformer; <code>kind="bus"</code> for buses), <code>contingencies</code> holds one
+   <code>Contingency(id=..., elements=[GridElement(id=..., type="LINE", kind="branch")])</code> per outaged branch, plus
+   a base case <code>Contingency(id="BASECASE", elements=[])</code>. <code>packages/contingency_analysis_pkg/README.md</code>
+   lists the entry points.</li>
+<li>Run <code>get_ac_loadflow_results(net, nminus1_def, job_id="lab", timestep=0, n_processes=1)</code> and collect
+   <code>branch_results</code>, <code>node_results</code> and <code>va_diff_results</code> into pandas.</li>
+<li>Recompute <code>overload_energy_n_1</code> (field <code>p</code>), <code>overload_current_n_1</code> (field <code>i</code>),
+   <code>critical_branch_count_n_1</code> and <code>max_va_diff_n_1</code> with pandas group-bys, then compare with
+   <code>compute_metrics(lf_results, base_case_id="BASECASE")</code> from <code>contingency/ac_loadflow_service/compute_metrics.py</code>.</li>
+<li>Explain why the number of branch result rows is below
+   <span class="arithmatex">\((2 \cdot n_\text{lines} + 2 \cdot n_\text{trafos} + 3 \cdot n_\text{trafo3w}) \cdot n_\text{contingencies}\)</span>.</li>
+<li>Optional cross-tool check: build IEEE 14 in pandapower, export it with <code>pandapower.converter.to_mpc</code>,
+   load the <code>.mat</code> file in pypowsybl, run the same single-branch N-1 in both (pandapower ids need
+   <code>id_type="unique_pandapower"</code>) and plot the distribution of branch-flow differences, as
+   <code>packages/contingency_analysis_pkg/tests/ac_service/test_backend_comparison.py</code> does.</li>
+</ol>
+<p><strong>Part C (optional): the price of security on the 7-bus case.</strong> The two code blocks of the worked example are
+also a module, <a href="src/case7.py"><code>case7.py</code></a>, whose <code>main()</code> prints the answers to
+steps 1–3. The answers to all five steps are in <a href="solutions/#lab-part-c-the-price-of-security-on-the-7-bus-case">Solutions</a>.</p>
+<ol>
+<li>Run the two code blocks of "The price of N-1 security on a 7-bus case, in Python" and print, for the <abbr title="Security-constrained optimal power flow">SCOPF</abbr>
+   dispatch, which contingency constraints are binding (post-contingency loading of exactly 100 %).</li>
+<li>Make the AC check pass, as PowerWorld's <abbr title="Security-constrained optimal power flow">SCOPF</abbr> does by iterating: for each line whose worst AC loading is
+   above 100 %, set its limit to (worst DC post-contingency flow) × 100 / (worst AC loading), solve the <abbr title="Security-constrained optimal power flow">SCOPF</abbr>
+   again and repeat until the AC worst loading is at most 100 %. Report the extra cost of AC security over DC
+   security (about $4,400 → $4,670/h after two updates).</li>
+<li>Lower the limit of line 1–3 to 150 MW. The <abbr title="Optimal power flow">OPF</abbr> cost stays at $4,300/h, but the <abbr title="Security-constrained optimal power flow">SCOPF</abbr> cost rises to about
+   $5,360/h. Explain why the gap grows, and why an operator would look for a remedial action such as a
+   topology change before paying it (<a href="../../part-4-optimization/ch28-topology-optimization/">Chapter 28</a>).</li>
+<li>If you have PowerWorld Simulator, enter the same 7 buses and 11 lines, solve <abbr title="Optimal power flow">OPF</abbr> and <abbr title="Security-constrained optimal power flow">SCOPF</abbr>, and compare
+   dispatch and cost with your result.</li>
+<li><strong>Hand the case to ToOp and ask the topology question instead.</strong> ToOp has no <abbr title="Optimal power flow">OPF</abbr> (no costs, no
+   redispatch); what it can do is look for a bus split that removes the N-1 overload at zero redispatch
+   cost. Exercises 7–10 do this step by step, with <a href="solutions/">solutions</a>; their script is
+   <a href="src/case7_toop.py"><code>case7_toop.py</code></a>.</li>
+</ol>
+<p>Solutions: <a href="solutions/#lab-part-a-dc-metrics-from-the-full-n-1-matrix">Lab</a> · Notebooks:
+<a href="src/lab_toop/">lab_toop.ipynb</a> (Parts A and B, ToOp) and <a href="src/lab/">lab.ipynb</a> (Part C).</p>
+</div>
+<h2 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h2>
+<p>All statements are also in <a href="src/exercises/">exercises.ipynb</a>; the worked examples run in
+<a href="src/examples/">examples.ipynb</a>.</p>
+<ol>
+<li>
+<p>Pen and paper: for the worked example, find a flow change on one branch in one contingency that raises the
+   critical branch count by one while adding only a tiny amount <span class="arithmatex">\(\varepsilon\)</span> to the overload energy (start
+   from a state where branch 3 is below its limit, for example its two flows scaled by 0.9), and one that adds
+   a lot of energy without changing the count. Then find a change that moves neither metric. One would hope
+   for a change that moves the count while the energy stays exactly put, but there is none: both metrics are
+   functions of the same per-branch worst-case overload <span class="arithmatex">\(\max_c (|F_{cb}| - \bar F_b)^+\)</span>, so the count can
+   only move when that quantity leaves or reaches zero, which moves the energy too. What does the optimizer
+   prefer under each objective?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-1">Exercise 1</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy + matplotlib)</em> Plot the per-branch penalty of overload energy, the <span class="arithmatex">\(\alpha = 1.5\)</span> power law
+   and cumulative overload as a function of loading from 0 to 200 % for limits of 100 MW and 1 000 MW. Which
+   metric makes a 10 % overload on a 110 kV line as costly as on a 380 kV line?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-2">Exercise 2</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: NumPy)</em> Show with a two-branch example that the double-limit dead zone can make the unsplit grid
+   have zero <code>overload_energy_limited_n_0</code> while a topology that only redistributes flow between the two
+   branches gets a positive value. Relate this to why the rule exists.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-3">Exercise 3</a>.</p>
+</li>
+<li>
+<p>Pen and paper: an unsplit grid has AC <code>overload_energy_n_1</code> = 0, <code>critical_branch_count_n_1</code> = 0 and 2
+   non-converging cases. A candidate has 0 MW, 1 critical branch and 2 non-converging cases after disconnecting
+   one branch. Apply <code>evaluate_acceptance</code> with default thresholds and state the rejection criterion, if any.
+   Would a relative tolerance or an absolute slack be the better design?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-4">Exercise 4</a>.</p>
+</li>
+<li>
+<p><em>(Octave + MATPOWER)</em> For <code>case30</code>, compute the DC N-1 flow matrix with <code>makePTDF</code> and <code>makeLODF</code>
+   (<a href="https://matpower.org/docs/ref/matpower7.1/lib/makeLODF.html">https://matpower.org/docs/ref/matpower7.1/lib/makeLODF.html</a>), skipping bridges, set every limit to 1.2 times
+   the base-case flow, and compute overload energy and critical branch count. Repeat after doubling one load
+   and explain which contingencies became worst for which branches.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-5">Exercise 5</a>.</p>
+</li>
+<li>
+<p><em>(Jupyter: pandas)</em> The DC optimizer's fitness for a run is <code>-713</code> and the AC fitness of the same topology is
+   <code>12.4</code>. Write down the weighted objective that could have produced the DC value and explain why the two
+   numbers cannot be compared directly.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-6">Exercise 6</a>.</p>
+</li>
+</ol>
+<p>Exercises 7–10 continue the 7-bus case of the worked example inside ToOp. Their scripts are in the chapter's
+<code>src</code> folder: <a href="src/case7.py"><code>case7.py</code></a> (SciPy and pandapower, runs anywhere) and
+<a href="src/case7_toop.py"><code>case7_toop.py</code></a> (runs in the ToOp container). Solve each exercise
+before opening its solution. All solutions of the chapter, with those of Lab Part C, are in <a href="solutions/">Solutions</a>;
+the numbers quoted were produced with ToOp <code>ba1874e</code> on CPU.</p>
+<ol>
+<li>
+<p><em>(ToOp container)</em> <strong>Same N-1, two tools.</strong> Wrap the 7-bus grid with the <abbr title="Optimal power flow">OPF</abbr> dispatch of the worked example
+   for ToOp, as <code>case14_pandapower</code> does in <code>dc_solver/example_grids.py</code>: bus 1 as <code>ext_grid</code> (the slack),
+   <code>grid.json</code> plus the masks, buses 3–6 as relevant substations, line outages only. Load it with <code>load_grid</code> and
+   <code>run_initial_loadflow</code> (<code>dc_solver/preprocess/convert_to_jax.py</code>), run the unsplit topology through
+   <code>run_solver_symmetric</code> with a pass-through aggregation function and read the full N-1 matrix. Compare
+   <code>overload_energy_n_1</code> and the worst post-contingency loading with the SciPy code, and derive the value of
+   <code>overload_energy_n_1</code> from the definition of the metric.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-7">Exercise 7</a>.</p>
+</li>
+<li>
+<p><em>(Pen and paper, then ToOp)</em> <strong>Count the action set.</strong> Before loading the case, predict how many actions ToOp
+   builds for the relevant substations 3–6 when a split must leave at least two branches on each busbar, mirror
+   images (the two busbars swapped) count once, and the unsplit configuration is one action per substation.
+   Derive a formula in the number of branches <span class="arithmatex">\(d\)</span> of a substation, then check it against
+   <code>dynamic_information.action_set.n_actions_per_sub</code> and decode the actions with <code>branch_actions</code>,
+   <code>substation_correspondence</code> and <code>network_data.branches_at_nodes</code>. Which substation is missing, and why?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-8">Exercise 8</a>.</p>
+</li>
+<li>
+<p><em>(Pen and paper, then ToOp)</em> <strong>An overload no switch can fix.</strong> Prove that, after the outage of line 1–2, the
+   flow on line 1–3 is 250 MW for every topology of buses 3–6. Then run the twelve actions of Exercise 8 through
+   <code>run_solver_symmetric</code> in one batch (<code>ActionIndexComputations</code> with one action in the first slot of each
+   topology) and report, per action, the worst post-contingency loading and the largest change of a base-case
+   flow. Which actions make things worse, which one islands the grid, and what is the only remedy?</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-9">Exercise 9</a>.</p>
+</li>
+<li>
+<p><em>(SciPy, ToOp and pandapower)</em> <strong>An overload a switch can fix.</strong> Start from the <abbr title="Security-constrained optimal power flow">SCOPF</abbr> dispatch (240, 100 and
+    0 MW) and lower the limit of line 3–6 to 100 MW. (a) With the SciPy code, find the new worst post-contingency
+    loading of that dispatch and the cost of the <abbr title="Security-constrained optimal power flow">SCOPF</abbr> that respects the new limit. (b) Rebuild the ToOp folder
+    with this dispatch and limit (<code>report(folder, pg, limit)</code> in the script does both) and find which single
+    splits clear every N-1 overload. (c) Reproduce the best split in pandapower: add a bus, move the lines of the
+    split to it (<code>split_bus</code> in <code>case7.py</code>) and run the DC N-1 again. (d) Explain, from the paths available after
+    the L2-5 outage, why this overload is fixable while the one of Exercise 9 is not, and check the split with
+    the AC N-1 as well.</p>
+<p><strong>Solution:</strong> <a href="solutions/#exercise-10">Exercise 10</a>.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../ch18-sensitivity-factors-2/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 18. Sensitivity factors II: low-rank updates for topology changes">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                18. Sensitivity factors II: low-rank updates for topology changes
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ch20-protection-short-circuit/" class="md-footer__link md-footer__link--next" aria-label="Next: 20. Protection, short circuit and switching feasibility">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                20. Protection, short circuit and switching feasibility
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

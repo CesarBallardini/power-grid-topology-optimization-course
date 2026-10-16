@@ -1,0 +1,2514 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/0.2.0/part-1-math/ch03-graph-theory/solutions/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Chapter 3 – Solutions - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-3-solutions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 3 – Solutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch01-complex-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-3-solutions">Chapter 3 – Solutions<a class="headerlink" href="#chapter-3-solutions" title="Permanent link">&para;</a></h1>
+<p>Solutions of the Lab and the Exercises of <a href="../">Chapter 3</a>. Try each task before reading its solution. The
+code is in the chapter's <code>src</code> folder: <a href="../src/grid_graph.py"><code>grid_graph.py</code></a> (edge list, bridges, Laplacian,
+effective resistance, algebraic connectivity, k-hop neighbourhoods), <a href="../src/ieee118.py"><code>ieee118.py</code></a> (the 118-bus
+stretch), <a href="../src/station_splits.py"><code>station_splits.py</code></a> (coupler states of a station), <a href="../src/tarjan.py"><code>tarjan.py</code></a>
+(DFS with discovery times and low-links) and <a href="../src/hamming.py"><code>hamming.py</code></a> (switching distance). Each module's
+<code>main()</code> prints every number quoted below; the worked examples run in <a href="../src/examples/">examples.ipynb</a>.</p>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Edge list.</strong> <code>pd.read_csv('ieee14_edges.csv')</code> gives 20 rows with columns <code>from_bus</code> and <code>to_bus</code>; the 14
+   buses appear at least once each, bus 8 exactly once (<code>load_edges</code> in <code>grid_graph.py</code>).</li>
+<li><strong>Bridges and articulation points.</strong> <code>nx.from_pandas_edgelist(df, 'from_bus', 'to_bus',
+   create_using=nx.MultiGraph)</code> builds a multigraph with 14 nodes and 20 edges. After <code>G.add_edge(7, 8)</code> the
+   multigraph has two parallel edges between buses 7 and 8 and <code>list(nx.bridges(G))</code> is empty: a bridge is an
+   edge whose removal disconnects its two ends, and when a parallel circuit exists, removing one of the two
+   leaves the other, so the ends stay connected (the two parallel edges form a cycle of length 2, see
+   <a href="#exercise-2">Exercise 2</a>). After <code>G.remove_edge(7, 8)</code> the result is <code>bridges = [(7, 8)]</code> and
+   <code>articulation_points = [7]</code>: bus 8 is a leaf attached to bus 7 by a single transformer, so that transformer's
+   outage islands bus 8, and the loss of bus 7 does the same. <code>draw_grid</code> colours the bridge red and draws bus 7
+   as a larger red node; no other branch is red, since every other bus has at least two branches that lead to
+   the rest of the grid.</li>
+<li>
+<p><strong>Zero eigenvalues and effective resistance.</strong> <code>np.linalg.eigvalsh(nx.laplacian_matrix(G).toarray())</code> has
+   exactly one eigenvalue below <span class="arithmatex">\(10^{-9}\)</span> on the intact grid and two after removing <code>(7, 8)</code>
+   (<code>count_zero_eigenvalues</code>), one per connected component: the Laplacian's null space is spanned by the
+   indicator vectors of the islands. With unit weights the effective resistance across <code>(7, 8)</code> is exactly
+   <span class="arithmatex">\(1\)</span>, and every other branch is below it:</p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th><span class="arithmatex">\(R_{\text{eff}}\)</span></th>
+<th>Branch</th>
+<th><span class="arithmatex">\(R_{\text{eff}}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7–8</td>
+<td>1.0000</td>
+<td>1–2, 1–5, 2–3, 3–4</td>
+<td>0.6135</td>
+</tr>
+<tr>
+<td>6–11, 9–10, 10–11</td>
+<td>0.7629</td>
+<td>6–13</td>
+<td>0.5541</td>
+</tr>
+<tr>
+<td>9–14, 13–14</td>
+<td>0.7467</td>
+<td>4–9</td>
+<td>0.5449</td>
+</tr>
+<tr>
+<td>5–6</td>
+<td>0.7260</td>
+<td>4–5</td>
+<td>0.4820</td>
+</tr>
+<tr>
+<td>6–12, 12–13</td>
+<td>0.6385</td>
+<td>2–4, 2–5</td>
+<td>0.4538</td>
+</tr>
+<tr>
+<td>4–7, 7–9</td>
+<td>0.6362</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>A branch of resistance 1 in parallel with any other path has an effective resistance below 1, by the
+parallel rule <span class="arithmatex">\(R = (1 + 1/R_{\text{path}})^{-1}\)</span>. The value <span class="arithmatex">\(1\)</span> means there is no parallel path at all: the
+whole unit current injected at bus 7 and withdrawn at bus 8 flows through the branch itself, which is the
+definition of a bridge. The equality <span class="arithmatex">\(g_k R_{\text{eff},k} = 1\)</span> for a bridge is the zero denominator of
+<a href="../../ch04-numerical-linear-algebra/">Chapter 4</a> and the vanishing <abbr title="Line outage distribution factor">LODF</abbr> denominator of
+<a href="../../../part-3-power-systems/ch17-sensitivity-factors-1/">Chapter 17</a>. The three branches at 0.7629 and
+the two at 0.7467 are the radial ring 6–11–10–9–14–13–6, the weakest loop of the grid.
+4. <strong><code>find_bridges.py</code> in ToOp.</strong> <code>find_bridges(from_node, to_node, number_of_branches, number_of_nodes)</code> first
+   builds an <code>nx.MultiGraph</code> whose edges are keyed by the branch index (<code>_get_graph_with_branch_keys</code>), the same
+   multigraph model as step 2, so parallel circuits are never bridges. It then calls <code>nx.bridges(graph_nx)</code>,
+   turns the list of <code>(from, to)</code> pairs into an integer array, appends the reversed pairs (NetworkX returns each
+   bridge in one orientation only, and a branch may be stored either way), and intersects that array with the
+   <code>[from_node, to_node]</code> columns of the branch table through a structured view and <code>np.intersect1d(...,
+   return_indices=True)</code>. The matched row indices set <code>True</code> in a Boolean mask <code>branch_is_bridge</code> of length
+   <code>number_of_branches</code>, which is the output: a bridge flag per branch, used to drop those branches from the N-1
+   outage set. The same file has <code>find_n_minus_2_safe_branches</code>, which removes each branch in turn from the
+   keyed multigraph and counts the bridges that appear (<code>get_number_of_bridges_after_outage</code>), the N-2 version of
+   the same test.
+5. <strong>Station coupler states.</strong> With couplers <code>(0,1), (1,2), (2,3), (3,0)</code>, <code>itertools.product((0, 1), repeat=4)</code>
+   gives 16 states; skipping the all-closed one and keeping the states whose closed-coupler graph has exactly two
+   connected components leaves 6 states, all with exactly two couplers open, realizing 6 distinct bipartitions
+   (<code>two_busbar_states</code> and <code>count_states_and_bipartitions</code> in <code>station_splits.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Open couplers</th>
+<th>Busbars</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0,1), (1,2)</td>
+<td 0_="0," 2_="2," 3="3">{1} |</td>
+</tr>
+<tr>
+<td>(1,2), (2,3)</td>
+<td 0_="0," 1_="1," 3="3">{2} |</td>
+</tr>
+<tr>
+<td>(2,3), (3,0)</td>
+<td 0_="0," 1_="1," 2="2">{3} |</td>
+</tr>
+<tr>
+<td>(3,0), (0,1)</td>
+<td 1_="1," 2_="2," 3="3">{0} |</td>
+</tr>
+<tr>
+<td>(0,1), (2,3)</td>
+<td 1_="1," 2="2">{0, 3} |</td>
+</tr>
+<tr>
+<td>(1,2), (3,0)</td>
+<td 2_="2," 3="3">{0, 1} |</td>
+</tr>
+</tbody>
+</table>
+<p>Opening one coupler leaves a path (one component), opening three leaves three components. With the extra
+coupler <code>(0, 2)</code> there are 32 states, 12 of them with two components, but still the same 6 bipartitions: the
+diagonal gives new ways to realize <code>{1} | {0, 2, 3}</code> (four states) and <code>{3} | {0, 1, 2}</code> (four states), and no
+new split, because <code>{0, 2} | {1, 3}</code> still has a disconnected side (<a href="#exercise-4">Exercise 4</a>). This is what
+<code>make_separation_set</code> does for real stations: enumerate coupler states, keep the two-component ones, and
+collapse them to distinct electrical bipartitions.
+6. <strong>IEEE 118-bus stretch.</strong> <code>ieee118.py</code> exports the 186 branches (lines and transformers, bus numbers from 1)
+   of <code>pandapower.networks.case118()</code>. The same functions give 9 bridges, <code>(8, 9), (9, 10), (12, 117), (68, 116),
+   (71, 73), (85, 86), (86, 87), (110, 111), (110, 112)</code>, and 9 articulation points, buses 8, 9, 12, 68, 71, 85,
+   86, 100 and 110 (bus 100 is a cut vertex without a bridge: its loss islands a block of ten buses that hangs
+   off it through two branches). The Laplacian
+   has one zero eigenvalue, exactly 9 branches have <span class="arithmatex">\(R_{\text{eff}} = 1\)</span>, the bridges again, and the algebraic
+   connectivity is <span class="arithmatex">\(0.0282\)</span>, far below the 14-bus value <span class="arithmatex">\(0.4584\)</span>: the bigger grid is sparser and has long radial
+   tails.</p>
+</li>
+</ol>
+<h2 id="exercise-1">Exercise 1<a class="headerlink" href="#exercise-1" title="Permanent link">&para;</a></h2>
+<p>Label the triangles <span class="arithmatex">\(\{0, 1, 2\}\)</span> and <span class="arithmatex">\(\{3, 4, 5\}\)</span> and join them by the edge <span class="arithmatex">\((2, 3)\)</span>. By hand: every edge of a
+triangle lies on a cycle, so it is not a bridge; <span class="arithmatex">\((2, 3)\)</span> lies on no cycle (any cycle through it would need a
+second path between the triangles), so it is the only bridge, and its two ends, vertices 2 and 3, are the
+articulation points (removing either leaves the other triangle cut off). Tarjan's DFS from vertex 0, visiting
+neighbours in increasing order, gives (<code>tarjan.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Vertex</th>
+<th>disc</th>
+<th>low</th>
+<th>How low is obtained</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>root</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>through child 2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>back edge 2–0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>through child 4, no back edge above 3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>through child 5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>3</td>
+<td>back edge 5–3</td>
+</tr>
+</tbody>
+</table>
+<p>The DFS tree is the path 0–1–2–3–4–5 with back edges 2–0 and 5–3. The tree edge <span class="arithmatex">\((2, 3)\)</span> has
+<span class="arithmatex">\(\text{low}[3] = 3 &gt; \text{disc}[2] = 2\)</span>: no vertex in the subtree of 3 can reach above 3, so <span class="arithmatex">\((2, 3)\)</span> is a
+bridge. Vertex 2 is an articulation point because it has a child, 3, with <span class="arithmatex">\(\text{low}[3] \ge \text{disc}[2]\)</span>;
+vertex 3 because <span class="arithmatex">\(\text{low}[4] = 3 \ge \text{disc}[3] = 3\)</span>. The root 0 has one child, so it is not one. NetworkX
+agrees: <code>nx.bridges</code> gives <code>[(2, 3)]</code> and <code>nx.articulation_points</code> gives <code>{2, 3}</code>.</p>
+<h2 id="exercise-2">Exercise 2<a class="headerlink" href="#exercise-2" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(e = uv\)</span> be an edge of a connected graph <span class="arithmatex">\(G\)</span>.</p>
+<p><em>Bridge <span class="arithmatex">\(\Rightarrow\)</span> no cycle.</em> Suppose <span class="arithmatex">\(e\)</span> lies on a cycle <span class="arithmatex">\(C\)</span>. Then <span class="arithmatex">\(C - e\)</span> is a <span class="arithmatex">\(u\)</span>–<span class="arithmatex">\(v\)</span> path that avoids
+<span class="arithmatex">\(e\)</span>. Any walk in <span class="arithmatex">\(G\)</span> that used <span class="arithmatex">\(e\)</span> can replace that step by <span class="arithmatex">\(C - e\)</span>, so every pair of vertices connected in <span class="arithmatex">\(G\)</span>
+is still connected in <span class="arithmatex">\(G - e\)</span>: <span class="arithmatex">\(e\)</span> is not a bridge. By contraposition, a bridge lies on no cycle.</p>
+<p><em>No cycle <span class="arithmatex">\(\Rightarrow\)</span> bridge.</em> If <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(v\)</span> were still connected in <span class="arithmatex">\(G - e\)</span> by a path <span class="arithmatex">\(P\)</span>, then <span class="arithmatex">\(P + e\)</span>
+would be a cycle through <span class="arithmatex">\(e\)</span>. So if <span class="arithmatex">\(e\)</span> lies on no cycle, <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(v\)</span> are disconnected in <span class="arithmatex">\(G - e\)</span>, which makes
+<span class="arithmatex">\(e\)</span> a bridge.</p>
+<p><em>Exactly two components.</em> Let <span class="arithmatex">\(w\)</span> be any vertex and <span class="arithmatex">\(P\)</span> a <span class="arithmatex">\(w\)</span>–<span class="arithmatex">\(u\)</span> path in <span class="arithmatex">\(G\)</span> (it exists, <span class="arithmatex">\(G\)</span> is connected). If
+<span class="arithmatex">\(P\)</span> avoids <span class="arithmatex">\(e\)</span>, <span class="arithmatex">\(w\)</span> is in the component of <span class="arithmatex">\(u\)</span> in <span class="arithmatex">\(G - e\)</span>. Otherwise follow <span class="arithmatex">\(P\)</span> from <span class="arithmatex">\(w\)</span> until the first endpoint
+of <span class="arithmatex">\(e\)</span> it meets; that initial segment avoids <span class="arithmatex">\(e\)</span>, so <span class="arithmatex">\(w\)</span> is in the component of <span class="arithmatex">\(u\)</span> or in the component of <span class="arithmatex">\(v\)</span>.
+Hence <span class="arithmatex">\(G - e\)</span> has at most two components, and by the previous paragraph <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(v\)</span> lie in different ones:
+exactly two. This is why the outage of a bridge always creates exactly one island, and why the Laplacian of
+step 3 gains exactly one zero eigenvalue.</p>
+<h2 id="exercise-3">Exercise 3<a class="headerlink" href="#exercise-3" title="Permanent link">&para;</a></h2>
+<p>The algebraic connectivity of the intact 14-bus grid is <span class="arithmatex">\(\lambda_2 = 0.4584\)</span> (<code>algebraic_connectivity</code>, in
+agreement with <code>nx.algebraic_connectivity</code>). Removing each branch in turn (<code>connectivity_after_removal</code>,
+bar chart with <code>plot_connectivity</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Removed branch</th>
+<th><span class="arithmatex">\(\lambda_2\)</span></th>
+<th>Drop</th>
+<th>Removed branch</th>
+<th><span class="arithmatex">\(\lambda_2\)</span></th>
+<th>Drop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7–8</td>
+<td>0.0000</td>
+<td>0.4584</td>
+<td>6–12</td>
+<td>0.3930</td>
+<td>0.0655</td>
+</tr>
+<tr>
+<td>5–6</td>
+<td>0.2017</td>
+<td>0.2567</td>
+<td>1–5</td>
+<td>0.4173</td>
+<td>0.0411</td>
+</tr>
+<tr>
+<td>9–10</td>
+<td>0.2611</td>
+<td>0.1973</td>
+<td>3–4</td>
+<td>0.4292</td>
+<td>0.0292</td>
+</tr>
+<tr>
+<td>9–14</td>
+<td>0.2624</td>
+<td>0.1960</td>
+<td>4–5</td>
+<td>0.4301</td>
+<td>0.0284</td>
+</tr>
+<tr>
+<td>7–9</td>
+<td>0.3014</td>
+<td>0.1571</td>
+<td>2–5</td>
+<td>0.4343</td>
+<td>0.0241</td>
+</tr>
+<tr>
+<td>6–11</td>
+<td>0.3116</td>
+<td>0.1468</td>
+<td>6–13</td>
+<td>0.4398</td>
+<td>0.0187</td>
+</tr>
+<tr>
+<td>4–7</td>
+<td>0.3160</td>
+<td>0.1424</td>
+<td>12–13</td>
+<td>0.4459</td>
+<td>0.0126</td>
+</tr>
+<tr>
+<td>13–14</td>
+<td>0.3307</td>
+<td>0.1277</td>
+<td>2–3</td>
+<td>0.4486</td>
+<td>0.0098</td>
+</tr>
+<tr>
+<td>10–11</td>
+<td>0.3543</td>
+<td>0.1042</td>
+<td>1–2</td>
+<td>0.4569</td>
+<td>0.0015</td>
+</tr>
+<tr>
+<td>4–9</td>
+<td>0.3735</td>
+<td>0.0849</td>
+<td>2–4</td>
+<td>0.4583</td>
+<td>0.0001</td>
+</tr>
+</tbody>
+</table>
+<p>The bridge is in a class of its own: removing it disconnects the grid and <span class="arithmatex">\(\lambda_2\)</span> drops to exactly zero
+(the second zero eigenvalue of step 3). Every other removal leaves a connected grid with <span class="arithmatex">\(\lambda_2 &gt; 0\)</span>. The
+worst non-bridge is 5–6: the cut between the western buses 1–5 and the eastern buses 6–14 has only three
+branches, 5–6, 4–7 and 4–9, and 5–6 is the one whose removal leaves the two sides most weakly joined. The next
+ones, 9–10, 9–14, 7–9, 6–11, 4–7 and 13–14, are on the weak ring 6–11–10–9–14–13 and its connections to bus 4,
+the same branches that had the largest effective resistances in step 3. Branches of the strongly meshed western
+end (2–4, 1–2, 2–3) barely matter: bus 2 keeps three other branches when any one of them goes. Algebraic connectivity measures how well a graph resists being cut, so it ranks the branches that are
+"almost bridges" without being one.</p>
+<h2 id="exercise-4">Exercise 4<a class="headerlink" href="#exercise-4" title="Permanent link">&para;</a></h2>
+<p>An assignment is a vector in <span class="arithmatex">\(\{A, B\}^n\)</span>, so there are <span class="arithmatex">\(2^n\)</span> of them. Swapping the labels A and B maps each
+vector to a different one (no vector is its own swap, because every busbar changes side) and pairs the <span class="arithmatex">\(2^n\)</span>
+vectors up, so there are <span class="arithmatex">\(2^n / 2 = 2^{n-1}\)</span> assignments up to swapping. Exactly one class is trivial, "all
+busbars on the same side" (the unsplit station), leaving <span class="arithmatex">\(2^{n-1} - 1\)</span> non-trivial bipartitions:
+<span class="arithmatex">\(8\)</span> and <span class="arithmatex">\(7\)</span> for the four-busbar station (<code>all_bipartitions</code> in <code>station_splits.py</code>).</p>
+<p>The lab found only 6 bipartitions reachable by opening couplers, so one of the 7 is unreachable:
+<span class="arithmatex">\(\{0, 2\} \mid \{1, 3\}\)</span> (<code>unreachable_bipartitions</code>). Opening couplers can only produce sides that are
+connected through closed couplers, because a side is an electrical busbar: everything on it must be joined by
+closed couplers. Busbars 0 and 2 are not adjacent in the ring, so to be on one side they need the path 0–1–2
+or 0–3–2 closed, which drags busbar 1 or 3 along; the same holds for 1 and 3. Adding the diagonal coupler
+<span class="arithmatex">\((0, 2)\)</span> makes <span class="arithmatex">\(\{0, 2\}\)</span> connectable but leaves <span class="arithmatex">\(\{1, 3\}\)</span> disconnected, so the same bipartition stays
+unreachable and the count stays at 6. In general a bipartition is reachable exactly when both sides induce
+connected subgraphs of the coupler graph; this is the condition <code>make_separation_set</code> checks when it keeps
+only the coupler states with exactly two components.</p>
+<h2 id="exercise-5">Exercise 5<a class="headerlink" href="#exercise-5" title="Permanent link">&para;</a></h2>
+<p>With Boolean vectors <code>a</code> and <code>b</code> of equal length, the Hamming distance is <code>np.count_nonzero(a != b)</code>
+(<code>hamming_distance</code> in <code>hamming.py</code>). For <code>current = [1, 1, 0, 0, 1, 0]</code> and <code>target = [0, 0, 1, 1, 0, 0]</code> the
+plain distance is 5, while the distance to the inverted target <code>~target = [1, 1, 0, 0, 1, 1]</code> is 1.</p>
+<p>The labels A (<code>True</code>) and B (<code>False</code>) are arbitrary names for the two busbars of a split station: assigning the
+assets to (A, B) or to (B, A) produces the same electrical topology, the one of <a href="#exercise-4">Exercise 4</a> "up to
+swapping". A distance that took the labels literally would say the two topologies above are 5 switching
+operations apart, when they differ by moving one asset. ToOp therefore computes the reassignment distance
+for the target and for its inverse and keeps the smaller one: in <code>per_station_switching_distance</code>
+(<code>dc_solver/preprocess/helpers/switching_distance.py</code>) <code>reassignment_distance</code> and
+<code>reassignment_distance_inv</code> are both evaluated, <code>invert = reassignment_distance_inv.min() &lt;
+reassignment_distance.min()</code> selects the orientation, and the function returns <code>invert</code> along with the distance
+so the caller knows which labelling it used. <code>switching_distance</code> in <code>hamming.py</code> does the same and returns
+<code>(1, True)</code> for the example.</p>
+<h2 id="exercise-6">Exercise 6<a class="headerlink" href="#exercise-6" title="Permanent link">&para;</a></h2>
+<p><code>nx.single_source_dijkstra_path_length(G, 5, cutoff=2)</code> on the 14-bus graph with unit weights
+(<code>k_hop_neighbourhood</code>) returns 11 buses with their distance:</p>
+<table>
+<thead>
+<tr>
+<th>Distance</th>
+<th>Buses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1, 2, 4, 6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3, 7, 9, 11, 12, 13</td>
+</tr>
+</tbody>
+</table>
+<p>Buses 8, 10 and 14 are three hops away and are cut off by <code>cutoff=2</code>: the algorithm stops expanding a node as
+soon as its tentative distance exceeds the cutoff, so it never visits the far side of the grid. This is the call
+ToOp's importer uses, with real branch weights, to find the bays and couplers around a busbar without walking
+the whole network (<code>importer/network_graph/</code>).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

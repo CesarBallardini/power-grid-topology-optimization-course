@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.165424Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.165424Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-4-optimization/ch25-quality-diversity/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:19:03.163553Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:19:03.163553Z",
+  "mimetype": null,
+  "name": "ch25-quality-diversity",
+  "path": "part-4-optimization/ch25-quality-diversity",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

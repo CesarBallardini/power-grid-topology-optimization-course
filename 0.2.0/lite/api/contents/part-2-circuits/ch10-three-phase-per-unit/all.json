@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.135616Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.135616Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-2-circuits/ch10-three-phase-per-unit/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:19:03.134044Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:19:03.134044Z",
+  "mimetype": null,
+  "name": "ch10-three-phase-per-unit",
+  "path": "part-2-circuits/ch10-three-phase-per-unit",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

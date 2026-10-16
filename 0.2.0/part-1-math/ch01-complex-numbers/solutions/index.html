@@ -1,0 +1,2414 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A five-semester study plan from college algebra to comprehending, using, debugging and improving ToOp, the open-source GPU topology optimization engine for power grids.">
+      
+      
+        <meta name="author" content="Cesar Ballardini">
+      
+      
+        <link rel="canonical" href="https://katra.ballardini.com.ar/power-grid-topology-optimization-course/0.2.0/part-1-math/ch01-complex-numbers/solutions/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Chapter 1 – Solutions - Power Grid Topology Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-1-solutions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-header__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Power Grid Topology Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 1 – Solutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Power Grid Topology Optimization" class="md-nav__button md-logo" aria-label="Power Grid Topology Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Power Grid Topology Optimization
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CesarBallardini/power-grid-topology-optimization-course
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 0 — Orientation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 0 — Orientation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-0-orientation/ch00-orientation-and-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Orientation and setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — Mathematical foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — Mathematical foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Complex numbers and phasor arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch02-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Linear algebra for networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch03-graph-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Graph theory for power grids
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch04-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Numerical linear algebra and floating point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch05-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Probability for stochastic search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ch06-newton-raphson/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Nonlinear equations and Newton–Raphson
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — Electricity and circuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — Electricity and circuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch07-electromagnetism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Electromagnetism refresher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch08-dc-circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. DC circuits and nodal analysis in matrix form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch09-ac-steady-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. AC steady state and complex power
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch10-three-phase-per-unit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Three-phase systems and the per-unit system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-2-circuits/ch11-transformers-psts-hvdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Transformers, phase-shifting transformers, machines and HVDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — Power systems and grid computations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — Power systems and grid computations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch12-power-grid-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. The power grid and its operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch13-substations-grid-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Substations, grid models and data formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch14-component-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Network component models and network matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch15-ac-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. AC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch16-dc-power-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. DC power flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch17-sensitivity-factors-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Sensitivity factors I: PTDF, PSDF, LODF and N-1 screening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch18-sensitivity-factors-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. Sensitivity factors II: low-rank updates for topology changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch19-operational-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Operational security and performance metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch20-protection-short-circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Protection, short circuit and switching feasibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch21-coordinated-security-rao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Coordinated security analysis, capacity calculation and remedial action optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-3-power-systems/ch22-import-preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Import and preprocessing: from grid model to search space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch23-optimization-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Optimization modeling: LP, duality, MILP and complexity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch24-evolutionary-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. Heuristics and evolutionary algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch25-quality-diversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Quality-diversity and MAP-Elites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch26-experimental-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Experimental methodology for stochastic optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch27-pareto-multi-objective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. True Pareto multi-objective optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch28-topology-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Topology optimization in power systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-4-optimization/ch29-learning-based-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Learning-based topology control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part V — Computing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part V — Computing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch30-scientific-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Scientific Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch31-jax-gpu-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. JAX and GPU computing fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch32-jax-in-toop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. JAX in ToOp: internals and GPU tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch33-testing-debugging-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Testing, debugging and profiling scientific and JAX code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-5-computing/ch34-pipeline-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Engineering the pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part VI — Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part VI — Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../part-6-capstone/ch35-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Capstone: reading ToOp end to end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/a-syllabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. University syllabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/b-books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Bibliography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/c-toop-concept-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. ToOp concept map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendices/d-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power Grid Topology Optimization — full book
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-1-solutions">Chapter 1 – Solutions<a class="headerlink" href="#chapter-1-solutions" title="Permanent link">&para;</a></h1>
+<p>Solutions of the Lab and the Exercises of <a href="../">Chapter 1</a>. Try each task before reading its solution. The
+code is in the chapter's <code>src</code> folder: <a href="../src/phasor_power.py"><code>phasor_power.py</code></a> and
+<a href="../src/phasor_power.m"><code>phasor_power.m</code></a> (the worked example), <a href="../src/complex_plane.py"><code>complex_plane.py</code></a> (every
+numeric check below, plain <code>cmath</code>), <a href="../src/three_loads.m"><code>three_loads.m</code></a> (Lab step 4 in Octave) and
+<a href="../src/tap_phase_shift.m"><code>tap_phase_shift.m</code></a> (Exercise 4 in Octave). <code>python complex_plane.py</code> prints every
+number quoted here; the Octave files carry their own <code>%!test</code> blocks and were run with Octave 11.3. The GeoGebra
+steps were not run here: they are given as the construction plus the values the screen must show, and the same
+values are computed by the code.</p>
+<h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Rotation by a slider.</strong> With <code>z = 3 + 4i</code>, <code>abs(z) = 5</code> and <code>arg(z) = 53.13°</code> (<span class="arithmatex">\(\arctan(4/3)\)</span>). For
+   <code>w = z (cos θ + i sin θ)</code>, <code>abs(w)</code> stays 5 for every slider value and <code>arg(w) = 53.13° + θ</code>, wrapped into
+   <span class="arithmatex">\((-180°, 180°]\)</span> by GeoGebra: <code>complex_plane.rotate(3 + 4j, θ)</code> gives <span class="arithmatex">\(w = 0.598 + 4.964i\)</span> at <span class="arithmatex">\(\theta = 30°\)</span>
+   (argument <span class="arithmatex">\(83.13°\)</span>), <span class="arithmatex">\(-4 + 3i\)</span> at <span class="arithmatex">\(90°\)</span> (<span class="arithmatex">\(143.13°\)</span>), <span class="arithmatex">\(-3 - 4i\)</span> at <span class="arithmatex">\(180°\)</span> (<span class="arithmatex">\(-126.87° = 233.13° - 360°\)</span>) and
+   <span class="arithmatex">\(4 - 3i\)</span> at <span class="arithmatex">\(270°\)</span> (<span class="arithmatex">\(-36.87°\)</span>). The point <span class="arithmatex">\(w\)</span> runs around the circle of radius 5; its modulus never changes
+   because <span class="arithmatex">\(|e^{j\theta}| = 1\)</span>.</p>
+<div class="highlight"><span class="filename">complex_plane.py</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="sd">"""Rotations, products, roots of unity and a transformer's phase shift with plain ``cmath`` (Chapter 1).</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sd">The numeric checks of the Lab (rotating ``z = 3 + 4i``, the product with ``u = 1 + 0.5i``, the cube roots of unity,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">three loads on a 230 V source) and of the Exercises (the hand computation of Exercise 1, ``atan`` against ``atan2``,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">the tap-changer phase shift of Exercise 4, the rotating phasor of Exercise 5). No NumPy: the ``complex`` type and</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">``cmath`` are enough. ``python complex_plane.py`` prints every number the solutions quote.</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">"""</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">cmath</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="kn">from</span><span class="w"> </span><span class="nn">phasor_power</span><span class="w"> </span><span class="kn">import</span> <span class="n">complex_power</span><span class="p">,</span> <span class="n">load_current</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">LOADS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'inductive'</span><span class="p">:</span> <span class="mi">40</span> <span class="o">+</span> <span class="mi">30</span><span class="n">j</span><span class="p">,</span> <span class="s1">'capacitive'</span><span class="p">:</span> <span class="mi">40</span> <span class="o">-</span> <span class="mi">30</span><span class="n">j</span><span class="p">,</span> <span class="s1">'resistive'</span><span class="p">:</span> <span class="mi">50</span> <span class="o">+</span> <span class="mi">0</span><span class="n">j</span><span class="p">}</span>  <span class="c1"># ohm, Lab step 4</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">polar_deg</span><span class="p">(</span><span class="n">z</span><span class="p">:</span> <span class="nb">complex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="sd">"""Modulus and argument in degrees, the argument from ``cmath.phase`` (an ``atan2``) in (-180, 180]."""</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cmath</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="k">def</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(</span><span class="n">z</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">theta_deg</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">complex</span><span class="p">:</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="sd">"""``z`` turned by ``theta_deg`` degrees: the product with exp(j theta), modulus unchanged."""</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="k">return</span> <span class="n">z</span> <span class="o">*</span> <span class="n">cmath</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">theta_deg</span><span class="p">))</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">wrap_deg</span><span class="p">(</span><span class="n">angle</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="sd">"""The same angle brought into (-180, 180], so that sums of arguments compare with ``polar_deg``."""</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.0</span> <span class="o">-</span> <span class="mf">180.0</span> <span class="k">if</span> <span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.0</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">180.0</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">product_check</span><span class="p">(</span><span class="n">z</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">complex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">    </span><span class="sd">"""Modulus and argument of ``z * u`` next to the product of moduli and the sum of arguments (Lab step 2)."""</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="n">mod_z</span><span class="p">,</span> <span class="n">arg_z</span> <span class="o">=</span> <span class="n">polar_deg</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="n">mod_u</span><span class="p">,</span> <span class="n">arg_u</span> <span class="o">=</span> <span class="n">polar_deg</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="n">mod_p</span><span class="p">,</span> <span class="n">arg_p</span> <span class="o">=</span> <span class="n">polar_deg</span><span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">u</span><span class="p">)</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'abs_p'</span><span class="p">:</span> <span class="n">mod_p</span><span class="p">,</span> <span class="s1">'abs_z_abs_u'</span><span class="p">:</span> <span class="n">mod_z</span> <span class="o">*</span> <span class="n">mod_u</span><span class="p">,</span> <span class="s1">'arg_p'</span><span class="p">:</span> <span class="n">arg_p</span><span class="p">,</span> <span class="s1">'arg_z_plus_arg_u'</span><span class="p">:</span> <span class="n">wrap_deg</span><span class="p">(</span><span class="n">arg_z</span> <span class="o">+</span> <span class="n">arg_u</span><span class="p">)}</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="k">def</span><span class="w"> </span><span class="nf">roots_of_unity</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">complex</span><span class="p">]:</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">    </span><span class="sd">"""The ``n`` solutions of z**n = 1: exp(j 2 pi k / n) for k = 0 .. n - 1."""</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">cmath</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="k">def</span><span class="w"> </span><span class="nf">load_study</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">loads</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">complex</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">complex</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]]:</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="w">    </span><span class="sd">"""Current, complex power, |S| two ways and the sign of Q for each load of ``loads`` (Lab step 4)."""</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">loads</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="n">i</span> <span class="o">=</span> <span class="n">load_current</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>        <span class="n">s</span> <span class="o">=</span> <span class="n">complex_power</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="n">q_sign</span> <span class="o">=</span> <span class="s1">'Q &gt; 0 (lagging, absorbs reactive power)'</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">imag</span> <span class="o">&gt;</span> <span class="mf">1e-9</span> <span class="k">else</span> <span class="s1">'Q = 0'</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">imag</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1e-9</span><span class="p">:</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>            <span class="n">q_sign</span> <span class="o">=</span> <span class="s1">'Q &lt; 0 (leading, supplies reactive power)'</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>            <span class="p">{</span><span class="s1">'load'</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">:</span> <span class="n">z</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="s1">'s'</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span> <span class="s1">'abs_s'</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="s1">'hypot'</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">imag</span><span class="p">),</span> <span class="s1">'q'</span><span class="p">:</span> <span class="n">q_sign</span><span class="p">}</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>        <span class="p">)</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>    <span class="k">return</span> <span class="n">rows</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="k">def</span><span class="w"> </span><span class="nf">exercise1</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">complex</span><span class="p">:</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="w">    </span><span class="sd">"""The quotient (3 + 4j)(1 - j) / (2j) of Exercise 1."""</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    <span class="k">return</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="n">j</span><span class="p">)</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a><span class="k">def</span><span class="w"> </span><span class="nf">atan_vs_atan2</span><span class="p">(</span><span class="n">z</span><span class="p">:</span> <span class="nb">complex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="w">    </span><span class="sd">"""``atan(y / x)`` and ``atan2(y, x)`` in degrees for the same point, to see where the first one fails."""</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">imag</span> <span class="o">/</span> <span class="n">z</span><span class="o">.</span><span class="n">real</span><span class="p">)),</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">real</span><span class="p">))</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a><span class="k">def</span><span class="w"> </span><span class="nf">tap_phase_shift</span><span class="p">(</span><span class="n">vn</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">phi_deg</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a><span class="w">    </span><span class="sd">"""Phase shift in degrees of a tap changer, two ways that must agree (Exercise 4).</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a><span class="sd">    The added voltage is du = vn * n * s / 100 at the step angle phi. The first value is</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="sd">    arg(1 + (du / vn) exp(j phi)), the second atan2(du sin(phi), vn + du cos(phi)), the formula ToOp uses.</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="sd">    """</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>    <span class="n">du</span> <span class="o">=</span> <span class="n">vn</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">100</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>    <span class="n">phi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">phi_deg</span><span class="p">)</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>    <span class="n">by_arg</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cmath</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">du</span> <span class="o">/</span> <span class="n">vn</span> <span class="o">*</span> <span class="n">cmath</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)))</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>    <span class="n">by_atan2</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">du</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">vn</span> <span class="o">+</span> <span class="n">du</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)))</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>    <span class="k">return</span> <span class="n">by_arg</span><span class="p">,</span> <span class="n">by_atan2</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>
+<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a><span class="k">def</span><span class="w"> </span><span class="nf">rotating_phasor</span><span class="p">(</span><span class="n">omega</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">complex</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a><span class="w">    </span><span class="sd">"""The unit phasor exp(j omega t) and its projection on the real axis, cos(omega t) (Exercise 5)."""</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>    <span class="n">u</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">omega</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">real</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a><span class="w">    </span><span class="sd">"""Print the numbers quoted in the Chapter 1 solutions."""</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>    <span class="n">z</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="n">j</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Lab 1: z ='</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s1">'abs, arg ='</span><span class="p">,</span> <span class="n">polar_deg</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>    <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">270</span><span class="p">):</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'  theta = </span><span class="si">{</span><span class="n">theta</span><span class="si">:</span><span class="s1">3d</span><span class="si">}</span><span class="s1">  w = </span><span class="si">{</span><span class="n">rotate</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">  abs, arg = </span><span class="si">{</span><span class="n">polar_deg</span><span class="p">(</span><span class="n">rotate</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">))</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Lab 2: u ='</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="s1">'abs, arg ='</span><span class="p">,</span> <span class="n">polar_deg</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="s1">' p = z u ='</span><span class="p">,</span> <span class="n">z</span> <span class="o">*</span> <span class="n">u</span><span class="p">,</span> <span class="n">product_check</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">))</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a>    <span class="n">roots</span> <span class="o">=</span> <span class="n">roots_of_unity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Lab 3: cube roots'</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">],</span> <span class="s1">'sum ='</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Lab 4:'</span><span class="p">)</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">load_study</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span> <span class="n">LOADS</span><span class="p">):</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>        <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>            <span class="sa">f</span><span class="s1">'  </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">"load"</span><span class="p">]</span><span class="si">:</span><span class="s1">10s</span><span class="si">}</span><span class="s1"> Z = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">"z"</span><span class="p">]</span><span class="si">}</span><span class="s1">  I = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">"i"</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">  S = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">"s"</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">  |S| = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">"abs_s"</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">  '</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a>            <span class="sa">f</span><span class="s1">'hypot = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">"hypot"</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">"q"</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a>        <span class="p">)</span>
+<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Exercise 1:'</span><span class="p">,</span> <span class="n">exercise1</span><span class="p">(),</span> <span class="s1">'polar'</span><span class="p">,</span> <span class="n">polar_deg</span><span class="p">(</span><span class="n">exercise1</span><span class="p">()))</span>
+<a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Exercise 2: atan(y/x), atan2(y, x) for -1 - j:'</span><span class="p">,</span> <span class="n">atan_vs_atan2</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span><span class="p">))</span>
+<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">roots</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Exercise 3: a ='</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="s1">' a^2 ='</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="s1">' 1 + a + a^2 ='</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a>    <span class="k">for</span> <span class="n">phi</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">60</span><span class="p">):</span>
+<a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Exercise 4: phi = </span><span class="si">{</span><span class="n">phi</span><span class="si">}</span><span class="s1">  shift = </span><span class="si">{</span><span class="n">tap_phase_shift</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a>    <span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+<a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a>    <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a>        <span class="s1">'Exercise 5: t, Re u, cos(omega t):'</span><span class="p">,</span>
+<a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a>        <span class="p">[(</span><span class="n">t</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">rotating_phasor</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">t</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="n">t</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
+<a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a>    <span class="p">)</span>
+<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a>
+<a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a>
+<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch01-complex-numbers/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+</li>
+<li>
+<p><strong>Rotate and scale.</strong> <code>u = 1 + 0.5i</code> has <code>abs(u) = 1.1180</code> (<span class="arithmatex">\(\sqrt{1.25}\)</span>) and <code>arg(u) = 26.57°</code>. The product
+   is <span class="arithmatex">\(p = (3 + 4i)(1 + 0.5i) = 3 + 1.5i + 4i + 2i^2 = 1 + 5.5i\)</span>, with <code>abs(p) = 5.5902</code> <span class="arithmatex">\(= 5 \times 1.1180\)</span> and
+   <code>arg(p) = 79.70°</code> <span class="arithmatex">\(= 53.13° + 26.57°\)</span> (<code>complex_plane.product_check</code>). In one sentence: writing both factors
+   in polar form, <span class="arithmatex">\(r_1 e^{j\theta_1} \cdot r_2 e^{j\theta_2} = (r_1 r_2)\, e^{j(\theta_1 + \theta_2)}\)</span>, so
+   multiplying by <span class="arithmatex">\(u\)</span> <em>scales</em> <span class="arithmatex">\(z\)</span> by <span class="arithmatex">\(|u|\)</span> and <em>rotates</em> it by <span class="arithmatex">\(\arg u\)</span>.</p>
+</li>
+<li><strong>Cube roots of unity.</strong> <code>Sequence(cos(k 120°) + i sin(k 120°), k, 0, 2)</code> draws <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(-0.5 + 0.866i\)</span> and
+   <span class="arithmatex">\(-0.5 - 0.866i\)</span> (<code>complex_plane.roots_of_unity(3)</code>). Their sum is <span class="arithmatex">\(1 - 0.5 - 0.5 + (0.866 - 0.866)i = 0\)</span>; in
+   floating point the code prints <span class="arithmatex">\(2 \times 10^{-16}\)</span>, which is zero to double precision. Three arrows of equal
+   length <span class="arithmatex">\(120°\)</span> apart close a triangle, which is what "balanced" means for the three phases of
+   <a href="../../../part-2-circuits/ch10-three-phase-per-unit/">Chapter 10</a>.</li>
+<li>
+<p><strong>Three loads.</strong> With <span class="arithmatex">\(V = 230\)</span> V and <code>complex_plane.LOADS</code> (or <code>three_loads(230, [40+30i, 40-30i, 50])</code> in
+   Octave):</p>
+<table>
+<thead>
+<tr>
+<th>Load</th>
+<th><span class="arithmatex">\(Z\)</span> (<span class="arithmatex">\(\Omega\)</span>)</th>
+<th><span class="arithmatex">\(I\)</span> (A)</th>
+<th><span class="arithmatex">\(S = V I^*\)</span> (VA)</th>
+<th><span class="arithmatex">\(\lvert S \rvert\)</span></th>
+<th><span class="arithmatex">\(\sqrt{P^2 + Q^2}\)</span></th>
+<th>Sign of <span class="arithmatex">\(Q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inductive</td>
+<td><span class="arithmatex">\(40 + j30\)</span></td>
+<td><span class="arithmatex">\(3.68 - j2.76\)</span></td>
+<td><span class="arithmatex">\(846.4 + j634.8\)</span></td>
+<td>1058.0</td>
+<td>1058.0</td>
+<td><span class="arithmatex">\(Q &gt; 0\)</span>: the current lags, the load absorbs reactive power</td>
+</tr>
+<tr>
+<td>capacitive</td>
+<td><span class="arithmatex">\(40 - j30\)</span></td>
+<td><span class="arithmatex">\(3.68 + j2.76\)</span></td>
+<td><span class="arithmatex">\(846.4 - j634.8\)</span></td>
+<td>1058.0</td>
+<td>1058.0</td>
+<td><span class="arithmatex">\(Q &lt; 0\)</span>: the current leads, the load supplies reactive power</td>
+</tr>
+<tr>
+<td>resistive</td>
+<td><span class="arithmatex">\(50\)</span></td>
+<td><span class="arithmatex">\(4.6\)</span></td>
+<td><span class="arithmatex">\(1058 + j0\)</span></td>
+<td>1058.0</td>
+<td>1058.0</td>
+<td><span class="arithmatex">\(Q = 0\)</span>: current in phase with the voltage</td>
+</tr>
+</tbody>
+</table>
+<p><code>abs(S)</code> and <code>sqrt(P**2 + Q**2)</code> agree to the last digit because they are the same number: <span class="arithmatex">\(|S|^2 = S S^* =
+(P + jQ)(P - jQ) = P^2 + Q^2\)</span>. The sign of <span class="arithmatex">\(Q\)</span> is the sign of <span class="arithmatex">\(X\)</span>: <span class="arithmatex">\(S = V I^* = |V|^2 / Z^* = |V|^2 (R + jX) /
+|Z|^2\)</span>, so <span class="arithmatex">\(Q = |V|^2 X / |Z|^2\)</span>. The three loads here were chosen with the same <span class="arithmatex">\(|Z| = 50\ \Omega\)</span>, which is
+why <span class="arithmatex">\(|S| = 230^2 / 50 = 1058\)</span> VA for all three while <span class="arithmatex">\(P\)</span> and <span class="arithmatex">\(Q\)</span> differ.</p>
+<div class="highlight"><span class="filename">three_loads.m</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span>T<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">three_loads</span><span class="p">(</span>V, Z<span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="c">% Current and complex power of several loads Z (a vector of impedances) on the same source V (Chapter 1,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="c">% Lab step 4). One row per load: [R, X, real(I), imag(I), P, Q, abs(S), hypot(P, Q)]; sign(Q) is the sign of X.</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="n">T</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span> <span class="mi">8</span><span class="p">);</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">numel</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="p">[</span><span class="no">I</span><span class="p">,</span> <span class="n">S</span><span class="p">]</span> <span class="p">=</span> <span class="n">phasor_power</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Z</span><span class="p">(</span><span class="n">k</span><span class="p">));</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">T</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">:)</span> <span class="p">=</span> <span class="p">[</span><span class="nb">real</span><span class="p">(</span><span class="n">Z</span><span class="p">(</span><span class="n">k</span><span class="p">)),</span> <span class="nb">imag</span><span class="p">(</span><span class="n">Z</span><span class="p">(</span><span class="n">k</span><span class="p">)),</span> <span class="nb">real</span><span class="p">(</span><span class="no">I</span><span class="p">),</span> <span class="nb">imag</span><span class="p">(</span><span class="no">I</span><span class="p">),</span> <span class="nb">real</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="nb">imag</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="nb">hypot</span><span class="p">(</span><span class="nb">real</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="nb">imag</span><span class="p">(</span><span class="n">S</span><span class="p">))];</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  <span class="k">end</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">end</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c">%!test</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c">%! T = three_loads(230, [40 + 30i, 40 - 30i, 50]);</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c">%! assert(T(:, 7), T(:, 8), 1e-9)                       % |S| = sqrt(P^2 + Q^2) for every load</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c">%! assert(sign(T(:, 6)), [1; -1; 0])                     % Q &gt; 0 inductive, Q &lt; 0 capacitive, Q = 0 resistive</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c">%! assert(T(1, 5:6), [846.4, 634.8], 1e-9)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c">%! assert(T(2, 5:6), [846.4, -634.8], 1e-9)</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="c">%! assert(T(3, 5:7), [1058, 0, 1058], 1e-9)</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch01-complex-numbers/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+</li>
+</ol>
+<h2 id="exercise-1">Exercise 1<a class="headerlink" href="#exercise-1" title="Permanent link">&para;</a></h2>
+<p>Numerator first: <span class="arithmatex">\((3 + 4j)(1 - j) = 3 - 3j + 4j - 4j^2 = 3 + j + 4 = 7 + j\)</span>. Dividing by <span class="arithmatex">\(2j\)</span> means multiplying
+by <span class="arithmatex">\(\dfrac{1}{2j} = \dfrac{-j}{2}\)</span>:</p>
+<div class="arithmatex">\[
+\frac{7 + j}{2j} = \frac{(7 + j)(-j)}{2} = \frac{-7j - j^2}{2} = \frac{1 - 7j}{2} = 0.5 - 3.5j .
+\]</div>
+<p>Polar form: <span class="arithmatex">\(|z| = \sqrt{0.5^2 + 3.5^2} = \sqrt{12.5} = 3.536\)</span> and <span class="arithmatex">\(\arg z = \operatorname{atan2}(-3.5, 0.5) =
+-81.87°\)</span> (fourth quadrant: real part positive, imaginary part negative). The polar route gives the same result and
+is shorter: <span class="arithmatex">\(|3 + 4j| = 5\)</span>, <span class="arithmatex">\(|1 - j| = \sqrt 2\)</span>, <span class="arithmatex">\(|2j| = 2\)</span>, so <span class="arithmatex">\(|z| = 5\sqrt 2 / 2 = 3.536\)</span>; the arguments are
+<span class="arithmatex">\(53.13°\)</span>, <span class="arithmatex">\(-45°\)</span> and <span class="arithmatex">\(90°\)</span>, so <span class="arithmatex">\(\arg z = 53.13° - 45° - 90° = -81.87°\)</span>. <code>complex_plane.exercise1()</code> prints
+<code>(0.5-3.5j)</code> and <code>polar_deg</code> gives <span class="arithmatex">\((3.5355, -81.87°)\)</span>.</p>
+<h2 id="exercise-2">Exercise 2<a class="headerlink" href="#exercise-2" title="Permanent link">&para;</a></h2>
+<p>For <span class="arithmatex">\(z = -1 - j\)</span>, <code>math.atan(y / x)</code> computes <span class="arithmatex">\(\arctan(1) = 45°\)</span> and <code>math.atan2(y, x)</code> gives <span class="arithmatex">\(-135°\)</span>
+(<code>complex_plane.atan_vs_atan2(-1 - 1j)</code>). The second one is the argument: <span class="arithmatex">\(-1 - j = \sqrt 2\, e^{-j3\pi/4}\)</span> lies in
+the third quadrant, and <span class="arithmatex">\(45°\)</span> points at <span class="arithmatex">\(1 + j\)</span>, the opposite vector. The quotient <span class="arithmatex">\(y/x\)</span> loses the signs of <span class="arithmatex">\(x\)</span>
+and <span class="arithmatex">\(y\)</span> separately: <span class="arithmatex">\((-1)/(-1) = 1/1\)</span>, so <span class="arithmatex">\(\arctan(y/x)\)</span> cannot tell <span class="arithmatex">\(z\)</span> from <span class="arithmatex">\(-z\)</span> and always answers in
+<span class="arithmatex">\((-90°, 90°)\)</span>, the right half plane. <code>atan2(y, x)</code> keeps both signs, returns a value in <span class="arithmatex">\((-180°, 180°]\)</span> and handles
+<span class="arithmatex">\(x = 0\)</span> without dividing by zero. This is why <code>cmath.phase</code>, Octave's <code>angle</code> and ToOp's
+<code>switch_preparation.py</code> all use the two-argument form.</p>
+<h2 id="exercise-3">Exercise 3<a class="headerlink" href="#exercise-3" title="Permanent link">&para;</a></h2>
+<p><strong>Geometrically.</strong> In GeoGebra, <code>a = cos(120°) + i sin(120°)</code>, <code>a^2</code> and <code>1</code> are three points on the unit circle
+<span class="arithmatex">\(120°\)</span> apart; drawing them as vectors from the origin and adding them head to tail (<code>Vector(1) + Vector(a) +
+Vector(a^2)</code>, or <code>1 + a + a^2</code> directly) returns to the origin: the three arrows form an equilateral triangle, so
+the sum is the zero vector.</p>
+<p><strong>Algebraically.</strong> <span class="arithmatex">\(a^3 = e^{j2\pi} = 1\)</span>, so <span class="arithmatex">\(a\)</span> is a root of <span class="arithmatex">\(z^3 - 1 = (z - 1)(z^2 + z + 1)\)</span>. Since <span class="arithmatex">\(a \ne 1\)</span>,
+the other factor must vanish: <span class="arithmatex">\(1 + a + a^2 = 0\)</span>. In components, <span class="arithmatex">\(a = -\tfrac12 + j\tfrac{\sqrt 3}{2}\)</span> and
+<span class="arithmatex">\(a^2 = e^{j4\pi/3} = -\tfrac12 - j\tfrac{\sqrt 3}{2}\)</span>, so the real parts give <span class="arithmatex">\(1 - \tfrac12 - \tfrac12 = 0\)</span> and
+the imaginary parts cancel. The code prints <span class="arithmatex">\(1 + a + a^2 = -1.1 \times 10^{-16} + 3.3 \times 10^{-16} j\)</span>, zero to
+double precision. The same identity makes a balanced three-phase set carry no neutral current
+(<a href="../../../part-2-circuits/ch10-three-phase-per-unit/">Chapter 10</a>).</p>
+<h2 id="exercise-4">Exercise 4<a class="headerlink" href="#exercise-4" title="Permanent link">&para;</a></h2>
+<p>The tapped winding adds the phasor <span class="arithmatex">\(\Delta u\, e^{j\varphi}\)</span> to the nominal <span class="arithmatex">\(V_n\)</span> (taken as the reference,
+angle 0), so the output voltage is <span class="arithmatex">\(V_n + \Delta u\, e^{j\varphi} = V_n \left(1 + \tfrac{\Delta u}{V_n}
+e^{j\varphi}\right)\)</span>. Multiplying by the real positive <span class="arithmatex">\(V_n\)</span> does not change an argument, so the phase shift is
+<span class="arithmatex">\(\arg\!\left(1 + \tfrac{\Delta u}{V_n} e^{j\varphi}\right)\)</span>. Writing the number in rectangular form, its real part is
+<span class="arithmatex">\(V_n + \Delta u \cos\varphi\)</span> and its imaginary part <span class="arithmatex">\(\Delta u \sin\varphi\)</span> (after multiplying both by <span class="arithmatex">\(V_n\)</span>,
+which again leaves the argument alone), and the argument of a complex number is <code>atan2(imaginary, real)</code>:</p>
+<div class="arithmatex">\[
+\arg\!\left(1 + \frac{\Delta u}{V_n} e^{j\varphi}\right) = \operatorname{atan2}(\Delta u \sin\varphi,\ V_n + \Delta u \cos\varphi).
+\]</div>
+<p>With <span class="arithmatex">\(V_n = 400\)</span> kV, <span class="arithmatex">\(n = 5\)</span> and <span class="arithmatex">\(s = 1\%\)</span>: <span class="arithmatex">\(\Delta u = 400 \times 5 \times 1 / 100 = 20\)</span> kV. For <span class="arithmatex">\(\varphi = 90°\)</span>,
+<span class="arithmatex">\(\operatorname{atan2}(20, 400) = 2.862°\)</span>; for <span class="arithmatex">\(\varphi = 60°\)</span>, <span class="arithmatex">\(\operatorname{atan2}(20 \times 0.866, 400 + 10) =
+\operatorname{atan2}(17.32, 410) = 2.419°\)</span>. <code>complex_plane.tap_phase_shift(400, 5, 1, φ)</code> returns both forms and
+they agree to <span class="arithmatex">\(10^{-12}\)</span> degrees: <span class="arithmatex">\((2.8624°, 2.8624°)\)</span> and <span class="arithmatex">\((2.4190°, 2.4190°)\)</span>. The quadrature booster
+(<span class="arithmatex">\(\varphi = 90°\)</span>) shifts most per volt added; at <span class="arithmatex">\(60°\)</span> part of <span class="arithmatex">\(\Delta u\)</span> goes into raising the magnitude instead.</p>
+<div class="highlight"><span class="filename">tap_phase_shift.m</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>shift_deg, du<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">tap_phase_shift</span><span class="p">(</span>Vn, n, s, phi_deg<span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  <span class="c">% Phase shift in degrees of a tap changer that adds du = Vn * n * s / 100 at the step angle phi_deg to the</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  <span class="c">% nominal voltage Vn (Chapter 1, Exercise 4): atan2(du sin(phi), Vn + du cos(phi)), the formula ToOp uses.</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  <span class="n">du</span> <span class="p">=</span> <span class="n">Vn</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  <span class="n">phi</span> <span class="p">=</span> <span class="n">phi_deg</span> <span class="o">*</span> <span class="nb">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  <span class="n">shift_deg</span> <span class="p">=</span> <span class="n">atan2</span><span class="p">(</span><span class="n">du</span> <span class="o">*</span> <span class="nb">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">Vn</span> <span class="o">+</span> <span class="n">du</span> <span class="o">*</span> <span class="nb">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span> <span class="o">*</span> <span class="mi">180</span> <span class="o">/</span> <span class="nb">pi</span><span class="p">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">end</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c">%!test</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c">%! [shift, du] = tap_phase_shift(400, 5, 1, 90);</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c">%! assert(du, 20, 1e-12)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c">%! assert(shift, 2.86, 5e-3)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c">%! assert(shift, angle(1 + du / 400 * exp(1i * pi / 2)) * 180 / pi, 1e-12)   % same as arg(1 + (du/Vn) e^{j phi})</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c">%!test</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c">%! assert(tap_phase_shift(400, 5, 1, 60), 2.42, 5e-3)</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c">%!test</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c">%! assert(tap_phase_shift(400, 0, 1, 60), 0, 1e-12)   % neutral tap: no shift</span>
+</code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch01-complex-numbers/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
+<h2 id="exercise-5">Exercise 5<a class="headerlink" href="#exercise-5" title="Permanent link">&para;</a></h2>
+<p>With sliders <code>t</code> and <code>ω</code>, the point <code>u = cos(ω t) + i sin(ω t)</code> <span class="arithmatex">\(= e^{j\omega t}\)</span> moves on the unit circle, and
+the traced point <code>(t, x(u))</code> draws <span class="arithmatex">\(x = \cos(\omega t)\)</span>: a <strong>cosine</strong>, the projection of the rotating unit phasor
+on the real axis. <code>complex_plane.rotating_phasor(2π, t)</code> gives <span class="arithmatex">\(\operatorname{Re}\, u = 1,\ 0.7071,\ 0,\ -1\)</span> at
+<span class="arithmatex">\(t = 0,\ 0.125,\ 0.25,\ 0.5\)</span>, the same as <code>cos(2π t)</code>. <span class="arithmatex">\(\omega\)</span> is the angular speed of the phasor: it fixes how
+far the arrow turns per unit time, so the trace repeats every <span class="arithmatex">\(T = 2\pi/\omega\)</span> and the cosine has frequency
+<span class="arithmatex">\(f = \omega / 2\pi\)</span> (in a 50 Hz grid, <span class="arithmatex">\(\omega = 100\pi\)</span> rad/s). Scaling <span class="arithmatex">\(u\)</span> by a modulus <span class="arithmatex">\(|V|\)</span> and starting it at
+an angle <span class="arithmatex">\(\theta\)</span> gives <span class="arithmatex">\(|V| \cos(\omega t + \theta)\)</span>, which is how <a href="../../../part-2-circuits/ch09-ac-steady-state/">Chapter 9</a>
+turns every sinusoidal voltage into the fixed phasor <span class="arithmatex">\(|V| e^{j\theta}\)</span> and drops the common rotation
+<span class="arithmatex">\(e^{j\omega t}\)</span>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

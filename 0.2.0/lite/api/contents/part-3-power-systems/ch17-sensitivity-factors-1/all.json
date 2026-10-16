@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.150666Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.150666Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-3-power-systems/ch17-sensitivity-factors-1/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:19:03.148580Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:19:03.148580Z",
+  "mimetype": null,
+  "name": "ch17-sensitivity-factors-1",
+  "path": "part-3-power-systems/ch17-sensitivity-factors-1",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

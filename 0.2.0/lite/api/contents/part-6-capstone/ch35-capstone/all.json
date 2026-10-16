@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.192413Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.192413Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-6-capstone/ch35-capstone/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:19:03.182736Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:19:03.182736Z",
+  "mimetype": null,
+  "name": "ch35-capstone",
+  "path": "part-6-capstone/ch35-capstone",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

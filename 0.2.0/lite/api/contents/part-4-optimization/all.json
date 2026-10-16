@@ -1,0 +1,71 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.165424Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.165424Z",
+      "mimetype": null,
+      "name": "ch26-experimental-methodology",
+      "path": "part-4-optimization/ch26-experimental-methodology",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.161639Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.161639Z",
+      "mimetype": null,
+      "name": "ch24-evolutionary-algorithms",
+      "path": "part-4-optimization/ch24-evolutionary-algorithms",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.163553Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.163553Z",
+      "mimetype": null,
+      "name": "ch25-quality-diversity",
+      "path": "part-4-optimization/ch25-quality-diversity",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.168017Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.168017Z",
+      "mimetype": null,
+      "name": "ch27-pareto-multi-objective",
+      "path": "part-4-optimization/ch27-pareto-multi-objective",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:19:03.168017Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:19:03.168017Z",
+  "mimetype": null,
+  "name": "part-4-optimization",
+  "path": "part-4-optimization",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

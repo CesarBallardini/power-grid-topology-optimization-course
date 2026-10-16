@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-10-16T18:19:03.125366Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-10-16T18:19:03.125366Z",
+      "mimetype": null,
+      "name": "src",
+      "path": "part-1-math/ch04-numerical-linear-algebra/src",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2026-10-16T18:19:03.122519Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-10-16T18:19:03.122519Z",
+  "mimetype": null,
+  "name": "ch04-numerical-linear-algebra",
+  "path": "part-1-math/ch04-numerical-linear-algebra",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}
