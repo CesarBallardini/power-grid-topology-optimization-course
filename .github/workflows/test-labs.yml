@@ -1,0 +1,57 @@
+name: test-labs
+
+# Chapter tests and notebooks marked `labs` (Grid2Op, Stable-Baselines3, QDax,
+# pymoo, moocore). They skip themselves in the course environment, so check.yml
+# never runs them. Locally they run in the labs container (`make test-labs`);
+# here the same locked environment, docker/labs/pyproject.toml + uv.lock, is
+# synced straight onto the runner, which skips the image build. Its own
+# workflow, so a failure in the heavy lab stack reads separately from lint and
+# unit tests.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-labs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    env:
+      # No GPU on the runner: JAX and torch must not look for one
+      JAX_PLATFORMS: cpu
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/install-uv
+
+      - name: Sync the labs environment
+        run: uv sync --project docker/labs --frozen
+
+      # Chapter 29 uses the full l2rpn_case14_sandbox dataset (294 MB). Grid2Op
+      # keeps it in ~/data_grid2op; caching it saves the download on every run.
+      # The key names the dataset, which does not change with the code.
+      - name: Cache the Grid2Op dataset
+        id: grid2op-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/data_grid2op
+          key: grid2op|l2rpn_case14_sandbox|v1
+
+      - name: Download the Grid2Op dataset
+        if: steps.grid2op-cache.outputs.cache-hit != 'true'
+        run: uv run --project docker/labs --frozen python -c "import grid2op; grid2op.make('l2rpn_case14_sandbox')"
+
+      # The same command as `make test-labs` runs inside the container.
+      - name: Run the labs tests and notebooks
+        run: >-
+          uv run --project docker/labs --frozen python -m pytest -m labs -o addopts="" -p no:cacheprovider
+          -W ignore $(find docs -name 'test_*_labs.py') tests/test_notebooks.py

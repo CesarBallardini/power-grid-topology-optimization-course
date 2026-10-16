@@ -1,0 +1,63 @@
+name: test-octave
+
+# The %!test blocks at the end of every Octave file in the chapters' src
+# folders. tests/test_octave_sources.py runs them through Octave and skips
+# when Octave is missing, so check.yml (no Octave on its runner) only checks
+# that the blocks exist. Here Octave comes from Ubuntu's packages and MATPOWER
+# from its release archive, so the MATPOWER-dependent blocks run too.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  MATPOWER_VERSION: "8.1"
+
+jobs:
+  test-octave:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # pytest alone is enough: the Octave files need nothing from the labs group
+      - uses: ./.github/actions/setup-python
+        with:
+          sync-args: "--group dev --frozen"
+
+      - name: Install Octave
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends octave
+          octave-cli --version | head -1
+
+      - name: Cache MATPOWER
+        id: matpower-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.local/share/matpower
+          key: matpower|${{ env.MATPOWER_VERSION }}
+
+      # Unpacked where tests/test_octave_sources.py looks on Linux
+      # (~/.local/share/matpower/matpower<version>); it installs MATPOWER per run.
+      - name: Download MATPOWER
+        if: steps.matpower-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.local/share/matpower
+          curl -sSfL -o /tmp/matpower.zip \
+            "https://github.com/MATPOWER/matpower/releases/download/${MATPOWER_VERSION}/matpower${MATPOWER_VERSION}.zip"
+          unzip -q /tmp/matpower.zip -d ~/.local/share/matpower
+
+      # MATPOWER is named explicitly: if the folder is missing the run fails,
+      # instead of the MATPOWER blocks skipping themselves and passing.
+      - name: Run the Octave tests
+        run: MATPOWER="$HOME/.local/share/matpower/matpower${MATPOWER_VERSION}" uv run --frozen pytest tests/test_octave_sources.py
