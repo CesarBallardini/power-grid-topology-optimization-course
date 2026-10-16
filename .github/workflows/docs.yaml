@@ -14,6 +14,9 @@ on:
       - docs/**
       - includes/**
       - mkdocs.yml
+      # The build hook for the notebook pages and the JupyterLite site
+      - tools/notebook_hooks.py
+      - lite/jupyter-lite.json
       - pyproject.toml
       - uv.lock
       - .github/workflows/docs.yaml

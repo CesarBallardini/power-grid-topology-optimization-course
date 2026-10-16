@@ -157,7 +157,7 @@ def pandapower_n1(net: pp.pandapowerNet, ac: bool = False) -> np.ndarray:
         net.line.at[k, 'in_service'] = False
         if ac:
             pp.runpp(net)
-            value = net.res_line.loading_percent.to_numpy()
+            value = net.res_line.loading_percent.to_numpy(copy=True)  # writable under pandas 3 copy-on-write too
         else:
             pp.rundcpp(net)
             value = np.abs(net.res_line.p_from_mw.to_numpy())

@@ -1,0 +1,12 @@
+{
+  "name": "course-lite-tests",
+  "private": true,
+  "description": "Runs the chapter notebooks that JupyterLite offers in Pyodide under Node (make test-lite).",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "pyodide": "314.0.6"
+  }
+}

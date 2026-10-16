@@ -36,6 +36,13 @@ doc = [
     "mkdocs-material>=9.7.5",
     "mike>=2.1",
     "mkdocs-print-site-plugin",
+    # Notebook pages and the in-browser JupyterLite site (tools/notebook_hooks.py). The Pyodide kernel fixes
+    # the Pyodide release that runs the notebooks; lite/package.json pins the same one for make test-lite.
+    "mkdocs-jupyter==0.26.3",
+    "jupyterlite-core==0.8.6",
+    "jupyterlite-pyodide-kernel==0.8.6",
+    # jupyter lite build needs it to index the notebooks it serves
+    "jupyter-server==2.21.1",
 ]
 labs = [
     "beartype>=0.23.1",

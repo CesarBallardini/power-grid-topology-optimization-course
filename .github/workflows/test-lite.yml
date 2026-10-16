@@ -1,0 +1,59 @@
+name: test-lite
+
+# The chapter notebooks that the book offers to run in the browser (the "Run in
+# your browser" button, JupyterLite with the Pyodide kernel) run here in Pyodide
+# under Node, every code cell, from the same staged copy JupyterLite serves
+# (install cell first, sibling modules and data files next to the notebook).
+# A notebook that passes check.yml in CPython can still fail here: a library
+# missing from Pyodide, a different pandas, no sockets. Locally: make test-lite.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-lite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Staging needs only the standard library: no dependency group is synced.
+      - uses: ./.github/actions/setup-python
+        with:
+          sync-args: "--frozen --no-default-groups"
+
+      # The same Node release as the node image make test-lite uses.
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.21.0
+          cache: npm
+          cache-dependency-path: lite/package-lock.json
+
+      - name: Install Pyodide
+        run: npm ci --prefix lite --no-audit --no-fund
+
+      # Pyodide downloads its packages (numpy, scipy, pandas, ...) from its CDN
+      # on first use; the lockfile fixes the Pyodide release, so it keys the cache.
+      - name: Cache the Pyodide packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .cache/pyodide-packages
+          key: pyodide-packages|${{ hashFiles('lite/package-lock.json') }}
+
+      - name: Stage the runnable notebooks
+        run: uv run --frozen python tools/notebook_hooks.py stage .cache/lite-contents
+
+      - name: Run them in Pyodide
+        run: node lite/run_in_pyodide.mjs .cache/lite-contents
+        env:
+          PYODIDE_PACKAGE_CACHE: .cache/pyodide-packages

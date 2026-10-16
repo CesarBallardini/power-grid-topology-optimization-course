@@ -14,3 +14,5 @@ books/
 .progress/
 # Hypothesis example database (tests/ and docs/**/src tests)
 .hypothesis/
+# Pyodide for make test-lite (npm ci --prefix lite)
+lite/node_modules/
