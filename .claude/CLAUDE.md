@@ -21,7 +21,7 @@ Chapter dependencies are defined in `docs/index.md` (Mermaid flowchart) and enfo
 
 ### Adding or Updating Content
 
-1. **Edit chapter files** in `docs/part-*/ch*.md` — they auto-build with live reload (`make docs-serve`)
+1. **Edit chapter files** in `docs/part-*/chNN-slug/index.md` — they auto-build with live reload (`make docs-serve`)
 2. **Check formatting** — run `make lint` before committing (ruff enforces style)
 3. **Verify links** — `make docs` (strict mode catches broken internal links; external links are checked locally only, with `make links`, never in CI)
 4. **Update glossary** — if you add new acronyms, run `make abbreviations` to regenerate tooltips
@@ -65,6 +65,7 @@ There is no link-check workflow on purpose. The `main` ruleset has no required s
 - `uv` script launchers in `.venv/Scripts` (`pre-commit.exe`, `cz.exe`, ...) can break with "uv trampoline failed to canonicalize script path". Local hooks and Make targets therefore call tools as modules (`python -m pre_commit`, `python -m commitizen`). Repair a broken venv with `uv sync --all-groups --frozen --reinstall`.
 - `markdown-link-check` sometimes reports "files were modified by this hook" with no dead links listed; rerun.
 - Commands typed with the `!` prefix in Claude Code run in Git Bash, not PowerShell: set a variable for one command as `SKIP=hook git commit ...`. In Git Bash, `$env:SKIP=...` silently sets nothing.
+- ToOp can be run without the container: `../ToOp/.venv/Scripts/python.exe` (JAX on CPU, pandapower, pypowsybl) imports the solver, which is enough to verify lab code when Docker Desktop is not running. Create scratch virtual environments under a short path such as `%LOCALAPPDATA%\Temp\v7`: under the long scratchpad path, networkx fails to import (Windows path length).
 - `uv run` can recreate `.venv` (for example after a Python upgrade) with only the default groups, so `make docs` fails with "Failed to spawn: mkdocs". Restore every group with `uv sync --all-groups --frozen`.
 
 ## Chapter Conventions
@@ -77,6 +78,7 @@ There is no link-check workflow on purpose. The `main` ruleset has no required s
 - **Video courses** in Resources are online university or college courses that are well known and recognized (MIT OCW, NPTEL, Coursera/edX from named universities, faculty lecture series such as Brunton's), or courses built on a popular textbook of the subject. Prefer college level; precalculus material stays only as a labelled "Refresher". Udemy courses are allowed where no recognized course fits the topic, marked as paid and not university. Mark paid or subscriber-only courses as such (for example **Real Python subscribers only**; the maintainer is a subscriber). **Every online course states whether it can be audited for free**, with one of: `free` (NPTEL, OCW, YouTube, Hugging Face), `free to audit` (edX), `paid, with a free trial; no free audit shown` (Coursera), `paid` (Udemy), `Real Python subscribers only`. Check the course page (see "Checking course pages") and never assume
 - **Real Python free tutorials** are valid resources on their own: cite them without looking for a companion video
 - **Tools in labs** are free and run on Windows, macOS and Linux. Commercial or Windows-only tools appear only as optional steps or resources. Example: PowerWorld Simulator (free demo limited to 13 buses, so IEEE 14 does not fit) is in the course guide's tool table, the Chapter 15 lab (step 6), and its free training modules are cited in chapters 13, 15, 17 and 19
+- **Chapter layout**: each chapter is a folder, `docs/part-*/chNN-slug/index.md`, so its URL is `.../chNN-slug/`; the `navigation.indexes` feature is off on purpose, since it would turn the first `index.md` of each Part into that Part's landing page and hide the chapter. **Chapter code** lives in `docs/part-*/chNN-slug/src/` ( Chapter 19 has `case7.py` and `case7_toop.py`). MkDocs serves these files with the book, so the chapter links to them with relative links that the strict build checks. ruff lints them like the tools (single quotes, Google docstrings, 119 columns); scripts that import ToOp run in the ToOp container or its virtual environment, never in the course's `.venv`. Exercises built on them carry a collapsed `??? note "Solution"` with the numbers and the ToOp commit that produced them. Running a script inside `docs/` leaves a `__pycache__` that MkDocs would copy into the site: delete it before building
 
 ## Checking course pages
 
