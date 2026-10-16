@@ -2386,6 +2386,7 @@ eqs. 4.38–4.39). Because <span class="arithmatex">\(\mathbf 1^\top (e_f - e_t)
 <a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch17-sensitivity-factors-1/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><strong>Octave + MATPOWER.</strong></p>
 <div class="highlight"><span class="filename">matpower_lodf.m</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>H, L, err<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">matpower_lodf</span><span class="p">(</span>casename<span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="c">% PTDF and LODF of a MATPOWER case, and the largest difference between the LODF computed from a</span>
@@ -2406,6 +2407,7 @@ eqs. 4.38–4.39). Because <span class="arithmatex">\(\mathbf 1^\top (e_f - e_t)
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="c">%! assert(err &lt; 1e-9)</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c">%! assert(diag(L)(~isnan(diag(L))), -ones(sum(~isnan(diag(L))), 1), 1e-9)   % outaged branch loses its flow</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch17-sensitivity-factors-1/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h3 id="slack-choice-in-toop">Slack choice in ToOp<a class="headerlink" href="#slack-choice-in-toop" title="Permanent link">&para;</a></h3>
 <ul>
 <li>The DC solver uses a single slack bus. <code>compute_ptdf</code> takes <code>slack_bus</code> with the docstring "Cannot be

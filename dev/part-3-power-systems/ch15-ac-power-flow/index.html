@@ -2330,6 +2330,7 @@ J_{22} = \frac{\partial Q}{\partial |V|},
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch15-ac-power-flow/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><code>test_ac_jacobian.py</code>, next to it in the chapter's <code>src</code> folder, does exactly that: central differences of
 <code>injections</code> on a random three-bus state, column by column.</p>
 <p><strong>Distributed slack.</strong> Replace the slack bus's unknown <span class="arithmatex">\(P\)</span> by a scalar mismatch <span class="arithmatex">\(\Delta\)</span> shared by the
@@ -2354,6 +2355,7 @@ OpenLoadFlow, the balance type selects <span class="arithmatex">\(k\)</span> (pr
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c">%! assert(r.success == 1 &amp;&amp; rfd.success == 1)</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c">%! assert(r.bus(:, 8), rfd.bus(:, 8), 1e-6)       % same voltage magnitudes (column VM)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch15-ac-power-flow/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h2 id="lab">Lab<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Lab: Newton–Raphson from scratch, then break it</p>

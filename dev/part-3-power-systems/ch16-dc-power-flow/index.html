@@ -2269,6 +2269,7 @@ terminals plus a direct flow on its own branch. <span class="arithmatex">\(B_\te
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch16-dc-power-flow/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><strong>Octave + MATPOWER.</strong> <code>makeBdc</code> returns exactly these four objects, and <code>rundcpf</code> is a wrapper that sets the
 model option to <code>'DC'</code> before calling <code>runpf</code> (manual §4.4 and §9.5.2):</p>
 <div class="highlight"><span class="filename">matpower_dcpf.m</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>pf, Bbus, Bf<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">matpower_dcpf</span><span class="p">(</span>casename<span class="p">)</span>
@@ -2288,6 +2289,7 @@ model option to <code>'DC'</code> before calling <code>runpf</code> (manual §4.
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c">%! assert(abs(sum(Bbus, 2)) &lt; 1e-9)                 % every row of Bbus sums to zero</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c">%! assert(numel(pf), 20)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch16-dc-power-flow/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><strong>Sign conventions.</strong> ToOp's <abbr title="Phase shift distribution factor">PSDF</abbr> (<code>dc_solver/preprocess/helpers/psdf.py</code>) corresponds to a branch flow
 <span class="arithmatex">\(b_k(\theta_f - \theta_t + \varphi_k)\)</span>, i.e. <span class="arithmatex">\(\varphi_k\)</span> enters with the opposite sign of MATPOWER's
 <span class="arithmatex">\(\theta_\text{shift}\)</span>; the PowSyBl backend negates the grid model's shift angle in <code>get_shift_angles</code>

@@ -2417,6 +2417,7 @@ exactly what the per-branch maximum captures.</p>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>With weights <code>(("overload_energy_n_1", 1.0), ("critical_branch_count_n_1", 10.0))</code> the DC fitness of this state
 is <span class="arithmatex">\(-(35 + 10 \cdot 3) = -65\)</span>.</p>
 <h3 id="the-price-of-n-1-security-on-a-7-bus-case-in-python">The price of N-1 security on a 7-bus case, in Python<a class="headerlink" href="#the-price-of-n-1-security-on-a-7-bus-case-in-python" title="Permanent link">&para;</a></h3>
@@ -2510,6 +2511,7 @@ NumPy and SciPy are needed (<code>scipy.optimize.linprog</code> uses the HiGHS s
 <a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a><span class="w">    </span><span class="sd">"""Post-contingency loading in percent, shape (outage, line); the outaged line itself reads 0."""</span>
 <a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">flows</span><span class="p">(</span><span class="n">pg</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span> <span class="o">/</span> <span class="n">limit</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_LINE</span><span class="p">)])</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><code>dispatch()</code> is the <abbr title="Optimal power flow">OPF</abbr> and <code>dispatch(range(N_LINE))</code> the <abbr title="Security-constrained optimal power flow">SCOPF</abbr>; <code>python case7.py</code> prints both:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>OPF   cost   4300 $/h  Pg [250.  90.   0.]  worst N-1 loading 104.2 % on L1-3 after L1-2 out
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>SCOPF cost   4400 $/h  Pg [240. 100.   0.]  worst N-1 loading 100.0 % on L1-3 after L1-2 out
@@ -2574,6 +2576,7 @@ time (110 kV lines with <span class="arithmatex">\(r = 0.1\,x\)</span>, loads wi
 <a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>        <span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">'in_service'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>    <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><code>pandapower_n1(pandapower_net(pg), ac=True).max()</code> gives 114.7 % for the <abbr title="Optimal power flow">OPF</abbr> dispatch and 109.7 % for the <abbr title="Security-constrained optimal power flow">SCOPF</abbr>
 one. The <abbr title="Security-constrained optimal power flow">SCOPF</abbr> dispatch, secure in DC, still overloads a line by about 10 % in AC (line current includes the reactive
 flow and the losses, which the DC model drops). PowerWorld's <abbr title="Security-constrained optimal power flow">SCOPF</abbr> closes this gap by iterating between the <abbr title="Linear programming">LP</abbr>

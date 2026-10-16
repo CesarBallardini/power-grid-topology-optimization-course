@@ -4029,6 +4029,7 @@ libraries) and in Octave:</p>
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#part-1-math-ch01-complex-numbers-__codelineno-0-26"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#part-1-math-ch01-complex-numbers-__codelineno-0-27"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch01-complex-numbers/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <div class="highlight"><span class="filename">phasor_power.m</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#part-1-math-ch01-complex-numbers-__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>I, S<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">phasor_power</span><span class="p">(</span>V, Z<span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#part-1-math-ch01-complex-numbers-__codelineno-1-2"></a>  <span class="c">% One load on a source: phasor current I = V / Z and complex power S = V * conj(I) (Chapter 1).</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#part-1-math-ch01-complex-numbers-__codelineno-1-3"></a>  <span class="no">I</span> <span class="p">=</span> <span class="n">V</span> <span class="o">/</span> <span class="n">Z</span><span class="p">;</span>
@@ -4041,6 +4042,7 @@ libraries) and in Octave:</p>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#part-1-math-ch01-complex-numbers-__codelineno-1-10"></a><span class="c">%! assert(S, 846.4 + 634.8i, 1e-9)</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#part-1-math-ch01-complex-numbers-__codelineno-1-11"></a><span class="c">%! assert([abs(S), hypot(real(S), imag(S))], [1058, 1058], 1e-9)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch01-complex-numbers/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h2 id="part-1-math-ch01-complex-numbers-lab">Lab<a class="headerlink" href="#part-1-math-ch01-complex-numbers-lab" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Lab: rotations in the complex plane</p>
@@ -4221,6 +4223,7 @@ network its null space is exactly the span of <span class="arithmatex">\(\mathbf
 <a id="__codelineno-0-43" name="__codelineno-0-43" href="#part-1-math-ch02-linear-algebra-__codelineno-0-43"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-44" name="__codelineno-0-44" href="#part-1-math-ch02-linear-algebra-__codelineno-0-44"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch02-linear-algebra/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>The same in Octave (indices start at 1):</p>
 <div class="highlight"><span class="filename">laplacian.m</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#part-1-math-ch02-linear-algebra-__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>G, v<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">laplacian</span><span class="p">(</span>fr, to, g, n, i<span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#part-1-math-ch02-linear-algebra-__codelineno-1-2"></a>  <span class="c">% Weighted Laplacian G = A' * diag(g) * A of a resistor network and, if an injection vector i is</span>
@@ -4242,6 +4245,7 @@ network its null space is exactly the span of <span class="arithmatex">\(\mathbf
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#part-1-math-ch02-linear-algebra-__codelineno-1-18"></a><span class="c">%! assert(abs(null(G)), 0.5 * ones(4, 1), 1e-9)              % constant vector, up to sign</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#part-1-math-ch02-linear-algebra-__codelineno-1-19"></a><span class="c">%! assert(G * v, [1; 0; 0; -1], 1e-12)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch02-linear-algebra/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h2 id="part-1-math-ch02-linear-algebra-lab">Lab<a class="headerlink" href="#part-1-math-ch02-linear-algebra-lab" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Lab: a resistor network from arrays</p>
@@ -4256,6 +4260,7 @@ used; the comparison with a power-flow tool is done in
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#part-1-math-ch02-linear-algebra-__codelineno-2-4"></a><span class="n">to</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#part-1-math-ch02-linear-algebra-__codelineno-2-5"></a><span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch02-linear-algebra/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <ol>
 <li>Write your own <code>incidence(fr, to, n)</code> returning <span class="arithmatex">\(A\)</span> (compare it with the one in <code>laplacian.py</code> above
    afterwards), and form <span class="arithmatex">\(G = A^\top \operatorname{diag}(g) A\)</span>. Check that
@@ -4409,6 +4414,7 @@ power system package is needed.</p>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#part-1-math-ch03-graph-theory-__codelineno-0-20"></a>12,13
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#part-1-math-ch03-graph-theory-__codelineno-0-21"></a>13,14
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch03-graph-theory/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 </li>
 <li>
 <p>Build a graph with <code>nx.from_pandas_edgelist(df, "from_bus", "to_bus", create_using=nx.MultiGraph)</code>
@@ -4601,6 +4607,7 @@ the only path between its ends, that is, when it is a bridge and its removal isl
 <a id="__codelineno-0-50" name="__codelineno-0-50" href="#part-1-math-ch04-numerical-linear-algebra-__codelineno-0-50"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-51" name="__codelineno-0-51" href="#part-1-math-ch04-numerical-linear-algebra-__codelineno-0-51"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch04-numerical-linear-algebra/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>The same update in Octave, as a function of the inverse before the removal:</p>
 <div class="highlight"><span class="filename">sherman_morrison.m</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#part-1-math-ch04-numerical-linear-algebra-__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span>Minv_sm<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">sherman_morrison</span><span class="p">(</span>Minv, Ar, g, k<span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#part-1-math-ch04-numerical-linear-algebra-__codelineno-1-2"></a>  <span class="c">% Inverse of the reduced Laplacian after removing branch k, by a rank-1 update of Minv = inv(Gr)</span>
@@ -4622,6 +4629,7 @@ the only path between its ends, that is, when it is a bridge and its removal isl
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#part-1-math-ch04-numerical-linear-algebra-__codelineno-1-18"></a><span class="c">%! assert(sherman_morrison(Minv, Ar, g, k), fresh, 1e-12)</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#part-1-math-ch04-numerical-linear-algebra-__codelineno-1-19"></a><span class="c">%! assert(1 - g(7) * (Ar(7, :) * Minv * Ar(7, :)'), 0, 1e-12)   % branch (5, 6) is a bridge</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch04-numerical-linear-algebra/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h2 id="part-1-math-ch04-numerical-linear-algebra-lab">Lab<a class="headerlink" href="#part-1-math-ch04-numerical-linear-algebra-lab" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Lab: rank-1 updates of a resistor network</p>
@@ -4861,6 +4869,7 @@ Never form <span class="arithmatex">\(J^{-1}\)</span>; solve the linear system (
 <a id="__codelineno-0-39" name="__codelineno-0-39" href="#part-1-math-ch06-newton-raphson-__codelineno-0-39"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-40" name="__codelineno-0-40" href="#part-1-math-ch06-newton-raphson-__codelineno-0-40"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch06-newton-raphson/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>From <span class="arithmatex">\((1, -1)\)</span> the residual norms are about <span class="arithmatex">\(8.6\cdot10^{-1}\)</span>, <span class="arithmatex">\(4.0\cdot10^{-2}\)</span>, <span class="arithmatex">\(1.0\cdot10^{-4}\)</span>, <span class="arithmatex">\(8.4\cdot10^{-10}\)</span>:
 the exponent roughly doubles each step (quadratic convergence), ending at <span class="arithmatex">\((1.0042, -1.7296)\)</span>. From <span class="arithmatex">\((-1, 1)\)</span>
 Newton finds the other root, <span class="arithmatex">\((-1.8163, 0.8374)\)</span>. From <span class="arithmatex">\((0, 0)\)</span> the Jacobian is singular and the first step
@@ -5721,6 +5730,7 @@ between the candidate's coupler state and the current one) separately.</p>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#part-3-power-systems-ch13-substations-grid-models-__codelineno-0-32"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#part-3-power-systems-ch13-substations-grid-models-__codelineno-0-33"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch13-substations-grid-models/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h2 id="part-3-power-systems-ch13-substations-grid-models-documentation-vs-code-known-discrepancies">Documentation vs code: known discrepancies<a class="headerlink" href="#part-3-power-systems-ch13-substations-grid-models-documentation-vs-code-known-discrepancies" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>docs/dc_solver/switching_distance.md</code> says the two-cluster assignments are enumerated with "a graph
@@ -5896,6 +5906,7 @@ imaginary part (up to sign) is the DC matrix <span class="arithmatex">\(B_\text{
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#part-3-power-systems-ch14-component-models-__codelineno-0-26"></a><span class="c">%! assert(ybus_check('case14') &lt; 1e-12)</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#part-3-power-systems-ch14-component-models-__codelineno-0-27"></a><span class="c">%! assert(ybus_check('case57') &lt; 1e-12)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch14-component-models/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>The same construction in NumPy against <code>pandapower.pypower.makeYbus.makeYbus(baseMVA, bus, branch)</code> on the
 <code>ppc</code> of <code>pandapower.networks.case14()</code> reproduces pandapower's matrix exactly; note that pandapower stores
 <code>TAP = 1</code> for lines, while MATPOWER case files use <code>TAP = 0</code>.</p>
@@ -6093,6 +6104,7 @@ J_{22} = \frac{\partial Q}{\partial |V|},
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#part-3-power-systems-ch15-ac-power-flow-__codelineno-0-31"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#part-3-power-systems-ch15-ac-power-flow-__codelineno-0-32"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch15-ac-power-flow/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><code>test_ac_jacobian.py</code>, next to it in the chapter's <code>src</code> folder, does exactly that: central differences of
 <code>injections</code> on a random three-bus state, column by column.</p>
 <p><strong>Distributed slack.</strong> Replace the slack bus's unknown <span class="arithmatex">\(P\)</span> by a scalar mismatch <span class="arithmatex">\(\Delta\)</span> shared by the
@@ -6117,6 +6129,7 @@ OpenLoadFlow, the balance type selects <span class="arithmatex">\(k\)</span> (pr
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#part-3-power-systems-ch15-ac-power-flow-__codelineno-1-14"></a><span class="c">%! assert(r.success == 1 &amp;&amp; rfd.success == 1)</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#part-3-power-systems-ch15-ac-power-flow-__codelineno-1-15"></a><span class="c">%! assert(r.bus(:, 8), rfd.bus(:, 8), 1e-6)       % same voltage magnitudes (column VM)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch15-ac-power-flow/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h2 id="part-3-power-systems-ch15-ac-power-flow-lab">Lab<a class="headerlink" href="#part-3-power-systems-ch15-ac-power-flow-lab" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Lab: Newton–Raphson from scratch, then break it</p>
@@ -6260,6 +6273,7 @@ terminals plus a direct flow on its own branch. <span class="arithmatex">\(B_\te
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#part-3-power-systems-ch16-dc-power-flow-__codelineno-0-28"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#part-3-power-systems-ch16-dc-power-flow-__codelineno-0-29"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch16-dc-power-flow/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><strong>Octave + MATPOWER.</strong> <code>makeBdc</code> returns exactly these four objects, and <code>rundcpf</code> is a wrapper that sets the
 model option to <code>'DC'</code> before calling <code>runpf</code> (manual §4.4 and §9.5.2):</p>
 <div class="highlight"><span class="filename">matpower_dcpf.m</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#part-3-power-systems-ch16-dc-power-flow-__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>pf, Bbus, Bf<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">matpower_dcpf</span><span class="p">(</span>casename<span class="p">)</span>
@@ -6279,6 +6293,7 @@ model option to <code>'DC'</code> before calling <code>runpf</code> (manual §4.
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#part-3-power-systems-ch16-dc-power-flow-__codelineno-1-15"></a><span class="c">%! assert(abs(sum(Bbus, 2)) &lt; 1e-9)                 % every row of Bbus sums to zero</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#part-3-power-systems-ch16-dc-power-flow-__codelineno-1-16"></a><span class="c">%! assert(numel(pf), 20)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch16-dc-power-flow/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><strong>Sign conventions.</strong> ToOp's <abbr title="Phase shift distribution factor">PSDF</abbr> (<code>dc_solver/preprocess/helpers/psdf.py</code>) corresponds to a branch flow
 <span class="arithmatex">\(b_k(\theta_f - \theta_t + \varphi_k)\)</span>, i.e. <span class="arithmatex">\(\varphi_k\)</span> enters with the opposite sign of MATPOWER's
 <span class="arithmatex">\(\theta_\text{shift}\)</span>; the PowSyBl backend negates the grid model's shift angle in <code>get_shift_angles</code>
@@ -6499,6 +6514,7 @@ eqs. 4.38–4.39). Because <span class="arithmatex">\(\mathbf 1^\top (e_f - e_t)
 <a id="__codelineno-0-47" name="__codelineno-0-47" href="#part-3-power-systems-ch17-sensitivity-factors-1-__codelineno-0-47"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#part-3-power-systems-ch17-sensitivity-factors-1-__codelineno-0-48"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch17-sensitivity-factors-1/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><strong>Octave + MATPOWER.</strong></p>
 <div class="highlight"><span class="filename">matpower_lodf.m</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#part-3-power-systems-ch17-sensitivity-factors-1-__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span><span class="p">[</span>H, L, err<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">matpower_lodf</span><span class="p">(</span>casename<span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#part-3-power-systems-ch17-sensitivity-factors-1-__codelineno-1-2"></a>  <span class="c">% PTDF and LODF of a MATPOWER case, and the largest difference between the LODF computed from a</span>
@@ -6519,6 +6535,7 @@ eqs. 4.38–4.39). Because <span class="arithmatex">\(\mathbf 1^\top (e_f - e_t)
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#part-3-power-systems-ch17-sensitivity-factors-1-__codelineno-1-17"></a><span class="c">%! assert(err &lt; 1e-9)</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#part-3-power-systems-ch17-sensitivity-factors-1-__codelineno-1-18"></a><span class="c">%! assert(diag(L)(~isnan(diag(L))), -ones(sum(~isnan(diag(L))), 1), 1e-9)   % outaged branch loses its flow</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch17-sensitivity-factors-1/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h3 id="part-3-power-systems-ch17-sensitivity-factors-1-slack-choice-in-toop">Slack choice in ToOp<a class="headerlink" href="#part-3-power-systems-ch17-sensitivity-factors-1-slack-choice-in-toop" title="Permanent link">&para;</a></h3>
 <ul>
 <li>The DC solver uses a single slack bus. <code>compute_ptdf</code> takes <code>slack_bus</code> with the docstring "Cannot be
@@ -6824,6 +6841,7 @@ checks that the result equals <span class="arithmatex">\(H' P'\)</span>.</p>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#part-3-power-systems-ch18-sensitivity-factors-2-__codelineno-0-23"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">p_c</span> <span class="o">@</span> <span class="n">p</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#part-3-power-systems-ch18-sensitivity-factors-2-__codelineno-0-24"></a>    <span class="k">return</span> <span class="n">h</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">p_c</span><span class="p">),</span> <span class="n">h</span> <span class="o">@</span> <span class="n">p</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">beta</span>  <span class="c1"># updated PTDF and flows</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch18-sensitivity-factors-2/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <h3 id="part-3-power-systems-ch18-sensitivity-factors-2-injection-reassignment-injection-outages-and-busbar-outages">Injection reassignment, injection outages and busbar outages<a class="headerlink" href="#part-3-power-systems-ch18-sensitivity-factors-2-injection-reassignment-injection-outages-and-busbar-outages" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Reassignment.</strong> Moving injection <span class="arithmatex">\(x\)</span> from bus A to bus B is the balanced change <span class="arithmatex">\(\Delta P_i = -x\)</span>,
@@ -7121,6 +7139,7 @@ exactly what the per-branch maximum captures.</p>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#part-3-power-systems-ch19-operational-security-__codelineno-0-48"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-49" name="__codelineno-0-49" href="#part-3-power-systems-ch19-operational-security-__codelineno-0-49"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>With weights <code>(("overload_energy_n_1", 1.0), ("critical_branch_count_n_1", 10.0))</code> the DC fitness of this state
 is <span class="arithmatex">\(-(35 + 10 \cdot 3) = -65\)</span>.</p>
 <h3 id="part-3-power-systems-ch19-operational-security-the-price-of-n-1-security-on-a-7-bus-case-in-python">The price of N-1 security on a 7-bus case, in Python<a class="headerlink" href="#part-3-power-systems-ch19-operational-security-the-price-of-n-1-security-on-a-7-bus-case-in-python" title="Permanent link">&para;</a></h3>
@@ -7214,6 +7233,7 @@ NumPy and SciPy are needed (<code>scipy.optimize.linprog</code> uses the HiGHS s
 <a id="__codelineno-1-83" name="__codelineno-1-83" href="#part-3-power-systems-ch19-operational-security-__codelineno-1-83"></a><span class="w">    </span><span class="sd">"""Post-contingency loading in percent, shape (outage, line); the outaged line itself reads 0."""</span>
 <a id="__codelineno-1-84" name="__codelineno-1-84" href="#part-3-power-systems-ch19-operational-security-__codelineno-1-84"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">flows</span><span class="p">(</span><span class="n">pg</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span> <span class="o">/</span> <span class="n">limit</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_LINE</span><span class="p">)])</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><code>dispatch()</code> is the <abbr title="Optimal power flow">OPF</abbr> and <code>dispatch(range(N_LINE))</code> the <abbr title="Security-constrained optimal power flow">SCOPF</abbr>; <code>python case7.py</code> prints both:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#part-3-power-systems-ch19-operational-security-__codelineno-2-1"></a>OPF   cost   4300 $/h  Pg [250.  90.   0.]  worst N-1 loading 104.2 % on L1-3 after L1-2 out
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#part-3-power-systems-ch19-operational-security-__codelineno-2-2"></a>SCOPF cost   4400 $/h  Pg [240. 100.   0.]  worst N-1 loading 100.0 % on L1-3 after L1-2 out
@@ -7278,6 +7298,7 @@ time (110 kV lines with <span class="arithmatex">\(r = 0.1\,x\)</span>, loads wi
 <a id="__codelineno-3-52" name="__codelineno-3-52" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-52"></a>        <span class="n">net</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">'in_service'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <a id="__codelineno-3-53" name="__codelineno-3-53" href="#part-3-power-systems-ch19-operational-security-__codelineno-3-53"></a>    <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><code>pandapower_n1(pandapower_net(pg), ac=True).max()</code> gives 114.7 % for the <abbr title="Optimal power flow">OPF</abbr> dispatch and 109.7 % for the <abbr title="Security-constrained optimal power flow">SCOPF</abbr>
 one. The <abbr title="Security-constrained optimal power flow">SCOPF</abbr> dispatch, secure in DC, still overloads a line by about 10 % in AC (line current includes the reactive
 flow and the losses, which the DC model drops). PowerWorld's <abbr title="Security-constrained optimal power flow">SCOPF</abbr> closes this gap by iterating between the <abbr title="Linear programming">LP</abbr>
@@ -7815,6 +7836,7 @@ analysis will check again.</p>
 <a id="__codelineno-0-41" name="__codelineno-0-41" href="#part-3-power-systems-ch21-coordinated-security-rao-__codelineno-0-41"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-42" name="__codelineno-0-42" href="#part-3-power-systems-ch21-coordinated-security-rao-__codelineno-0-42"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch21-coordinated-security-rao/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>Branch 0–2 limits the A→B exchange to 317 MW. A topology action that lowers its zone-to-zone <abbr title="Power transfer distribution factor">PTDF</abbr> or its <span class="arithmatex">\(F_0\)</span>
 enlarges the domain for the market; this is the capacity-calculation view of a remedial action.</p>
 <h2 id="part-3-power-systems-ch21-coordinated-security-rao-lab">Lab<a class="headerlink" href="#part-3-power-systems-ch21-coordinated-security-rao-lab" title="Permanent link">&para;</a></h2>
@@ -8059,6 +8081,7 @@ exactly one branch on either busbar.</p>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#part-3-power-systems-ch22-import-preprocessing-__codelineno-0-23"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#part-3-power-systems-ch22-import-preprocessing-__codelineno-0-24"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch22-import-preprocessing/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>For <span class="arithmatex">\(d = 4\)</span> the three splits are the 2|2 partitions; for <span class="arithmatex">\(d = 5\)</span> they are the <span class="arithmatex">\(\binom{5}{2} = 10\)</span> partitions 2|3.
 Random clipping starts when <span class="arithmatex">\(2^{d-1} &gt; 2^{23}\)</span>, i.e. at <span class="arithmatex">\(d = 25\)</span> branches. <code>np.random.choice</code> draws with
 replacement and duplicates are removed, so for <span class="arithmatex">\(d = 25\)</span> the expected number of distinct actions is
@@ -8332,6 +8355,7 @@ weaker <abbr title="Linear programming">LP</abbr> relaxation, so branch and boun
 <a id="__codelineno-0-47" name="__codelineno-0-47" href="#part-4-optimization-ch23-optimization-modeling-__codelineno-0-47"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#part-4-optimization-ch23-optimization-modeling-__codelineno-0-48"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch23-optimization-modeling/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>Both formulations find the optimum 27 (open only B). The <abbr title="Linear programming">LP</abbr> relaxation of the strong formulation is already
 27, but the big-M relaxation drops to 19.5 with fractional <span class="arithmatex">\(y = (0.25, 0.5, 0.25)\)</span>: that gap is the work branch
 and bound has to close, and on larger instances it is the difference between seconds and hours.</p>
@@ -8487,6 +8511,7 @@ normalized so that equal sets have equal genotypes:</p>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#part-4-optimization-ch24-evolutionary-algorithms-__codelineno-0-28"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#part-4-optimization-ch24-evolutionary-algorithms-__codelineno-0-29"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch24-evolutionary-algorithms/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>The fitness function receives the set <code>g[g &lt; n]</code>, rebuilds the network without those lines and returns the
 negated N-1 overload energy, or <span class="arithmatex">\(-\infty\)</span> when the switched network is disconnected.</p>
 <h2 id="part-4-optimization-ch24-evolutionary-algorithms-lab">Lab<a class="headerlink" href="#part-4-optimization-ch24-evolutionary-algorithms-lab" title="Permanent link">&para;</a></h2>
@@ -8627,6 +8652,7 @@ version ToOp uses:</p>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#part-4-optimization-ch25-quality-diversity-__codelineno-0-16"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#part-4-optimization-ch25-quality-diversity-__codelineno-0-17"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch25-quality-diversity/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>The first topology (1 split, 60 switching operations) lands in cell <span class="arithmatex">\(1 \cdot 45 + 44 = 89\)</span>, the same cell as any
 one-split topology with 44 or more operations. The second (7 splits, 3 operations) is clipped to row 4, cell
 <span class="arithmatex">\(4 \cdot 45 + 3 = 183\)</span>. Cells on the last row or column therefore compete over "at least" a value, which
@@ -8834,6 +8860,7 @@ report an effect size next to the <span class="arithmatex">\(p\)</span>-value:</
 <a id="__codelineno-0-39" name="__codelineno-0-39" href="#part-4-optimization-ch26-experimental-methodology-__codelineno-0-39"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-40" name="__codelineno-0-40" href="#part-4-optimization-ch26-experimental-methodology-__codelineno-0-40"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch26-experimental-methodology/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p><span class="arithmatex">\(\hat A_{12} = 0.08\)</span> means a run of A beats a run of B only 8% of the time. Use <code>stats.wilcoxon</code> (signed-rank)
 instead when the samples are paired, for example the same seed on the same instance for both configurations
 across several different instances.</p>
@@ -9471,6 +9498,7 @@ without deriving anything:</p>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#part-4-optimization-ch29-learning-based-control-__codelineno-0-33"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34" href="#part-4-optimization-ch29-learning-based-control-__codelineno-0-34"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch29-learning-based-control/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>The gradient exists with respect to continuous quantities (injections, susceptances) but not with respect to a
 switching decision <span class="arithmatex">\(z_\ell \in \{0, 1\}\)</span>. Relaxing <span class="arithmatex">\(z_\ell\)</span> to <span class="arithmatex">\([0, 1]\)</span> and scaling <span class="arithmatex">\(b_\ell\)</span> by it gives
 gradients, but the optimum of the relaxation need not be near a good binary topology, which is one reason ToOp
@@ -9656,6 +9684,7 @@ ToOp's lock file, and with pandapower 3.5 and pypowsybl 1.16, the versions of th
 <a id="__codelineno-0-37" name="__codelineno-0-37" href="#part-5-computing-ch30-scientific-python-__codelineno-0-37"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38" href="#part-5-computing-ch30-scientific-python-__codelineno-0-38"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch30-scientific-python/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>Note the two different styles: pandapower writes results into <code>res_*</code> tables of a mutable <code>net</code> object, while
 pypowsybl updates the network and exposes results as columns of <code>get_lines()</code>, <code>get_buses()</code> and so on.</p>
 <h2 id="part-5-computing-ch30-scientific-python-lab">Lab<a class="headerlink" href="#part-5-computing-ch30-scientific-python-lab" title="Permanent link">&para;</a></h2>
@@ -9853,6 +9882,7 @@ axis and <code>jit</code> compile the whole batch:</p>
 <a id="__codelineno-0-43" name="__codelineno-0-43" href="#part-5-computing-ch31-jax-gpu-fundamentals-__codelineno-0-43"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-44" name="__codelineno-0-44" href="#part-5-computing-ch31-jax-gpu-fundamentals-__codelineno-0-44"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch31-jax-gpu-fundamentals/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>Three habits to notice. The bridge case returns a flag instead of raising, because a compiled batch cannot stop
 halfway. The outage index is a traced array, so a new outage set of the same length reuses the compiled program;
 passing it as a Python tuple in <code>static_argnums</code> would compile once per distinct tuple. And <abbr title="Graphics processing unit">GPU</abbr> timings must wait
@@ -10239,6 +10269,7 @@ bridges, chords are added at random):</p>
 <a id="__codelineno-0-47" name="__codelineno-0-47" href="#part-5-computing-ch33-testing-debugging-profiling-__codelineno-0-47"></a>        <span class="n">f_ref</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span> <span class="o">=</span> <span class="n">ptdf_matrix</span><span class="p">(</span><span class="n">fr</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">to</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span> <span class="o">@</span> <span class="n">p</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#part-5-computing-ch33-testing-debugging-profiling-__codelineno-0-48"></a>        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">f0</span> <span class="o">+</span> <span class="n">lodf</span> <span class="o">*</span> <span class="n">f0</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">f_ref</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch33-testing-debugging-profiling/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>Delete the line <code>lodf[b] = -1.0</code> and Hypothesis immediately reports a failing grid: the formula alone gives
 <span class="arithmatex">\(\mathrm{LODF}_{b,b} = c_b/(1-c_b) \neq -1\)</span>, which is why both <code>numpy_reference.py</code> and <code>dc_solver/jax/lodf.py</code>
 overwrite the diagonal explicitly. Run it in the ToOp container with <code>uv run --with hypothesis pytest &lt;file&gt;</code>.</p>

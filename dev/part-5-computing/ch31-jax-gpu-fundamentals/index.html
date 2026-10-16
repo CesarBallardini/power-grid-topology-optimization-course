@@ -2307,6 +2307,7 @@ axis and <code>jit</code> compile the whole batch:</p>
 <a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
 <a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch31-jax-gpu-fundamentals/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>Three habits to notice. The bridge case returns a flag instead of raising, because a compiled batch cannot stop
 halfway. The outage index is a traced array, so a new outage set of the same length reuses the compiled program;
 passing it as a Python tuple in <code>static_argnums</code> would compile once per distinct tuple. And <abbr title="Graphics processing unit">GPU</abbr> timings must wait

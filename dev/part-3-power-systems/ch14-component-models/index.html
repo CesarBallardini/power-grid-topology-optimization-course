@@ -2294,6 +2294,7 @@ imaginary part (up to sign) is the DC matrix <span class="arithmatex">\(B_\text{
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="c">%! assert(ybus_check('case14') &lt; 1e-12)</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="c">%! assert(ybus_check('case57') &lt; 1e-12)</span>
 </code></pre></div>
+<p><a href="https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch14-component-models/src" target="_blank">Open the <code>src/</code> folder on GitHub</a> to see or download all the files of this chapter.</p>
 <p>The same construction in NumPy against <code>pandapower.pypower.makeYbus.makeYbus(baseMVA, bus, branch)</code> on the
 <code>ppc</code> of <code>pandapower.networks.case14()</code> reproduces pandapower's matrix exactly; note that pandapower stores
 <code>TAP = 1</code> for lines, while MATPOWER case files use <code>TAP = 0</code>.</p>
