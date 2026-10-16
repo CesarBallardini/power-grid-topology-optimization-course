@@ -35,3 +35,13 @@ def test_gpu_flag_changes_only_the_visible_cuda_devices(tmp_path):
     assert {k: v for k, v in cpu.items() if k != 'num_cuda_devices'} == {
         k: v for k, v in gpu.items() if k != 'num_cuda_devices'
     }
+
+
+@pytest.mark.parametrize('name', [f'{d}_s{s}' for d in ('gpu', 'cpu') for s in range(1, 6)])
+def test_gpu_comparison_runs_use_the_default_config_of_their_seed(name, tmp_path):
+    descriptors, weight, seed = toop_front_toop.EXPERIMENTS[f'fine_s{name[-1]}']
+    cfg = toop_front_toop.dc_config(tmp_path / 'grid', tmp_path / name, descriptors, weight, seed, 60.0)
+    stored = json.loads((RUNS.parent / 'toop_front_gpu' / f'{name}.json').read_text(encoding='utf-8'))['args']
+    assert stored['ga_config']['random_seed'] == seed
+    assert stored['ga_config']['target_metrics'] == [list(t) for t in cfg['ga_config']['target_metrics']]
+    assert [(d['metric'], d['num_cells']) for d in stored['ga_config']['me_descriptors']] == list(descriptors)

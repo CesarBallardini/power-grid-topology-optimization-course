@@ -126,11 +126,11 @@ def main() -> None:
             print(agreement(case))
         return
     rows = repeated_sweep(runs=int(sys.argv[2])) if mode == 'repeat' else sweep()
-    print(f'{"case":15s} {"branches":>8s} {"dtype":>8s} {"output MB":>10s} {"first [s]":>10s} {"steady [s]":>11s}')
+    print(f'{"case":15s} {"branches":>8s} {"dtype":>8s} {"output MB":>10s} {"first [s]":>10s} {"steady [ms]":>11s}')
     for r in rows:
         print(
             f'{r["case"]:15s} {r["n_branch"]:8d} {r["dtype"]:>8s} {r["output_mb"]:10.1f} '
-            f'{r["first_s"]:10.3f} {r["steady_s"]:11.4f}'
+            f'{r["first_s"]:10.3f} {r["steady_s"] * 1e3:11.3f}'
         )
 
 
