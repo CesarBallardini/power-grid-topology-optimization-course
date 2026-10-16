@@ -59,6 +59,8 @@ def find_matpower() -> Path | None:
 
 OCTAVE = find_octave()
 MATPOWER = find_matpower()
+# What the %!test blocks that need MATPOWER print when they skip themselves
+SKIP_MESSAGE = 'MATPOWER not on the path, test skipped'
 
 
 def test_every_octave_file_has_test_blocks():
@@ -75,3 +77,7 @@ def test_octave_file_passes_its_own_tests(path):
     cmd = [OCTAVE, '--no-gui', '--quiet', '--eval', program]
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=300, check=False)  # noqa: S603
     assert result.returncode == 0, result.stdout + result.stderr
+    # A MATPOWER block that cannot find MATPOWER prints SKIP_MESSAGE and returns, which Octave counts as a pass:
+    # with MATPOWER found, that message means the installation is broken, not that the block may skip.
+    if MATPOWER:
+        assert SKIP_MESSAGE not in result.stdout + result.stderr, result.stdout + result.stderr
