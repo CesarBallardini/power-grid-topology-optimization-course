@@ -1,0 +1,42 @@
+{
+ "gpu_s1": {
+  "wall_seconds": 71.9,
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU"
+ },
+ "gpu_s2": {
+  "wall_seconds": 71.4,
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU"
+ },
+ "gpu_s3": {
+  "wall_seconds": 71.9,
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU"
+ },
+ "gpu_s4": {
+  "wall_seconds": 72.0,
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU"
+ },
+ "gpu_s5": {
+  "wall_seconds": 71.5,
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU"
+ },
+ "cpu_s1": {
+  "wall_seconds": 66.0,
+  "device": "cpu"
+ },
+ "cpu_s2": {
+  "wall_seconds": 66.0,
+  "device": "cpu"
+ },
+ "cpu_s3": {
+  "wall_seconds": 66.0,
+  "device": "cpu"
+ },
+ "cpu_s4": {
+  "wall_seconds": 65.9,
+  "device": "cpu"
+ },
+ "cpu_s5": {
+  "wall_seconds": 65.9,
+  "device": "cpu"
+ }
+}

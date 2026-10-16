@@ -169,13 +169,16 @@ def compare(results: pd.DataFrame, column: str, configs: tuple[str, str] = ('fin
 
 # --8<-- [end:quality]
 # --8<-- [start:gpu]
-def gpu_vs_cpu(runs: Path = GPU_RUNS, reference_factor: float = 1.1) -> pd.DataFrame:
+def gpu_vs_cpu(runs: Path = GPU_RUNS, reference_factor: float = 1.1) -> pd.DataFrame | None:
     """The default repertoire (``fine``), seeds 1 to 5, on the GPU and again on the CPU in the same environment.
 
     Work done in the 60 s (epochs, and evaluations: ToOp's ``total_branch_combis``), the elites and how many of
     them are non-dominated in the four metrics of Lab 1, and the hypervolume and IGD+ of each bi-objective front,
     normalized with the ideal and nadir of Lab 4's joint front, so that 0.8364 means "Lab 4's front reached".
+    Returns ``None`` when ``runs`` holds no GPU runs (``wall_seconds.json`` missing).
     """
+    if not (runs / 'wall_seconds.json').exists():
+        return None
     r4 = lab4(reference_factor)
     joint = r4.attrs['joint']
     ideal, nadir = joint.min(axis=0), joint.max(axis=0)
@@ -214,6 +217,25 @@ def gpu_vs_cpu(runs: Path = GPU_RUNS, reference_factor: float = 1.1) -> pd.DataF
 
 
 # --8<-- [end:gpu]
+def print_gpu_vs_cpu() -> None:
+    """Print the GPU against CPU comparison, or say why it is skipped."""
+    g = gpu_vs_cpu()
+    if g is None:
+        print(f'GPU against CPU: skipped, no GPU runs in {GPU_RUNS.name}/')
+        return
+    print('GPU against CPU (fine, seeds 1-5, same environment; normalized as Lab 4):')
+    print(g.to_string(index=False, float_format=lambda x: f'{x:.4f}'))
+    print(
+        '  joint front of the ten runs:', [as_tuple(p) for p in g.attrs['joint']], 'hv', round(g.attrs['joint_hv'], 4)
+    )
+    reached = g.loc[np.isclose(g['hv'], g.attrs['lab4_joint_hv']), 'run'].tolist()
+    print('  runs reaching the Lab 4 hypervolume', round(g.attrs['lab4_joint_hv'], 4), ':', reached)
+    for name in g.loc[~g['run'].isin(reached), 'run']:
+        print(f'  front of {name}:', [as_tuple(p) for p in front_of(name, runs=GPU_RUNS)])
+    for column in ('epochs', 'evaluations', 'wall_seconds', 'non_dominated', 'hv', 'igd_plus'):
+        print(f'  {column}:', compare(g, column, ('gpu', 'cpu')))
+
+
 # --8<-- [start:decision]
 def lab7(name: str = 'fine_s1', switching: float = 3.0, splits: float = 1.0) -> dict:
     """Knee and pseudo-weights on the (overload, switching distance) front; ASF with an operator's reference point.
@@ -275,20 +297,7 @@ def main() -> None:
         print(f'  {column}:', compare(r4, column))
     r4b = lab4(2.0)
     print('  hv with reference 2.0:', compare(r4b, 'hv'))
-    g = gpu_vs_cpu()
-    print('GPU against CPU (fine, seeds 1-5, same environment; normalized as Lab 4):')
-    print(g.to_string(index=False, float_format=lambda x: f'{x:.4f}'))
-    print(
-        '  joint front of the ten runs:', [as_tuple(p) for p in g.attrs['joint']], 'hv', round(g.attrs['joint_hv'], 4)
-    )
-    print(
-        '  runs reaching the Lab 4 hypervolume',
-        round(g.attrs['lab4_joint_hv'], 4),
-        ':',
-        g.loc[np.isclose(g['hv'], g.attrs['lab4_joint_hv']), 'run'].tolist(),
-    )
-    for column in ('epochs', 'evaluations', 'non_dominated', 'hv', 'igd_plus'):
-        print(f'  {column}:', compare(g, column, ('gpu', 'cpu')))
+    print_gpu_vs_cpu()
     r7 = lab7()
     print('Lab 7 front (overload, switching distance):', [as_tuple(p) for p in r7['front']])
     print('  knees:', [as_tuple(p) for p in r7['knees']])
