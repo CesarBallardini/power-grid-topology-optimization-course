@@ -86,6 +86,8 @@ normalized so that equal sets have equal genotypes:
 --8<-- "docs/part-4-optimization/ch24-evolutionary-algorithms/src/genome_mutation.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch24-evolutionary-algorithms/src){ target="_blank" } to see or download all the files of this chapter.
+
 The fitness function receives the set `g[g < n]`, rebuilds the network without those lines and returns the
 negated N-1 overload energy, or $-\infty$ when the switched network is disconnected.
 

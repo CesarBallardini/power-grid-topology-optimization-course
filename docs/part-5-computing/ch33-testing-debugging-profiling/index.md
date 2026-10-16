@@ -121,6 +121,8 @@ bridges, chords are added at random):
 --8<-- "docs/part-5-computing/ch33-testing-debugging-profiling/src/test_lodf_property.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch33-testing-debugging-profiling/src){ target="_blank" } to see or download all the files of this chapter.
+
 Delete the line `lodf[b] = -1.0` and Hypothesis immediately reports a failing grid: the formula alone gives
 $\mathrm{LODF}_{b,b} = c_b/(1-c_b) \neq -1$, which is why both `numpy_reference.py` and `dc_solver/jax/lodf.py`
 overwrite the diagonal explicitly. Run it in the ToOp container with `uv run --with hypothesis pytest <file>`.

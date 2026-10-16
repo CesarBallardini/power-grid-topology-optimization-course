@@ -101,6 +101,8 @@ ToOp's lock file, and with pandapower 3.5 and pypowsybl 1.16, the versions of th
 --8<-- "docs/part-5-computing/ch30-scientific-python/src/two_libraries.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch30-scientific-python/src){ target="_blank" } to see or download all the files of this chapter.
+
 Note the two different styles: pandapower writes results into `res_*` tables of a mutable `net` object, while
 pypowsybl updates the network and exposes results as columns of `get_lines()`, `get_buses()` and so on.
 

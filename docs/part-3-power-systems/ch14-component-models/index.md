@@ -115,6 +115,8 @@ imaginary part (up to sign) is the DC matrix $B_\text{bus} = A^\top \operatornam
 --8<-- "docs/part-3-power-systems/ch14-component-models/src/ybus_check.m"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch14-component-models/src){ target="_blank" } to see or download all the files of this chapter.
+
 The same construction in NumPy against `pandapower.pypower.makeYbus.makeYbus(baseMVA, bus, branch)` on the
 `ppc` of `pandapower.networks.case14()` reproduces pandapower's matrix exactly; note that pandapower stores
 `TAP = 1` for lines, while MATPOWER case files use `TAP = 0`.

@@ -113,11 +113,15 @@ the only path between its ends, that is, when it is a bridge and its removal isl
 --8<-- "docs/part-1-math/ch04-numerical-linear-algebra/src/sherman_morrison.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch04-numerical-linear-algebra/src){ target="_blank" } to see or download all the files of this chapter.
+
 The same update in Octave, as a function of the inverse before the removal:
 
 ```octave title="sherman_morrison.m"
 --8<-- "docs/part-1-math/ch04-numerical-linear-algebra/src/sherman_morrison.m"
 ```
+
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch04-numerical-linear-algebra/src){ target="_blank" } to see or download all the files of this chapter.
 
 ## Lab
 

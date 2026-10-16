@@ -145,6 +145,8 @@ weaker LP relaxation, so branch and bound explores more nodes.
 --8<-- "docs/part-4-optimization/ch23-optimization-modeling/src/facility_location.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch23-optimization-modeling/src){ target="_blank" } to see or download all the files of this chapter.
+
 Both formulations find the optimum 27 (open only B). The LP relaxation of the strong formulation is already
 27, but the big-M relaxation drops to 19.5 with fractional $y = (0.25, 0.5, 0.25)$: that gap is the work branch
 and bound has to close, and on larger instances it is the difference between seconds and hours.

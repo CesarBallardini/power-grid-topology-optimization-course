@@ -74,6 +74,8 @@ Never form $J^{-1}$; solve the linear system ([Chapter 4](../ch04-numerical-line
 --8<-- "docs/part-1-math/ch06-newton-raphson/src/newton.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch06-newton-raphson/src){ target="_blank" } to see or download all the files of this chapter.
+
 From $(1, -1)$ the residual norms are about $8.6\cdot10^{-1}$, $4.0\cdot10^{-2}$, $1.0\cdot10^{-4}$, $8.4\cdot10^{-10}$:
 the exponent roughly doubles each step (quadratic convergence), ending at $(1.0042, -1.7296)$. From $(-1, 1)$
 Newton finds the other root, $(-1.8163, 0.8374)$. From $(0, 0)$ the Jacobian is singular and the first step

@@ -132,11 +132,15 @@ eqs. 4.38–4.39). Because $\mathbf 1^\top (e_f - e_t) = 0$, the LODF does not d
 --8<-- "docs/part-3-power-systems/ch17-sensitivity-factors-1/src/lodf.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch17-sensitivity-factors-1/src){ target="_blank" } to see or download all the files of this chapter.
+
 **Octave + MATPOWER.**
 
 ```octave title="matpower_lodf.m"
 --8<-- "docs/part-3-power-systems/ch17-sensitivity-factors-1/src/matpower_lodf.m"
 ```
+
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch17-sensitivity-factors-1/src){ target="_blank" } to see or download all the files of this chapter.
 
 ### Slack choice in ToOp
 

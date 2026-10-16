@@ -105,6 +105,8 @@ axis and `jit` compile the whole batch:
 --8<-- "docs/part-5-computing/ch31-jax-gpu-fundamentals/src/n1_screen.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-5-computing/ch31-jax-gpu-fundamentals/src){ target="_blank" } to see or download all the files of this chapter.
+
 Three habits to notice. The bridge case returns a flag instead of raising, because a compiled batch cannot stop
 halfway. The outage index is a traced array, so a new outage set of the same length reuses the compiled program;
 passing it as a Python tuple in `static_argnums` would compile once per distinct tuple. And GPU timings must wait
