@@ -105,9 +105,13 @@ libraries) and in Octave:
 --8<-- "docs/part-1-math/ch01-complex-numbers/src/phasor_power.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch01-complex-numbers/src){ target="_blank" } to see or download all the files of this chapter.
+
 ```octave title="phasor_power.m"
 --8<-- "docs/part-1-math/ch01-complex-numbers/src/phasor_power.m"
 ```
+
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch01-complex-numbers/src){ target="_blank" } to see or download all the files of this chapter.
 
 ## Lab
 

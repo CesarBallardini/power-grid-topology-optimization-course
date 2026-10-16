@@ -123,6 +123,8 @@ Four buses with equal reactances, zone A = {0, 1}, zone B = {2, 3}, slack at bus
 --8<-- "docs/part-3-power-systems/ch21-coordinated-security-rao/src/flow_based.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch21-coordinated-security-rao/src){ target="_blank" } to see or download all the files of this chapter.
+
 Branch 0–2 limits the A→B exchange to 317 MW. A topology action that lowers its zone-to-zone PTDF or its $F_0$
 enlarges the domain for the market; this is the capacity-calculation view of a remedial action.
 

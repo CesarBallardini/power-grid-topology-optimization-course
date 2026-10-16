@@ -86,12 +86,16 @@ The slack bus absorbs the imbalance $P_s = -\sum_{i \ne s} P_i$.
 --8<-- "docs/part-3-power-systems/ch16-dc-power-flow/src/dc_power_flow.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch16-dc-power-flow/src){ target="_blank" } to see or download all the files of this chapter.
+
 **Octave + MATPOWER.** `makeBdc` returns exactly these four objects, and `rundcpf` is a wrapper that sets the
 model option to `'DC'` before calling `runpf` (manual §4.4 and §9.5.2):
 
 ```octave title="matpower_dcpf.m"
 --8<-- "docs/part-3-power-systems/ch16-dc-power-flow/src/matpower_dcpf.m"
 ```
+
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch16-dc-power-flow/src){ target="_blank" } to see or download all the files of this chapter.
 
 **Sign conventions.** ToOp's PSDF (`dc_solver/preprocess/helpers/psdf.py`) corresponds to a branch flow
 $b_k(\theta_f - \theta_t + \varphi_k)$, i.e. $\varphi_k$ enters with the opposite sign of MATPOWER's

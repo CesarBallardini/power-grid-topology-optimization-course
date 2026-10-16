@@ -126,6 +126,8 @@ without deriving anything:
 --8<-- "docs/part-4-optimization/ch29-learning-based-control/src/jax_ptdf.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch29-learning-based-control/src){ target="_blank" } to see or download all the files of this chapter.
+
 The gradient exists with respect to continuous quantities (injections, susceptances) but not with respect to a
 switching decision $z_\ell \in \{0, 1\}$. Relaxing $z_\ell$ to $[0, 1]$ and scaling $b_\ell$ by it gives
 gradients, but the optimum of the relaxation need not be near a good binary topology, which is one reason ToOp

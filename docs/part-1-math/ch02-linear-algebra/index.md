@@ -108,11 +108,15 @@ network its null space is exactly the span of $\mathbf{1}$.
 --8<-- "docs/part-1-math/ch02-linear-algebra/src/laplacian.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch02-linear-algebra/src){ target="_blank" } to see or download all the files of this chapter.
+
 The same in Octave (indices start at 1):
 
 ```octave title="laplacian.m"
 --8<-- "docs/part-1-math/ch02-linear-algebra/src/laplacian.m"
 ```
+
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch02-linear-algebra/src){ target="_blank" } to see or download all the files of this chapter.
 
 ## Lab
 
@@ -128,6 +132,8 @@ The same in Octave (indices start at 1):
     ```python title="lab_network.py"
     --8<-- "docs/part-1-math/ch02-linear-algebra/src/lab_network.py"
     ```
+
+    [Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch02-linear-algebra/src){ target="_blank" } to see or download all the files of this chapter.
 
     1. Write your own `incidence(fr, to, n)` returning $A$ (compare it with the one in `laplacian.py` above
        afterwards), and form $G = A^\top \operatorname{diag}(g) A$. Check that

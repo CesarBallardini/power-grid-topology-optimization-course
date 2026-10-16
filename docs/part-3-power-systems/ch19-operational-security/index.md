@@ -150,6 +150,8 @@ exactly what the per-branch maximum captures.
 --8<-- "docs/part-3-power-systems/ch19-operational-security/src/metrics.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src){ target="_blank" } to see or download all the files of this chapter.
+
 With weights `(("overload_energy_n_1", 1.0), ("critical_branch_count_n_1", 10.0))` the DC fitness of this state
 is $-(35 + 10 \cdot 3) = -65$.
 
@@ -164,6 +166,8 @@ NumPy and SciPy are needed (`scipy.optimize.linprog` uses the HiGHS solver):
 ```python title="case7.py"
 --8<-- "docs/part-3-power-systems/ch19-operational-security/src/case7.py:dc"
 ```
+
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src){ target="_blank" } to see or download all the files of this chapter.
 
 `dispatch()` is the OPF and `dispatch(range(N_LINE))` the SCOPF; `python case7.py` prints both:
 
@@ -183,6 +187,8 @@ time (110 kV lines with $r = 0.1\,x$, loads with $Q = 0.3\,P$, bus 1 as the slac
 ```python title="case7.py"
 --8<-- "docs/part-3-power-systems/ch19-operational-security/src/case7.py:ac"
 ```
+
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch19-operational-security/src){ target="_blank" } to see or download all the files of this chapter.
 
 `pandapower_n1(pandapower_net(pg), ac=True).max()` gives 114.7 % for the OPF dispatch and 109.7 % for the SCOPF
 one. The SCOPF dispatch, secure in DC, still overloads a line by about 10 % in AC (line current includes the reactive

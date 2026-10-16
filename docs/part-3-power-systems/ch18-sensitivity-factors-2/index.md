@@ -194,6 +194,8 @@ checks that the result equals $H' P'$.
 --8<-- "docs/part-3-power-systems/ch18-sensitivity-factors-2/src/bsdf.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch18-sensitivity-factors-2/src){ target="_blank" } to see or download all the files of this chapter.
+
 ### Injection reassignment, injection outages and busbar outages
 
 - **Reassignment.** Moving injection $x$ from bus A to bus B is the balanced change $\Delta P_i = -x$,

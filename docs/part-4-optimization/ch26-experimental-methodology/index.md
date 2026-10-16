@@ -118,6 +118,8 @@ report an effect size next to the $p$-value:
 --8<-- "docs/part-4-optimization/ch26-experimental-methodology/src/compare_runs.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch26-experimental-methodology/src){ target="_blank" } to see or download all the files of this chapter.
+
 $\hat A_{12} = 0.08$ means a run of A beats a run of B only 8% of the time. Use `stats.wilcoxon` (signed-rank)
 instead when the samples are paired, for example the same seed on the same instance for both configurations
 across several different instances.

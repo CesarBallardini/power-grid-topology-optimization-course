@@ -103,6 +103,8 @@
         --8<-- "docs/part-1-math/ch03-graph-theory/src/ieee14_edges.csv"
         ```
 
+        [Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-1-math/ch03-graph-theory/src){ target="_blank" } to see or download all the files of this chapter.
+
     2. Build a graph with `nx.from_pandas_edgelist(df, "from_bus", "to_bus", create_using=nx.MultiGraph)`
        (real grids have parallel circuits, so a multigraph is the honest model). Add a duplicate of branch
        `(7, 8)` and check that `nx.bridges` no longer reports it: explain why a branch with a parallel circuit

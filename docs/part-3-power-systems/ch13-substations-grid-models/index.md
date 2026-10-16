@@ -101,6 +101,8 @@ between the candidate's coupler state and the current one) separately.
 --8<-- "docs/part-3-power-systems/ch13-substations-grid-models/src/coupler_splits.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch13-substations-grid-models/src){ target="_blank" } to see or download all the files of this chapter.
+
 ## Documentation vs code: known discrepancies
 
 - `docs/dc_solver/switching_distance.md` says the two-cluster assignments are enumerated with "a graph

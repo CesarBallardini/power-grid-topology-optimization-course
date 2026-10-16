@@ -149,6 +149,8 @@ $\partial S/\partial|V|$. Check your implementation against finite differences b
 --8<-- "docs/part-3-power-systems/ch15-ac-power-flow/src/ac_jacobian.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch15-ac-power-flow/src){ target="_blank" } to see or download all the files of this chapter.
+
 `test_ac_jacobian.py`, next to it in the chapter's `src` folder, does exactly that: central differences of
 `injections` on a random three-bus state, column by column.
 
@@ -163,6 +165,8 @@ OpenLoadFlow, the balance type selects $k$ (proportional to $P_\text{max}$, to t
 ```octave title="matpower_pf.m"
 --8<-- "docs/part-3-power-systems/ch15-ac-power-flow/src/matpower_pf.m"
 ```
+
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch15-ac-power-flow/src){ target="_blank" } to see or download all the files of this chapter.
 
 ## Lab
 

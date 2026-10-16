@@ -79,6 +79,8 @@ version ToOp uses:
 --8<-- "docs/part-4-optimization/ch25-quality-diversity/src/map_elites_cells.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-4-optimization/ch25-quality-diversity/src){ target="_blank" } to see or download all the files of this chapter.
+
 The first topology (1 split, 60 switching operations) lands in cell $1 \cdot 45 + 44 = 89$, the same cell as any
 one-split topology with 44 or more operations. The second (7 splits, 3 operations) is clipped to row 4, cell
 $4 \cdot 45 + 3 = 183$. Cells on the last row or column therefore compete over "at least" a value, which

@@ -170,6 +170,8 @@ exactly one branch on either busbar.
 --8<-- "docs/part-3-power-systems/ch22-import-preprocessing/src/action_count.py"
 ```
 
+[Open the `src/` folder on GitHub](https://github.com/CesarBallardini/power-grid-topology-optimization-course/tree/main/docs/part-3-power-systems/ch22-import-preprocessing/src){ target="_blank" } to see or download all the files of this chapter.
+
 For $d = 4$ the three splits are the 2|2 partitions; for $d = 5$ they are the $\binom{5}{2} = 10$ partitions 2|3.
 Random clipping starts when $2^{d-1} > 2^{23}$, i.e. at $d = 25$ branches. `np.random.choice` draws with
 replacement and duplicates are removed, so for $d = 25$ the expected number of distinct actions is
