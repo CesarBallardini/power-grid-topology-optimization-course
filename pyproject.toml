@@ -36,6 +36,18 @@ doc = [
     "mike>=2.1",
     "mkdocs-print-site-plugin",
 ]
+labs = [
+    "highspy>=1.15.1",
+    "hypothesis>=6.170.0",
+    "jax>=0.11.2",
+    "matplotlib>=3.11.2",
+    "networkx>=3.7",
+    "numpy>=2.4.6",
+    "pandapower>=3.5.6",
+    "pulp>=3,<4",
+    "pypowsybl>=1.16.1",
+    "scipy>=1.18.1",
+]
 
 [tool.commitizen]
 # Conventional Commits, enforced in two places: the commit-msg pre-commit hook
@@ -51,12 +63,13 @@ update_changelog_on_bump = false
 
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers -m 'not network'"
-testpaths = ["tests"]
+testpaths = ["tests", "docs"]
 # The maintenance tools are plain scripts, not a package: putting tools/ on the
 # path lets the tests import them by module name.
 pythonpath = ["tools"]
 markers = [
     "network: tests that hit a live external service (archive.org), excluded by default, run with -m network",
+    "toop: chapter tests that import ToOp; they skip themselves unless ToOp is importable, run them with make test-toop",
 ]
 # Warnings are failures, like every other gate here -- a DeprecationWarning is
 # a future breakage that has already been diagnosed for us, and the only way it
@@ -66,4 +79,7 @@ markers = [
 # and must say why it cannot simply be fixed. Anything not listed is an error.
 filterwarnings = [
     "error",
+    # pandapower's own case57 (used by the Chapter 30 script) ships without the tap_dependency_table that
+    # pandapower 3 introduced; the warning comes from their test data, not from code in this repository.
+    "ignore:tap_dependency_table is missing in net:DeprecationWarning",
 ]

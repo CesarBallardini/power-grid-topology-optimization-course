@@ -11,6 +11,7 @@ import numpy as np
 import pandapower as pp
 from scipy.optimize import linprog
 
+# --8<-- [start:dc]
 # (from bus, to bus, x p.u., limit MW)
 LINES = [
     (1, 2, 0.10, 240),
@@ -97,6 +98,7 @@ def n1_loading(pg: np.ndarray, limit: np.ndarray = LIMIT) -> np.ndarray:
     return np.array([100 * np.abs(flows(pg, k)) / limit for k in range(N_LINE)])
 
 
+# --8<-- [end:dc]
 def worst(pct: np.ndarray) -> str:
     """Describe the largest entry of an (outage, line) loading table."""
     o, k = np.unravel_index(pct.argmax(), pct.shape)
@@ -109,6 +111,7 @@ def binding(pg: np.ndarray, limit: np.ndarray = LIMIT, tol: float = 1e-6) -> lis
     return [(NAMES[o], NAMES[k]) for o, k in zip(*np.nonzero(np.abs(pct - 100) < tol), strict=True)]
 
 
+# --8<-- [start:ac]
 def pandapower_net(pg: np.ndarray, limit: np.ndarray = LIMIT) -> pp.pandapowerNet:
     """The same grid for pandapower: 110 kV lines with r = 0.1 x, loads with Q = 0.3 P, bus 1 as ``ext_grid``."""
     net = pp.create_empty_network(sn_mva=100)
@@ -164,6 +167,7 @@ def pandapower_n1(net: pp.pandapowerNet, ac: bool = False) -> np.ndarray:
     return result
 
 
+# --8<-- [end:ac]
 def ac_secure_dispatch(limit: np.ndarray = LIMIT, max_iter: int = 10) -> tuple[list[float], np.ndarray]:
     """Lab Part C, step 2: derate the limits of the AC-overloaded lines until the SCOPF dispatch is AC secure.
 
@@ -195,9 +199,11 @@ def main() -> None:
     print('Part C step 2, SCOPF cost per derating iteration:', np.round(costs))
     lim = LIMIT.copy()
     lim[NAMES.index('L1-3')] = 150
+    opf3, scopf3 = dispatch((), lim), dispatch(range(N_LINE), lim)
     print(
-        f'Part C step 3, L1-3 limited to 150 MW: OPF {dispatch((), lim).fun:.0f} $/h, '
-        f'SCOPF {dispatch(range(N_LINE), lim).fun:.0f} $/h'
+        f'Part C step 3, L1-3 limited to 150 MW: OPF {opf3.fun:.0f} $/h, SCOPF {scopf3.fun:.0f} $/h, '
+        f'SCOPF Pg {np.round(scopf3.x, 1)}, binding {binding(scopf3.x, lim)}, '
+        f'OPF base-case flow on L1-3 {flows(opf3.x)[NAMES.index("L1-3")]:.1f} MW'
     )
 
     print('\nExercise 10: SCOPF dispatch, L3-6 limited to 100 MW')
@@ -213,6 +219,7 @@ def main() -> None:
         print(
             f'  bus 6 split, {moved} on their own busbar: DC worst N-1 flow on L3-6 {dc[NAMES.index("L3-6")]:.1f} MW, '
             f'worst DC loading {(100 * dc / lim).max():.1f} %, '
+            f'DC worst N-1 flow on L3-4 {dc[NAMES.index("L3-4")]:.1f} MW, '
             f'worst AC loading {ac.max():.1f} % on {NAMES[ac.argmax()]}'
         )
 

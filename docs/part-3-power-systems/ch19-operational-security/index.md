@@ -146,27 +146,8 @@
 Three monitored branches, one timestep, two contingencies. The worst contingency differs per branch, which is
 exactly what the per-branch maximum captures.
 
-```python
-import numpy as np
-
-f_max = np.array([100.0, 200.0, 50.0])                    # MW
-n_0 = np.array([[80.0, -150.0, 49.0]])                    # (timesteps, branches)
-n_1 = np.array([[[95.0, -210.0, 40.0],                    # (timesteps, contingencies, branches)
-                 [120.0, -160.0, 55.0]]])
-
-over = np.clip(np.abs(n_1) - f_max, 0, None)
-overload_energy_n_1 = over.max(axis=1).sum()              # 20 + 10 + 5 = 35 MW
-rel = np.clip(np.abs(n_1) / f_max, 1, None)
-power_law_n_1 = ((rel**1.5 - 1) * f_max).max(axis=1).sum()     # 31.45 + 15.19 + 7.68 = 54.32
-critical_n_1 = np.any(np.abs(n_1) > f_max, axis=1).sum(axis=1).max()   # 3
-
-def double_limits(flows_tcb, f_max, lower=0.9, upper=1.0):
-    flows = np.abs(flows_tcb).max(axis=(0, 1))
-    low, high = flows < lower * f_max, flows > upper * f_max
-    return np.where(low, lower * f_max, np.where(high, upper * f_max, flows))
-
-print(double_limits(n_0[:, None, :], f_max))              # [ 90. 180.  49.]  (49 MW is in the dead zone)
-delta = np.clip(np.abs(n_1) - np.abs(n_0)[:, None, :], 0, None).max(axis=1)   # [[40. 60.  6.]]
+```python title="metrics.py"
+--8<-- "docs/part-3-power-systems/ch19-operational-security/src/metrics.py"
 ```
 
 With weights `(("overload_energy_n_1", 1.0), ("critical_branch_count_n_1", 10.0))` the DC fitness of this state
@@ -180,59 +161,15 @@ minimizes cost; the base-case constraints use the PTDF of [Chapter 17](../ch17-s
 contingency $k$ adds $|f_\ell + \text{LODF}_{\ell k} f_k| \le f_\ell^\max$ for every other line $\ell$. Only
 NumPy and SciPy are needed (`scipy.optimize.linprog` uses the HiGHS solver):
 
-```python
-import numpy as np
-from scipy.optimize import linprog
+```python title="case7.py"
+--8<-- "docs/part-3-power-systems/ch19-operational-security/src/case7.py:dc"
+```
 
-# (from bus, to bus, x p.u., limit MW)
-LINES = [(1, 2, .10, 240), (1, 3, .15, 240), (2, 3, .10, 200), (2, 5, .12, 240), (3, 4, .10, 200), (3, 6, .14, 200),
-         (4, 5, .10, 200), (4, 6, .12, 200), (5, 6, .10, 200), (5, 7, .15, 200), (6, 7, .12, 200)]
-n, m = 7, len(LINES)
-load = np.array([0, 0, 80, 100, 90, 70, 0.])               # MW per bus
-gens = {1: (10, 250), 2: (20, 200), 7: (35, 200)}           # bus: ($/MWh, MW max)
+`dispatch()` is the OPF and `dispatch(range(N_LINE))` the SCOPF; `python case7.py` prints both:
 
-A = np.zeros((m, n))                                        # branch-bus incidence
-for k, (i, j, *_) in enumerate(LINES):
-    A[k, i - 1], A[k, j - 1] = 1, -1
-b = 1 / np.array([x for _, _, x, _ in LINES])
-B = A.T @ np.diag(b) @ A
-ptdf = np.zeros((m, n))                                     # slack = bus 1
-ptdf[:, 1:] = np.diag(b) @ A[:, 1:] @ np.linalg.inv(B[1:, 1:])
-limit = np.array([f for *_, f in LINES], float)
-C = np.zeros((n, len(gens)))                                # generator -> bus
-for g, bus in enumerate(gens):
-    C[bus - 1, g] = 1
-cost = np.array([c for c, _ in gens.values()], float)
-
-def lodf(k):                                                # flow change on every line per MW lost on line k
-    h = ptdf[:, LINES[k][0] - 1] - ptdf[:, LINES[k][1] - 1]
-    return h / (1 - h[k])
-
-def flows(pg, out=None):                                    # DC flows, optionally after the outage of line `out`
-    f = ptdf @ (C @ pg - load)
-    if out is None:
-        return f
-    f = f + lodf(out) * f[out]
-    f[out] = 0
-    return f
-
-def dispatch(contingencies=()):
-    F, d = ptdf @ C, ptdf @ load                            # base flow = F @ pg - d
-    rows, rhs = [F, -F], [limit + d, limit - d]
-    for k in contingencies:
-        keep = np.arange(m) != k
-        Fk, dk = F + np.outer(lodf(k), F[k]), d + lodf(k) * d[k]
-        rows += [Fk[keep], -Fk[keep]]
-        rhs += [limit[keep] + dk[keep], limit[keep] - dk[keep]]
-    return linprog(cost, A_ub=np.vstack(rows), b_ub=np.concatenate(rhs), A_eq=np.ones((1, len(gens))),
-                   b_eq=[load.sum()], bounds=[(0, p) for _, p in gens.values()], method="highs")
-
-for name, ctg in (("OPF", ()), ("SCOPF", range(m))):
-    r = dispatch(ctg)
-    worst = max((np.abs(flows(r.x, k)) / limit).max() for k in range(m))
-    print(f"{name:5s} cost {r.fun:6.0f} $/h  Pg {np.round(r.x, 1)}  worst post-contingency loading {100 * worst:.0f} %")
-# OPF   cost   4300 $/h  Pg [250.  90.   0.]  worst post-contingency loading 104 %
-# SCOPF cost   4400 $/h  Pg [240. 100.   0.]  worst post-contingency loading 100 %
+```text
+OPF   cost   4300 $/h  Pg [250.  90.   0.]  worst N-1 loading 104.2 % on L1-3 after L1-2 out
+SCOPF cost   4400 $/h  Pg [240. 100.   0.]  worst N-1 loading 100.0 % on L1-3 after L1-2 out
 ```
 
 The cheapest generator is capped at 250 MW, and the plain OPF uses all of it. The outage of line 1–2 (or 1–3)
@@ -243,36 +180,12 @@ avoid by switching instead of redispatching ([Chapter 28](../../part-4-optimizat
 DC security is not AC security. Check the same two dispatches with pandapower's AC power flow, one outage at a
 time (110 kV lines with $r = 0.1\,x$, loads with $Q = 0.3\,P$, bus 1 as the slack, which also covers the losses):
 
-```python
-import pandapower as pp
-
-def ac_worst_loading(pg):
-    net = pp.create_empty_network(sn_mva=100)
-    for _ in range(n):
-        pp.create_bus(net, vn_kv=110.0)
-    pp.create_ext_grid(net, 0, vm_pu=1.0)
-    for (bus, _), p in zip(gens.items(), pg):
-        if bus != 1:
-            pp.create_gen(net, bus - 1, p_mw=p, vm_pu=1.0)
-    for bus, p in enumerate(load):
-        if p:
-            pp.create_load(net, bus, p_mw=p, q_mvar=0.3 * p)
-    for i, j, x, lim in LINES:
-        z = x * 110.0 ** 2 / 100                          # ohm
-        pp.create_line_from_parameters(net, i - 1, j - 1, length_km=1, r_ohm_per_km=0.1 * z, x_ohm_per_km=z,
-                                       c_nf_per_km=0, max_i_ka=lim / (np.sqrt(3) * 110.0))
-    worst = 0
-    for k in range(m):
-        net.line.at[k, "in_service"] = False
-        pp.runpp(net)
-        worst = max(worst, net.res_line.loading_percent.drop(k).max())
-        net.line.at[k, "in_service"] = True
-    return worst
-
-print(ac_worst_loading(dispatch().x), ac_worst_loading(dispatch(range(m)).x))   # about 114.7 and 109.7 %
+```python title="case7.py"
+--8<-- "docs/part-3-power-systems/ch19-operational-security/src/case7.py:ac"
 ```
 
-The SCOPF dispatch, secure in DC, still overloads a line by about 10 % in AC (line current includes the reactive
+`pandapower_n1(pandapower_net(pg), ac=True).max()` gives 114.7 % for the OPF dispatch and 109.7 % for the SCOPF
+one. The SCOPF dispatch, secure in DC, still overloads a line by about 10 % in AC (line current includes the reactive
 flow and the losses, which the DC model drops). PowerWorld's SCOPF closes this gap by iterating between the LP
 and the power flow equations; ToOp does the same in two stages, a fast DC search followed by AC validation
 ([Chapter 16](../ch16-dc-power-flow/index.md)).
@@ -354,7 +267,7 @@ and the power flow equations; ToOp does the same in two stages, a fast DC search
 
     **Part C (optional): the price of security on the 7-bus case.** The two code blocks of the worked example are
     also a module, [`case7.py`](src/case7.py), whose `main()` prints the answers to
-    steps 1–3.
+    steps 1–3. The answers to all five steps are in [Solutions](solutions.md#lab-part-c-the-price-of-security-on-the-7-bus-case).
 
     1. Run the two code blocks of "The price of N-1 security on a 7-bus case, in Python" and print, for the SCOPF
        dispatch, which contingency constraints are binding (post-contingency loading of exactly 100 %).
@@ -369,7 +282,7 @@ and the power flow equations; ToOp does the same in two stages, a fast DC search
        dispatch and cost with your result.
     5. **Hand the case to ToOp and ask the topology question instead.** ToOp has no OPF (no costs, no
        redispatch); what it can do is look for a bus split that removes the N-1 overload at zero redispatch
-       cost. Exercises 7–10 do this step by step, with solutions; their script is
+       cost. Exercises 7–10 do this step by step, with [solutions](solutions.md); their script is
        [`case7_toop.py`](src/case7_toop.py).
 
 ## Exercises
@@ -398,7 +311,8 @@ and the power flow equations; ToOp does the same in two stages, a fast DC search
 Exercises 7–10 continue the 7-bus case of the worked example inside ToOp. Their scripts are in the chapter's
 `src` folder: [`case7.py`](src/case7.py) (SciPy and pandapower, runs anywhere) and
 [`case7_toop.py`](src/case7_toop.py) (runs in the ToOp container). Solve each exercise
-before opening its solution; the numbers quoted were produced with ToOp `ba1874e` on CPU.
+before opening its solution. All solutions of the chapter, with those of Lab Part C, are in [Solutions](solutions.md);
+the numbers quoted were produced with ToOp `ba1874e` on CPU.
 
 7. *(ToOp container)* **Same N-1, two tools.** Wrap the 7-bus grid with the OPF dispatch of the worked example
    for ToOp, as `case14_pandapower` does in `dc_solver/example_grids.py`: bus 1 as `ext_grid` (the slack),
@@ -408,28 +322,7 @@ before opening its solution; the numbers quoted were produced with ToOp `ba1874e
    `overload_energy_n_1` and the worst post-contingency loading with the SciPy code, and derive the value of
    `overload_energy_n_1` from the definition of the metric.
 
-    ??? note "Solution"
-
-        `write_case` in the script writes the folder; the pass-through function returns
-        `(lf.n_0_matrix, lf.n_1_matrix)` and is defined once, at module level. `run_initial_loadflow` returns
-        `(overload_energy_n_0, overload_energy_n_1) = (0.0, 20.0)`, and the unsplit N-1 matrix gives, per outage,
-        the worst loaded line:
-
-        | Outage | Worst line | Loading |
-        |---|---|---|
-        | L1-2 | L1-3 | 104.2 % |
-        | L1-3 | L1-2 | 104.2 % |
-        | L2-3 | L1-3 | 71.8 % |
-        | L2-5 | L2-3 | 85.7 % |
-        | every other line | L1-3 or L2-5 | below 67 % |
-
-        The SciPy code gives the same 104.2 % (`n1_loading(dispatch().x).max()`). The two agree to the decimal
-        because both solve the same lossless DC equations, and the LODF update is exact, not an approximation.
-        The 20 MW follow from the definition: for each branch the worst contingency, then the sum over branches.
-        L1-3 carries 250 MW after the L1-2 outage (10 MW above its 240 MW), L1-2 carries 250 MW after the L1-3
-        outage (another 10 MW), and no other branch exceeds its limit in any contingency: 10 + 10 = 20 MW. Under
-        the "worst contingency per timestep" wording of `metrics.md` (see "Documentation vs code" above) the value
-        would be 10 MW; this case shows that the code sums per branch.
+    **Solution:** [Exercise 7](solutions.md#exercise-7).
 
 8. *(Pen and paper, then ToOp)* **Count the action set.** Before loading the case, predict how many actions ToOp
    builds for the relevant substations 3–6 when a split must leave at least two branches on each busbar, mirror
@@ -438,28 +331,7 @@ before opening its solution; the numbers quoted were produced with ToOp `ba1874e
    `dynamic_information.action_set.n_actions_per_sub` and decode the actions with `branch_actions`,
    `substation_correspondence` and `network_data.branches_at_nodes`. Which substation is missing, and why?
 
-    ??? note "Solution"
-
-        Choosing the set $B$ of branches that go to the second busbar with $2 \le |B| \le d - 2$ gives
-        $2^d - 2 - 2d$ configurations; each split appears twice ($B$ and its complement), so a substation with $d$
-        branches has $2^{d-1} - d - 1$ splits: 3 for $d = 4$, 10 for $d = 5$, 25 for $d = 6$ and none for $d = 3$.
-        Buses 3, 5 and 6 have four lines each, bus 4 has three (L3-4, L4-5, L4-6), so the prediction is
-        $3 \times (3 + 1) = 12$ actions. ToOp reports `n_actions_per_sub = [4, 4, 4]` for buses 3, 5 and 6, and
-        bus 4 is not in `relevant_nodes` at all. In the code, `enumerate_branch_actions_for_sub`
-        (`dc_solver/preprocess/action_set.py`) asserts $d \ge 4$ (smaller substations are dropped earlier),
-        enumerates $2^{d-1}$ configurations (the mirror image is not generated), removes those that isolate a
-        single branch (`exclude_isolations`) and then those that leave fewer than two non-bridge branches on a
-        busbar (`filter_splits_by_bridge_lookup`; no line of this grid is a bridge, so nothing more goes). Decoded,
-        the twelve actions are:
-
-        | Action | Substation | Branches on a busbar of their own |
-        |---|---|---|
-        | 0, 4, 8 | bus 3, 5, 6 | none (unsplit) |
-        | 1, 2, 3 | bus 3 | L3-6 + L1-3; L3-4 + L1-3; L3-4 + L3-6 |
-        | 5, 6, 7 | bus 5 | L5-7 + L2-5; L5-6 + L2-5; L5-6 + L5-7 |
-        | 9, 10, 11 | bus 6 | L3-6 + L4-6; L6-7 + L4-6; L6-7 + L3-6 |
-
-        The load of a substation stays with the branches that are not moved (`inj_actions` is all `False` here).
+    **Solution:** [Exercise 8](solutions.md#exercise-8).
 
 9. *(Pen and paper, then ToOp)* **An overload no switch can fix.** Prove that, after the outage of line 1–2, the
    flow on line 1–3 is 250 MW for every topology of buses 3–6. Then run the twelve actions of Exercise 8 through
@@ -467,34 +339,7 @@ before opening its solution; the numbers quoted were produced with ToOp `ba1874e
    topology) and report, per action, the worst post-contingency loading and the largest change of a base-case
    flow. Which actions make things worse, which one islands the grid, and what is the only remedy?
 
-    ??? note "Solution"
-
-        Kirchhoff's current law at bus 1: with L1-2 out, L1-3 is the only branch left at bus 1, so it carries the
-        bus's net injection, 250 MW of generation and no load, whatever the impedances or the topology downstream:
-        250 / 240 = 104.2 %. The same holds for L1-2 after the L1-3 outage. A split at buses 3, 5 or 6 changes how
-        the 250 MW spread beyond bus 3, never how they leave bus 1. ToOp confirms it:
-
-        | Action | Split | Largest N-0 change | Worst N-1 loading |
-        |---|---|---|---|
-        | 0, 4, 8 | unsplit | 0 MW | 104.2 % (L1-3 after L1-2 out) |
-        | 1 | bus 3: L3-6 + L1-3 | 44 MW | 125.0 % (L3-6 after L1-2 out) |
-        | 2 | bus 3: L3-4 + L1-3 | 31 MW | 125.0 % (L3-4 after L1-2 out) |
-        | 3 | bus 3: L3-4 + L3-6 | 137 MW | islanded (solver flag `False`, `nan`) |
-        | 5 | bus 5: L5-7 + L2-5 | 66 MW | 126.5 % (L2-3 after L1-3 out) |
-        | 6 | bus 5: L5-6 + L2-5 | 73 MW | 109.3 % (L2-3 after L1-3 out) |
-        | 7 | bus 5: L5-6 + L5-7 | 13 MW | 104.2 % |
-        | 9 | bus 6: L3-6 + L4-6 | 38 MW | 104.2 % |
-        | 10 | bus 6: L6-7 + L4-6 | 1 MW | 104.2 % |
-        | 11 | bus 6: L6-7 + L3-6 | 35 MW | 104.2 % |
-
-        No action gets below 104.2 %, four add a second overload, and action 3 turns line 2–5 into a bridge: the
-        busbar with L3-4 and L3-6 has no injection and no other link to buses 1 and 2, so already in the base case
-        L2-5 carries the whole 260 MW of load of buses 4–6 (108 % of its limit), and its outage islands buses 4–7
-        without generation. The `action_set_filter_bsdf_lodf` option, switched off in `write_case`, removes such
-        actions from the set ([Chapter 22](../ch22-import-preprocessing/index.md)). The only remedy is redispatch: the SCOPF
-        moves 10 MW from the $10 generator at bus 1 to the $20 one at bus 2, the $100/h of the worked example. In
-        general, a bus split redistributes flow among parallel paths; it cannot change the flow through a cut whose
-        remaining branches all lie on one side of a fixed injection.
+    **Solution:** [Exercise 9](solutions.md#exercise-9).
 
 10. *(SciPy, ToOp and pandapower)* **An overload a switch can fix.** Start from the SCOPF dispatch (240, 100 and
     0 MW) and lower the limit of line 3–6 to 100 MW. (a) With the SciPy code, find the new worst post-contingency
@@ -505,30 +350,4 @@ before opening its solution; the numbers quoted were produced with ToOp `ba1874e
     the L2-5 outage, why this overload is fixable while the one of Exercise 9 is not, and check the split with
     the AC N-1 as well.
 
-    ??? note "Solution"
-
-        (a) The old SCOPF dispatch loads L3-6 to 111.5 % after the L2-5 outage. The SCOPF with the tighter limit
-        costs $4,739/h with dispatch (240, 77.4, 22.6): the $35 generator at bus 7 must run, and the binding
-        constraints are now (L1-2 out, L1-3), (L1-3 out, L1-2) and (L2-5 out, L3-6). That is $339/h more than the
-        original SCOPF, the redispatch an operator would like to avoid.
-
-        (b) ToOp: the unsplit grid has `overload_energy_n_1 = 11.5 MW` (111.5 MW on a 100 MW line). Two of the
-        twelve actions clear every N-1 overload, both at bus 6: action 11, L3-6 + L6-7 on their own busbar, brings
-        L3-6 down to 60.2 MW, and action 9, L3-6 + L4-6, to 76.8 MW; the worst loading is then exactly 100.0 %, on
-        the lines 1–2 and 1–3 that the SCOPF had left at their limits. The third bus-6 split (L6-7 + L4-6) leaves
-        109.0 %, and every bus-3 and bus-5 split is worse than doing nothing (104.7 % to 240 %, or islanding).
-
-        (c) `split_bus(pandapower_net(pg, lim), 6, ['L3-6', 'L6-7'])` followed by `pandapower_n1` gives the same
-        60.2 MW on L3-6 and a worst DC loading of 100.0 %.
-
-        (d) After the L2-5 outage the 260 MW of load at buses 4, 5 and 6 must all come from bus 3 through the cut
-        {L3-4, L3-6}. The total through the cut is fixed by KCL, as in Exercise 9, but its split between the two
-        lines is not: it follows the impedances of the parallel paths behind the cut. Unsplit, L3-6 feeds bus 6
-        directly and bus 5 through L5-6 ($x = 0.14 + 0.10$). Paired with L6-7, whatever enters through L3-6 must
-        continue to bus 7 and reach bus 5 through L5-7 ($x = 0.14 + 0.12 + 0.15$), a much longer path than
-        L3-4 → L4-5 ($0.20$) or L3-4 → L4-6 ($0.22$), so most of the flow moves to L3-4 (199.8 MW of 200 MW after
-        the same outage). A split helps when the overloaded line has a parallel path downstream that the split
-        can lengthen or shorten; it is powerless when the line is the only path, as at bus 1
-        ([Chapter 28](../../part-4-optimization/ch28-topology-optimization/index.md)). The AC check shows the price of the
-        thin DC margin: the split topology's worst AC N-1 loading is 116 % on L3-4, so this remedial action passes
-        ToOp's DC stage and fails its AC validation, which is the reason the two stages exist.
+    **Solution:** [Exercise 10](solutions.md#exercise-10).

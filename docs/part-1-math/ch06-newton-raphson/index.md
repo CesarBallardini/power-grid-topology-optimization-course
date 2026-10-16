@@ -70,22 +70,8 @@ and iterate: solve $J(\mathbf{x}_k)\, \Delta_k = -F(\mathbf{x}_k)$, then set
 $\mathbf{x}_{k+1} = \mathbf{x}_k + \Delta_k$.
 Never form $J^{-1}$; solve the linear system ([Chapter 4](../ch04-numerical-linear-algebra/index.md)).
 
-```python
-import numpy as np
-
-def F(x):
-    return np.array([x[0]**2 + x[1]**2 - 4, np.exp(x[0]) + x[1] - 1])
-
-def J(x):
-    return np.array([[2 * x[0], 2 * x[1]], [np.exp(x[0]), 1.0]])
-
-x = np.array([1.0, -1.0])
-for k in range(20):
-    x = x + np.linalg.solve(J(x), -F(x))
-    r = np.linalg.norm(F(x))
-    print(k + 1, x, f"{r:.1e}")
-    if r < 1e-12:
-        break
+```python title="newton.py"
+--8<-- "docs/part-1-math/ch06-newton-raphson/src/newton.py"
 ```
 
 From $(1, -1)$ the residual norms are about $8.6\cdot10^{-1}$, $4.0\cdot10^{-2}$, $1.0\cdot10^{-4}$, $8.4\cdot10^{-10}$:

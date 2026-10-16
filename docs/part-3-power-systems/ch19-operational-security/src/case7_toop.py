@@ -128,6 +128,7 @@ def report(folder: Path, pg: np.ndarray, limit: np.ndarray = case7.LIMIT) -> Non
         k_o, k_b = np.unravel_index(np.abs(n1_all[a] / lim).argmax(), n1_all[a].shape)
         print(
             f'  action {a:2d}: {describe(si, network_data, a):45s} dN-0 {np.abs(n0_all[a] - n0).max():6.1f} MW, '
+            f'N-0 worst {100 * np.abs(n0_all[a] / lim).max():6.1f} %, '
             f'worst {w:6.1f} % ({names[k_b]} after {outages[k_o]} out), solver ok={bool(ok_all[a].all())}'
         )
     print(f'splits that clear every N-1 overload: {int((worst <= 100 + 1e-9).sum())} of {len(worst)}')

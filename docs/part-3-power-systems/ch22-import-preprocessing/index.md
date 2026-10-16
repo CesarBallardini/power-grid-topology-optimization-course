@@ -166,20 +166,8 @@ How big is the action space of one station? The code enumerates integers $0 \dot
 each A/B assignment appears once; it flips patterns with more than $d/2$ branches on B and drops patterns with
 exactly one branch on either busbar.
 
-```python
-import numpy as np
-
-def n_actions(d):
-    r = np.arange(2 ** (d - 1))
-    repo = ((r[:, None] >> np.arange(d)) & 1).astype(bool)
-    flip = repo.sum(axis=1) > d / 2
-    repo[flip] = ~repo[flip]
-    on_b = repo.sum(axis=1)
-    repo = repo[(on_b != 1) & (on_b != d - 1)]
-    return len(np.unique(repo, axis=0))
-
-print([(d, n_actions(d), 2 ** (d - 1) - d) for d in range(4, 9)])
-# [(4, 4, 4), (5, 11, 11), (6, 26, 26), (7, 57, 57), (8, 120, 120)]
+```python title="action_count.py"
+--8<-- "docs/part-3-power-systems/ch22-import-preprocessing/src/action_count.py"
 ```
 
 For $d = 4$ the three splits are the 2|2 partitions; for $d = 5$ they are the $\binom{5}{2} = 10$ partitions 2|3.

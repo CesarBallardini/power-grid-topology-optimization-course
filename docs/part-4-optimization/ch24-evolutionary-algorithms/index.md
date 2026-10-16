@@ -82,24 +82,8 @@ A genotype for "switch off at most $k$ of $n$ lines" can be a sorted integer vec
 sentinel $n$ (ToOp pads with the largest integer instead). Mutation changes one slot, and the candidate is
 normalized so that equal sets have equal genotypes:
 
-```python
-import numpy as np
-
-def normalize(g, n):
-    """Remove duplicates, sort, pad with sentinel n."""
-    u = np.unique(g[g < n])
-    return np.concatenate([u, np.full(len(g) - len(u), n)])
-
-def mutate(g, n, rng, p_remove=0.2):
-    g = g.copy()
-    slot = rng.integers(len(g))
-    g[slot] = n if rng.random() < p_remove else rng.integers(n)
-    return normalize(g, n)
-
-rng = np.random.default_rng(seed=1)
-n, k = 41, 3
-g = normalize(np.array([7, 7, 41]), n)   # -> [7, 41, 41]
-print(g, mutate(g, n, rng))
+```python title="genome_mutation.py"
+--8<-- "docs/part-4-optimization/ch24-evolutionary-algorithms/src/genome_mutation.py"
 ```
 
 The fitness function receives the set `g[g < n]`, rebuilds the network without those lines and returns the

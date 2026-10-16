@@ -119,29 +119,8 @@
 
 Four buses with equal reactances, zone A = {0, 1}, zone B = {2, 3}, slack at bus 0.
 
-```python
-import numpy as np
-
-branches = [(0, 1), (0, 2), (1, 3), (2, 3), (1, 2)]    # x = 1 pu each
-A = np.zeros((5, 4))
-for k, (f, t) in enumerate(branches):
-    A[k, f], A[k, t] = 1.0, -1.0
-ns = [1, 2, 3]                                          # bus 0 is the slack
-ptdf = np.zeros((5, 4))
-ptdf[:, ns] = A[:, ns] @ np.linalg.inv((A.T @ A)[np.ix_(ns, ns)])
-
-glsk = np.array([[0.6, 0.0], [0.4, 0.0], [0.0, 0.5], [0.0, 0.5]])   # rows: buses, columns: zones A, B
-ptdf_zone = ptdf @ glsk                                 # (CNECs, zones)
-ptdf_ab = ptdf_zone[:, 0] - ptdf_zone[:, 1]             # sensitivity to an A -> B exchange
-
-p_ref = np.array([300.0, -50.0, -150.0, -100.0])        # reference nodal injections, MW
-f_ref = ptdf @ p_ref
-np_ref = np.array([p_ref[:2].sum(), p_ref[2:].sum()])   # net positions A, B
-f_0 = f_ref - ptdf_zone @ np_ref                        # flows with all net positions at zero
-ram = 200.0 - 10.0 - f_0                                # F_max = 200 MW, FRM = 10 MW, from -> to direction
-print(np.round(ptdf_ab, 3))           # [0.188 0.412 0.362 0.138 0.225]
-print(np.round(ram, 1))               # [ 99.4 130.6 218.1 186.9 221.2]
-print(np.round(ram / ptdf_ab))        # [ 530.  317.  602. 1359.  983.]
+```python title="flow_based.py"
+--8<-- "docs/part-3-power-systems/ch21-coordinated-security-rao/src/flow_based.py"
 ```
 
 Branch 0–2 limits the A→B exchange to 317 MW. A topology action that lowers its zone-to-zone PTDF or its $F_0$

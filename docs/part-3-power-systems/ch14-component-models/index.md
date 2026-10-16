@@ -111,25 +111,8 @@ imaginary part (up to sign) is the DC matrix $B_\text{bus} = A^\top \operatornam
 
 **Octave + MATPOWER.** Rebuild $Y_\text{bus}$ for IEEE 14 and compare with `makeYbus`:
 
-```octave
-define_constants;
-mpc = ext2int(loadcase('case14'));
-[Ybus, Yf, Yt] = makeYbus(mpc);
-
-nb = size(mpc.bus, 1);  nl = size(mpc.branch, 1);
-Cf = sparse(1:nl, mpc.branch(:, F_BUS), 1, nl, nb);
-Ct = sparse(1:nl, mpc.branch(:, T_BUS), 1, nl, nb);
-stat = mpc.branch(:, BR_STATUS);
-ys = stat ./ (mpc.branch(:, BR_R) + 1j * mpc.branch(:, BR_X));
-bc = stat .* mpc.branch(:, BR_B);
-tap = ones(nl, 1);  k = find(mpc.branch(:, TAP));  tap(k) = mpc.branch(k, TAP);
-tap = tap .* exp(1j * pi / 180 * mpc.branch(:, SHIFT));
-Ytt = ys + 1j * bc / 2;  Yff = Ytt ./ (tap .* conj(tap));
-Yft = -ys ./ conj(tap);  Ytf = -ys ./ tap;
-Ysh = (mpc.bus(:, GS) + 1j * mpc.bus(:, BS)) / mpc.baseMVA;
-D = @(v) spdiags(v, 0, numel(v), numel(v));
-Y2 = Cf.' * (D(Yff) * Cf + D(Yft) * Ct) + Ct.' * (D(Ytf) * Cf + D(Ytt) * Ct) + D(Ysh);
-disp(full(max(max(abs(Ybus - Y2)))))   % expect round-off only
+```octave title="ybus_check.m"
+--8<-- "docs/part-3-power-systems/ch14-component-models/src/ybus_check.m"
 ```
 
 The same construction in NumPy against `pandapower.pypower.makeYbus.makeYbus(baseMVA, bus, branch)` on the

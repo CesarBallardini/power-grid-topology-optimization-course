@@ -70,7 +70,13 @@ markdown_extensions:
       generic: true
   - pymdownx.details
   # Acronym tooltips everywhere: the glossary (Appendix D) generates includes/abbreviations.md.
+  # Snippets also pull the chapters' source files (docs/part-*/chNN-slug/src/) into fenced code blocks, with
+  # `--8<-- "docs/.../src/file.py"` (optionally `:section`). Paths are relative to the repository root, and
+  # a missing file fails the build.
   - pymdownx.snippets:
+      base_path:
+        - .
+      check_paths: true
       auto_append:
         - includes/abbreviations.md
   - pymdownx.highlight:

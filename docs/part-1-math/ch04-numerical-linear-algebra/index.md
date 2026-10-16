@@ -109,34 +109,14 @@ The quantity $a_k^\top G_r^{-1} a_k$ is the effective resistance between the two
 ([Chapter 3](../ch03-graph-theory/index.md)). The denominator $1 - g_k R_{\text{eff},k}$ is zero exactly when the branch is
 the only path between its ends, that is, when it is a bridge and its removal islands part of the network.
 
-```python
-import numpy as np
-
-fr = np.array([0, 0, 1, 1, 2, 3, 4]); to = np.array([1, 2, 2, 3, 4, 4, 5])
-g = np.array([10, 5, 8, 4, 6, 3, 2.0]); m, n = len(fr), 6
-A = np.zeros((m, n)); A[np.arange(m), fr] = 1; A[np.arange(m), to] = -1
-Ar = A[:, 1:]                                  # ground node 0
-Gr = Ar.T @ np.diag(g) @ Ar
-Minv = np.linalg.inv(Gr)
-
-k = 3                                          # branch (1, 3)
-a = Ar[k]
-u = Minv @ a
-den = 1 - g[k] * (a @ u)
-Minv_sm = Minv + g[k] * np.outer(u, u) / den   # Gr is symmetric, so Minv a a^T Minv = u u^T
-
-keep = np.arange(m) != k
-Gk = Ar[keep].T @ np.diag(g[keep]) @ Ar[keep]
-print(np.max(np.abs(Minv_sm - np.linalg.inv(Gk))))   # ~1e-16
-print(1 - g[6] * (Ar[6] @ Minv @ Ar[6]))             # bridge (4, 5): 0
+```python title="sherman_morrison.py"
+--8<-- "docs/part-1-math/ch04-numerical-linear-algebra/src/sherman_morrison.py"
 ```
 
-```octave
-% Ar, g and Minv = inv(Gr) built as above; k = 4 selects the fourth row, branch (1, 3)
-a = Ar(k, :)';             % row k as a column vector
-u = Minv * a;
-den = 1 - g(k) * (a' * u);
-Minv_sm = Minv + g(k) * (u * u') / den;
+The same update in Octave, as a function of the inverse before the removal:
+
+```octave title="sherman_morrison.m"
+--8<-- "docs/part-1-math/ch04-numerical-linear-algebra/src/sherman_morrison.m"
 ```
 
 ## Lab

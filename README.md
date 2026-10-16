@@ -28,7 +28,8 @@ and `make`. Optional: [gitleaks](https://github.com/gitleaks/gitleaks) on `PATH`
 make install      # sync the environment from uv.lock and install the git hooks
 make docs-serve   # live preview at http://127.0.0.1:8000
 make docs         # strict build: any warning (broken link, missing page) fails
-make test         # tests of the maintenance tools
+make test         # tests of the maintenance tools and of the chapters' code (docs/part-*/*/src)
+make test-toop    # the chapter tests that need ToOp, run with ../ToOp/.venv
 make check-toop   # every ToOp source path cited in the book exists (needs ../ToOp)
 make check-books  # every archive.org access label still matches archive.org (network)
 make              # list all targets

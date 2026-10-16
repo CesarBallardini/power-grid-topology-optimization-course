@@ -95,24 +95,10 @@
 
 Both libraries ship test grids and store every element type as a data frame. Treat the solvers as black boxes
 for now; only the data handling matters here (checked with pandapower 3.1 and pypowsybl 1.15, the versions in
-ToOp's lock file).
+ToOp's lock file, and with pandapower 3.5 and pypowsybl 1.16, the versions of the course environment).
 
-```python
-import pandapower as pp
-import pandapower.networks as pn
-import pypowsybl as pypo
-
-net = pn.case57()                         # IEEE 57-bus case in pandapower
-print(len(net.bus), len(net.line), len(net.trafo))   # element tables are pandas DataFrames
-pp.runpp(net)                             # AC power flow; results land in net.res_line, net.res_bus, ...
-ac_p = net.res_line.p_from_mw.copy()
-pp.rundcpp(net)                           # DC power flow overwrites the same result tables
-dc_p = net.res_line.p_from_mw
-
-n = pypo.network.create_ieee14()          # IEEE 14-bus case in pypowsybl
-result = pypo.loadflow.run_ac(n)
-print(result[0].status)                   # ComponentStatus.CONVERGED
-lines = n.get_lines()[["p1", "i1"]]       # results are columns of the element tables
+```python title="two_libraries.py"
+--8<-- "docs/part-5-computing/ch30-scientific-python/src/two_libraries.py"
 ```
 
 Note the two different styles: pandapower writes results into `res_*` tables of a mutable `net` object, while

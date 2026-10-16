@@ -122,6 +122,16 @@ All course material is in English. When a textbook has a Spanish edition, the bo
 Counts such as "(12 syllabi)" give the number of distinct universities whose course bibliography cites the
 book, from the survey in [Appendix A](appendices/a-syllabi.md).
 
+### Chapter code
+
+Every program shown in a chapter is a file in that chapter's `src` folder (for example
+`part-3-power-systems/ch19-operational-security/src/case7.py`), included in the page from the file, not copied
+into it, with the file name in the title bar of the code block. Each file has unit tests next to it
+(`test_*.py`; Octave files carry `%!test` blocks), run by `make test` from the repository; tests that need ToOp
+run only where ToOp is importable. Where a chapter has solutions, they are in `solutions.md` in the chapter's
+folder and every program behind a solution lives in `src` too. Whenever a MATLAB solution exists, the chapter
+also gives the Octave one: free software first, proprietary tools allowed.
+
 ### ToOp source paths
 
 ToOp source paths are abbreviated:

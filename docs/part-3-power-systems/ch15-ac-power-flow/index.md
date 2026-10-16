@@ -145,19 +145,12 @@ $$
 with $J_{11}, J_{21}$ the real and imaginary parts of $\partial S/\partial\theta$ and $J_{12}, J_{22}$ those of
 $\partial S/\partial|V|$. Check your implementation against finite differences before trusting it:
 
-```python
-import numpy as np
-
-def injections(theta, vm, Y):
-    v = vm * np.exp(1j * theta)
-    return v * np.conj(Y @ v)          # S = [V] conj(Y V)
-
-def jacobian_blocks(theta, vm, Y):
-    v = vm * np.exp(1j * theta); i = Y @ v; E = np.diag(v / vm)
-    dS_dth = 1j * np.diag(v) @ np.conj(np.diag(i) - Y @ np.diag(v))
-    dS_dvm = np.diag(v) @ np.conj(Y @ E) + np.diag(np.conj(i)) @ E
-    return dS_dth.real, dS_dvm.real, dS_dth.imag, dS_dvm.imag   # J11, J12, J21, J22
+```python title="ac_jacobian.py"
+--8<-- "docs/part-3-power-systems/ch15-ac-power-flow/src/ac_jacobian.py"
 ```
+
+`test_ac_jacobian.py`, next to it in the chapter's `src` folder, does exactly that: central differences of
+`injections` on a random three-bus state, column by column.
 
 **Distributed slack.** Replace the slack bus's unknown $P$ by a scalar mismatch $\Delta$ shared by the
 participating generators, $P_{g,i} = P_{g,i}^0 + k_i \Delta$ with $\sum_i k_i = 1$. The unknown vector gains
@@ -167,13 +160,8 @@ OpenLoadFlow, the balance type selects $k$ (proportional to $P_\text{max}$, to t
 
 **Octave + MATPOWER.**
 
-```octave
-mpc = loadcase('case14');
-mpopt = mpoption('pf.alg', 'NR', 'pf.enforce_q_lims', 1, 'verbose', 2, 'out.all', 0);
-results = runpf(mpc, mpopt);
-results.success            % 1 if converged
-mpopt = mpoption(mpopt, 'pf.alg', 'FDXB');   % fast decoupled, XB version
-results_fd = runpf(mpc, mpopt);
+```octave title="matpower_pf.m"
+--8<-- "docs/part-3-power-systems/ch15-ac-power-flow/src/matpower_pf.m"
 ```
 
 ## Lab

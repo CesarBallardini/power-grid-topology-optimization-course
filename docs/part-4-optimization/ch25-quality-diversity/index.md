@@ -75,13 +75,8 @@
 With the default descriptors, `n_cells_per_dim = (5, 45)`. NumPy's `ravel_multi_index` behaves like the JAX
 version ToOp uses:
 
-```python
-import numpy as np
-
-split_subs = np.array([1, 7, 2])
-switching_distance = np.array([60, 3, 44])
-cells = np.ravel_multi_index((split_subs, switching_distance), dims=(5, 45), mode="clip")
-print(cells)   # [ 89 183 134]
+```python title="map_elites_cells.py"
+--8<-- "docs/part-4-optimization/ch25-quality-diversity/src/map_elites_cells.py"
 ```
 
 The first topology (1 split, 60 switching operations) lands in cell $1 \cdot 45 + 44 = 89$, the same cell as any

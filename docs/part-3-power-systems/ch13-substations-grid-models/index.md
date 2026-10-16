@@ -97,18 +97,8 @@ and a singly connected asset that changes busbar counts twice (one connection op
 the candidate with the smallest reassignment distance and reports its coupler distance (the Hamming distance
 between the candidate's coupler state and the current one) separately.
 
-```python
-import itertools
-import networkx as nx
-
-couplers = [(0, 1), (1, 2), (2, 3)]
-for is_open in itertools.product([True, False], repeat=len(couplers)):
-    g = nx.Graph()
-    g.add_nodes_from(range(4))
-    g.add_edges_from(c for c, o in zip(couplers, is_open) if not o)
-    parts = list(nx.connected_components(g))
-    if any(is_open) and len(parts) == 2:
-        print(is_open, parts)
+```python title="coupler_splits.py"
+--8<-- "docs/part-3-power-systems/ch13-substations-grid-models/src/coupler_splits.py"
 ```
 
 ## Documentation vs code: known discrepancies

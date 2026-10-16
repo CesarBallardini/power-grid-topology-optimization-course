@@ -128,32 +128,14 @@ With the matrix $\mathcal H = H\,(C_f - C_t)^\top$ of all $h_{\ell k}$, the full
 $\text{LODF} = \mathcal H\,\operatorname{diag}(1 - h_{kk})^{-1}$ with the diagonal set to $-1$ (MATPOWER manual,
 eqs. 4.38–4.39). Because $\mathbf 1^\top (e_f - e_t) = 0$, the LODF does not depend on the slack either.
 
-```python
-import numpy as np
-
-def lodf_column(H, frm, to, k):
-    h = H[:, frm[k]] - H[:, to[k]]
-    den = 1.0 - h[k]
-    if abs(den) < 1e-11:                   # bridge: islanding
-        raise ValueError("outage splits the grid")
-    lodf = h / den
-    lodf[k] = -1.0
-    return lodf
-
-# N-1 flows for all outages at once, F0 = H @ P (shape n_branches)
-# N1[k, :] = F0 + lodf_column(H, frm, to, k) * F0[k]
+```python title="lodf.py"
+--8<-- "docs/part-3-power-systems/ch17-sensitivity-factors-1/src/lodf.py"
 ```
 
 **Octave + MATPOWER.**
 
-```octave
-mpc = ext2int(loadcase('case14'));
-H  = makePTDF(mpc);              % single slack: the reference bus
-L  = makeLODF(mpc, H, true);     % mask_bridge = true: NaN columns for bridges
-nb = size(mpc.bus, 1);
-w  = ones(nb, 1) / nb;           % a distributed slack
-Hw = makePTDF(mpc, w);
-disp(max(max(abs(makeLODF(mpc, Hw) - makeLODF(mpc, H)))))   % LODF is slack independent
+```octave title="matpower_lodf.m"
+--8<-- "docs/part-3-power-systems/ch17-sensitivity-factors-1/src/matpower_lodf.m"
 ```
 
 ### Slack choice in ToOp

@@ -17,6 +17,13 @@ Maintain a five-semester university course (36 chapters, 8000+ lines) that takes
 
 Chapter dependencies are defined in `docs/index.md` (Mermaid flowchart) and enforce a teaching order across semesters.
 
+## No AI attribution
+
+Nothing in this repository names an AI assistant, model or vendor as an author or tool: no `Co-Authored-By`
+lines for AI models in commit messages, no "Generated with ..." footers in pull request descriptions, no mentions
+of Claude, Anthropic, ChatGPT, LLMs and the like in code comments, docstrings, book pages or solutions. This
+rule overrides the assistant's own default attribution reminders. Commit messages end after the body.
+
 ## Development Workflow
 
 ### Adding or Updating Content
@@ -34,7 +41,8 @@ On commit, `markdown-link-check` checks every link in each staged file, not only
 - **`make check-books`** — Verify every archive.org link still works (network test, run weekly)
 - **`make check-toop`** — Validate ToOp source paths cited in the book (requires `../ToOp` sibling repo)
 - **`make links`** — Check every external link (network, ~2.5 min). Local only, never in CI: GitHub runner IPs are blocked by many hosts. `202` counts as alive, since eur-lex answers every bot with a 202 firewall challenge. A few links fail from anywhere (techrxiv 403, udemy 403 and realpython.com 403 for scripted requests, tudelft/gmu/ou time out in the checker); confirm by opening the link, not by trusting the exit code
-- **`make test`** — Run unit tests on maintenance tools (72 tests)
+- **`make test`** — Run the unit tests of the maintenance tools and of the chapters' `src/` code (ToOp-dependent tests skip)
+- **`make test-toop`** — Run the chapter tests marked `toop` with ToOp's own interpreter (`TOOP_PYTHON`, default `../ToOp/.venv`); the course venv never gets ToOp installed, because ToOp pins its own JAX and Python
 - **`make docs`** — Full strict build: any warning fails the build
 
 ### Release Process
@@ -66,6 +74,7 @@ There is no link-check workflow on purpose. The `main` ruleset has no required s
 - `markdown-link-check` sometimes reports "files were modified by this hook" with no dead links listed; rerun.
 - Commands typed with the `!` prefix in Claude Code run in Git Bash, not PowerShell: set a variable for one command as `SKIP=hook git commit ...`. In Git Bash, `$env:SKIP=...` silently sets nothing.
 - ToOp can be run without the container: `../ToOp/.venv/Scripts/python.exe` (JAX on CPU, pandapower, pypowsybl) imports the solver, which is enough to verify lab code when Docker Desktop is not running. Create scratch virtual environments under a short path such as `%LOCALAPPDATA%\Temp\v7`: under the long scratchpad path, networkx fails to import (Windows path length).
+- Octave (Chocolatey) installs to `C:\Program Files\GNU Octave\Octave-<version>\mingw64\bin\octave-cli.exe` without adding it to the PATH; `tests/test_octave_sources.py` looks there. MATPOWER 8.1 is unzipped under `%LOCALAPPDATA%\matpower\matpower8.1` and loaded per run with `install_matpower(1, 0, 0)`; set `MATPOWER=<folder>` to use another copy
 - `uv run` can recreate `.venv` (for example after a Python upgrade) with only the default groups, so `make docs` fails with "Failed to spawn: mkdocs". Restore every group with `uv sync --all-groups --frozen`.
 
 ## Chapter Conventions
@@ -78,7 +87,13 @@ There is no link-check workflow on purpose. The `main` ruleset has no required s
 - **Video courses** in Resources are online university or college courses that are well known and recognized (MIT OCW, NPTEL, Coursera/edX from named universities, faculty lecture series such as Brunton's), or courses built on a popular textbook of the subject. Prefer college level; precalculus material stays only as a labelled "Refresher". Udemy courses are allowed where no recognized course fits the topic, marked as paid and not university. Mark paid or subscriber-only courses as such (for example **Real Python subscribers only**; the maintainer is a subscriber). **Every online course states whether it can be audited for free**, with one of: `free` (NPTEL, OCW, YouTube, Hugging Face), `free to audit` (edX), `paid, with a free trial; no free audit shown` (Coursera), `paid` (Udemy), `Real Python subscribers only`. Check the course page (see "Checking course pages") and never assume
 - **Real Python free tutorials** are valid resources on their own: cite them without looking for a companion video
 - **Tools in labs** are free and run on Windows, macOS and Linux. Commercial or Windows-only tools appear only as optional steps or resources. Example: PowerWorld Simulator (free demo limited to 13 buses, so IEEE 14 does not fit) is in the course guide's tool table, the Chapter 15 lab (step 6), and its free training modules are cited in chapters 13, 15, 17 and 19
-- **Chapter layout**: each chapter is a folder, `docs/part-*/chNN-slug/index.md`, so its URL is `.../chNN-slug/`; the `navigation.indexes` feature is off on purpose, since it would turn the first `index.md` of each Part into that Part's landing page and hide the chapter. **Chapter code** lives in `docs/part-*/chNN-slug/src/` ( Chapter 19 has `case7.py` and `case7_toop.py`). MkDocs serves these files with the book, so the chapter links to them with relative links that the strict build checks. ruff lints them like the tools (single quotes, Google docstrings, 119 columns); scripts that import ToOp run in the ToOp container or its virtual environment, never in the course's `.venv`. Exercises built on them carry a collapsed `??? note "Solution"` with the numbers and the ToOp commit that produced them. Running a script inside `docs/` leaves a `__pycache__` that MkDocs would copy into the site: delete it before building
+- **Free software first**: whenever a MATLAB solution is used, write the equivalent Octave solution (MATPOWER runs on both); proprietary software is not forbidden, but every exercise must be solvable with free tools
+- **Chapter layout**: each chapter is a folder, `docs/part-*/chNN-slug/index.md`, so its URL is `.../chNN-slug/`; the `navigation.indexes` feature is off on purpose, since it would turn the first `index.md` of each Part into that Part's landing page and hide the chapter
+- **Chapter code lives in `src/`, is included, never copied.** Every program a chapter shows (Python, Octave, data files) is a file in `docs/part-*/chNN-slug/src/`, pulled into the page with a snippet inside the fence: ```` ```python title="file.py" ```` then `--8<-- "docs/part-X/chNN-slug/src/file.py"` (optionally `:section`, delimited in the file by `# --8<-- [start:section]` / `# --8<-- [end:section]`). Paths are relative to the repository root and a missing file fails the build (`check_paths`). Shell commands to type (`docker compose ...`) stay inline. MkDocs serves the files with the book, so pages may also link to them (`src/file.py`), and the strict build checks those links
+- **Every `src/` file has unit tests next to it**: `test_<name>.py` (pytest collects `docs/` too, see `testpaths`; the test's folder is on `sys.path`, so `from file import ...` works; keep test basenames unique across chapters). Octave files end with `%!test` blocks; `tests/test_octave_sources.py` runs them when Octave is on the PATH and skips otherwise (Octave is not installed on the maintainer's machine, so those blocks are unverified here). Tests that need ToOp are named `test_<name>_toop.py` and carry `pytestmark = pytest.mark.toop` plus `pytest.importorskip('toop_engine_dc_solver')`; `make test` skips them and `make test-toop` collects only those files with ToOp's interpreter (`-o addopts="" -W ignore`: ToOp's environment lacks the `labs` libraries and emits its own warnings). Libraries the chapter code needs are in the `labs` dependency group (`uv add --group labs ...`); pulp is pinned `>=3,<4` because 4.0 replaced the `LpVariable.dicts` API. pytest treats warnings as errors: a library warning needs a specific `filterwarnings` entry in `pyproject.toml` with its reason
+- **Solutions** of a chapter's labs and exercises are all in `chNN-slug/solutions.md` (not in `mkdocs.yml`'s nav; the chapter links to it from each task and from the Exercises intro), with the numbers and the ToOp commit that produced them. Any program written to find a solution lives in that chapter's `src/` and prints every number the solution quotes; never quote results from scratch scripts
+- Running a script inside `docs/` leaves a `__pycache__` that MkDocs would copy into the site: delete it before building (`find docs -name __pycache__ -prune -exec rm -rf {} +`)
+- Math belongs in the page, not in docstrings: MathJax does not render inside code blocks, so a docstring states a formula in plain text and the chapter prose next to the include carries the typeset version
 
 ## Checking course pages
 
